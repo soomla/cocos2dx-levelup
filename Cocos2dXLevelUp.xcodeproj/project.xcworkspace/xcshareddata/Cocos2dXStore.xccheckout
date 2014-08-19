@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AAF22100-73D6-4302-B235-22C3F5C9F388</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Cocos2dXStore</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>01E95FC6-FAAD-4DD1-AF0D-0C02FC16D21C</key>
+		<string>ssh://github.com/soomla/cocos2dx-store.git</string>
+		<key>6A16EF48-8E05-485B-B76F-D96FA79CF6C9</key>
+		<string>ssh://github.com/soomla/ios-store.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Cocos2dXStore.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>01E95FC6-FAAD-4DD1-AF0D-0C02FC16D21C</key>
+		<string>../..</string>
+		<key>6A16EF48-8E05-485B-B76F-D96FA79CF6C9</key>
+		<string>../../submodules/ios-store</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/soomla/cocos2dx-store.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>01E95FC6-FAAD-4DD1-AF0D-0C02FC16D21C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>01E95FC6-FAAD-4DD1-AF0D-0C02FC16D21C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>cocos2dx-store</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6A16EF48-8E05-485B-B76F-D96FA79CF6C9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios-store</string>
+		</dict>
+	</array>
+</dict>
+</plist>

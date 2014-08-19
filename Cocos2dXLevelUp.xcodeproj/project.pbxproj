@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		372B70F36F4E5CCEDA362F60 /* CCBalanceMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B78F143A1070E21FE284A /* CCBalanceMission.cpp */; };
+		372B720C11E89EE7BBB82CD4 /* CCMissionStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B70956EBA764C7A0B324B /* CCMissionStorage.cpp */; };
+		372B73A60915E9ACB5C3EC1B /* CCChallenge.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B745E08FEAFC1826C22FC /* CCChallenge.h */; };
+		372B73CE72C87FB9E6122061 /* CCChallenge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B735263E13592C7B78212 /* CCChallenge.cpp */; };
+		372B73D94A6F1B58F34FCCE1 /* CCWorldCompletionMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B72D6EE60AA54CFB2C6E7 /* CCWorldCompletionMission.h */; };
+		372B75D6F190894B86C35B5F /* CCMissionStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B796E9CF8838D0C266354 /* CCMissionStorage.h */; };
+		372B7648C7665DEE4183A363 /* CCGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7F3EA2150408B70E99F0 /* CCGate.h */; };
+		372B7724AE373ED18ED6BB6D /* CCSimpleLevelUpEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B764EF8A601047DA497DF /* CCSimpleLevelUpEventHandler.h */; };
+		372B7959A55672ED76BE1066 /* CCMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7FCB82674683BF8FF0AB /* CCMission.cpp */; };
+		372B7A74E01C0AAB812088CC /* CCRecordMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B72100092BF60C35A82FC /* CCRecordMission.cpp */; };
+		372B7B181E1EA6AC4D6F9831 /* CCSimpleLevelUpEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7472CEDA0F5E8BDE68EB /* CCSimpleLevelUpEventHandler.cpp */; };
+		372B7BB0B71FF1CA733A9EDE /* CCWorldCompletionMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B75D76177D0DE1C8B50C4 /* CCWorldCompletionMission.cpp */; };
+		372B7BD43DCE08B373683E0F /* CCMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7FB1F36A0A18E5421969 /* CCMission.h */; };
+		372B7BED507238BCD5ADBE8A /* CCRecordMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B78167841DB350ADE7440 /* CCRecordMission.h */; };
+		372B7C6FFA3EDC7C61D4B981 /* CCBalanceMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7411FEF4D657F1E95D73 /* CCBalanceMission.h */; };
+		372B7DA4C3499A370323D494 /* CCGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B78A4D91AB2BBAD390489 /* CCGate.cpp */; };
+		372B7EBB9BE15CC38A027193 /* CCPurchasingMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7E0EB1FF770DD928DA2E /* CCPurchasingMission.h */; };
+		372B7F7CBA9D5FAFD462B1DB /* CCPurchasingMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B79957F4EFBCE237E9218 /* CCPurchasingMission.cpp */; };
+		9D4101C51978D7F600907FA8 /* CCLevelUpConsts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4101871978D7F600907FA8 /* CCLevelUpConsts.cpp */; };
+		9D4101C61978D7F600907FA8 /* CCLevelUpConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4101881978D7F600907FA8 /* CCLevelUpConsts.h */; };
+		9D4101C71978D7F600907FA8 /* CCSoomlaLevelUp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4101891978D7F600907FA8 /* CCSoomlaLevelUp.cpp */; };
+		9D4101C81978D7F600907FA8 /* CCSoomlaLevelUp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D41018A1978D7F600907FA8 /* CCSoomlaLevelUp.h */; };
+		9D4101C91978D7F600907FA8 /* CCLevelUpEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D41018B1978D7F600907FA8 /* CCLevelUpEventDispatcher.cpp */; };
+		9D4101CA1978D7F600907FA8 /* CCLevelUpEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D41018C1978D7F600907FA8 /* CCLevelUpEventDispatcher.h */; };
+		9D4101CB1978D7F600907FA8 /* CCLevelUpEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D41018D1978D7F600907FA8 /* CCLevelUpEventHandler.h */; };
+		9D4101CE1978D7F600907FA8 /* CCLevelUpService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4101901978D7F600907FA8 /* CCLevelUpService.cpp */; };
+		9D4101CF1978D7F600907FA8 /* CCLevelUpService.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4101911978D7F600907FA8 /* CCLevelUpService.h */; };
+		9D4101D21978D7F600907FA8 /* Cocos2dxLevelUp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4101941978D7F600907FA8 /* Cocos2dxLevelUp.h */; };
+		9DB1148F19A34C3000D7CEEF /* libSoomlaiOSLevelUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DB1148E19A34C3000D7CEEF /* libSoomlaiOSLevelUp.a */; };
+		C0B3C5F3168C6D0C00161FAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B3C5F2168C6D0C00161FAA /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9D76A0B119A3B6090025DB64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D6575F0199A2811005FE63A /* Cocos2dXiOSLevelUp.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C0B3C5EF168C6D0C00161FAA;
+			remoteInfo = Cocos2dXiOSLevelUp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		372B70956EBA764C7A0B324B /* CCMissionStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCMissionStorage.cpp; sourceTree = "<group>"; };
+		372B72100092BF60C35A82FC /* CCRecordMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCRecordMission.cpp; sourceTree = "<group>"; };
+		372B72D6EE60AA54CFB2C6E7 /* CCWorldCompletionMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCWorldCompletionMission.h; sourceTree = "<group>"; };
+		372B735263E13592C7B78212 /* CCChallenge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCChallenge.cpp; sourceTree = "<group>"; };
+		372B7411FEF4D657F1E95D73 /* CCBalanceMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBalanceMission.h; sourceTree = "<group>"; };
+		372B745E08FEAFC1826C22FC /* CCChallenge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCChallenge.h; sourceTree = "<group>"; };
+		372B7472CEDA0F5E8BDE68EB /* CCSimpleLevelUpEventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSimpleLevelUpEventHandler.cpp; sourceTree = "<group>"; };
+		372B75D76177D0DE1C8B50C4 /* CCWorldCompletionMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCWorldCompletionMission.cpp; sourceTree = "<group>"; };
+		372B764EF8A601047DA497DF /* CCSimpleLevelUpEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSimpleLevelUpEventHandler.h; sourceTree = "<group>"; };
+		372B78167841DB350ADE7440 /* CCRecordMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRecordMission.h; sourceTree = "<group>"; };
+		372B78A4D91AB2BBAD390489 /* CCGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCGate.cpp; sourceTree = "<group>"; };
+		372B78F143A1070E21FE284A /* CCBalanceMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBalanceMission.cpp; sourceTree = "<group>"; };
+		372B796E9CF8838D0C266354 /* CCMissionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMissionStorage.h; sourceTree = "<group>"; };
+		372B79957F4EFBCE237E9218 /* CCPurchasingMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCPurchasingMission.cpp; sourceTree = "<group>"; };
+		372B7E0EB1FF770DD928DA2E /* CCPurchasingMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPurchasingMission.h; sourceTree = "<group>"; };
+		372B7F3EA2150408B70E99F0 /* CCGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGate.h; sourceTree = "<group>"; };
+		372B7FB1F36A0A18E5421969 /* CCMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMission.h; sourceTree = "<group>"; };
+		372B7FCB82674683BF8FF0AB /* CCMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCMission.cpp; sourceTree = "<group>"; };
+		9D41016D1978D35200907FA8 /* libCocos2dXiOSCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocos2dXiOSCore.a; path = "soomla-native/compilations/ios/libCocos2dXiOSCore.a"; sourceTree = "<group>"; };
+		9D41016E1978D35200907FA8 /* libSoomlaiOSCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoomlaiOSCore.a; path = "soomla-native/compilations/ios/libSoomlaiOSCore.a"; sourceTree = "<group>"; };
+		9D4101871978D7F600907FA8 /* CCLevelUpConsts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCLevelUpConsts.cpp; sourceTree = "<group>"; };
+		9D4101881978D7F600907FA8 /* CCLevelUpConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpConsts.h; sourceTree = "<group>"; };
+		9D4101891978D7F600907FA8 /* CCSoomlaLevelUp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSoomlaLevelUp.cpp; sourceTree = "<group>"; };
+		9D41018A1978D7F600907FA8 /* CCSoomlaLevelUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSoomlaLevelUp.h; sourceTree = "<group>"; };
+		9D41018B1978D7F600907FA8 /* CCLevelUpEventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCLevelUpEventDispatcher.cpp; sourceTree = "<group>"; };
+		9D41018C1978D7F600907FA8 /* CCLevelUpEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpEventDispatcher.h; sourceTree = "<group>"; };
+		9D41018D1978D7F600907FA8 /* CCLevelUpEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpEventHandler.h; sourceTree = "<group>"; };
+		9D4101901978D7F600907FA8 /* CCLevelUpService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCLevelUpService.cpp; sourceTree = "<group>"; };
+		9D4101911978D7F600907FA8 /* CCLevelUpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpService.h; sourceTree = "<group>"; };
+		9D4101941978D7F600907FA8 /* Cocos2dxLevelUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cocos2dxLevelUp.h; sourceTree = "<group>"; };
+		9D4101FD1978D87900907FA8 /* libSoomlaiOSStore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoomlaiOSStore.a; path = "submodules/ios-store/build/libSoomlaiOSStore.a"; sourceTree = "<group>"; };
+		9D6575F0199A2811005FE63A /* Cocos2dXiOSLevelUp.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cocos2dXiOSLevelUp.xcodeproj; path = "soomla-native/projects/cocos2dx-ios-levelup/Cocos2dXiOSLevelUp.xcodeproj"; sourceTree = "<group>"; };
+		9DB1148E19A34C3000D7CEEF /* libSoomlaiOSLevelUp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoomlaiOSLevelUp.a; path = "submodules/ios-levelup/build/libSoomlaiOSLevelUp.a"; sourceTree = "<group>"; };
+		C0B3C5EF168C6D0C00161FAA /* libCocos2dXLevelUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocos2dXLevelUp.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0B3C5F2168C6D0C00161FAA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C0B3C5EC168C6D0C00161FAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9DB1148F19A34C3000D7CEEF /* libSoomlaiOSLevelUp.a in Frameworks */,
+				C0B3C5F3168C6D0C00161FAA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		372B76248D5B52C93A40AA4D /* challenges */ = {
+			isa = PBXGroup;
+			children = (
+				372B7FCB82674683BF8FF0AB /* CCMission.cpp */,
+				372B7FB1F36A0A18E5421969 /* CCMission.h */,
+				372B78F143A1070E21FE284A /* CCBalanceMission.cpp */,
+				372B7411FEF4D657F1E95D73 /* CCBalanceMission.h */,
+				372B735263E13592C7B78212 /* CCChallenge.cpp */,
+				372B745E08FEAFC1826C22FC /* CCChallenge.h */,
+				372B79957F4EFBCE237E9218 /* CCPurchasingMission.cpp */,
+				372B7E0EB1FF770DD928DA2E /* CCPurchasingMission.h */,
+				372B72100092BF60C35A82FC /* CCRecordMission.cpp */,
+				372B78167841DB350ADE7440 /* CCRecordMission.h */,
+				372B75D76177D0DE1C8B50C4 /* CCWorldCompletionMission.cpp */,
+				372B72D6EE60AA54CFB2C6E7 /* CCWorldCompletionMission.h */,
+			);
+			path = challenges;
+			sourceTree = "<group>";
+		};
+		372B7F7434E870F61A0DD949 /* gates */ = {
+			isa = PBXGroup;
+			children = (
+				372B78A4D91AB2BBAD390489 /* CCGate.cpp */,
+				372B7F3EA2150408B70E99F0 /* CCGate.h */,
+			);
+			path = gates;
+			sourceTree = "<group>";
+		};
+		9D4101851978D7F600907FA8 /* Soomla */ = {
+			isa = PBXGroup;
+			children = (
+				9D4101871978D7F600907FA8 /* CCLevelUpConsts.cpp */,
+				9D4101881978D7F600907FA8 /* CCLevelUpConsts.h */,
+				9D4101891978D7F600907FA8 /* CCSoomlaLevelUp.cpp */,
+				9D41018A1978D7F600907FA8 /* CCSoomlaLevelUp.h */,
+				9D41018B1978D7F600907FA8 /* CCLevelUpEventDispatcher.cpp */,
+				9D41018C1978D7F600907FA8 /* CCLevelUpEventDispatcher.h */,
+				9D41018D1978D7F600907FA8 /* CCLevelUpEventHandler.h */,
+				9D4101901978D7F600907FA8 /* CCLevelUpService.cpp */,
+				9D4101911978D7F600907FA8 /* CCLevelUpService.h */,
+				9D4101941978D7F600907FA8 /* Cocos2dxLevelUp.h */,
+				9D4101951978D7F600907FA8 /* data */,
+				372B76248D5B52C93A40AA4D /* challenges */,
+				372B7F7434E870F61A0DD949 /* gates */,
+				372B7472CEDA0F5E8BDE68EB /* CCSimpleLevelUpEventHandler.cpp */,
+				372B764EF8A601047DA497DF /* CCSimpleLevelUpEventHandler.h */,
+			);
+			path = Soomla;
+			sourceTree = "<group>";
+		};
+		9D4101951978D7F600907FA8 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				372B70956EBA764C7A0B324B /* CCMissionStorage.cpp */,
+				372B796E9CF8838D0C266354 /* CCMissionStorage.h */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		9D76A0AE19A3B6090025DB64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D76A0B219A3B6090025DB64 /* libCocos2dXiOSLevelUp.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C0B3C5E4168C6D0C00161FAA = {
+			isa = PBXGroup;
+			children = (
+				9D6575F0199A2811005FE63A /* Cocos2dXiOSLevelUp.xcodeproj */,
+				9D4101851978D7F600907FA8 /* Soomla */,
+				C0B3C5F1168C6D0C00161FAA /* Frameworks */,
+				C0B3C5F0168C6D0C00161FAA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C0B3C5F0168C6D0C00161FAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C0B3C5EF168C6D0C00161FAA /* libCocos2dXLevelUp.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C0B3C5F1168C6D0C00161FAA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9DB1148E19A34C3000D7CEEF /* libSoomlaiOSLevelUp.a */,
+				9D4101FD1978D87900907FA8 /* libSoomlaiOSStore.a */,
+				9D41016D1978D35200907FA8 /* libCocos2dXiOSCore.a */,
+				9D41016E1978D35200907FA8 /* libSoomlaiOSCore.a */,
+				C0B3C5F2168C6D0C00161FAA /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9D64AAD0190653C40091D664 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D4101D21978D7F600907FA8 /* Cocos2dxLevelUp.h in Headers */,
+				9D4101CB1978D7F600907FA8 /* CCLevelUpEventHandler.h in Headers */,
+				9D4101C61978D7F600907FA8 /* CCLevelUpConsts.h in Headers */,
+				9D4101C81978D7F600907FA8 /* CCSoomlaLevelUp.h in Headers */,
+				9D4101CA1978D7F600907FA8 /* CCLevelUpEventDispatcher.h in Headers */,
+				9D4101CF1978D7F600907FA8 /* CCLevelUpService.h in Headers */,
+				372B7BD43DCE08B373683E0F /* CCMission.h in Headers */,
+				372B7648C7665DEE4183A363 /* CCGate.h in Headers */,
+				372B7724AE373ED18ED6BB6D /* CCSimpleLevelUpEventHandler.h in Headers */,
+				372B75D6F190894B86C35B5F /* CCMissionStorage.h in Headers */,
+				372B7C6FFA3EDC7C61D4B981 /* CCBalanceMission.h in Headers */,
+				372B73A60915E9ACB5C3EC1B /* CCChallenge.h in Headers */,
+				372B7EBB9BE15CC38A027193 /* CCPurchasingMission.h in Headers */,
+				372B7BED507238BCD5ADBE8A /* CCRecordMission.h in Headers */,
+				372B73D94A6F1B58F34FCCE1 /* CCWorldCompletionMission.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C0B3C5EE168C6D0C00161FAA /* Cocos2dXLevelUp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0B3C5FD168C6D0C00161FAA /* Build configuration list for PBXNativeTarget "Cocos2dXLevelUp" */;
+			buildPhases = (
+				C0B3C5EB168C6D0C00161FAA /* Sources */,
+				C0B3C5EC168C6D0C00161FAA /* Frameworks */,
+				9D64AAD0190653C40091D664 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cocos2dXLevelUp;
+			productName = SoomlaIOSStore;
+			productReference = C0B3C5EF168C6D0C00161FAA /* libCocos2dXLevelUp.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C0B3C5E6168C6D0C00161FAA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = SOOMLA;
+			};
+			buildConfigurationList = C0B3C5E9168C6D0C00161FAA /* Build configuration list for PBXProject "Cocos2dXLevelUp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C0B3C5E4168C6D0C00161FAA;
+			productRefGroup = C0B3C5F0168C6D0C00161FAA /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9D76A0AE19A3B6090025DB64 /* Products */;
+					ProjectRef = 9D6575F0199A2811005FE63A /* Cocos2dXiOSLevelUp.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				C0B3C5EE168C6D0C00161FAA /* Cocos2dXLevelUp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9D76A0B219A3B6090025DB64 /* libCocos2dXiOSLevelUp.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCocos2dXiOSLevelUp.a;
+			remoteRef = 9D76A0B119A3B6090025DB64 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C0B3C5EB168C6D0C00161FAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D4101C91978D7F600907FA8 /* CCLevelUpEventDispatcher.cpp in Sources */,
+				9D4101CE1978D7F600907FA8 /* CCLevelUpService.cpp in Sources */,
+				9D4101C51978D7F600907FA8 /* CCLevelUpConsts.cpp in Sources */,
+				9D4101C71978D7F600907FA8 /* CCSoomlaLevelUp.cpp in Sources */,
+				372B7959A55672ED76BE1066 /* CCMission.cpp in Sources */,
+				372B7DA4C3499A370323D494 /* CCGate.cpp in Sources */,
+				372B7B181E1EA6AC4D6F9831 /* CCSimpleLevelUpEventHandler.cpp in Sources */,
+				372B720C11E89EE7BBB82CD4 /* CCMissionStorage.cpp in Sources */,
+				372B70F36F4E5CCEDA362F60 /* CCBalanceMission.cpp in Sources */,
+				372B73CE72C87FB9E6122061 /* CCChallenge.cpp in Sources */,
+				372B7F7CBA9D5FAFD462B1DB /* CCPurchasingMission.cpp in Sources */,
+				372B7A74E01C0AAB812088CC /* CCRecordMission.cpp in Sources */,
+				372B7BB0B71FF1CA733A9EDE /* CCWorldCompletionMission.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C0B3C5FB168C6D0C00161FAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C0B3C5FC168C6D0C00161FAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
+				GCC_PREFIX_HEADER = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C0B3C5FE168C6D0C00161FAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SoomlaIOSStore.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOS2D_DEBUG=1",
+					CC_TARGET_OS_IPHONE,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../cocos",
+					"$(SRCROOT)/../../cocos/base",
+					"$(SRCROOT)/../../cocos/2d",
+					"$(SRCROOT)/../../cocos/platform/ios",
+					"$(SRCROOT)/../../cocos/platform/ios/Simulation",
+					"$(SRCROOT)/../../external/jansson",
+					"$(SRCROOT)/soomla-native/compilations/ios/headers/**",
+					"$(SRCROOT)/../soomla-cocos2dx-core/Soomla/**",
+					"$(SRCROOT)/../cocos2dx-store/Soomla/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/soomla-native/compilations/ios",
+					"$(PROJECT_DIR)/submodules/ios-store/build",
+					"$(PROJECT_DIR)/submodules/ios-levelup/build",
+				);
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = headers/private;
+				PRODUCT_NAME = Cocos2dXLevelUp;
+				PUBLIC_HEADERS_FOLDER_PATH = headers/public;
+				SKIP_INSTALL = YES;
+				SYMROOT = out;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		C0B3C5FF168C6D0C00161FAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SoomlaIOSStore.dst;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = CC_TARGET_OS_IPHONE;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../../cocos",
+					"$(SRCROOT)/../../cocos/base",
+					"$(SRCROOT)/../../cocos/2d",
+					"$(SRCROOT)/../../cocos/platform/ios",
+					"$(SRCROOT)/../../cocos/platform/ios/Simulation",
+					"$(SRCROOT)/../../external/jansson",
+					"$(SRCROOT)/soomla-native/compilations/ios/headers/**",
+					"$(SRCROOT)/../soomla-cocos2dx-core/Soomla/**",
+					"$(SRCROOT)/../cocos2dx-store/Soomla/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/soomla-native/compilations/ios",
+					"$(PROJECT_DIR)/submodules/ios-store/build",
+					"$(PROJECT_DIR)/submodules/ios-levelup/build",
+				);
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = headers/private;
+				PRODUCT_NAME = Cocos2dXLevelUp;
+				PUBLIC_HEADERS_FOLDER_PATH = headers/public;
+				SKIP_INSTALL = YES;
+				SYMROOT = out;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C0B3C5E9168C6D0C00161FAA /* Build configuration list for PBXProject "Cocos2dXLevelUp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0B3C5FB168C6D0C00161FAA /* Debug */,
+				C0B3C5FC168C6D0C00161FAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0B3C5FD168C6D0C00161FAA /* Build configuration list for PBXNativeTarget "Cocos2dXLevelUp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0B3C5FE168C6D0C00161FAA /* Debug */,
+				C0B3C5FF168C6D0C00161FAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C0B3C5E6168C6D0C00161FAA /* Project object */;
+}
