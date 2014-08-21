@@ -1,0 +1,65 @@
+//
+// Created by Shubin Fedor on 20/08/14.
+// Copyright (c) 2014 SOOMLA. All rights reserved.
+//
+
+
+#ifndef __CCWorldCompletionGate_H_
+#define __CCWorldCompletionGate_H_
+
+#include "CCGate.h"
+#include "CCLevelUpConsts.h"
+#include "CCSimpleStoreEventHandler.h"
+#include "CCSimpleLevelUpEventHandler.h"
+
+namespace soomla {
+    class CCWorldCompletionGate: public CCGate {
+        friend class CCWorldCompletionGateEventHanler;
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAssociatedWorldId, AssociatedWorldId, CCLevelUpConsts::JSON_LU_ASSOCWORLDID)
+        CC_SYNTHESIZE_RETAIN(CCLevelUpEventHandler *, mEventHandler, EventHandler);
+    public:
+        CCWorldCompletionGate(): CCGate(), mAssociatedWorldId(NULL), mEventHandler(NULL) {
+        }
+
+        static CCWorldCompletionGate *create(cocos2d::__String *id, cocos2d::__String *associatedWorldId);
+
+        SL_CREATE_WITH_DICTIONARY(CCWorldCompletionGate)
+        bool init(cocos2d::__String *id, cocos2d::__String *associatedWorldId);
+
+        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+
+        virtual const char *getType() const;
+
+        virtual cocos2d::__Dictionary *toDictionary();
+
+        virtual ~CCWorldCompletionGate();
+
+    protected:
+        virtual void registerEvents();
+
+        virtual void unregisterEvents();
+
+        virtual bool canOpenInner();
+
+        virtual bool openInner();
+    };
+
+    class CCWorldCompletionGateEventHanler: public CCSimpleLevelUpEventHandler {
+    private:
+        CCWorldCompletionGate *mWorldCompletionGate;
+    public:
+        CCWorldCompletionGateEventHanler(): mWorldCompletionGate(NULL) {
+        }
+
+        static CCWorldCompletionGateEventHanler *create(CCWorldCompletionGate *worldCompletionGate);
+
+        // TODO: void onWorldCompleted(CCWorld *world)
+//        void onWorldCompleted(CCWorld *world) {
+//            if (world.ID == AssociatedWorldId) {
+//                ForceOpen(true);
+//            }
+//        }
+    };
+}
+
+#endif //__CCWorldCompletionGate_H_

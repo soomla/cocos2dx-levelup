@@ -42,6 +42,8 @@ namespace soomla {
                 setGate(NULL);
             }
 
+            registerEvents();
+
             return true;
         }
 
@@ -64,12 +66,16 @@ namespace soomla {
             // gate
             ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_GATE);
             CC_ASSERT(dynamic_cast<__Dictionary *>(ref));
-            setGate(CCGate::createWithDictionary(dynamic_cast<__Dictionary *>(ref)));
+            ref = CCDomainFactory::getInstance()->createWithDictionary(dynamic_cast<__Dictionary *>(ref));
+            CC_ASSERT(dynamic_cast<CCGate *>(ref));
+            setGate(dynamic_cast<CCGate *>(ref));
 
             // schedule
             ref = dict->objectForKey(CCLevelUpConsts::JSON_SCHEDULE);
             CC_ASSERT(dynamic_cast<__Dictionary *>(ref));
             setSchedule(CCSchedule::createWithDictionary(dynamic_cast<__Dictionary *>(ref)));
+
+            registerEvents();
 
             return true;
         }
@@ -190,6 +196,7 @@ namespace soomla {
 
     CCMissionEventHandler *soomla::CCMissionEventHandler::create(soomla::CCMission *mission) {
         CCMissionEventHandler *ret = new CCMissionEventHandler();
+        ret->autorelease();
         ret->mMission = mission;
         return ret;
     }

@@ -21,9 +21,7 @@ namespace soomla {
 
         virtual void onGateOpened(CCGate *gate);
 
-
         virtual void onMissionCompleted(CCMission *mission);
-
         virtual void onMissionCompletionRevoked(CCMission *mission);
     };
 }

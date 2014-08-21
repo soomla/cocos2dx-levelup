@@ -4,12 +4,6 @@
 
 #include "CCLevelUpEventDispatcher.h"
 #include "CCSoomlaEventDispatcher.h"
-#include "CCError.h"
-#include "CCStoreInfo.h"
-#include "CCSoomlaUtils.h"
-#include "CCPurchaseWithMarket.h"
-#include "CCLevelUpConsts.h"
-#include "CCGate.h"
 
 namespace soomla {
 
@@ -58,4 +52,5 @@ namespace soomla {
             eventHandler->onMissionCompletionRevoked(mission);
         }
     }
+
 }

@@ -92,6 +92,7 @@ namespace soomla {
 
     CCChallengeEventHandler *CCChallengeEventHandler::create(CCChallenge *challenge) {
         CCChallengeEventHandler *ret = new CCChallengeEventHandler();
+        ret->autorelease();
         ret->mChallenge = challenge;
         return ret;
     }

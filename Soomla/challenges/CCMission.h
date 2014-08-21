@@ -24,7 +24,7 @@ namespace soomla {
         CC_SYNTHESIZE_RETAIN(CCSchedule *, mSchedule, Schedule)
         CC_SYNTHESIZE_RETAIN(CCGate *, mGate, Gate);
 
-        CC_SYNTHESIZE_RETAIN(CCSimpleLevelUpEventHandler *, mEventHandler, EventHandler);
+        CC_SYNTHESIZE_RETAIN(CCLevelUpEventHandler *, mEventHandler, EventHandler);
     public:
         CCMission(): CCSoomlaEntity(), mRewards(NULL), mSchedule(NULL), mGate(NULL), mEventHandler(NULL) {
         }

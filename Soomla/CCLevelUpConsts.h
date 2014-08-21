@@ -65,8 +65,11 @@ namespace soomla {
 
         static char const *JSON_JSON_TYPE_GATE;
         static char const *JSON_JSON_TYPE_BALANCE_GATE;
+        static char const *JSON_JSON_TYPE_GATES_LIST_AND;
+        static char const *JSON_JSON_TYPE_GATES_LIST_OR;
         static char const *JSON_JSON_TYPE_PURCHASABLE_GATE;
         static char const *JSON_JSON_TYPE_RECORD_GATE;
+        static char const *JSON_JSON_TYPE_SCHEDULE_GATE;
         static char const *JSON_JSON_TYPE_WORLD_COMPLETION_GATE;
 
         static char const *EVENT_BILLING_NOT_SUPPORTED;

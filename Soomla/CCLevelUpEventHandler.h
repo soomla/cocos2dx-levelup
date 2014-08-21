@@ -18,10 +18,13 @@
 #define __CCLevelUpEventHandler__
 
 #include "cocos2d.h"
-#include "CCMission.h"
-#include "CCGate.h"
 
 namespace soomla {
+    class CCMission;
+    class CCGate;
+    class CCVirtualCurrency;
+    class CCVirtualGood;
+
     class CCLevelUpEventHandler : public cocos2d::Ref {
     public:
         virtual void onGateOpened(CCGate *gate) = 0;

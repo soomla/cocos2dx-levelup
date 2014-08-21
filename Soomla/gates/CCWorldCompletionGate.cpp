@@ -1,0 +1,106 @@
+//
+// Created by Shubin Fedor on 20/08/14.
+// Copyright (c) 2014 SOOMLA. All rights reserved.
+//
+
+#include "CCWorldCompletionGate.h"
+#include "CCStoreEventDispatcher.h"
+#include "CCStoreInventory.h"
+#include "CCSoomlaUtils.h"
+#include "CCLevelUpEventDispatcher.h"
+
+namespace soomla {
+
+    USING_NS_CC;
+
+#define TAG "SOOMLA WorldCompletionGate"
+
+    CCWorldCompletionGate *CCWorldCompletionGate::create(cocos2d::__String *id, cocos2d::__String *associatedWorldId) {
+        CCWorldCompletionGate *ret = new CCWorldCompletionGate();
+        if (ret->init(id, associatedWorldId)) {
+            ret->autorelease();
+        }
+        else {
+            CC_SAFE_DELETE(ret);
+        }
+
+        return ret;
+    }
+
+    bool CCWorldCompletionGate::init(cocos2d::__String *id, cocos2d::__String *associatedWorldId) {
+        bool result = CCGate::init(id, NULL);
+        if (result) {
+            setAssociatedWorldId(associatedWorldId);
+            return true;
+        }
+        return result;
+    }
+
+    bool CCWorldCompletionGate::initWithDictionary(cocos2d::__Dictionary *dict) {
+        bool result = CCGate::initWithDictionary(dict);
+        if (result) {
+            fillAssociatedWorldIdFromDict(dict);
+            return true;
+        }
+        return result;
+    }
+
+    const char *CCWorldCompletionGate::getType() const {
+        return CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE;
+    }
+
+    cocos2d::__Dictionary *CCWorldCompletionGate::toDictionary() {
+        cocos2d::__Dictionary *dict = CCGate::toDictionary();
+
+        putAssociatedWorldIdToDict(dict);
+
+        return dict;
+    }
+
+    CCWorldCompletionGate::~CCWorldCompletionGate() {
+        CC_SAFE_RELEASE(mAssociatedWorldId);
+    }
+
+
+    void CCWorldCompletionGate::registerEvents() {
+        if (!isOpen()) {
+            setEventHandler(CCWorldCompletionGateEventHanler::create(this));
+            CCLevelUpEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+        }
+    }
+
+    void CCWorldCompletionGate::unregisterEvents() {
+        CCLevelUpEventHandler *eventHandler = getEventHandler();
+        if (eventHandler) {
+            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(eventHandler);
+            setEventHandler(NULL);
+        }
+    }
+
+    bool CCWorldCompletionGate::canOpenInner() {
+        // TODO: CCWorldCompletionGate::canOpenInner()
+//        World world = LevelUp.GetInstance().GetWorld(AssociatedWorldId);
+//        return world != null && world.IsCompleted();
+        return true;
+    }
+
+    bool CCWorldCompletionGate::openInner() {
+        if (canOpen()) {
+            forceOpen(true);
+            return true;
+        }
+
+        return false;
+    }
+
+    CCWorldCompletionGateEventHanler *CCWorldCompletionGateEventHanler::create(CCWorldCompletionGate *worldCompletionGate) {
+        CCWorldCompletionGateEventHanler *ret = new CCWorldCompletionGateEventHanler();
+        ret->autorelease();
+
+        ret->mWorldCompletionGate = worldCompletionGate;
+
+        return ret;
+    }
+
+}
+

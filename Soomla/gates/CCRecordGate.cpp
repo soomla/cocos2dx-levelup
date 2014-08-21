@@ -1,0 +1,108 @@
+//
+// Created by Shubin Fedor on 20/08/14.
+// Copyright (c) 2014 SOOMLA. All rights reserved.
+//
+
+#include "CCRecordGate.h"
+#include "CCLevelUpEventDispatcher.h"
+
+namespace soomla {
+
+    CCRecordGate *CCRecordGate::create(cocos2d::__String *id, cocos2d::__String *associatedScoreId, cocos2d::__Double *desiredRecord) {
+        CCRecordGate *ret = new CCRecordGate();
+        if (ret->init(id, associatedScoreId, desiredRecord)) {
+            ret->autorelease();
+        }
+        else {
+            CC_SAFE_DELETE(ret);
+        }
+
+        return ret;
+    }
+
+    bool CCRecordGate::init(cocos2d::__String *id, cocos2d::__String *associatedScoreId, cocos2d::__Double *desiredRecord) {
+        bool result = CCGate::init(id, NULL);
+        if (result) {
+            setAssociatedScoreId(associatedScoreId);
+            setDesiredRecord(desiredRecord);
+            return true;
+        }
+        return result;
+    }
+
+    bool CCRecordGate::initWithDictionary(cocos2d::__Dictionary *dict) {
+        bool result = CCGate::initWithDictionary(dict);
+        if (result) {
+            fillAssociatedScoreIdFromDict(dict);
+            fillDesiredRecordFromDict(dict);
+            return true;
+        }
+        return result;
+    }
+
+    const char *CCRecordGate::getType() const {
+        return CCLevelUpConsts::JSON_JSON_TYPE_RECORD_GATE;
+    }
+
+    cocos2d::__Dictionary *CCRecordGate::toDictionary() {
+        cocos2d::__Dictionary *dict = CCGate::toDictionary();
+
+        putAssociatedScoreIdToDict(dict);
+        putDesiredRecordToDict(dict);
+
+        return dict;
+    }
+
+    CCRecordGate::~CCRecordGate() {
+        CC_SAFE_RELEASE(mAssociatedScoreId);
+        CC_SAFE_RELEASE(mDesiredRecord);
+    }
+
+    bool CCRecordGate::canOpenInner() {
+        // TODO: Implement bool CCRecordGate::canOpenInner()
+        return false;
+//        Score score = LevelUp.GetInstance().GetScore(AssociatedScoreId);
+//        if (score == null) {
+//            SoomlaUtils.LogError(TAG, "(canOpenInner) couldn't find score with scoreId: " + AssociatedScoreId);
+//            return false;
+//        }
+//
+//        return score.HasRecordReached(DesiredRecord);
+    }
+
+    bool CCRecordGate::openInner() {
+        if (canOpen()) {
+            // There's nothing to do here... If the DesiredRecord was reached then the gate is just open.
+            forceOpen(true);
+            return true;
+        }
+
+        return false;
+    }
+
+    void CCRecordGate::registerEvents() {
+        if (!isOpen()) {
+            setEventHandler(CCRecordGateEventHandler::create(this));
+            CCLevelUpEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+        }
+    }
+
+    void CCRecordGate::unregisterEvents() {
+        CCLevelUpEventHandler *eventHandler = getEventHandler();
+        if (eventHandler) {
+            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(eventHandler);
+            setEventHandler(NULL);
+        }
+    }
+
+    CCRecordGateEventHandler *CCRecordGateEventHandler::create(CCRecordGate *recordGate) {
+        CCRecordGateEventHandler *ret = new CCRecordGateEventHandler();
+        ret->autorelease();
+
+        ret->mRecordGate = recordGate;
+
+        return ret;
+    }
+
+
+}

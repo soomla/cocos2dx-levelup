@@ -16,3 +16,4 @@ void soomla::CCSimpleLevelUpEventHandler::onMissionCompleted(soomla::CCMission *
 void soomla::CCSimpleLevelUpEventHandler::onMissionCompletionRevoked(soomla::CCMission *mission) {
 
 }
+

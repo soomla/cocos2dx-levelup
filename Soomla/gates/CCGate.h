@@ -9,18 +9,25 @@
 #include "CCSoomlaEntity.h"
 
 namespace soomla {
+
     class CCGate: public CCSoomlaEntity {
     public:
-        SL_CREATE_WITH_DICTIONARY(CCGate);
 
-        void forceOpen(bool b);
+        virtual bool init(cocos2d::__String *id, cocos2d::__String *name = NULL);
 
-        bool open();
+        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
 
-        bool canOpen();
+        virtual const char *getType() const;
 
-
-        virtual char const *getType() const;
+        virtual bool open();
+        virtual void forceOpen(bool open);
+        virtual bool isOpen();
+        virtual bool canOpen();
+    protected:
+        virtual void registerEvents() = 0;
+        virtual void unregisterEvents() = 0;
+        virtual bool canOpenInner() = 0;
+        virtual bool openInner() = 0;
     };
 }
 

@@ -5,19 +5,77 @@
 
 #include "CCGate.h"
 #include "CCLevelUpConsts.h"
+#include "CCGateStorage.h"
 
-void soomla::CCGate::forceOpen(bool b) {
+namespace soomla {
 
-}
+#define TAG "SOOMLA Gate"
 
-bool soomla::CCGate::open() {
-    return false;
-}
+    bool CCGate::init(cocos2d::__String *id, cocos2d::__String *name) {
+        if (!name) {
+            name = cocos2d::__String::create("");
+        }
+        bool result = CCSoomlaEntity::init(id, name, NULL);
 
-bool soomla::CCGate::canOpen() {
-    return false;
-}
+        if (result) {
+            registerEvents();
 
-char const *soomla::CCGate::getType() const {
-    return CCLevelUpConsts::JSON_JSON_TYPE_GATE;
+            return true;
+        }
+
+        return result;
+    }
+
+    bool CCGate::initWithDictionary(cocos2d::__Dictionary *dict) {
+        bool result = CCSoomlaEntity::initWithDictionary(dict);
+
+        if (result) {
+            registerEvents();
+
+            return true;
+        }
+
+        return result;
+    }
+
+    char const *CCGate::getType() const {
+        return CCLevelUpConsts::JSON_JSON_TYPE_GATE;
+    }
+
+    bool CCGate::open() {
+        //  check in gate storage if it's already open
+        if (CCGateStorage::getInstance()->isOpen(this)) {
+            return true;
+        }
+        return openInner();
+    }
+
+    void CCGate::forceOpen(bool open) {
+        if (isOpen() == open) {
+            // if it's already open why open it again?
+            return;
+        }
+
+        CCGateStorage::getInstance()->setOpen(this, open);
+        if (open) {
+            unregisterEvents();
+        } else {
+            // we can do this here ONLY becasue we check 'isOpen == open' a few lines above.
+            registerEvents();
+        }
+    }
+
+    bool CCGate::isOpen() {
+        return CCGateStorage::getInstance()->isOpen(this);
+    }
+
+    bool CCGate::canOpen() {
+        // check in gate storage if the gate is open
+        if (CCGateStorage::getInstance()->isOpen(this)) {
+            return true;
+        }
+
+        return canOpenInner();
+    }
+
 }
