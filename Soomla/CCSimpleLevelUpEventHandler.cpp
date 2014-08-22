@@ -4,6 +4,7 @@
 //
 
 #include "CCSimpleLevelUpEventHandler.h"
+#include "CCScore.h"
 
 void soomla::CCSimpleLevelUpEventHandler::onGateOpened(soomla::CCGate *gate) {
 
@@ -17,3 +18,6 @@ void soomla::CCSimpleLevelUpEventHandler::onMissionCompletionRevoked(soomla::CCM
 
 }
 
+void soomla::CCSimpleLevelUpEventHandler::onScoreRecordReached(soomla::CCScore *score) {
+
+}

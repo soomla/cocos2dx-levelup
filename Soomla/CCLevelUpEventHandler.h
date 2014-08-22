@@ -22,14 +22,16 @@
 namespace soomla {
     class CCMission;
     class CCGate;
-    class CCVirtualCurrency;
-    class CCVirtualGood;
+    class CCScore;
 
     class CCLevelUpEventHandler : public cocos2d::Ref {
     public:
         virtual void onGateOpened(CCGate *gate) = 0;
+
         virtual void onMissionCompleted(CCMission *mission) = 0;
         virtual void onMissionCompletionRevoked(CCMission *mission) = 0;
+
+        virtual void onScoreRecordReached(CCScore *score) = 0;
     };
 };
 

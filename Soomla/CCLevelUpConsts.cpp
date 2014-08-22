@@ -64,6 +64,8 @@ namespace soomla {
     char const *CCLevelUpConsts::JSON_JSON_TYPE_SCHEDULE_GATE = "scheduleGate";
     char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE = "worldCompletionGate";
 
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SCORE       = "score";
+
 //    char const *CCLevelUpConsts::EVENT_BILLING_NOT_SUPPORTED = "CCLevelUpEventHandler::onBillingNotSupported";
 //
 }

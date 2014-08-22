@@ -4,6 +4,7 @@
 
 #include "CCLevelUpEventDispatcher.h"
 #include "CCSoomlaEventDispatcher.h"
+#include "CCScore.h"
 
 namespace soomla {
 
@@ -52,5 +53,12 @@ namespace soomla {
             eventHandler->onMissionCompletionRevoked(mission);
         }
     }
+
+    void CCLevelUpEventDispatcher::onScoreRecordReached(CCScore *score) {
+        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
+            eventHandler->onScoreRecordReached(score);
+        }
+    }
+
 
 }

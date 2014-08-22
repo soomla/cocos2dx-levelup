@@ -8,13 +8,17 @@
 #define __CCSimpleLevelUpEventHandler_H_
 
 #include "CCLevelUpEventHandler.h"
+#include "CCScore.h"
 
 namespace soomla {
     class CCSimpleLevelUpEventHandler: public CCLevelUpEventHandler {
     public:
         virtual void onGateOpened(CCGate* gate);
+
         virtual void onMissionCompleted(CCMission* completedMission);
         virtual void onMissionCompletionRevoked(CCMission* mission);
+
+        virtual void onScoreRecordReached(CCScore *score);
     };
 }
 

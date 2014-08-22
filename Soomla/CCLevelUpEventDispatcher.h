@@ -23,6 +23,8 @@ namespace soomla {
 
         virtual void onMissionCompleted(CCMission *mission);
         virtual void onMissionCompletionRevoked(CCMission *mission);
+
+        virtual void onScoreRecordReached(CCScore *score);
     };
 }
 
