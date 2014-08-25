@@ -11,6 +11,7 @@
 #include "CCLevelUpConsts.h"
 #include "CCSimpleStoreEventHandler.h"
 #include "CCSimpleLevelUpEventHandler.h"
+#include "CCWorld.h"
 
 namespace soomla {
     class CCWorldCompletionGate: public CCGate {
@@ -53,12 +54,7 @@ namespace soomla {
 
         static CCWorldCompletionGateEventHanler *create(CCWorldCompletionGate *worldCompletionGate);
 
-        // TODO: void onWorldCompleted(CCWorld *world)
-//        void onWorldCompleted(CCWorld *world) {
-//            if (world.ID == AssociatedWorldId) {
-//                ForceOpen(true);
-//            }
-//        }
+        void onWorldCompleted(CCWorld *world);
     };
 }
 

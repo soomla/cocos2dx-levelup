@@ -5,6 +5,7 @@
 #include "CCLevelUpEventDispatcher.h"
 #include "CCSoomlaEventDispatcher.h"
 #include "CCScore.h"
+#include "CCWorld.h"
 
 namespace soomla {
 
@@ -60,5 +61,15 @@ namespace soomla {
         }
     }
 
+    void CCLevelUpEventDispatcher::onScoreRecordChanged(CCScore *score) {
+        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
+            eventHandler->onScoreRecordChanged(score);
+        }
+    }
 
+    void CCLevelUpEventDispatcher::onWorldCompleted(CCWorld *world) {
+        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
+            eventHandler->onWorldCompleted(world);
+        }
+    }
 }

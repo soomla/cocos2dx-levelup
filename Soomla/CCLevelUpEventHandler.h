@@ -23,6 +23,7 @@ namespace soomla {
     class CCMission;
     class CCGate;
     class CCScore;
+    class CCWorld;
 
     class CCLevelUpEventHandler : public cocos2d::Ref {
     public:
@@ -32,6 +33,9 @@ namespace soomla {
         virtual void onMissionCompletionRevoked(CCMission *mission) = 0;
 
         virtual void onScoreRecordReached(CCScore *score) = 0;
+        virtual void onScoreRecordChanged(CCScore *score) = 0;
+
+        virtual void onWorldCompleted(CCWorld *world) = 0;
     };
 };
 

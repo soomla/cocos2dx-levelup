@@ -7,6 +7,8 @@
 
 #include "CCLevelUpEventHandler.h"
 #include "CCAbstractAggregatedEventHandler.h"
+#include "CCScore.h"
+#include "CCWorld.h"
 
 namespace soomla {
     class CCLevelUpEventDispatcher
@@ -25,6 +27,9 @@ namespace soomla {
         virtual void onMissionCompletionRevoked(CCMission *mission);
 
         virtual void onScoreRecordReached(CCScore *score);
+        virtual void onScoreRecordChanged(CCScore *score);
+
+        virtual void onWorldCompleted(CCWorld *world);
     };
 }
 

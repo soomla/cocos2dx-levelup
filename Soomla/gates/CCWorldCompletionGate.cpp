@@ -8,6 +8,8 @@
 #include "CCStoreInventory.h"
 #include "CCSoomlaUtils.h"
 #include "CCLevelUpEventDispatcher.h"
+#include "CCWorld.h"
+#include "CCLevelUp.h"
 
 namespace soomla {
 
@@ -78,10 +80,8 @@ namespace soomla {
     }
 
     bool CCWorldCompletionGate::canOpenInner() {
-        // TODO: CCWorldCompletionGate::canOpenInner()
-//        World world = LevelUp.GetInstance().GetWorld(AssociatedWorldId);
-//        return world != null && world.IsCompleted();
-        return true;
+        CCWorld *world = CCLevelUp::getInstance()->getWorld(mAssociatedWorldId->getCString());
+        return world != NULL && world->isCompleted();
     }
 
     bool CCWorldCompletionGate::openInner() {
@@ -102,5 +102,10 @@ namespace soomla {
         return ret;
     }
 
+    void CCWorldCompletionGateEventHanler::onWorldCompleted(CCWorld *world) {
+        if (world->getId()->compare(mWorldCompletionGate->mAssociatedWorldId->getCString()) == 0) {
+            mWorldCompletionGate->forceOpen(true);
+        }
+    }
 }
 

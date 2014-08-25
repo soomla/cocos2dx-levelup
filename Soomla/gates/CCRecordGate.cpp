@@ -5,6 +5,8 @@
 
 #include "CCRecordGate.h"
 #include "CCLevelUpEventDispatcher.h"
+#include "CCLevelUp.h"
+#include "CCSoomlaUtils.h"
 
 namespace soomla {
 
@@ -59,15 +61,15 @@ namespace soomla {
     }
 
     bool CCRecordGate::canOpenInner() {
-        // TODO: Implement bool CCRecordGate::canOpenInner()
-        return false;
-//        Score score = LevelUp.GetInstance().GetScore(AssociatedScoreId);
-//        if (score == null) {
-//            SoomlaUtils.LogError(TAG, "(canOpenInner) couldn't find score with scoreId: " + AssociatedScoreId);
-//            return false;
-//        }
-//
-//        return score.HasRecordReached(DesiredRecord);
+        CCScore *score = CCLevelUp::getInstance()->getScore(mAssociatedScoreId->getCString());
+        if (score == NULL) {
+            CCSoomlaUtils::logError(TAG, cocos2d::__String::createWithFormat(
+                    "(canOpenInner) couldn't find score with scoreId: %s", mAssociatedScoreId->getCString()
+            )->getCString());
+            return false;
+        }
+
+        return score->hasRecordReached(mDesiredRecord->getValue());
     }
 
     bool CCRecordGate::openInner() {
@@ -104,5 +106,15 @@ namespace soomla {
         return ret;
     }
 
+    void CCRecordGateEventHandler::onScoreRecordChanged(CCScore *score) {
 
+        if (score->getId()->compare(mRecordGate->mAssociatedScoreId->getCString()) == 0 &&
+                score->hasRecordReached(mRecordGate->mDesiredRecord->getValue())) {
+
+            // We were thinking what will happen if the score's record will be broken over and over again.
+            // It might have made this function being called over and over again.
+            // It won't be called b/c ForceOpen(true) calls 'unregisterEvents' inside.
+            mRecordGate->forceOpen(true);
+        }
+    }
 }

@@ -9,6 +9,7 @@
 #include "CCLevel.h"
 #include "CCSoomlaUtils.h"
 #include "CCWorldStorage.h"
+#include "CCLevelUp.h"
 
 #define TAG "SOOMLA World"
 
@@ -366,8 +367,7 @@ namespace soomla {
     void CCWorld::assignReward(CCReward *reward) {
         __String *olderReward = this->getAssignedRewardId();
         if (olderReward != NULL && olderReward->length() > 0) {
-            CCReward *oldReward = NULL;
-//            TODO: Implement: CCReward *oldReward = LevelUp.GetInstance().GetReward(olderReward);
+            CCReward *oldReward = CCLevelUp::getInstance()->getReward(olderReward->getCString());
             if (oldReward != NULL) {
                 oldReward->take();
             }
