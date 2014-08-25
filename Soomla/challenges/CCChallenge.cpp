@@ -28,7 +28,6 @@ namespace soomla {
         return ret;
     }
 
-
     bool CCChallenge::init(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Array *missions, cocos2d::__Array *rewards) {
         bool result = CCMission::init(id, name, rewards);
         if (result) {
@@ -37,7 +36,6 @@ namespace soomla {
         }
         return result;
     }
-
 
     bool CCChallenge::initWithDictionary(cocos2d::__Dictionary *dict) {
         bool result = CCMission::initWithDictionary(dict);
@@ -51,7 +49,6 @@ namespace soomla {
         }
         return result;
     }
-
 
     cocos2d::__Dictionary *CCChallenge::toDictionary() {
         __Dictionary *dict = CCMission::toDictionary();

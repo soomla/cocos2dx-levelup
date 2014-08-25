@@ -74,6 +74,8 @@ namespace soomla {
 
         static char const *JSON_JSON_TYPE_SCORE;
 
+        static char const *JSON_JSON_TYPE_WORLD;
+
         static char const *EVENT_BILLING_NOT_SUPPORTED;
     };
 }

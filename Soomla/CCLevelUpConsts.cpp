@@ -66,6 +66,8 @@ namespace soomla {
 
     char const *CCLevelUpConsts::JSON_JSON_TYPE_SCORE       = "score";
 
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD       = "world";
+
 //    char const *CCLevelUpConsts::EVENT_BILLING_NOT_SUPPORTED = "CCLevelUpEventHandler::onBillingNotSupported";
 //
 }
