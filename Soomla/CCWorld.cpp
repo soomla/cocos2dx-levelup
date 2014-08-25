@@ -9,7 +9,6 @@
 #include "CCLevel.h"
 #include "CCSoomlaUtils.h"
 #include "CCWorldStorage.h"
-#include "CCReward.h"
 
 #define TAG "SOOMLA World"
 

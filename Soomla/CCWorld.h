@@ -66,8 +66,8 @@ namespace soomla {
         void setScoreValue(char const *id, double scoreVal, bool onlyIfBetter);
 
         bool isCompleted();
-        void setCompleted(bool completed);
-        void setCompleted(bool completed, bool recursive);
+        virtual void setCompleted(bool completed);
+        virtual void setCompleted(bool completed, bool recursive);
 
         void assignReward(CCReward *reward);
         cocos2d::__String *getAssignedRewardId();
