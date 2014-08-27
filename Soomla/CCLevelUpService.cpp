@@ -58,8 +58,8 @@ namespace soomla {
         CCDomainFactory *domainFactory = CCDomainFactory::getInstance();
 //        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_VIRTUAL_ITEM, CCVirtualItem::createWithDictionary);
 
-
         return true;
     }
+
 
 }

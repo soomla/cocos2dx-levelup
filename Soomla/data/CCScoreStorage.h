@@ -17,10 +17,10 @@ namespace soomla {
     public:
         static CCScoreStorage *getInstance();
 
-        double getRecordScore(CCScore *score);
+        void setLatestScore(CCScore *score, double newValue);
         double getLatestScore(CCScore *score);
         void setRecordScore(CCScore *score, double newValue);
-        void setLatestScore(CCScore *score, double newValue);
+        double getRecordScore(CCScore *score);
     };
 }
 

@@ -4,6 +4,7 @@
 //
 
 #include "CCMissionStorage.h"
+#include "CCLevelUpService.h"
 
 namespace soomla {
     static CCMissionStorage *sInstance = nullptr;
@@ -15,5 +16,22 @@ namespace soomla {
             sInstance->retain();
         }
         return sInstance;
+    }
+
+
+    void CCMissionStorage::setCompleted(CCMission *mission, bool completed) {
+        return this->setCompleted(mission, completed, true);
+    }
+
+    void CCMissionStorage::setCompleted(CCMission *mission, bool completed, bool notify) {
+        return CCLevelUpService::getInstance()->missionSetCompleted(mission, completed, notify);
+    }
+
+    bool CCMissionStorage::isCompleted(CCMission *mission) {
+        return getTimesCompleted(mission) > 0;
+    }
+
+    int CCMissionStorage::getTimesCompleted(CCMission *mission) {
+        return CCLevelUpService::getInstance()->missionGetTimesCompleted(mission);
     }
 }

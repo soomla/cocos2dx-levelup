@@ -5,9 +5,10 @@
 
 #include "CCWorldStorage.h"
 #include "CCWorld.h"
+#include "CCLevelUpService.h"
 
 namespace soomla {
-    static CCWorldStorage *sInstance = nullptr;
+    static CCWorldStorage *sInstance = NULL;
 
     CCWorldStorage *soomla::CCWorldStorage::getInstance() {
         if (!sInstance)
@@ -18,18 +19,29 @@ namespace soomla {
         return sInstance;
     }
 
-    bool CCWorldStorage::isCompleted(CCWorld *world) {
-        return false;
+    void CCWorldStorage::setCompleted(CCWorld *world, bool completed, bool notify) {
+        bool currentStatus = isCompleted(world);
+        if (currentStatus == completed) {
+            // we don't need to set the status of a world to the same status over and over again.
+            // couldn't only cause trouble.
+            return;
+        }
+        CCLevelUpService::getInstance()->worldSetCompleted(world, completed, notify);
     }
 
     void CCWorldStorage::setCompleted(CCWorld *world, bool completed) {
+        setCompleted(world, completed, true);
+    }
+
+    bool CCWorldStorage::isCompleted(CCWorld *world) {
+        return CCLevelUpService::getInstance()->worldIsCompleted(world);
     }
 
     void CCWorldStorage::setReward(CCWorld *world, cocos2d::__String *rewardId) {
-
+        CCLevelUpService::getInstance()->worldSetReward(world, rewardId);
     }
 
     cocos2d::__String *CCWorldStorage::getAssignedReward(CCWorld *world) {
-        return NULL;
+        return CCLevelUpService::getInstance()->worldGetAssignedReward(world);
     }
 }

@@ -8,8 +8,6 @@
 #define __CCLevelStorage_H_
 
 #include "cocos2d.h"
-#include "CCMission.h"
-#include "CCWorld.h"
 
 namespace soomla {
     class CCLevel;
@@ -17,15 +15,22 @@ namespace soomla {
     public:
         static CCLevelStorage *getInstance();
 
-        int getTimesStarted(CCLevel *level);
-        int getTimesPlayed(CCLevel *level);
-        int getSlowestDurationMillis(CCLevel *level);
-        int getFastestDurationMillis(CCLevel *level);
-        void incTimesStarted(CCLevel *level);
         void setSlowestDurationMillis(CCLevel *level, long duration);
-        void setFastestDurationMillis(CCLevel *level, long duration);
+        long getSlowestDurationMillis(CCLevel *level);
 
-        void incTimesPlayed(CCLevel *level);
+        void setFastestDurationMillis(CCLevel *level, long duration);
+        long getFastestDurationMillis(CCLevel *level);
+
+        int incTimesStarted(CCLevel *level);
+        int decTimesStarted(CCLevel *level);
+        int getTimesStarted(CCLevel *level);
+
+        int getTimesPlayed(CCLevel *level);
+        int incTimesPlayed(CCLevel *level);
+        int decTimesPlayed(CCLevel *level);
+
+    private:
+
     };
 }
 

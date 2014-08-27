@@ -15,9 +15,10 @@ namespace soomla {
     public:
         static CCMissionStorage *getInstance();
 
+        void setCompleted(CCMission *mission, bool completed);
+        void setCompleted(CCMission *mission, bool completed, bool notify);
         bool isCompleted(CCMission *mission);
         int getTimesCompleted(CCMission *mission);
-        int setCompleted(CCMission *mission, bool completed);
     };
 }
 

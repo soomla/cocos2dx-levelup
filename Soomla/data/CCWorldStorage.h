@@ -17,8 +17,9 @@ namespace soomla {
     public:
         static CCWorldStorage *getInstance();
 
-        bool isCompleted(CCWorld *world);
+        void setCompleted(CCWorld *world, bool completed, bool notify);
         void setCompleted(CCWorld *world, bool completed);
+        bool isCompleted(CCWorld *world);
 
         void setReward(CCWorld *world, cocos2d::__String *rewardId);
         cocos2d::__String *getAssignedReward(CCWorld *world);

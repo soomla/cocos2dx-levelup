@@ -4,6 +4,7 @@
 //
 
 #include "CCGateStorage.h"
+#include "CCLevelUpService.h"
 
 namespace soomla {
     static CCGateStorage *sInstance = nullptr;
@@ -15,5 +16,13 @@ namespace soomla {
             sInstance->retain();
         }
         return sInstance;
+    }
+
+    bool CCGateStorage::isOpen(CCGate *gate) {
+        return CCLevelUpService::getInstance()->gateIsOpen(gate);
+    }
+
+    void CCGateStorage::setOpen(CCGate *gate, bool open) {
+        CCLevelUpService::getInstance()->gateSetOpen(gate, open);
     }
 }
