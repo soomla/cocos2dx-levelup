@@ -10,6 +10,8 @@
 
 namespace soomla {
 
+#define TAG "SOOMLA BalanceGate"
+
     soomla::CCBalanceGate *soomla::CCBalanceGate::create(cocos2d::__String *id, cocos2d::__String *associatedItemId, cocos2d::__Integer *desiredBalance) {
         CCBalanceGate *ret = new CCBalanceGate();
         if (ret->init(id, associatedItemId, desiredBalance)) {
