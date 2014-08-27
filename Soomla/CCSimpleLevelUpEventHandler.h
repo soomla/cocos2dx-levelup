@@ -8,8 +8,6 @@
 #define __CCSimpleLevelUpEventHandler_H_
 
 #include "CCLevelUpEventHandler.h"
-#include "CCScore.h"
-#include "CCWorld.h"
 
 namespace soomla {
     class CCSimpleLevelUpEventHandler: public CCLevelUpEventHandler {
