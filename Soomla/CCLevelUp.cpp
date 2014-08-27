@@ -5,6 +5,9 @@
 
 #include "CCLevelUp.h"
 
+#include "CCWorld.h"
+#include "CCLevel.h"
+
 namespace soomla {
 
 #define DB_KEY_PREFIX "soomla.levelup."
@@ -77,6 +80,20 @@ namespace soomla {
 
     CCReward *CCLevelUp::getReward(const char *rewardId) {
         return dynamic_cast<CCReward *>(mRewards->objectForKey(rewardId));
+    }
+
+    CCGate *CCLevelUp::getGate(char const *gateId) {
+        // TODO: Implement CCLevelUp::getGate
+        return nullptr;
+    }
+    CCMission *CCLevelUp::getMission(char const *missionId) {
+        // TODO: Implement CCLevelUp::getMission
+        return nullptr;
+    }
+
+    CCLevel *CCLevelUp::getLevel(char const *levelId) {
+        // TODO: Implement CCLevelUp::getLevel
+        return nullptr;
     }
 
     CCScore *CCLevelUp::getScore(const char *scoreId) {

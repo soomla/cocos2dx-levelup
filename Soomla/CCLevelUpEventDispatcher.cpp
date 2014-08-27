@@ -5,6 +5,7 @@
 #include "CCLevelUpEventDispatcher.h"
 #include "CCSoomlaEventDispatcher.h"
 #include "CCDomainFactory.h"
+#include "CCLevelUp.h"
 
 namespace soomla {
 
@@ -31,55 +32,64 @@ namespace soomla {
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED,
                 [this](__Dictionary *parameters) {
-                    SL_SAFE_CREATE(CCScore *, score, parameters->objectForKey("score"));
+                    CCScore *score = CCLevelUp::getInstance()->getScore(parameters->valueForKey("scoreId")->getCString());
+                    CC_ASSERT(score);
                     this->onScoreRecordReached(score);
                 });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED,
                 [this](__Dictionary *parameters) {
-                    SL_SAFE_CREATE(CCScore *, score, parameters->objectForKey("score"));
+                    CCScore *score = CCLevelUp::getInstance()->getScore(parameters->valueForKey("scoreId")->getCString());
+                    CC_ASSERT(score);
                     this->onScoreRecordChanged(score);
                 });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_GATE_OPENED,
                 [this](__Dictionary *parameters) {
-                    SL_SAFE_CREATE(CCGate *, gate, parameters->objectForKey("gate"));
+                    CCGate *gate = CCLevelUp::getInstance()->getGate(parameters->valueForKey("gateId")->getCString());
+                    CC_ASSERT(gate);
                     this->onGateOpened(gate);
                 });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_MISSION_COMPLETED,
                 [this](__Dictionary *parameters) {
-                    SL_SAFE_CREATE(CCMission *, mission, parameters->objectForKey("mission"));
+                    CCMission *mission = CCLevelUp::getInstance()->getMission(parameters->valueForKey("missionId")->getCString());
+                    CC_ASSERT(mission);
                     this->onMissionCompleted(mission);
                 });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED,
                 [this](__Dictionary *parameters) {
-                    SL_SAFE_CREATE(CCMission *, mission, parameters->objectForKey("mission"));
+                    CCMission *mission = CCLevelUp::getInstance()->getMission(parameters->valueForKey("missionId")->getCString());
+                    CC_ASSERT(mission);
                     this->onMissionCompletionRevoked(mission);
                 });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_WORLD_COMPLETED,
                 [this](__Dictionary *parameters) {
-                    SL_SAFE_CREATE(CCWorld *, world, parameters->objectForKey("world"));
+                    CCWorld *world = CCLevelUp::getInstance()->getWorld(parameters->valueForKey("worldId")->getCString());
+                    CC_ASSERT(world);
                     this->onWorldCompleted(world);
                 });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED,
                 [this](__Dictionary *parameters) {
-                    SL_SAFE_CREATE(CCWorld *, world, parameters->objectForKey("world"));
+                    CCWorld *world = CCLevelUp::getInstance()->getWorld(parameters->valueForKey("worldId")->getCString());
+                    CC_ASSERT(world);
                     this->onWorldRewardAssigned(world);
                 });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LEVEL_STARTED,
                 [this](__Dictionary *parameters) {
-                    SL_SAFE_CREATE(CCLevel *, level, parameters->objectForKey("level"));
+                    CCLevel *level = CCLevelUp::getInstance()->getLevel(parameters->valueForKey("levelId")->getCString());
+                    CC_ASSERT(level);
                     this->onLevelStarted(level);
                 });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LEVEL_ENDED,
                 [this](__Dictionary *parameters) {
-                    SL_SAFE_CREATE(CCLevel *, level, parameters->objectForKey("level"));
+                    CCLevel *level = CCLevelUp::getInstance()->getLevel(parameters->valueForKey("levelId")->getCString());
+                    CC_ASSERT(level);
                     this->onLevelEnded(level);
                 });
 

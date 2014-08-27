@@ -7,9 +7,15 @@
 #define __CCLevelUp_H_
 
 #include "cocos2d.h"
-#include "CCWorld.h"
 
 namespace soomla {
+
+    class CCWorld;
+    class CCReward;
+    class CCScore;
+    class CCGate;
+    class CCMission;
+    class CCLevel;
 
     class CCLevelUp: public cocos2d::Ref {
     private:
@@ -33,6 +39,12 @@ namespace soomla {
         CCScore *getScore(char const *scoreId);
 
         CCWorld *getWorld(char const *worldId);
+
+        CCGate *getGate(char const *gateId);
+
+        CCMission *getMission(char const *missionId);
+
+        CCLevel *getLevel(char const *levelId);
 
         int getLevelCount();
 

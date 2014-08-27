@@ -82,7 +82,7 @@ namespace soomla {
                 __String::createWithFormat("call gateIsOpen with gate: %s", gate->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::gateIsOpen");
-        params->setObject(gate->toDictionary(), "gate");
+        params->setObject(gate->getId(), "gateId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -103,7 +103,7 @@ namespace soomla {
                 __String::createWithFormat("call gateSetOpen with gate: %s", gate->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::gateSetOpen");
-        params->setObject(gate->toDictionary(), "gate");
+        params->setObject(gate->getId(), "gateId");
         params->setObject(__Bool::create(open), "open");
         params->setObject(__Bool::create(notify), "notify");
 
@@ -122,7 +122,7 @@ namespace soomla {
                 __String::createWithFormat("call levelSetSlowestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelSetSlowestDurationMillis");
-        params->setObject(level->toDictionary(), "level");
+        params->setObject(level->getId(), "levelId");
         params->setObject(__Integer::create(duration), "duration");
 
         CCError *error = NULL;
@@ -139,7 +139,7 @@ namespace soomla {
                 __String::createWithFormat("call levelGetSlowestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelGetSlowestDurationMillis");
-        params->setObject(level->toDictionary(), "level");
+        params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -161,7 +161,7 @@ namespace soomla {
                 __String::createWithFormat("call levelSetFastestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelSetFastestDurationMillis");
-        params->setObject(level->toDictionary(), "gate");
+        params->setObject(level->getId(), "gateId");
         params->setObject(__Integer::create(duration), "duration");
 
         CCError *error = NULL;
@@ -178,7 +178,7 @@ namespace soomla {
                 __String::createWithFormat("call levelGetFastestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelGetFastestDurationMillis");
-        params->setObject(level->toDictionary(), "level");
+        params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -200,7 +200,7 @@ namespace soomla {
                 __String::createWithFormat("call levelIncTimesStarted with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelIncTimesStarted");
-        params->setObject(level->toDictionary(), "level");
+        params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -221,7 +221,7 @@ namespace soomla {
                 __String::createWithFormat("call levelDecTimesStarted with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelDecTimesStarted");
-        params->setObject(level->toDictionary(), "level");
+        params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -242,7 +242,7 @@ namespace soomla {
                 __String::createWithFormat("call levelGetTimesStarted with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelGetTimesStarted");
-        params->setObject(level->toDictionary(), "level");
+        params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -264,7 +264,7 @@ namespace soomla {
                 __String::createWithFormat("call levelGetTimesPlayed with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelGetTimesPlayed");
-        params->setObject(level->toDictionary(), "level");
+        params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -285,7 +285,7 @@ namespace soomla {
                 __String::createWithFormat("call levelIncTimesPlayed with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelIncTimesPlayed");
-        params->setObject(level->toDictionary(), "level");
+        params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -306,7 +306,7 @@ namespace soomla {
                 __String::createWithFormat("call levelDecTimesPlayed with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelDecTimesPlayed");
-        params->setObject(level->toDictionary(), "level");
+        params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -328,7 +328,7 @@ namespace soomla {
                 __String::createWithFormat("call missionSetCompleted with mission: %s", mission->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::missionSetCompleted");
-        params->setObject(mission->toDictionary(), "mission");
+        params->setObject(mission->getId(), "missionId");
         params->setObject(__Bool::create(completed), "completed");
         params->setObject(__Bool::create(notify), "notify");
 
@@ -346,7 +346,7 @@ namespace soomla {
                 __String::createWithFormat("call missionGetTimesCompleted with mission: %s", mission->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::missionGetTimesCompleted");
-        params->setObject(mission->toDictionary(), "mission");
+        params->setObject(mission->getId(), "missionId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -367,7 +367,7 @@ namespace soomla {
                 __String::createWithFormat("call scoreSetLatestScore with score: %s", score->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::scoreSetLatestScore");
-        params->setObject(score->toDictionary(), "score");
+        params->setObject(score->getId(), "scoreId");
         params->setObject(__Double::create(newValue), "newValue");
 
         CCError *error = NULL;
@@ -384,7 +384,7 @@ namespace soomla {
                 __String::createWithFormat("call scoreGetLatestScore with score: %s", score->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::scoreGetLatestScore");
-        params->setObject(score->toDictionary(), "score");
+        params->setObject(score->getId(), "scoreId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -405,7 +405,7 @@ namespace soomla {
                 __String::createWithFormat("call scoreSetRecordScore with score: %s", score->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::scoreSetRecordScore");
-        params->setObject(score->toDictionary(), "score");
+        params->setObject(score->getId(), "scoreId");
         params->setObject(__Double::create(newValue), "newValue");
 
         CCError *error = NULL;
@@ -422,7 +422,7 @@ namespace soomla {
                 __String::createWithFormat("call scoreGetRecordScore with score: %s", score->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::scoreGetRecordScore");
-        params->setObject(score->toDictionary(), "score");
+        params->setObject(score->getId(), "scoreId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -443,7 +443,7 @@ namespace soomla {
                 __String::createWithFormat("call worldSetCompleted with world: %s", world->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::worldSetCompleted");
-        params->setObject(world->toDictionary(), "world");
+        params->setObject(world->getId(), "worldId");
         params->setObject(__Bool::create(completed), "completed");
         params->setObject(__Bool::create(notify), "notify");
 
@@ -461,7 +461,7 @@ namespace soomla {
                 __String::createWithFormat("call worldIsCompleted with world: %s", world->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::worldIsCompleted");
-        params->setObject(world->toDictionary(), "world");
+        params->setObject(world->getId(), "worldId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
@@ -482,7 +482,7 @@ namespace soomla {
                 __String::createWithFormat("call worldSetReward with world: %s", world->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::worldSetReward");
-        params->setObject(world->toDictionary(), "world");
+        params->setObject(world->getId(), "worldId");
         params->setObject(rewardId, "rewardId");
 
         CCError *error = NULL;
@@ -499,7 +499,7 @@ namespace soomla {
                 __String::createWithFormat("call worldGetAssignedReward with world: %s", world->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::worldGetAssignedReward");
-        params->setObject(world->toDictionary(), "world");
+        params->setObject(world->getId(), "worldId");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
