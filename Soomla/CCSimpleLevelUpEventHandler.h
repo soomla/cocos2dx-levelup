@@ -21,6 +21,10 @@ namespace soomla {
         virtual void onScoreRecordChanged(CCScore *score);
 
         virtual void onWorldCompleted(CCWorld *world);
+        virtual void onWorldRewardAssigned(CCWorld *world);
+
+        virtual void onLevelStarted(CCLevel *level);
+        virtual void onLevelEnded(CCLevel *level);
     };
 }
 

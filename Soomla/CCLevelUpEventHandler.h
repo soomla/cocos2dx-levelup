@@ -24,18 +24,23 @@ namespace soomla {
     class CCGate;
     class CCScore;
     class CCWorld;
+    class CCLevel;
 
     class CCLevelUpEventHandler : public cocos2d::Ref {
     public:
+        virtual void onScoreRecordReached(CCScore *score) = 0;
+        virtual void onScoreRecordChanged(CCScore *score) = 0;
+
         virtual void onGateOpened(CCGate *gate) = 0;
 
         virtual void onMissionCompleted(CCMission *mission) = 0;
         virtual void onMissionCompletionRevoked(CCMission *mission) = 0;
 
-        virtual void onScoreRecordReached(CCScore *score) = 0;
-        virtual void onScoreRecordChanged(CCScore *score) = 0;
-
         virtual void onWorldCompleted(CCWorld *world) = 0;
+        virtual void onWorldRewardAssigned(CCWorld *world) = 0;
+
+        virtual void onLevelStarted(CCLevel *level) = 0;
+        virtual void onLevelEnded(CCLevel *level) = 0;
     };
 };
 

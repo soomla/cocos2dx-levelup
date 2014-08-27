@@ -122,7 +122,7 @@ namespace soomla {
                 __String::createWithFormat("call levelSetSlowestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelSetSlowestDurationMillis");
-        params->setObject(level->toDictionary(), "gate");
+        params->setObject(level->toDictionary(), "level");
         params->setObject(__Integer::create(duration), "duration");
 
         CCError *error = NULL;
@@ -346,7 +346,7 @@ namespace soomla {
                 __String::createWithFormat("call missionGetTimesCompleted with mission: %s", mission->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::missionGetTimesCompleted");
-        params->setObject(mission->toDictionary(), "level");
+        params->setObject(mission->toDictionary(), "mission");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);

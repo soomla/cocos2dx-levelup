@@ -6,6 +6,7 @@
 #include "CCSimpleLevelUpEventHandler.h"
 #include "CCScore.h"
 #include "CCWorld.h"
+#include "CCLevel.h"
 
 void soomla::CCSimpleLevelUpEventHandler::onGateOpened(soomla::CCGate *gate) {
 
@@ -28,5 +29,17 @@ void soomla::CCSimpleLevelUpEventHandler::onScoreRecordChanged(CCScore *score) {
 }
 
 void soomla::CCSimpleLevelUpEventHandler::onWorldCompleted(soomla::CCWorld *world) {
+
+}
+
+void soomla::CCSimpleLevelUpEventHandler::onWorldRewardAssigned(soomla::CCWorld *world) {
+
+}
+
+void soomla::CCSimpleLevelUpEventHandler::onLevelStarted(soomla::CCLevel *level) {
+
+}
+
+void soomla::CCSimpleLevelUpEventHandler::onLevelEnded(soomla::CCLevel *level) {
 
 }

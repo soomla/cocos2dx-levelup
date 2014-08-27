@@ -10,6 +10,8 @@
 
 namespace soomla {
 
+#define TAG "SOOMLA RecordGate"
+
     CCRecordGate *CCRecordGate::create(cocos2d::__String *id, cocos2d::__String *associatedScoreId, cocos2d::__Double *desiredRecord) {
         CCRecordGate *ret = new CCRecordGate();
         if (ret->init(id, associatedScoreId, desiredRecord)) {
