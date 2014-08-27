@@ -72,7 +72,7 @@ namespace soomla {
     bool CCGate::canOpen() {
         // check in gate storage if the gate is open
         if (CCGateStorage::getInstance()->isOpen(this)) {
-            return true;
+            return false;
         }
 
         return canOpenInner();
