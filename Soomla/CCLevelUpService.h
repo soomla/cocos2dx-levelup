@@ -9,6 +9,7 @@
 
 #include "cocos2d.h"
 #include "CCStoreAssets.h"
+#include "CCGate.h"
 
 namespace soomla {
 
@@ -32,7 +33,7 @@ namespace soomla {
         virtual bool init(CCStoreAssets *gameAssets, cocos2d::__Dictionary *storeParams);
 
         bool gateIsOpen(CCGate *gate);
-        void gateSetOpen(CCGate *gate, bool open);
+        void gateSetOpen(CCGate *gate, bool open, bool b);
 
         void levelSetSlowestDurationMillis(CCLevel *level, long duration);
         long levelGetSlowestDurationMillis(CCLevel *level);
@@ -51,7 +52,6 @@ namespace soomla {
         void missionSetCompleted(CCMission *mission, bool completed, bool notify);
         int missionGetTimesCompleted(CCMission *mission);
 
-
         void scoreSetLatestScore(CCScore *score, double newValue);
         double scoreGetLatestScore(CCScore *score);
         void scoreSetRecordScore(CCScore *score, double newValue);
@@ -59,7 +59,6 @@ namespace soomla {
 
 
         void worldSetCompleted(CCWorld *world, bool completed, bool notify);
-        void worldSetCompleted(CCWorld *world, bool completed);
         bool worldIsCompleted(CCWorld *world);
 
         void worldSetReward(CCWorld *world, cocos2d::__String *rewardId);

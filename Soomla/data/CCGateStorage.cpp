@@ -23,6 +23,10 @@ namespace soomla {
     }
 
     void CCGateStorage::setOpen(CCGate *gate, bool open) {
-        CCLevelUpService::getInstance()->gateSetOpen(gate, open);
+        setOpen(gate, open, true);
+    }
+
+    void CCGateStorage::setOpen(CCGate *gate, bool open, bool notify) {
+        CCLevelUpService::getInstance()->gateSetOpen(gate, open, notify);
     }
 }

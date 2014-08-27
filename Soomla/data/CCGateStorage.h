@@ -17,6 +17,7 @@ namespace soomla {
 
         bool isOpen(CCGate *gate);
         void setOpen(CCGate *gate, bool open);
+        void setOpen(CCGate *gate, bool open, bool notify);
     };
 }
 

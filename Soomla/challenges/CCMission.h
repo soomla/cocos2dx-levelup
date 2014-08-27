@@ -15,8 +15,6 @@
 
 namespace soomla {
 
-    #define TAG "SOOMLA Mission"
-
     class CCMission: public CCSoomlaEntity {
         friend class CCMissionEventHandler;
         friend class CCChallengeEventHandler;

@@ -16,6 +16,8 @@ USING_NS_CC;
 
 namespace soomla {
 
+#define TAG "SOOMLA Mission"
+
     CCMission *CCMission::create(cocos2d::__String *id, cocos2d::__String *name, __Array *rewards, cocos2d::__Dictionary *gateInitParams) {
         CCMission *ret = new CCMission();
         if (ret->init(id, name, rewards, gateInitParams)) {
