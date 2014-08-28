@@ -44,7 +44,7 @@
 		372B7A74E01C0AAB812088CC /* CCRecordMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B72100092BF60C35A82FC /* CCRecordMission.cpp */; };
 		372B7B181E1EA6AC4D6F9831 /* CCSimpleLevelUpEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7472CEDA0F5E8BDE68EB /* CCSimpleLevelUpEventHandler.cpp */; };
 		372B7B59C41B68F3123255F4 /* CCScoreStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7C20AE5C99E46A01ADF6 /* CCScoreStorage.h */; };
-		372B7BA5EEF5099B6C553A06 /* ССRangeScore.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7936499F751BEA10C373 /* ССRangeScore.h */; };
+		372B7BA5EEF5099B6C553A06 /* CCRangeScore.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7936499F751BEA10C373 /* CCRangeScore.h */; };
 		372B7BB0B71FF1CA733A9EDE /* CCWorldCompletionMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B75D76177D0DE1C8B50C4 /* CCWorldCompletionMission.cpp */; };
 		372B7BD43DCE08B373683E0F /* CCMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7FB1F36A0A18E5421969 /* CCMission.h */; };
 		372B7BD7A5D36E7EBE77A80E /* CCPurchasableGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7A2E8BBBEEA1AA3D9725 /* CCPurchasableGate.h */; };
@@ -54,7 +54,7 @@
 		372B7C6FFA3EDC7C61D4B981 /* CCBalanceMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7411FEF4D657F1E95D73 /* CCBalanceMission.h */; };
 		372B7CE7A12068B6ADE8AF44 /* CCGatesList.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B786DCF24F93FA3FF7F7F /* CCGatesList.h */; };
 		372B7DA4C3499A370323D494 /* CCGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B78A4D91AB2BBAD390489 /* CCGate.cpp */; };
-		372B7DEBF42D9D9A50A8503C /* ССRangeScore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B741CAB2E4F209B6C9794 /* ССRangeScore.cpp */; };
+		372B7DEBF42D9D9A50A8503C /* CCRangeScore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B741CAB2E4F209B6C9794 /* CCRangeScore.cpp */; };
 		372B7DEEFBA610A3FC160430 /* CCLevelStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7653B04DE8EAC17F6FC8 /* CCLevelStorage.cpp */; };
 		372B7E18B2F52487030E40A0 /* CCScheduleGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B76BFE0AC20E7858E188F /* CCScheduleGate.h */; };
 		372B7EBB9BE15CC38A027193 /* CCPurchasingMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7E0EB1FF770DD928DA2E /* CCPurchasingMission.h */; };
@@ -63,8 +63,6 @@
 		372B7FA29C1946C4648D20DE /* CCBalanceGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B73AE777215B95AD7D693 /* CCBalanceGate.cpp */; };
 		9D4101C51978D7F600907FA8 /* CCLevelUpConsts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4101871978D7F600907FA8 /* CCLevelUpConsts.cpp */; };
 		9D4101C61978D7F600907FA8 /* CCLevelUpConsts.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4101881978D7F600907FA8 /* CCLevelUpConsts.h */; };
-		9D4101C71978D7F600907FA8 /* CCSoomlaLevelUp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D4101891978D7F600907FA8 /* CCSoomlaLevelUp.cpp */; };
-		9D4101C81978D7F600907FA8 /* CCSoomlaLevelUp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D41018A1978D7F600907FA8 /* CCSoomlaLevelUp.h */; };
 		9D4101C91978D7F600907FA8 /* CCLevelUpEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D41018B1978D7F600907FA8 /* CCLevelUpEventDispatcher.cpp */; };
 		9D4101CA1978D7F600907FA8 /* CCLevelUpEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D41018C1978D7F600907FA8 /* CCLevelUpEventDispatcher.h */; };
 		9D4101CB1978D7F600907FA8 /* CCLevelUpEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D41018D1978D7F600907FA8 /* CCLevelUpEventHandler.h */; };
@@ -102,7 +100,7 @@
 		372B73C09B90674DB5987EE4 /* CCLevel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCLevel.cpp; sourceTree = "<group>"; };
 		372B73D65804834DD318119D /* CCWorldCompletionGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCWorldCompletionGate.cpp; sourceTree = "<group>"; };
 		372B7411FEF4D657F1E95D73 /* CCBalanceMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBalanceMission.h; sourceTree = "<group>"; };
-		372B741CAB2E4F209B6C9794 /* ССRangeScore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "ССRangeScore.cpp"; sourceTree = "<group>"; };
+		372B741CAB2E4F209B6C9794 /* CCRangeScore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCRangeScore.cpp; sourceTree = "<group>"; };
 		372B745E08FEAFC1826C22FC /* CCChallenge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCChallenge.h; sourceTree = "<group>"; };
 		372B7472CEDA0F5E8BDE68EB /* CCSimpleLevelUpEventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSimpleLevelUpEventHandler.cpp; sourceTree = "<group>"; };
 		372B74C5F1003DB5E5E45E13 /* CCWorldStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCWorldStorage.h; sourceTree = "<group>"; };
@@ -123,7 +121,7 @@
 		372B78B90FCB8CF31134AE66 /* CCGateStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCGateStorage.cpp; sourceTree = "<group>"; };
 		372B78F143A1070E21FE284A /* CCBalanceMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBalanceMission.cpp; sourceTree = "<group>"; };
 		372B7903E56FB597573D894F /* CCWorldCompletionGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCWorldCompletionGate.h; sourceTree = "<group>"; };
-		372B7936499F751BEA10C373 /* ССRangeScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ССRangeScore.h"; sourceTree = "<group>"; };
+		372B7936499F751BEA10C373 /* CCRangeScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRangeScore.h; sourceTree = "<group>"; };
 		372B7938D7A533ADDFB3C455 /* CCPurchasableGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCPurchasableGate.cpp; sourceTree = "<group>"; };
 		372B7965DF88D9857BE3F729 /* CCGatesListAnd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCGatesListAnd.cpp; sourceTree = "<group>"; };
 		372B796E9CF8838D0C266354 /* CCMissionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMissionStorage.h; sourceTree = "<group>"; };
@@ -144,8 +142,6 @@
 		9D41016E1978D35200907FA8 /* libSoomlaiOSCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoomlaiOSCore.a; path = "soomla-native/compilations/ios/libSoomlaiOSCore.a"; sourceTree = "<group>"; };
 		9D4101871978D7F600907FA8 /* CCLevelUpConsts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCLevelUpConsts.cpp; sourceTree = "<group>"; };
 		9D4101881978D7F600907FA8 /* CCLevelUpConsts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpConsts.h; sourceTree = "<group>"; };
-		9D4101891978D7F600907FA8 /* CCSoomlaLevelUp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSoomlaLevelUp.cpp; sourceTree = "<group>"; };
-		9D41018A1978D7F600907FA8 /* CCSoomlaLevelUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSoomlaLevelUp.h; sourceTree = "<group>"; };
 		9D41018B1978D7F600907FA8 /* CCLevelUpEventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCLevelUpEventDispatcher.cpp; sourceTree = "<group>"; };
 		9D41018C1978D7F600907FA8 /* CCLevelUpEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpEventDispatcher.h; sourceTree = "<group>"; };
 		9D41018D1978D7F600907FA8 /* CCLevelUpEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpEventHandler.h; sourceTree = "<group>"; };
@@ -177,8 +173,8 @@
 			children = (
 				372B72CF7028ADAA4F3666DA /* CCScore.cpp */,
 				372B722F803B521ED01FC90C /* CCScore.h */,
-				372B741CAB2E4F209B6C9794 /* ССRangeScore.cpp */,
-				372B7936499F751BEA10C373 /* ССRangeScore.h */,
+				372B741CAB2E4F209B6C9794 /* CCRangeScore.cpp */,
+				372B7936499F751BEA10C373 /* CCRangeScore.h */,
 				372B7B1A384265A8C027E392 /* CCVirtualItemScore.cpp */,
 				372B72C2DE631EB99060C541 /* CCVirtualItemScore.h */,
 			);
@@ -234,8 +230,6 @@
 			children = (
 				9D4101871978D7F600907FA8 /* CCLevelUpConsts.cpp */,
 				9D4101881978D7F600907FA8 /* CCLevelUpConsts.h */,
-				9D4101891978D7F600907FA8 /* CCSoomlaLevelUp.cpp */,
-				9D41018A1978D7F600907FA8 /* CCSoomlaLevelUp.h */,
 				9D41018B1978D7F600907FA8 /* CCLevelUpEventDispatcher.cpp */,
 				9D41018C1978D7F600907FA8 /* CCLevelUpEventDispatcher.h */,
 				9D41018D1978D7F600907FA8 /* CCLevelUpEventHandler.h */,
@@ -323,7 +317,6 @@
 				9D4101D21978D7F600907FA8 /* Cocos2dxLevelUp.h in Headers */,
 				9D4101CB1978D7F600907FA8 /* CCLevelUpEventHandler.h in Headers */,
 				9D4101C61978D7F600907FA8 /* CCLevelUpConsts.h in Headers */,
-				9D4101C81978D7F600907FA8 /* CCSoomlaLevelUp.h in Headers */,
 				9D4101CA1978D7F600907FA8 /* CCLevelUpEventDispatcher.h in Headers */,
 				9D4101CF1978D7F600907FA8 /* CCLevelUpService.h in Headers */,
 				372B7BD43DCE08B373683E0F /* CCMission.h in Headers */,
@@ -346,7 +339,7 @@
 				372B7349A957142DF76CCFBA /* CCWorldCompletionGate.h in Headers */,
 				372B7408F7C7A8078B4B5848 /* CCScore.h in Headers */,
 				372B7B59C41B68F3123255F4 /* CCScoreStorage.h in Headers */,
-				372B7BA5EEF5099B6C553A06 /* ССRangeScore.h in Headers */,
+				372B7BA5EEF5099B6C553A06 /* CCRangeScore.h in Headers */,
 				372B73A51D5CE45F7D8086F4 /* CCVirtualItemScore.h in Headers */,
 				372B798C0A27B50D84FD7627 /* CCLevel.h in Headers */,
 				372B71AFD312A9930814F6E3 /* CCWorld.h in Headers */,
@@ -426,7 +419,6 @@
 				9D4101C91978D7F600907FA8 /* CCLevelUpEventDispatcher.cpp in Sources */,
 				9D4101CE1978D7F600907FA8 /* CCLevelUpService.cpp in Sources */,
 				9D4101C51978D7F600907FA8 /* CCLevelUpConsts.cpp in Sources */,
-				9D4101C71978D7F600907FA8 /* CCSoomlaLevelUp.cpp in Sources */,
 				372B7959A55672ED76BE1066 /* CCMission.cpp in Sources */,
 				372B7DA4C3499A370323D494 /* CCGate.cpp in Sources */,
 				372B7B181E1EA6AC4D6F9831 /* CCSimpleLevelUpEventHandler.cpp in Sources */,
@@ -447,7 +439,7 @@
 				372B784DA2DCF35D775199E3 /* CCWorldCompletionGate.cpp in Sources */,
 				372B763C6561E03230266A78 /* CCScore.cpp in Sources */,
 				372B7A5025AF8043DAB12E85 /* CCScoreStorage.cpp in Sources */,
-				372B7DEBF42D9D9A50A8503C /* ССRangeScore.cpp in Sources */,
+				372B7DEBF42D9D9A50A8503C /* CCRangeScore.cpp in Sources */,
 				372B71BA5B35F8507BF77FB8 /* CCVirtualItemScore.cpp in Sources */,
 				372B79EE74381A4C0398A6A2 /* CCLevel.cpp in Sources */,
 				372B77E8B8D16A524E0960BA /* CCWorld.cpp in Sources */,

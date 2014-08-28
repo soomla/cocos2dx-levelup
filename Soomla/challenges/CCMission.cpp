@@ -8,7 +8,7 @@
 #include "CCReward.h"
 #include "CCDomainHelper.h"
 #include "CCLevelUpEventDispatcher.h"
-#import "CCMissionStorage.h"
+#include "CCMissionStorage.h"
 #include "CCSoomlaUtils.h"
 #include "CCDomainFactory.h"
 

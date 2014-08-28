@@ -3,8 +3,8 @@
 // Copyright (c) 2014 SOOMLA. All rights reserved.
 //
 
-#ifndef __ССRangeScore_H_
-#define __ССRangeScore_H_
+#ifndef __CCRangeScore_H_
+#define __CCRangeScore_H_
 
 #include "CCScore.h"
 
@@ -28,16 +28,16 @@ namespace soomla {
         virtual cocos2d::__Dictionary *toDictionary();
     };
 
-    class ССRangeScore: public CCScore {
+    class CCRangeScore : public CCScore {
         CC_SYNTHESIZE_RETAIN(CCSRange *, mRange, Range);
     public:
-        ССRangeScore(): CCScore(), mRange(NULL) {
+        CCRangeScore(): CCScore(), mRange(NULL) {
         }
 
-        static ССRangeScore *create(cocos2d::__String *id, CCSRange *range);
-        static ССRangeScore *create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range);
+        static CCRangeScore *create(cocos2d::__String *id, CCSRange *range);
+        static CCRangeScore *create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range);
 
-        SL_CREATE_WITH_DICTIONARY(ССRangeScore);
+        SL_CREATE_WITH_DICTIONARY(CCRangeScore);
 
         virtual bool init(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range);
 
@@ -53,4 +53,4 @@ namespace soomla {
     };
 }
 
-#endif //__ССRangeScore_H_
+#endif //__CCRangeScore_H_

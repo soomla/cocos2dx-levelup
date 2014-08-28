@@ -10,6 +10,8 @@
 
 namespace soomla {
 
+#define TAG "SOOMLA ScheduleGate"
+
     CCScheduleGate *CCScheduleGate::create(cocos2d::__String *id, CCSchedule *schedule) {
         CCScheduleGate *ret = new CCScheduleGate();
         if (ret->init(id, schedule)) {

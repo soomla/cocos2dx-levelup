@@ -85,7 +85,7 @@ namespace soomla {
         CCStoreInventory::sharedStoreInventory()->buyItem(mAssociatedItemId->getCString(), this->getId()->getCString(), &error);
         if (error) {
             if (error->getInfo())
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat("Cannot purchase this item. itemId: ",
+            CCSoomlaUtils::logError(TAG, __String::createWithFormat("Cannot purchase this item. itemId: %s",
                     mAssociatedItemId->getCString())->getCString());
             CCSoomlaUtils::logError(TAG, error->getInfo());
             return false;

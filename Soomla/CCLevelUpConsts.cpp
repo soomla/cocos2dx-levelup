@@ -67,6 +67,7 @@ namespace soomla {
     char const *CCLevelUpConsts::JSON_JSON_TYPE_SCORE       = "score";
 
     char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD       = "world";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_LEVEL       = "level";
 
     char const *CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED = "CCLevelUpEventHandler::onScoreRecordReached";
     char const *CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED = "CCLevelUpEventHandler::onScoreRecordChanged";

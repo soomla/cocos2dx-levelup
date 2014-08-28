@@ -12,8 +12,6 @@
 
 namespace soomla {
 
-#define TAG "SOOMLA ScheduleGate"
-
     class CCScheduleGate: public CCGate {
         CC_SYNTHESIZE_RETAIN(CCSchedule *, mSchedule, Schedule);
     public:

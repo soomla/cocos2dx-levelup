@@ -330,7 +330,7 @@ namespace soomla {
         if (score == NULL) {
             CCSoomlaUtils::logError(TAG,
                     __String::createWithFormat(
-                            "(setScore) Can't find score id: %s world id: ",
+                            "(setScore) Can't find score id: %s world id: %s",
                             id,
                             this->getId()->getCString()
                     )->getCString());

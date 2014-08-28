@@ -8,7 +8,7 @@
 #include "CCLevelUpConsts.h"
 #include "CCSoomlaUtils.h"
 #include "CCLevelUpEventDispatcher.h"
-#import "CCMissionStorage.h"
+#include "CCMissionStorage.h"
 
 namespace soomla {
     
@@ -114,7 +114,7 @@ namespace soomla {
     void CCChallengeEventHandler::onMissionCompleted(CCMission *completedMission) {
         CCSoomlaUtils::logDebug (TAG, "onMissionCompleted");
         if (mChallenge->mMissions->containsObject(completedMission)) {
-            CCSoomlaUtils::logDebug (TAG, __String::createWithFormat("Mission %s is part of challenge %s (%s) total",
+            CCSoomlaUtils::logDebug (TAG, __String::createWithFormat("Mission %s is part of challenge %s (%zi) total",
                     completedMission->getId()->getCString(),
                     mChallenge->getId()->getCString(),
                     mChallenge->mMissions->count())->getCString());

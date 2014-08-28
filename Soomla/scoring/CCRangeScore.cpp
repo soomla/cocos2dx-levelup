@@ -3,16 +3,16 @@
 // Copyright (c) 2014 SOOMLA. All rights reserved.
 //
 
-#include "ССRangeScore.h"
+#include "CCRangeScore.h"
 
 namespace soomla {
 
-    ССRangeScore *ССRangeScore::create(cocos2d::__String *id, CCSRange *range) {
-        return ССRangeScore::create(id, NULL, NULL, range);
+    CCRangeScore *CCRangeScore::create(cocos2d::__String *id, CCSRange *range) {
+        return CCRangeScore::create(id, NULL, NULL, range);
     }
 
-    ССRangeScore *ССRangeScore::create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range) {
-        ССRangeScore *ret = new ССRangeScore();
+    CCRangeScore *CCRangeScore::create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range) {
+        CCRangeScore *ret = new CCRangeScore();
         if (ret->init(id, name, higherBetter, range)) {
             ret->autorelease();
         }
@@ -23,7 +23,7 @@ namespace soomla {
         return ret;
     }
 
-    bool ССRangeScore::init(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range) {
+    bool CCRangeScore::init(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range) {
         bool result = CCScore::init(id, name, higherBetter);
         if (result) {
             setRange(range);
@@ -32,7 +32,7 @@ namespace soomla {
         return result;
     }
 
-    bool ССRangeScore::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCRangeScore::initWithDictionary(cocos2d::__Dictionary *dict) {
         bool result = CCScore::initWithDictionary(dict);
         if (result) {
             cocos2d::__Dictionary *rangeDict = dynamic_cast<cocos2d::__Dictionary *>(
@@ -45,7 +45,7 @@ namespace soomla {
         return result;
     }
 
-    cocos2d::__Dictionary *ССRangeScore::toDictionary() {
+    cocos2d::__Dictionary *CCRangeScore::toDictionary() {
         cocos2d::__Dictionary *dict = CCScore::toDictionary();
 
         if (mRange) {
@@ -56,7 +56,7 @@ namespace soomla {
     }
 
 
-    void ССRangeScore::inc(double amount) {
+    void CCRangeScore::inc(double amount) {
         // Don't increment if we've hit the range's highest value
         if (mTempScore >= mRange->mHigh) {
             return;
@@ -69,7 +69,7 @@ namespace soomla {
         CCScore::inc(amount);
     }
 
-    void ССRangeScore::dec(double amount) {
+    void CCRangeScore::dec(double amount) {
         // Don't dencrement if we've hit the range's lowest value
         if (mTempScore <= mRange->mLow) {
             return;
@@ -82,7 +82,7 @@ namespace soomla {
         CCScore::dec(amount);
     }
 
-    void ССRangeScore::setTempScore(double score, bool onlyIfBetter) {
+    void CCRangeScore::setTempScore(double score, bool onlyIfBetter) {
         if (score > mRange->mHigh) {
             score = mRange->mHigh;
         }
