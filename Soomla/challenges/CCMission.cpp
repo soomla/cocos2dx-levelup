@@ -37,12 +37,19 @@ namespace soomla {
             setRewards(rewards);
 
             if (gateInitParams) {
+                if (!gateInitParams->objectForKey(CCCoreConsts::JSON_ITEM_ITEM_ID)) {
+                    gateInitParams->setObject(autoGateId(), CCCoreConsts::JSON_ITEM_ITEM_ID);
+                }
                 CCDomain *domain = CCDomainFactory::getInstance()->createWithDictionary(gateInitParams);
-                CC_ASSERT(dynamic_cast<CCGate *>(domain));
-                setGate(dynamic_cast<CCGate *>(domain));
+
+                CCGate *gate = dynamic_cast<CCGate *>(domain);
+                CC_ASSERT(gate);
+                setGate(gate);
             } else {
                 setGate(NULL);
             }
+
+            setSchedule(CCSchedule::createAnyTimeOnce());
 
             registerEvents();
 

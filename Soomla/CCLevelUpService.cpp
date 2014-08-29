@@ -8,7 +8,6 @@
 #include "CCNdkBridge.h"
 #include "CCSoomlaUtils.h"
 #include "CCLevelUpEventDispatcher.h"
-#include "CCLevel.h"
 #include "CCChallenge.h"
 #include "CCBalanceMission.h"
 #include "CCWorldCompletionMission.h"
@@ -21,6 +20,7 @@
 #include "CCGatesListOr.h"
 #include "CCRecordMission.h"
 #include "CCPurchasingMission.h"
+#include "CCLevelUp.h"
 
 USING_NS_CC;
 
@@ -40,9 +40,9 @@ namespace soomla {
         return sInstance;
     }
 
-    void CCLevelUpService::initShared(CCStoreAssets *gameAssets, cocos2d::__Dictionary *storeParams) {
-        CCLevelUpService *storeService = CCLevelUpService::getInstance();
-        if (!storeService->init(gameAssets, storeParams)) {
+    void CCLevelUpService::initShared() {
+        CCLevelUpService *levelUpService = CCLevelUpService::getInstance();
+        if (!levelUpService->init()) {
             exit(1);
         }
     }
@@ -51,7 +51,7 @@ namespace soomla {
 
     }
 
-    bool CCLevelUpService::init(CCStoreAssets *gameAssets, cocos2d::__Dictionary *storeParams) {
+    bool CCLevelUpService::init() {
 
         CCLevelUpEventDispatcher::getInstance();    // to get sure it's inited
 
@@ -74,7 +74,22 @@ namespace soomla {
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD, CCWorld::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_LEVEL, CCLevel::createWithDictionary);
 
-        return true;
+        CCSoomlaUtils::logDebug(TAG, "call init");
+
+        SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::init");
+
+        CCError *error = NULL;
+        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+
+        if (error) {
+            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+                    "call init failed with error: %s", error->getInfo())->getCString());
+            return false;
+        }
+
+        SL_EXTRACT_FROM_RETURN(__Bool, ret, retParams);
+
+        return ret->getValue();
     }
 
     bool CCLevelUpService::gateIsOpen(CCGate *gate) {
@@ -395,7 +410,7 @@ namespace soomla {
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Double, ret, retParams);
+        SL_EXTRACT_DOUBLE_FROM_RETURN(ret, retParams);
 
         return ret->getValue();
     }
@@ -433,7 +448,7 @@ namespace soomla {
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Double, ret, retParams);
+        SL_EXTRACT_DOUBLE_FROM_RETURN(ret, retParams);
 
         return ret->getValue();
     }

@@ -81,14 +81,14 @@ namespace soomla {
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LEVEL_STARTED,
                 [this](__Dictionary *parameters) {
-                    CCLevel *level = CCLevelUp::getInstance()->getLevel(parameters->valueForKey("levelId")->getCString());
+                    CCLevel *level = (CCLevel *) CCLevelUp::getInstance()->getWorld(parameters->valueForKey("levelId")->getCString());
                     CC_ASSERT(level);
                     this->onLevelStarted(level);
                 });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LEVEL_ENDED,
                 [this](__Dictionary *parameters) {
-                    CCLevel *level = CCLevelUp::getInstance()->getLevel(parameters->valueForKey("levelId")->getCString());
+                    CCLevel *level = (CCLevel *) CCLevelUp::getInstance()->getWorld(parameters->valueForKey("levelId")->getCString());
                     CC_ASSERT(level);
                     this->onLevelEnded(level);
                 });

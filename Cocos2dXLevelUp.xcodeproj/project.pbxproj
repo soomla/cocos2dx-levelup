@@ -70,6 +70,7 @@
 		9D4101CF1978D7F600907FA8 /* CCLevelUpService.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4101911978D7F600907FA8 /* CCLevelUpService.h */; };
 		9D4101D21978D7F600907FA8 /* Cocos2dxLevelUp.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D4101941978D7F600907FA8 /* Cocos2dxLevelUp.h */; };
 		9DB1148F19A34C3000D7CEEF /* libSoomlaiOSLevelUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DB1148E19A34C3000D7CEEF /* libSoomlaiOSLevelUp.a */; };
+		9DC9217E19AF707200D59F56 /* libCocos2dXiOSLevelUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D76A0B219A3B6090025DB64 /* libCocos2dXiOSLevelUp.a */; };
 		C0B3C5F3168C6D0C00161FAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B3C5F2168C6D0C00161FAA /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,13 @@
 			containerPortal = 9D6575F0199A2811005FE63A /* Cocos2dXiOSLevelUp.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = C0B3C5EF168C6D0C00161FAA;
+			remoteInfo = Cocos2dXiOSLevelUp;
+		};
+		9DC9217B19AF706B00D59F56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D6575F0199A2811005FE63A /* Cocos2dXiOSLevelUp.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C0B3C5EE168C6D0C00161FAA;
 			remoteInfo = Cocos2dXiOSLevelUp;
 		};
 /* End PBXContainerItemProxy section */
@@ -160,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DC9217E19AF707200D59F56 /* libCocos2dXiOSLevelUp.a in Frameworks */,
 				9DB1148F19A34C3000D7CEEF /* libSoomlaiOSLevelUp.a in Frameworks */,
 				C0B3C5F3168C6D0C00161FAA /* Foundation.framework in Frameworks */,
 			);
@@ -363,6 +372,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9DC9217C19AF706B00D59F56 /* PBXTargetDependency */,
 			);
 			name = Cocos2dXLevelUp;
 			productName = SoomlaIOSStore;
@@ -450,6 +460,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9DC9217C19AF706B00D59F56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Cocos2dXiOSLevelUp;
+			targetProxy = 9DC9217B19AF706B00D59F56 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C0B3C5FB168C6D0C00161FAA /* Debug */ = {

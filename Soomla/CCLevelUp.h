@@ -7,6 +7,8 @@
 #define __CCLevelUp_H_
 
 #include "cocos2d.h"
+#include "CCGate.h"
+#include "CCMission.h"
 
 namespace soomla {
 
@@ -44,8 +46,6 @@ namespace soomla {
 
         CCMission *getMission(char const *missionId);
 
-        CCLevel *getLevel(char const *levelId);
-
         int getLevelCount();
 
         int getLevelCountInWorld(CCWorld *world);
@@ -61,8 +61,13 @@ namespace soomla {
 
         CCScore *fetchScoreFromWorlds(char const *scoreId, cocos2d::__Dictionary *worlds);
 
+        CCGate *fetchGate(char const *gateId, cocos2d::__Dictionary *worlds);
+
+        CCGate *fetchGateFromMissions(char const *gateId, cocos2d::__Array *missions);
+
         int getRecursiveCount(CCWorld *world, bool (*isAccepted)(CCWorld *));
 
+        CCMission *fetchMission(char const *missionId, cocos2d::__Dictionary *worlds);
     };
 
 }
