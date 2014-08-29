@@ -5,29 +5,11 @@
 #import "LevelUpService.h"
 #import "NdkGlue.h"
 #import "LevelUpEventHandling.h"
-#import "DomainFactory.h"
 #import "GateStorage.h"
 #import "LevelStorage.h"
 #import "MissionStorage.h"
 #import "ScoreStorage.h"
 #import "WorldStorage.h"
-#import "DomainHelper.h"
-#import "Mission.h"
-#import "BalanceMission.h"
-#import "Challenge.h"
-#import "PurchasingMission.h"
-#import "RecordMission.h"
-//#import "WorldCompletionMission.h"
-#import "BalanceGate.h"
-#import "GatesListAND.h"
-#import "GatesListOR.h"
-#import "PurchasableGate.h"
-#import "RecordGate.h"
-//#import "ScheduleGate.h"
-#import "WorldCompletionGate.h"
-#import "Score.h"
-#import "World.h"
-#import "Level.h"
 
 
 @interface LevelUpService ()
@@ -53,101 +35,13 @@
 }
 
 + (void)initDomainHelper {
-    [[DomainHelper sharedDomainHelper] registerType:@"mission"
-                                      withClassName:NSStringFromClass([Mission class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[Mission alloc] initWithDictionary:dict] autorelease];
-                                           }];
+    // Nothing to do here!
 
-    [[DomainHelper sharedDomainHelper] registerType:@"balanceMission"
-                                      withClassName:NSStringFromClass([BalanceMission class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[BalanceMission alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-    [[DomainHelper sharedDomainHelper] registerType:@"challenge"
-                                      withClassName:NSStringFromClass([Challenge class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[Challenge alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-    [[DomainHelper sharedDomainHelper] registerType:@"purchasingMission"
-                                      withClassName:NSStringFromClass([PurchasingMission class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[PurchasingMission alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-    [[DomainHelper sharedDomainHelper] registerType:@"recordMission"
-                                      withClassName:NSStringFromClass([RecordMission class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[RecordMission alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-//    [[DomainHelper sharedDomainHelper] registerType:@"worldCompletionMission"
-//                                      withClassName:NSStringFromClass([WorldCompletionMission class])
+//    [[DomainHelper sharedDomainHelper] registerType:@"mission"
+//                                      withClassName:NSStringFromClass([Mission class])
 //                                           andBlock:^id(NSDictionary *dict) {
-//                                               return [[[WorldCompletionMission alloc] initWithDictionary:dict] autorelease];
+//                                               return [[[Mission alloc] initWithDictionary:dict] autorelease];
 //                                           }];
-//
-    [[DomainHelper sharedDomainHelper] registerType:@"balanceGate"
-                                      withClassName:NSStringFromClass([BalanceGate class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[BalanceGate alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-    [[DomainHelper sharedDomainHelper] registerType:@"gatesListAnd"
-                                      withClassName:NSStringFromClass([GatesListAND class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[GatesListAND alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-    [[DomainHelper sharedDomainHelper] registerType:@"gatesListOr"
-                                      withClassName:NSStringFromClass([GatesListOR class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[GatesListOR alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-    [[DomainHelper sharedDomainHelper] registerType:@"purchasableGate"
-                                      withClassName:NSStringFromClass([PurchasableGate class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[PurchasableGate alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-    [[DomainHelper sharedDomainHelper] registerType:@"recordGate"
-                                      withClassName:NSStringFromClass([RecordGate class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[RecordGate alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-//    [[DomainHelper sharedDomainHelper] registerType:@"scheduleGate"
-//                                      withClassName:NSStringFromClass([ScheduleGate class])
-//                                           andBlock:^id(NSDictionary *dict) {
-//                                               return [[[ScheduleGate alloc] initWithDictionary:dict] autorelease];
-//                                           }];
-//
-    [[DomainHelper sharedDomainHelper] registerType:@"worldCompletionGate"
-                                      withClassName:NSStringFromClass([WorldCompletionGate class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[WorldCompletionGate alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-    [[DomainHelper sharedDomainHelper] registerType:@"score"
-                                      withClassName:NSStringFromClass([Score class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[Score alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-    [[DomainHelper sharedDomainHelper] registerType:@"world"
-                                      withClassName:NSStringFromClass([World class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[World alloc] initWithDictionary:dict] autorelease];
-                                           }];
-
-    [[DomainHelper sharedDomainHelper] registerType:@"level"
-                                      withClassName:NSStringFromClass([Level class])
-                                           andBlock:^id(NSDictionary *dict) {
-                                               return [[[Level alloc] initWithDictionary:dict] autorelease];
-                                           }];
 
 }
 
@@ -166,6 +60,10 @@
     NdkGlue *ndkGlue = [NdkGlue sharedInstance];
 
     /* -= Call handlers =- */
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::init" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+        retParameters[@"return"] = @([[LevelUpService sharedLevelUpService] init] != nil);
+    }];
+
     [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::gateIsOpen" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *gateId = parameters[@"gateId"];
         retParameters[@"return"] = @([GateStorage isOpen:gateId]);

@@ -26,11 +26,11 @@ namespace soomla {
         */
         static CCLevelUpService *getInstance();
 
-        static void initShared(CCStoreAssets *gameAssets, cocos2d::__Dictionary *storeParams);
+        static void initShared();
 
         CCLevelUpService();
 
-        virtual bool init(CCStoreAssets *gameAssets, cocos2d::__Dictionary *storeParams);
+        virtual bool init();
 
         bool gateIsOpen(CCGate *gate);
         void gateSetOpen(CCGate *gate, bool open, bool b);

@@ -7,6 +7,7 @@
 
 #include "CCWorld.h"
 #include "CCLevel.h"
+#include "CCChallenge.h"
 
 namespace soomla {
 
@@ -62,7 +63,13 @@ namespace soomla {
     }
 
     void CCLevelUp::initialize(CCWorld *initialWorld, __Array *rewards) {
+        if (mInitialWorld) {
+            mInitialWorld->release();
+        }
         mInitialWorld = initialWorld;
+        if (mInitialWorld) {
+            mInitialWorld->retain();
+        }
 //			save();
 
         if (rewards != NULL) {
@@ -74,7 +81,13 @@ namespace soomla {
                     rewardMap->setObject(reward, reward->getId()->getCString());
                 }
 
+            if (mRewards) {
+                mRewards->release();
+            }
             mRewards = rewardMap;
+            if (mRewards) {
+                mRewards->retain();
+            }
         }
     }
 
@@ -83,28 +96,46 @@ namespace soomla {
     }
 
     CCGate *CCLevelUp::getGate(char const *gateId) {
-        // TODO: Implement CCLevelUp::getGate
-        return nullptr;
+        if (mInitialWorld->getGate() != NULL && mInitialWorld->getGate()->getId()->compare(gateId) == 0) {
+            return mInitialWorld->getGate();
+        }
+
+        CCGate *gate = fetchGateFromMissions(gateId, mInitialWorld->getMissions());
+        if (gate != NULL) {
+            return gate;
+        }
+
+        return this->fetchGate(gateId, mInitialWorld->getInnerWorldsMap());
     }
     CCMission *CCLevelUp::getMission(char const *missionId) {
-        // TODO: Implement CCLevelUp::getMission
-        return nullptr;
-    }
+        CCMission *retMission = NULL;
 
-    CCLevel *CCLevelUp::getLevel(char const *levelId) {
-        // TODO: Implement CCLevelUp::getLevel
-        return nullptr;
+        Ref *ref;
+        CCMission *mission;
+        CCARRAY_FOREACH(mInitialWorld->getMissions(), ref) {
+                mission = dynamic_cast<CCMission *>(ref);
+                CC_ASSERT(mission);
+                if (mission->getId()->compare(missionId) == 0) {
+                    retMission = mission;
+                    break;
+                }
+            }
+
+        if (retMission == NULL) {
+            return fetchMission(missionId, mInitialWorld->getInnerWorldsMap());
+        }
+
+        return retMission;
     }
 
     CCScore *CCLevelUp::getScore(const char *scoreId) {
-        CCScore *retScore = NULL;
         __Dictionary *scores = mInitialWorld->getScores();
-        CCScore *score = dynamic_cast<CCScore *>(mRewards->objectForKey(scoreId));
+        CCScore *score = dynamic_cast<CCScore *>(scores->objectForKey(scoreId));
         if (score == NULL) {
             score = fetchScoreFromWorlds(scoreId, mInitialWorld->getInnerWorldsMap());
         }
 
-        return retScore;
+        return score;
     }
 
     CCWorld *CCLevelUp::getWorld(const char *worldId) {
@@ -227,4 +258,97 @@ namespace soomla {
         return count;
     }
 
+    CCGate *CCLevelUp::fetchGate(char const *gateId, __Dictionary *worlds) {
+        if (worlds == NULL) {
+            return NULL;
+        }
+
+        CCGate *retGate = NULL;
+
+        DictElement *el;
+        CCWorld *world;
+        CCDICT_FOREACH(worlds, el) {
+                world = (CCWorld *) el->getObject();
+                CCGate *gate = world->getGate();
+                if (gate != NULL && gate->getId()->create(gateId) == 0) {
+                    retGate = gate;
+                    break;
+                }
+            }
+
+
+        if (retGate == NULL) {
+            CCDICT_FOREACH(worlds, el) {
+                    world = (CCWorld *) el->getObject();
+
+                    retGate = fetchGateFromMissions(gateId, world->getMissions());
+                    if (retGate != NULL) {
+                        break;
+                    }
+
+                    retGate = fetchGate(gateId, world->getInnerWorldsMap());
+                    if (retGate != NULL) {
+                        break;
+                    }
+                }
+        }
+
+        return retGate;
+
+    }
+
+    CCGate *CCLevelUp::fetchGateFromMissions(char const *gateId, cocos2d::__Array *missions) {
+        CCGate *retGate = NULL;
+
+        Ref *ref;
+        CCMission *mission;
+        CCARRAY_FOREACH(missions, ref) {
+                mission = (CCMission *) ref;
+                if (mission->getGate() != NULL && mission->getGate()->getId()->compare(gateId) == 0) {
+                    retGate = mission->getGate();
+                    break;
+                }
+            }
+
+        if (retGate == NULL) {
+            CCChallenge *challenge;
+            CCARRAY_FOREACH(missions, ref) {
+                    challenge = dynamic_cast<CCChallenge *>(ref);
+                    if (challenge != NULL) {
+                        retGate = fetchGateFromMissions(gateId, challenge->getMissions());
+                        if (retGate != NULL) {
+                            break;
+                        }
+                    }
+                }
+        }
+
+        return retGate;
+    }
+
+    CCMission *CCLevelUp::fetchMission(char const *missionId, cocos2d::__Dictionary *worlds) {
+        DictElement *el;
+        CCWorld *world;
+        CCMission *mission;
+        CCDICT_FOREACH(worlds, el) {
+                world = (CCWorld *) el->getObject();
+
+                Ref *ref;
+                CCARRAY_FOREACH(mInitialWorld->getMissions(), ref) {
+                        mission = dynamic_cast<CCMission *>(ref);
+                        CC_ASSERT(mission);
+                        if (mission->getId()->compare(missionId) == 0) {
+                            return mission;
+                        }
+                    }
+
+                mission = fetchMission(missionId, world->getInnerWorldsMap());
+
+                if (mission) {
+                    return mission;
+                }
+            }
+
+        return NULL;
+    }
 }

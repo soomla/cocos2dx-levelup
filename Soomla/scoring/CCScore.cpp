@@ -29,7 +29,7 @@ namespace soomla {
         bool result = CCSoomlaEntity::init(id, name);
         if (result) {
             setStartValue(__Double::create(0));
-            setHigherBetter(higherBetter);
+            setHigherBetter(higherBetter ? higherBetter : __Bool::create(true));
             return true;
         }
         return result;
@@ -100,7 +100,7 @@ namespace soomla {
 
 
     bool CCScore::hasScoreReached(double score1, double score2) {
-        return this->mHigherBetter ?
+        return this->mHigherBetter->getValue() ?
                 (score1 >= score2) :
                 (score1 <= score2);
     }
