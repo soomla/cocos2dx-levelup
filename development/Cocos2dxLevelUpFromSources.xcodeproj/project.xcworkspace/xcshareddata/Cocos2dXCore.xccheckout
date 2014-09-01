@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>446852AB-F913-4CA7-81CD-B39A91AEF5C3</string>
+	<string>81EF9B8E-3385-4A70-B674-C1D139232859</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Cocos2dXStore</string>
+	<string>Cocos2dXCore</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>E0759C5A-1B76-4FE0-8847-F2AFC4B6FAE6</key>
-		<string>https://github.com/soomla/cocos2dx-levelup</string>
+		<key>558E1A0D-727E-488F-BFA9-2BDB8CBA807C</key>
+		<string>ssh://github.com/soomla/soomla-cocos2dx-core.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Cocos2dXStore.xcodeproj/project.xcworkspace</string>
+	<string>development/Cocos2dXCore.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>E0759C5A-1B76-4FE0-8847-F2AFC4B6FAE6</key>
-		<string>../..</string>
+		<key>558E1A0D-727E-488F-BFA9-2BDB8CBA807C</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/soomla/cocos2dx-levelup</string>
+	<string>ssh://github.com/soomla/soomla-cocos2dx-core.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>E0759C5A-1B76-4FE0-8847-F2AFC4B6FAE6</string>
+	<string>558E1A0D-727E-488F-BFA9-2BDB8CBA807C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E0759C5A-1B76-4FE0-8847-F2AFC4B6FAE6</string>
+			<string>558E1A0D-727E-488F-BFA9-2BDB8CBA807C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>cocos2dx-levelup</string>
+			<string>soomla-cocos2dx-core</string>
 		</dict>
 	</array>
 </dict>

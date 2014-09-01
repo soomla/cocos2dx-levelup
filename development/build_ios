@@ -1,0 +1,14 @@
+paths=( "submodules/ios-levelup" "soomla-native/cocos2dx-ios-levelup" )
+build=../build/ios
+
+rm -rf $build
+mkdir -p $build
+
+for path in "${paths[@]}"
+do
+  cd $path
+  ./build_all
+  cd -
+  cp -R $path/build/* $build/
+done
+

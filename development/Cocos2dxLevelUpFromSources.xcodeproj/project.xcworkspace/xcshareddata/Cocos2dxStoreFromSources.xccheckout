@@ -5,20 +5,20 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>446852AB-F913-4CA7-81CD-B39A91AEF5C3</string>
+	<string>4FE3EA66-4A68-4CAA-B68D-4303F1F4FD8C</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Cocos2dXStore</string>
+	<string>Cocos2dxStoreFromSources</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E0759C5A-1B76-4FE0-8847-F2AFC4B6FAE6</key>
 		<string>https://github.com/soomla/cocos2dx-levelup</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Cocos2dXStore.xcodeproj/project.xcworkspace</string>
+	<string>development/Cocos2dxStoreFromSources.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E0759C5A-1B76-4FE0-8847-F2AFC4B6FAE6</key>
-		<string>../..</string>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/soomla/cocos2dx-levelup</string>

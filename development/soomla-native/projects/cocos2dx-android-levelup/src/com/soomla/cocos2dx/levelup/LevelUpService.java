@@ -41,11 +41,10 @@ public class LevelUpService extends AbstractSoomlaService {
 
         final NdkGlue ndkGlue = NdkGlue.getInstance();
 
-        ndkGlue.registerCallHandler("CCLevelUpService::gateIsOpen", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpService::init", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
-                String gateId = params.getString("gateId");
-                GateStorage.isOpen(gateId);
+                // nothing to do
             }
         });
 
