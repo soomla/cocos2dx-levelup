@@ -8,7 +8,6 @@
 
 
 #include "cocos2d.h"
-#include "CCStoreAssets.h"
 #include "CCGate.h"
 
 namespace soomla {
