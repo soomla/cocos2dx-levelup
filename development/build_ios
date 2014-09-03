@@ -1,4 +1,4 @@
-paths=( "submodules/ios-levelup" "soomla-native/cocos2dx-ios-levelup" )
+paths=( "submodules/ios-levelup" "soomla-native/projects/cocos2dx-ios-levelup" )
 build=../build/ios
 
 rm -rf $build
