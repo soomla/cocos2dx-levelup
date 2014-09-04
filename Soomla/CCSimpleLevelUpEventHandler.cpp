@@ -8,6 +8,10 @@
 #include "CCWorld.h"
 #include "CCLevel.h"
 
+void soomla::CCSimpleLevelUpEventHandler::onLevelUpInitialized() {
+
+}
+
 void soomla::CCSimpleLevelUpEventHandler::onGateOpened(soomla::CCGate *gate) {
 
 }

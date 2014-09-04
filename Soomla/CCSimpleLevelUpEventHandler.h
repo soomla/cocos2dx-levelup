@@ -12,6 +12,8 @@
 namespace soomla {
     class CCSimpleLevelUpEventHandler: public CCLevelUpEventHandler {
     public:
+        virtual void onLevelUpInitialized();
+
         virtual void onGateOpened(CCGate* gate);
 
         virtual void onMissionCompleted(CCMission* completedMission);

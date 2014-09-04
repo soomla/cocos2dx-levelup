@@ -16,6 +16,8 @@
 
 @interface WorldStorage : NSObject
 
++ (void)initLevelUp:(NSDictionary *)metadata;
+
 + (void)setCompleted:(BOOL)completed forWorld:(NSString *)worldId;
 
 + (void)setCompleted:(BOOL)completed forWorld:(NSString *)worldId andNotify:(BOOL)notify;

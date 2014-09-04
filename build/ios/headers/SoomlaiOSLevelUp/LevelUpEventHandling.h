@@ -24,6 +24,7 @@
 #define EVENT_LEVEL_STARTED                  @"lu_level_started"
 #define EVENT_LEVEL_ENDED                    @"lu_level_ended"
 #define EVENT_WORLD_REWARD_ASSIGNED          @"lu_world_reward_assigned"
+#define EVENT_LEVEL_UP_INITIALIZED           @"lu_level_up_initialized"
 
 
 // UserInfo Elements
@@ -35,6 +36,7 @@
 #define DICT_ELEMENT_LEVEL                   @"level"
 #define DICT_ELEMENT_IS_CHALLENGE            @"isChallenge"
 #define DICT_ELEMENT_IS_BADGE                @"isBadge"
+#define DICT_ELEMENT_METADATA                @"metadata"
 
 
 @interface LevelUpEventHandling : NSObject
@@ -60,5 +62,5 @@
 
 + (void)postLevelEnded:(NSString *)levelId;
 
-
++ (void)postLevelUpInitialized:(NSDictionary *)metadata;
 @end
