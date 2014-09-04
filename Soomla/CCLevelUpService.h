@@ -9,6 +9,7 @@
 
 #include "cocos2d.h"
 #include "CCGate.h"
+#include "CCWorld.h"
 
 namespace soomla {
 
@@ -30,6 +31,8 @@ namespace soomla {
         CCLevelUpService();
 
         virtual bool init();
+
+        bool initLevelUp(CCWorld *initialWorld, cocos2d::__Array *rewards);
 
         bool gateIsOpen(CCGate *gate);
         void gateSetOpen(CCGate *gate, bool open, bool b);

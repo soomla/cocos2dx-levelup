@@ -77,6 +77,7 @@ namespace soomla {
         static char const *JSON_JSON_TYPE_WORLD;
         static char const *JSON_JSON_TYPE_LEVEL;
 
+        static char const *EVENT_LEVEL_UP_INITIALIZED;
         static char const *EVENT_SCORE_RECORD_REACHED;
         static char const *EVENT_SCORE_RECORD_CHANGED;
         static char const *EVENT_GATE_OPENED;

@@ -21,6 +21,7 @@
 #include "CCRecordMission.h"
 #include "CCPurchasingMission.h"
 #include "CCLevelUp.h"
+#include "CCDomainHelper.h"
 
 USING_NS_CC;
 
@@ -48,7 +49,6 @@ namespace soomla {
     }
 
     CCLevelUpService::CCLevelUpService() {
-
     }
 
     bool CCLevelUpService::init() {
@@ -74,9 +74,21 @@ namespace soomla {
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD, CCWorld::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_LEVEL, CCLevel::createWithDictionary);
 
+        return true;
+    }
+
+    bool CCLevelUpService::initLevelUp(CCWorld *initialWorld, __Array *rewards) {
+
         CCSoomlaUtils::logDebug(TAG, "call init");
 
-        SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::init");
+        __Dictionary *metadata = __Dictionary::create();
+        metadata->setObject(initialWorld->toDictionary(), "initialWorld");
+        if (rewards) {
+            metadata->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(rewards), "rewards");
+        }
+
+        SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::initLevelUp");
+        params->setObject(metadata, "metadata");
 
         CCError *error = NULL;
         __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);

@@ -8,6 +8,7 @@
 #include "CCWorld.h"
 #include "CCLevel.h"
 #include "CCChallenge.h"
+#include "CCLevelUpService.h"
 
 namespace soomla {
 
@@ -89,6 +90,8 @@ namespace soomla {
                 mRewards->retain();
             }
         }
+
+        CCLevelUpService::getInstance()->initLevelUp(initialWorld, rewards);
     }
 
     CCReward *CCLevelUp::getReward(const char *rewardId) {
