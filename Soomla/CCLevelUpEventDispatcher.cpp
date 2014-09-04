@@ -30,6 +30,11 @@ namespace soomla {
 
         CCSoomlaEventDispatcher *eventDispatcher = CCSoomlaEventDispatcher::getInstance();
 
+        eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED,
+                [this](__Dictionary *parameters) {
+                    this->onLevelUpInitialized();
+                });
+
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED,
                 [this](__Dictionary *parameters) {
                     CCScore *score = CCLevelUp::getInstance()->getScore(parameters->valueForKey("scoreId")->getCString());
@@ -94,6 +99,12 @@ namespace soomla {
                 });
 
         return true;
+    }
+
+    void CCLevelUpEventDispatcher::onLevelUpInitialized() {
+        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
+            eventHandler->onLevelUpInitialized();
+        }
     }
 
     void CCLevelUpEventDispatcher::onGateOpened(CCGate *gate) {

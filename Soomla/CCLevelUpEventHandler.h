@@ -28,6 +28,8 @@ namespace soomla {
 
     class CCLevelUpEventHandler : public cocos2d::Ref {
     public:
+        virtual void onLevelUpInitialized() = 0;
+
         virtual void onScoreRecordReached(CCScore *score) = 0;
         virtual void onScoreRecordChanged(CCScore *score) = 0;
 

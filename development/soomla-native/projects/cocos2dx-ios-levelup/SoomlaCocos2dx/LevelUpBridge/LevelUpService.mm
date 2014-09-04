@@ -60,8 +60,12 @@
     NdkGlue *ndkGlue = [NdkGlue sharedInstance];
 
     /* -= Call handlers =- */
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::init" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
-        retParameters[@"return"] = @([[LevelUpService sharedLevelUpService] init] != nil);
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::initLevelUp" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+        BOOL res = [[LevelUpService sharedLevelUpService] init] != nil;
+        if (res) {
+            [WorldStorage initLevelUp:parameters[@"metadata"]];
+        }
+        retParameters[@"return"] = @(res);
     }];
 
     [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::gateIsOpen" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
@@ -186,6 +190,10 @@
     }];
 
     /* -= Callback handlers =- */
+    [ndkGlue registerCallbackHandlerForKey:EVENT_LEVEL_UP_INITIALIZED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {
+        parameters[@"method"] = @"CCLevelUpEventHandler::onLevelUpInitialized";
+    }];
+
     [ndkGlue registerCallbackHandlerForKey:EVENT_SCORE_RECORD_REACHED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {
         parameters[@"method"] = @"CCLevelUpEventHandler::onScoreRecordReached";
         parameters[@"scoreId"] = (notification.userInfo)[DICT_ELEMENT_SCORE];

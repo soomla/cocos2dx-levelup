@@ -22,6 +22,9 @@ namespace soomla {
 
         bool init();
 
+
+        virtual void onLevelUpInitialized();
+
         virtual void onGateOpened(CCGate *gate);
 
         virtual void onMissionCompleted(CCMission *mission);
