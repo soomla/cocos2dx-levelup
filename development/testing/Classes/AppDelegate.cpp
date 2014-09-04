@@ -15,7 +15,6 @@
  */
 
 #include "AppDelegate.h"
-#include "ProfileScreen.h"
 #include "TestScreen.h"
 #include "CoreEventHandler.h"
 #include "ProfileEventHandler.h"
@@ -25,6 +24,8 @@
 #include "CCServiceManager.h"
 #include "CCStoreService.h"
 #include "CCCoreEventDispatcher.h"
+#include "CCLevelUpService.h"
+#include "CCLevelUp.h"
 
 USING_NS_CC;
 
@@ -60,6 +61,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(handler);
     soomla::CCProfileService::initShared(profileParams);
+    
+    soomla::CCLevelUpService::initShared();
     
     auto glview = director->getOpenGLView();
     if(!glview) {

@@ -30,6 +30,7 @@
 #import "ServiceManager.h"
 #import "ProfileService.h"
 #import "StoreService.h"
+#import "LevelUpService.h"
 
 @implementation AppController
 
@@ -43,6 +44,7 @@ static AppDelegate s_sharedApplication;
 
     [[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
     [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
+    [[ServiceManager sharedServiceManager] registerService:[LevelUpService sharedLevelUpService]];
 
     // Override point for customization after application launch.
 

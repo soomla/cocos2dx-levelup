@@ -44,7 +44,7 @@ public class LevelUpService extends AbstractSoomlaService {
         ndkGlue.registerCallHandler("CCLevelUpService::init", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
-                // nothing to do
+                retParams.put("return", LevelUpService.getInstance() != null);
             }
         });
 

@@ -107,6 +107,8 @@
 		F8ADF54F19B752D100C4FE4B /* CocosTestReporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8ADF54E19B752D100C4FE4B /* CocosTestReporter.cpp */; };
 		F8ADF56719B774A600C4FE4B /* TestScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8ADF56519B774A600C4FE4B /* TestScreen.cpp */; };
 		F8DA3BC919B70BBB00438250 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8DA3BC819B70BBB00438250 /* GameController.framework */; };
+		F8F8E39A19B869B2000F048A /* TestWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F8E39819B869B2000F048A /* TestWorld.cpp */; };
+		F8F8E39D19B86B84000F048A /* InitialWorldFixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F8E39B19B86B84000F048A /* InitialWorldFixture.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -352,6 +354,9 @@
 		F8ADF56519B774A600C4FE4B /* TestScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestScreen.cpp; sourceTree = "<group>"; };
 		F8ADF56619B774A600C4FE4B /* TestScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScreen.h; sourceTree = "<group>"; };
 		F8DA3BC819B70BBB00438250 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
+		F8F8E39819B869B2000F048A /* TestWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestWorld.cpp; sourceTree = "<group>"; };
+		F8F8E39B19B86B84000F048A /* InitialWorldFixture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InitialWorldFixture.cpp; sourceTree = "<group>"; };
+		F8F8E39C19B86B84000F048A /* InitialWorldFixture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialWorldFixture.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -440,6 +445,9 @@
 				F8A0EC9019ACCD46006CB3C2 /* CoreEventHandler.cpp */,
 				F8ADF53119B74F3500C4FE4B /* CocosTestReporter.h */,
 				F8ADF54E19B752D100C4FE4B /* CocosTestReporter.cpp */,
+				F8F8E39819B869B2000F048A /* TestWorld.cpp */,
+				F8F8E39B19B86B84000F048A /* InitialWorldFixture.cpp */,
+				F8F8E39C19B86B84000F048A /* InitialWorldFixture.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -944,6 +952,7 @@
 				F8ADF51819B744A100C4FE4B /* Test.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				F8F8E39D19B86B84000F048A /* InitialWorldFixture.cpp in Sources */,
 				F8ADF51719B744A100C4FE4B /* ReportAssert.cpp in Sources */,
 				F8ADF4D319B7448300C4FE4B /* value.c in Sources */,
 				F8ADF51D19B744A100C4FE4B /* TestResults.cpp in Sources */,
@@ -970,6 +979,7 @@
 				F8ADF56719B774A600C4FE4B /* TestScreen.cpp in Sources */,
 				F8ADF50D19B744A100C4FE4B /* AssertException.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				F8F8E39A19B869B2000F048A /* TestWorld.cpp in Sources */,
 				F8ADF4CD19B7448300C4FE4B /* memory.c in Sources */,
 				F8ADF51419B744A100C4FE4B /* MemoryOutStream.cpp in Sources */,
 				F8ADF51C19B744A100C4FE4B /* TestReporterStdout.cpp in Sources */,

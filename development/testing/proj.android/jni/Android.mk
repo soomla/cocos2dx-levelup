@@ -49,6 +49,7 @@ LOCAL_WHOLE_STATIC_LIBRARIES += cocos_extension_static
 
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_store_static
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_profile_static
+LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_levelup_static
 
 include $(BUILD_SHARED_LIBRARY)
 
@@ -65,3 +66,4 @@ $(call import-module,extensions)
 
 $(call import-module,extensions/cocos2dx-store)
 $(call import-module,extensions/cocos2dx-profile)
+$(call import-module,extensions/cocos2dx-levelup)
