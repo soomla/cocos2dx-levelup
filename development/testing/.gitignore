@@ -1,0 +1,14 @@
+.DS_Store
+*.apk
+proj.android/assets
+proj.android/bin
+proj.android/gen
+proj.android/libs/armeabi
+proj.android/obj
+proj.android/out
+proj.android/local.properties
+proj.ios_mac/build
+proj.ios_mac/*.xcodeproj/project.xcworkspace/xcuserdata
+proj.ios_mac/*.xcodeproj/xcuserdata
+proj.ios_mac/cocos2dx-store-example.xcodeproj/project.xcworkspace/xcshareddata/cocos2dx-store-example.xccheckout
+proj.android/.idea/workspace.xml
