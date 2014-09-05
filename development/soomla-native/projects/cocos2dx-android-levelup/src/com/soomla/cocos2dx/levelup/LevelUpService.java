@@ -44,7 +44,15 @@ public class LevelUpService extends AbstractSoomlaService {
         ndkGlue.registerCallHandler("CCLevelUpService::init", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
-                // nothing to do
+                retParams.put("return", true);
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCLevelUpService::initLevelUp", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                JSONObject metadata = retParams.optJSONObject("metadata");
+                WorldStorage.initLevelUp(metadata != null ? metadata.toString() : "{}");
             }
         });
 
