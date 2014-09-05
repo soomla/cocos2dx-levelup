@@ -20,6 +20,21 @@ public class LevelUpEventHandlerBridge {
     }
 
     @Subscribe
+    public void LevelUpInitialized(final LevelUpInitializedEvent levelUpInitializedEvent) {
+        mGLThread.queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject parameters = createJsonObjectForMethod("CCLevelUpEventHandler::onLevelUpInitialized");
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
+                } catch (JSONException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        });
+    }
+
+    @Subscribe
     public void onScoreRecordReached(final ScoreRecordReachedEvent scoreRecordReachedEvent) {
         mGLThread.queueEvent(new Runnable() {
             @Override
