@@ -109,6 +109,7 @@
 		F8DA3BC919B70BBB00438250 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8DA3BC819B70BBB00438250 /* GameController.framework */; };
 		F8F8E39A19B869B2000F048A /* TestWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F8E39819B869B2000F048A /* TestWorld.cpp */; };
 		F8F8E39D19B86B84000F048A /* InitialWorldFixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F8E39B19B86B84000F048A /* InitialWorldFixture.cpp */; };
+		F8F8E3B019B8A259000F048A /* TestingLevelUpEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F8E3AE19B8A259000F048A /* TestingLevelUpEventHandler.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -357,6 +358,8 @@
 		F8F8E39819B869B2000F048A /* TestWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestWorld.cpp; sourceTree = "<group>"; };
 		F8F8E39B19B86B84000F048A /* InitialWorldFixture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InitialWorldFixture.cpp; sourceTree = "<group>"; };
 		F8F8E39C19B86B84000F048A /* InitialWorldFixture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialWorldFixture.h; sourceTree = "<group>"; };
+		F8F8E3AE19B8A259000F048A /* TestingLevelUpEventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestingLevelUpEventHandler.cpp; sourceTree = "<group>"; };
+		F8F8E3AF19B8A259000F048A /* TestingLevelUpEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingLevelUpEventHandler.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,6 +451,8 @@
 				F8F8E39819B869B2000F048A /* TestWorld.cpp */,
 				F8F8E39B19B86B84000F048A /* InitialWorldFixture.cpp */,
 				F8F8E39C19B86B84000F048A /* InitialWorldFixture.h */,
+				F8F8E3AE19B8A259000F048A /* TestingLevelUpEventHandler.cpp */,
+				F8F8E3AF19B8A259000F048A /* TestingLevelUpEventHandler.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -966,6 +971,7 @@
 				F8ADF51019B744A100C4FE4B /* CurrentTest.cpp in Sources */,
 				F8ADF51E19B744A100C4FE4B /* TestRunner.cpp in Sources */,
 				F8ADF4C919B7448300C4FE4B /* dump.c in Sources */,
+				F8F8E3B019B8A259000F048A /* TestingLevelUpEventHandler.cpp in Sources */,
 				F8ADF52319B744A100C4FE4B /* XmlTestReporter.cpp in Sources */,
 				F8ADF51519B744A100C4FE4B /* SignalTranslator.cpp in Sources */,
 				F8ADF51119B744A100C4FE4B /* DeferredTestReporter.cpp in Sources */,

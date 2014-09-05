@@ -18,17 +18,19 @@
 #define ___InitialWorldFixture__H
 
 #include "CCWorld.h"
-#include "CCLevelUp.h"
+#include "TestingLevelUpEventHandler.h"
 
 using namespace cocos2d;
 using namespace soomla;
 
 struct InitialWorldFixture {
     InitialWorldFixture();
+    ~InitialWorldFixture();
     
     void Reinitialize();
     
     CCWorld *initialWorld;
+    TestingLevelUpEventHandler *handler;
 };
 
 #endif // ___InitialWorldFixture__H

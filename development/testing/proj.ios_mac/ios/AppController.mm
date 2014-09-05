@@ -41,6 +41,8 @@
 static AppDelegate s_sharedApplication;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
 
     [[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
     [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];

@@ -17,8 +17,23 @@
 #include "UnitTestPP.h"
 #include "InitialWorldFixture.h"
 #include "CCLevel.h"
+#include "CCScheduleGate.h"
+#include "CCLevelUpConsts.h"
 
 using namespace UnitTest;
+
+TEST_FIXTURE(InitialWorldFixture, SanityCanStart) {
+    CCScheduleGate *gate = CCScheduleGate::create(__String::create("unopened_gate"),
+                                                  CCSchedule::createAnyTimeOnce());
+    initialWorld->setGate(gate);
+    
+    CHECK(!initialWorld->canStart());
+    
+    gate->forceOpen(true);
+    
+    CHECK(handler->checkEventFired(CCLevelUpConsts::EVENT_GATE_OPENED));
+    CHECK(initialWorld->canStart());
+}
 
 TEST_FIXTURE(InitialWorldFixture, SanityAddInnerWorld) {
     CCLevel *level = CCLevel::create(__String::create("test_level"));
@@ -28,5 +43,6 @@ TEST_FIXTURE(InitialWorldFixture, SanityAddInnerWorld) {
     innerWorlds->objectForKey("test_level");
     CCWorld *innerLevel = dynamic_cast<CCWorld *>(innerWorlds->objectForKey(level->getId()->getCString()));
     
+    CHECK_EQUAL(1, innerWorlds->count());
     CHECK_EQUAL(level, innerLevel);
 }

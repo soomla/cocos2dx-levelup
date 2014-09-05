@@ -15,6 +15,9 @@
  */
 
 #include "InitialWorldFixture.h"
+#include "CCLevelUp.h"
+#include "CCLevelUpEventDispatcher.h"
+#include "CCKeyValueStorage.h"
 
 InitialWorldFixture::InitialWorldFixture() {
     initialWorld = CCWorld::create(__String::create("initial_world"),
@@ -22,7 +25,17 @@ InitialWorldFixture::InitialWorldFixture() {
                                    __Dictionary::create(),
                                    __Dictionary::create(),
                                    __Array::create());
+    
+    handler = new TestingLevelUpEventHandler();
+    CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
+    
+    CCKeyValueStorage::getInstance()->purge();
+    
     Reinitialize();
+}
+
+InitialWorldFixture::~InitialWorldFixture() {
+    CCLevelUpEventDispatcher::getInstance()->removeEventHandler(handler);
 }
 
 void InitialWorldFixture::Reinitialize() {
