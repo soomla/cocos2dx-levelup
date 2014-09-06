@@ -36,23 +36,23 @@ public class LevelUpService extends AbstractSoomlaService {
     public LevelUpService() {
         levelUpEventHandlerBridge = new LevelUpEventHandlerBridge();
 
-        // TODO:
-//        DomainHelper.getInstance().registerTypeWithClassName(LevelUpConsts.JSON_JSON_TYPE_VIRTUAL_ITEM, VirtualItem.class);
-
         final NdkGlue ndkGlue = NdkGlue.getInstance();
-
-        ndkGlue.registerCallHandler("CCLevelUpService::init", new NdkGlue.CallHandler() {
-            @Override
-            public void handle(JSONObject params, JSONObject retParams) throws Exception {
-                retParams.put("return", true);
-            }
-        });
 
         ndkGlue.registerCallHandler("CCLevelUpService::initLevelUp", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                LevelUpService.getInstance().init();
                 JSONObject metadata = retParams.optJSONObject("metadata");
                 WorldStorage.initLevelUp(metadata != null ? metadata.toString() : "{}");
+                retParams.put("return", true);
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCLevelUpService::gateIsOpen", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String gateId = params.getString("gateId");
+                retParams.put("return", GateStorage.isOpen(gateId));
             }
         });
 
@@ -162,7 +162,7 @@ public class LevelUpService extends AbstractSoomlaService {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String missionId = params.getString("missionId");
-                retParams.put("return", MissionStorage.isCompleted(missionId));
+                retParams.put("return", MissionStorage.getTimesCompleted(missionId));
             }
         });
 
