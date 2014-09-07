@@ -26,7 +26,7 @@ namespace soomla {
     class CCWorld;
     class CCLevel;
 
-    class CCLevelUpEventHandler : public cocos2d::Ref {
+    class CCLevelUpEventHandler : public cocos2d::CCObject {
     public:
         virtual void onLevelUpInitialized() = 0;
 

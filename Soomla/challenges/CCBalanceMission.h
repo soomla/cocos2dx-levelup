@@ -14,11 +14,11 @@ namespace soomla {
         CCBalanceMission(): CCMission() {
         }
 
-        static CCBalanceMission *create(cocos2d::__String *id, cocos2d::__String *name,
-                cocos2d::__String *associatedItemId, cocos2d::__Integer *desiredBalance);
+        static CCBalanceMission *create(cocos2d::CCString *id, cocos2d::CCString *name,
+                cocos2d::CCString *associatedItemId, cocos2d::CCInteger *desiredBalance);
 
-        static CCBalanceMission *create(cocos2d::__String *id, cocos2d::__String *name,
-                cocos2d::__Array *rewards, cocos2d::__String *associatedItemId, cocos2d::__Integer *desiredBalance);
+        static CCBalanceMission *create(cocos2d::CCString *id, cocos2d::CCString *name,
+                cocos2d::CCArray *rewards, cocos2d::CCString *associatedItemId, cocos2d::CCInteger *desiredBalance);
 
         SL_CREATE_WITH_DICTIONARY(CCBalanceMission);
 

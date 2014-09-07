@@ -13,7 +13,7 @@ namespace soomla {
 
     USING_NS_CC;
 
-    bool CCGatesList::init(cocos2d::__String *id, __Array *gates) {
+    bool CCGatesList::init(cocos2d::CCString *id, CCArray *gates) {
         bool result = CCGate::init(id, NULL);
         if (result) {
             setGates(gates);
@@ -23,18 +23,18 @@ namespace soomla {
     }
 
 
-    bool CCGatesList::init(cocos2d::__String *id, CCGate *gate) {
-        cocos2d::__Array *gates = cocos2d::__Array::create();
+    bool CCGatesList::init(cocos2d::CCString *id, CCGate *gate) {
+        cocos2d::CCArray *gates = cocos2d::CCArray::create();
         gates->addObject(gate);
         return init(id, gates);
     }
 
-    bool soomla::CCGatesList::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool soomla::CCGatesList::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCGate::initWithDictionary(dict);
         if (result) {
-            Ref *ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_GATES);
+            CCObject *ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_GATES);
             if (ref) {
-                __Array *gatesDict = dynamic_cast<__Array *>(ref);
+                CCArray *gatesDict = dynamic_cast<CCArray *>(ref);
                 setGates((CCDomainHelper::getInstance()->getDomainsFromDictArray(gatesDict)));
             }
             return true;
@@ -42,8 +42,8 @@ namespace soomla {
         return result;
     }
 
-    cocos2d::__Dictionary *soomla::CCGatesList::toDictionary() {
-        cocos2d::__Dictionary *dict = CCGate::toDictionary();
+    cocos2d::CCDictionary *soomla::CCGatesList::toDictionary() {
+        cocos2d::CCDictionary *dict = CCGate::toDictionary();
 
         if (mGates) {
             dict->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(mGates), CCLevelUpConsts::JSON_LU_GATES);

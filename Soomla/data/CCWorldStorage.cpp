@@ -37,11 +37,11 @@ namespace soomla {
         return CCLevelUpService::getInstance()->worldIsCompleted(world);
     }
 
-    void CCWorldStorage::setReward(CCWorld *world, cocos2d::__String *rewardId) {
+    void CCWorldStorage::setReward(CCWorld *world, cocos2d::CCString *rewardId) {
         CCLevelUpService::getInstance()->worldSetReward(world, rewardId);
     }
 
-    cocos2d::__String *CCWorldStorage::getAssignedReward(CCWorld *world) {
+    cocos2d::CCString *CCWorldStorage::getAssignedReward(CCWorld *world) {
         return CCLevelUpService::getInstance()->worldGetAssignedReward(world);
     }
 }

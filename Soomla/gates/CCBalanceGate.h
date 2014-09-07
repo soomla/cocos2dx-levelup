@@ -17,24 +17,24 @@
 namespace soomla {
     class CCBalanceGate: public CCGate {
         friend class CCBalanceGateEventHandler;
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAssociatedItemId, AssociatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID)
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__Integer *, mDesiredBalance, DesiredBalance, CCLevelUpConsts::JSON_LU_DESIRED_BALANCE);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCString *, mAssociatedItemId, AssociatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID)
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCInteger *, mDesiredBalance, DesiredBalance, CCLevelUpConsts::JSON_LU_DESIRED_BALANCE);
         CC_SYNTHESIZE(CCStoreEventHandler *, mEventHandler, EventHandler);
     public:
         CCBalanceGate(): CCGate(), mAssociatedItemId(NULL), mDesiredBalance(NULL), mEventHandler(NULL) {
         }
 
-        static CCBalanceGate *create(cocos2d::__String *id, cocos2d::__String *associatedItemId, cocos2d::__Integer *desiredBalance);
+        static CCBalanceGate *create(cocos2d::CCString *id, cocos2d::CCString *associatedItemId, cocos2d::CCInteger *desiredBalance);
 
         SL_CREATE_WITH_DICTIONARY(CCBalanceGate);
 
-        virtual bool init(cocos2d::__String *id, cocos2d::__String *associatedItemId, cocos2d::__Integer *desiredBalance);
+        virtual bool init(cocos2d::CCString *id, cocos2d::CCString *associatedItemId, cocos2d::CCInteger *desiredBalance);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
         virtual const char *getType() const;
 
-        virtual cocos2d::__Dictionary *toDictionary();
+        virtual cocos2d::CCDictionary *toDictionary();
 
         virtual ~CCBalanceGate();
 
@@ -47,7 +47,7 @@ namespace soomla {
 
         virtual void unregisterEvents();
     private:
-        void checkItemIdBalance(cocos2d::__String *itemId, int balance);;
+        void checkItemIdBalance(cocos2d::CCString *itemId, int balance);;
     };
 
     class CCBalanceGateEventHandler: public CCSimpleStoreEventHandler {

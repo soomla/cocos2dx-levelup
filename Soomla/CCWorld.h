@@ -17,26 +17,26 @@ namespace soomla {
 
     class CCWorld: public CCSoomlaEntity {
         CC_SYNTHESIZE_RETAIN(CCGate *, mGate, Gate);
-        CC_SYNTHESIZE_RETAIN(cocos2d::__Dictionary *, mInnerWorldsMap, InnerWorldsMap);
-        CC_SYNTHESIZE_RETAIN(cocos2d::__Dictionary *, mScores, Scores);
-        CC_SYNTHESIZE_RETAIN(cocos2d::__Array*, mMissions, Missions);
+        CC_SYNTHESIZE_RETAIN(cocos2d::CCDictionary *, mInnerWorldsMap, InnerWorldsMap);
+        CC_SYNTHESIZE_RETAIN(cocos2d::CCDictionary *, mScores, Scores);
+        CC_SYNTHESIZE_RETAIN(cocos2d::CCArray*, mMissions, Missions);
     public:
         CCWorld(): CCSoomlaEntity(), mGate(NULL), mInnerWorldsMap(NULL), mScores(NULL), mMissions(NULL) {
         }
 
-        static CCWorld *create(cocos2d::__String *id);
-        static CCWorld *create(cocos2d::__String *id, CCGate *gate,
-                cocos2d::__Dictionary *innerWorldsMap, cocos2d::__Dictionary *scores, cocos2d::__Array *missions);
+        static CCWorld *create(cocos2d::CCString *id);
+        static CCWorld *create(cocos2d::CCString *id, CCGate *gate,
+                cocos2d::CCDictionary *innerWorldsMap, cocos2d::CCDictionary *scores, cocos2d::CCArray *missions);
 
         SL_CREATE_WITH_DICTIONARY(CCWorld);
 
-        virtual bool init(cocos2d::__String *id);
-        virtual bool init(cocos2d::__String *id, CCGate *gate,
-                cocos2d::__Dictionary *innerWorldsMap, cocos2d::__Dictionary *scores, cocos2d::__Array *missions);
+        virtual bool init(cocos2d::CCString *id);
+        virtual bool init(cocos2d::CCString *id, CCGate *gate,
+                cocos2d::CCDictionary *innerWorldsMap, cocos2d::CCDictionary *scores, cocos2d::CCArray *missions);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
-        virtual cocos2d::__Dictionary *toDictionary();
+        virtual cocos2d::CCDictionary *toDictionary();
 
         virtual char const *getType() const;
 
@@ -48,7 +48,7 @@ namespace soomla {
         void addScore(CCScore *score);
 
         void batchAddLevelsWithTemplates(int numLevels, CCGate *gateTemplate, CCScore *scoreTemplate, CCMission *missionTemplate);
-        void batchAddLevelsWithTemplates(int numLevels, CCGate *gateTemplate, cocos2d::__Array *scoreTemplates, cocos2d::__Array *missionTemplates);
+        void batchAddLevelsWithTemplates(int numLevels, CCGate *gateTemplate, cocos2d::CCArray *scoreTemplates, cocos2d::CCArray *missionTemplates);
 
         void setSingleScoreValue(double amount);
         void decSingleScore(double amount);
@@ -59,8 +59,8 @@ namespace soomla {
         void decScore(char const *scoreId, double amount);
         void incScore(char const *scoreId, double amount);
 
-        cocos2d::__Dictionary *getRecordScores();
-        cocos2d::__Dictionary *getLatestScores();
+        cocos2d::CCDictionary *getRecordScores();
+        cocos2d::CCDictionary *getLatestScores();
 
         void setScoreValue(char const *id, double scoreVal);
         void setScoreValue(char const *id, double scoreVal, bool onlyIfBetter);
@@ -70,7 +70,7 @@ namespace soomla {
         virtual void setCompleted(bool completed, bool recursive);
 
         void assignReward(CCReward *reward);
-        cocos2d::__String *getAssignedRewardId();
+        cocos2d::CCString *getAssignedRewardId();
 
         bool canStart();
     private:

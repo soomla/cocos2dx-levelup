@@ -7,7 +7,7 @@
 #include "CCLevelUpService.h"
 
 namespace soomla {
-    static CCMissionStorage *sInstance = nullptr;
+    static CCMissionStorage *sInstance = NULL;
 
     CCMissionStorage *soomla::CCMissionStorage::getInstance() {
         if (!sInstance)

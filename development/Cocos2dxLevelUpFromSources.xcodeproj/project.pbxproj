@@ -51,8 +51,8 @@
 		9DEA545919B4A5F00093D5D9 /* CCGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA541919B4A5F00093D5D9 /* CCGate.h */; };
 		9DEA545A19B4A5F00093D5D9 /* CCGatesList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA541A19B4A5F00093D5D9 /* CCGatesList.cpp */; };
 		9DEA545B19B4A5F00093D5D9 /* CCGatesList.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA541B19B4A5F00093D5D9 /* CCGatesList.h */; };
-		9DEA545C19B4A5F00093D5D9 /* CCGatesListAnd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA541C19B4A5F00093D5D9 /* CCGatesListAnd.cpp */; };
-		9DEA545D19B4A5F00093D5D9 /* CCGatesListAnd.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA541D19B4A5F00093D5D9 /* CCGatesListAnd.h */; };
+		9DEA545C19B4A5F00093D5D9 /* CCGatesListAND.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA541C19B4A5F00093D5D9 /* CCGatesListAND.cpp */; };
+		9DEA545D19B4A5F00093D5D9 /* CCGatesListAND.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA541D19B4A5F00093D5D9 /* CCGatesListAND.h */; };
 		9DEA545E19B4A5F00093D5D9 /* CCGatesListOr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA541E19B4A5F00093D5D9 /* CCGatesListOr.cpp */; };
 		9DEA545F19B4A5F00093D5D9 /* CCGatesListOr.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA541F19B4A5F00093D5D9 /* CCGatesListOr.h */; };
 		9DEA546019B4A5F00093D5D9 /* CCPurchasableGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA542019B4A5F00093D5D9 /* CCPurchasableGate.cpp */; };
@@ -137,8 +137,8 @@
 		9DEA541919B4A5F00093D5D9 /* CCGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGate.h; sourceTree = "<group>"; };
 		9DEA541A19B4A5F00093D5D9 /* CCGatesList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCGatesList.cpp; sourceTree = "<group>"; };
 		9DEA541B19B4A5F00093D5D9 /* CCGatesList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGatesList.h; sourceTree = "<group>"; };
-		9DEA541C19B4A5F00093D5D9 /* CCGatesListAnd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCGatesListAnd.cpp; sourceTree = "<group>"; };
-		9DEA541D19B4A5F00093D5D9 /* CCGatesListAnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGatesListAnd.h; sourceTree = "<group>"; };
+		9DEA541C19B4A5F00093D5D9 /* CCGatesListAND.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCGatesListAND.cpp; sourceTree = "<group>"; };
+		9DEA541D19B4A5F00093D5D9 /* CCGatesListAND.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGatesListAND.h; sourceTree = "<group>"; };
 		9DEA541E19B4A5F00093D5D9 /* CCGatesListOr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCGatesListOr.cpp; sourceTree = "<group>"; };
 		9DEA541F19B4A5F00093D5D9 /* CCGatesListOr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCGatesListOr.h; sourceTree = "<group>"; };
 		9DEA542019B4A5F00093D5D9 /* CCPurchasableGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCPurchasableGate.cpp; sourceTree = "<group>"; };
@@ -263,8 +263,8 @@
 				9DEA541919B4A5F00093D5D9 /* CCGate.h */,
 				9DEA541A19B4A5F00093D5D9 /* CCGatesList.cpp */,
 				9DEA541B19B4A5F00093D5D9 /* CCGatesList.h */,
-				9DEA541C19B4A5F00093D5D9 /* CCGatesListAnd.cpp */,
-				9DEA541D19B4A5F00093D5D9 /* CCGatesListAnd.h */,
+				9DEA541C19B4A5F00093D5D9 /* CCGatesListAND.cpp */,
+				9DEA541D19B4A5F00093D5D9 /* CCGatesListAND.h */,
 				9DEA541E19B4A5F00093D5D9 /* CCGatesListOr.cpp */,
 				9DEA541F19B4A5F00093D5D9 /* CCGatesListOr.h */,
 				9DEA542019B4A5F00093D5D9 /* CCPurchasableGate.cpp */,
@@ -426,7 +426,7 @@
 				9DEA543A19B4A5F00093D5D9 /* CCLevelUpService.h in Headers */,
 				9DEA548A19B4A6350093D5D9 /* LUJSONConsts.h in Headers */,
 				9DEA544D19B4A5F00093D5D9 /* CCGateStorage.h in Headers */,
-				9DEA545D19B4A5F00093D5D9 /* CCGatesListAnd.h in Headers */,
+				9DEA545D19B4A5F00093D5D9 /* CCGatesListAND.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,7 +507,7 @@
 				9DEA544319B4A5F00093D5D9 /* CCMission.cpp in Sources */,
 				9DEA546819B4A5F00093D5D9 /* CCRangeScore.cpp in Sources */,
 				9DEA545E19B4A5F00093D5D9 /* CCGatesListOr.cpp in Sources */,
-				9DEA545C19B4A5F00093D5D9 /* CCGatesListAnd.cpp in Sources */,
+				9DEA545C19B4A5F00093D5D9 /* CCGatesListAND.cpp in Sources */,
 				9DEA544519B4A5F00093D5D9 /* CCPurchasingMission.cpp in Sources */,
 				9DEA543619B4A5F00093D5D9 /* CCLevelUpEventDispatcher.cpp in Sources */,
 				9DEA544E19B4A5F00093D5D9 /* CCLevelStorage.cpp in Sources */,
@@ -529,13 +529,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "";
@@ -557,13 +557,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREFIX_HEADER = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -588,11 +588,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../../../cocos",
-					"$(SRCROOT)/../../../cocos/base",
-					"$(SRCROOT)/../../../cocos/2d",
-					"$(SRCROOT)/../../../cocos/platform/ios",
-					"$(SRCROOT)/../../../cocos/platform/ios/Simulation",
+					"\"$(SRCROOT)/../../../cocos2dx\"",
+					"\"$(SRCROOT)/../../../cocos2dx/include\"",
+					"\"$(SRCROOT)/../../../cocos2dx/kazmath/include\"",
+					"\"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios\"",
+					"\"$(SRCROOT)/../../../cocos2dx/platform/ios\"",
+					"\"$(SRCROOT)/../../../cocos2dx/platform/ios/Simulation\"",
 					"$(SRCROOT)/../../../external/jansson",
 					"$(SRCROOT)/../../soomla-cocos2dx-core/Soomla/**",
 					"$(SRCROOT)/../../soomla-cocos2dx-core/development/soomla-native/projects/cocos2dx-ios-core/CoreCocos2dx/**",
@@ -625,11 +626,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../../../cocos",
-					"$(SRCROOT)/../../../cocos/base",
-					"$(SRCROOT)/../../../cocos/2d",
-					"$(SRCROOT)/../../../cocos/platform/ios",
-					"$(SRCROOT)/../../../cocos/platform/ios/Simulation",
+					"\"$(SRCROOT)/../../../cocos2dx\"",
+					"\"$(SRCROOT)/../../../cocos2dx/include\"",
+					"\"$(SRCROOT)/../../../cocos2dx/kazmath/include\"",
+					"\"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios\"",
+					"\"$(SRCROOT)/../../../cocos2dx/platform/ios\"",
+					"\"$(SRCROOT)/../../../cocos2dx/platform/ios/Simulation\"",
 					"$(SRCROOT)/../../../external/jansson",
 					"$(SRCROOT)/../../soomla-cocos2dx-core/Soomla/**",
 					"$(SRCROOT)/../../soomla-cocos2dx-core/development/soomla-native/projects/cocos2dx-ios-core/CoreCocos2dx/**",

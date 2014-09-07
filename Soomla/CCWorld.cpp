@@ -17,7 +17,7 @@ namespace soomla {
 
     USING_NS_CC;
 
-    CCWorld *CCWorld::create(cocos2d::__String *id) {
+    CCWorld *CCWorld::create(cocos2d::CCString *id) {
         CCWorld *ret = new CCWorld();
         if (ret->init(id)) {
             ret->autorelease();
@@ -29,7 +29,7 @@ namespace soomla {
         return ret;
     }
 
-    CCWorld *CCWorld::create(cocos2d::__String *id, CCGate *gate, cocos2d::__Dictionary *innerWorldsMap, cocos2d::__Dictionary *scores, cocos2d::__Array *missions) {
+    CCWorld *CCWorld::create(cocos2d::CCString *id, CCGate *gate, cocos2d::CCDictionary *innerWorldsMap, cocos2d::CCDictionary *scores, cocos2d::CCArray *missions) {
         CCWorld *ret = new CCWorld();
         if (ret->init(id, gate, innerWorldsMap, scores, missions)) {
             ret->autorelease();
@@ -41,7 +41,7 @@ namespace soomla {
         return ret;
     }
 
-    bool CCWorld::init(cocos2d::__String *id) {
+    bool CCWorld::init(cocos2d::CCString *id) {
         bool result = CCSoomlaEntity::init(id);
         if (result) {
             return true;
@@ -49,7 +49,7 @@ namespace soomla {
         return result;
     }
 
-    bool CCWorld::init(cocos2d::__String *id, CCGate *gate, cocos2d::__Dictionary *innerWorldsMap, cocos2d::__Dictionary *scores, cocos2d::__Array *missions) {
+    bool CCWorld::init(cocos2d::CCString *id, CCGate *gate, cocos2d::CCDictionary *innerWorldsMap, cocos2d::CCDictionary *scores, cocos2d::CCArray *missions) {
         bool result = CCSoomlaEntity::init(id);
         if (result) {
             setGate(gate);
@@ -62,25 +62,25 @@ namespace soomla {
         return result;
     }
 
-    bool CCWorld::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCWorld::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCSoomlaEntity::initWithDictionary(dict);
         if (result) {
 
-            Ref *ref;
+            CCObject *ref;
 
             ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_GATE);
             if (ref) {
-                __Dictionary *gateDict = dynamic_cast<__Dictionary *>(ref);
+                CCDictionary *gateDict = dynamic_cast<CCDictionary *>(ref);
                 CC_ASSERT(gateDict);
                 setGate((CCGate *) CCDomainFactory::getInstance()->createWithDictionary(gateDict));
             }
 
             ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_WORLDS);
             if (ref) {
-                __Array *worldDictArray = dynamic_cast<__Array *>(ref);
+                CCArray *worldDictArray = dynamic_cast<CCArray *>(ref);
                 CC_ASSERT(worldDictArray);
-                __Array *worldArray = CCDomainHelper::getInstance()->getDomainsFromDictArray(worldDictArray);
-                __Dictionary *worldsMap = __Dictionary::create();
+                CCArray *worldArray = CCDomainHelper::getInstance()->getDomainsFromDictArray(worldDictArray);
+                CCDictionary *worldsMap = CCDictionary::create();
                 CCWorld *world;
                 CCARRAY_FOREACH(worldArray, ref) {
                         world = dynamic_cast<CCWorld *>(ref);
@@ -91,10 +91,10 @@ namespace soomla {
 
             ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_SCORES);
             if (ref) {
-                __Array *scoreDictArray = dynamic_cast<__Array *>(ref);
+                CCArray *scoreDictArray = dynamic_cast<CCArray *>(ref);
                 CC_ASSERT(scoreDictArray);
-                __Array *scoreArray = CCDomainHelper::getInstance()->getDomainsFromDictArray(scoreDictArray);
-                __Dictionary *scoresMap = __Dictionary::create();
+                CCArray *scoreArray = CCDomainHelper::getInstance()->getDomainsFromDictArray(scoreDictArray);
+                CCDictionary *scoresMap = CCDictionary::create();
                 CCScore *score;
                 CCARRAY_FOREACH(scoreArray, ref) {
                         score = dynamic_cast<CCScore *>(ref);
@@ -105,7 +105,7 @@ namespace soomla {
 
             ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_MISSIONS);
             if (ref) {
-                __Array *missionsDict = dynamic_cast<__Array *>(ref);
+                CCArray *missionsDict = dynamic_cast<CCArray *>(ref);
                 setMissions(CCDomainHelper::getInstance()->getDomainsFromDictArray(missionsDict));
             }
 
@@ -115,16 +115,16 @@ namespace soomla {
         return result;
     }
 
-    cocos2d::__Dictionary *CCWorld::toDictionary() {
-        __Dictionary *dict = CCSoomlaEntity::toDictionary();
+    cocos2d::CCDictionary *CCWorld::toDictionary() {
+        CCDictionary *dict = CCSoomlaEntity::toDictionary();
 
         if (mGate) {
             dict->setObject(mGate->toDictionary(), CCLevelUpConsts::JSON_LU_GATE);
         }
 
         if (mInnerWorldsMap) {
-            __Array *worldArray = __Array::create();
-            DictElement* el = NULL;
+            CCArray *worldArray = CCArray::create();
+            CCDictElement* el = NULL;
             CCDICT_FOREACH(mInnerWorldsMap, el) {
                     worldArray->addObject(el->getObject());
                 }
@@ -132,8 +132,8 @@ namespace soomla {
         }
 
         if (mScores) {
-            __Array *scoreArray = __Array::create();
-            DictElement* el = NULL;
+            CCArray *scoreArray = CCArray::create();
+            CCDictElement* el = NULL;
             CCDICT_FOREACH(mScores, el) {
                     scoreArray->addObject(el->getObject());
                 }
@@ -173,27 +173,27 @@ namespace soomla {
 
     /** Automatic generation of levels. **/
     const char *CCWorld::getIdForAutoGeneratedLevel(const char *id, int idx) {
-        return __String::createWithFormat("%s_level%d", id, idx)->getCString();
+        return CCString::createWithFormat("%s_level%d", id, idx)->getCString();
     }
 
     const char *CCWorld::getIdForAutoGeneratedScore(const char *id, int idx) {
-        return __String::createWithFormat("%s_score%d", id, idx)->getCString();
+        return CCString::createWithFormat("%s_score%d", id, idx)->getCString();
     }
 
     const char *CCWorld::getIdForAutoGeneratedGate(const char *id) {
-        return __String::createWithFormat("%s_gate", id)->getCString();
+        return CCString::createWithFormat("%s_gate", id)->getCString();
     }
 
     const char *CCWorld::getIdForAutoGeneratedMission(const char *id, int idx) {
-        return __String::createWithFormat("%s_mission%d", id, idx)->getCString();
+        return CCString::createWithFormat("%s_mission%d", id, idx)->getCString();
     }
 
     void CCWorld::batchAddLevelsWithTemplates(int numLevels, CCGate *gateTemplate, CCScore *scoreTemplate, CCMission *missionTemplate) {
-        __Array *scoreTemplates = __Array::create();
+        CCArray *scoreTemplates = CCArray::create();
         if (scoreTemplate) {
             scoreTemplates->addObject(scoreTemplate);
         }
-        __Array *missionTemplates = __Array::create();
+        CCArray *missionTemplates = CCArray::create();
         if (missionTemplate) {
             missionTemplates->addObject(missionTemplate);
         }
@@ -201,23 +201,23 @@ namespace soomla {
         batchAddLevelsWithTemplates(numLevels, gateTemplate, scoreTemplates, missionTemplates);
     }
 
-    void CCWorld::batchAddLevelsWithTemplates(int numLevels, CCGate *gateTemplate, __Array *scoreTemplates, __Array *missionTemplates) {
+    void CCWorld::batchAddLevelsWithTemplates(int numLevels, CCGate *gateTemplate, CCArray *scoreTemplates, CCArray *missionTemplates) {
         for (int i=0; i<numLevels; i++) {
             const char *lvlId = getIdForAutoGeneratedLevel(getId()->getCString(), i);
-            CCLevel *aLvl = CCLevel::create(__String::create(lvlId));
+            CCLevel *aLvl = CCLevel::create(CCString::create(lvlId));
 
             aLvl->mGate = (CCGate *) gateTemplate->clone(getIdForAutoGeneratedGate(lvlId));
 
             if (scoreTemplates != NULL) {
                 for(int k=0; k<scoreTemplates->count(); k++) {
-                    CCScore *score = (CCScore *)scoreTemplates->getObjectAtIndex(k);
+                    CCScore *score = (CCScore *)scoreTemplates->objectAtIndex(k);
                     aLvl->addScore((CCScore *) score->clone(getIdForAutoGeneratedScore(lvlId, k)));
                 }
             }
 
             if (missionTemplates != NULL) {
                 for(int k=0; i<missionTemplates->count(); k++) {
-                    CCMission *mission = (CCMission *)missionTemplates->getObjectAtIndex(k);
+                    CCMission *mission = (CCMission *)missionTemplates->objectAtIndex(k);
                     aLvl->addMission((CCMission *) mission->clone(getIdForAutoGeneratedMission(lvlId, k)));
                 }
             }
@@ -232,7 +232,7 @@ namespace soomla {
             return;
         }
 
-        char const *firstScoreId = ((cocos2d::__String *)mScores->allKeys()->getObjectAtIndex(0))->getCString();
+        char const *firstScoreId = ((cocos2d::CCString *)mScores->allKeys()->objectAtIndex(0))->getCString();
         setScoreValue(firstScoreId, amount);
     }
 
@@ -241,7 +241,7 @@ namespace soomla {
             return;
         }
 
-        char const *firstScoreId = ((cocos2d::__String *)mScores->allKeys()->getObjectAtIndex(0))->getCString();
+        char const *firstScoreId = ((cocos2d::CCString *)mScores->allKeys()->objectAtIndex(0))->getCString();
         decScore(firstScoreId, amount);
     }
 
@@ -249,7 +249,7 @@ namespace soomla {
         if (mScores->count() == 0) {
             return;
         }
-        char const *firstScoreId = ((cocos2d::__String *)mScores->allKeys()->getObjectAtIndex(0))->getCString();
+        char const *firstScoreId = ((cocos2d::CCString *)mScores->allKeys()->objectAtIndex(0))->getCString();
         incScore(firstScoreId, amount);
     }
 
@@ -257,7 +257,7 @@ namespace soomla {
         if (mScores->count() == 0) {
             return NULL;
         }
-        char const *firstScoreId = ((cocos2d::__String *)mScores->allKeys()->getObjectAtIndex(0))->getCString();
+        char const *firstScoreId = ((cocos2d::CCString *)mScores->allKeys()->objectAtIndex(0))->getCString();
         return (CCScore *) mScores->objectForKey(firstScoreId);
     }
 
@@ -265,7 +265,7 @@ namespace soomla {
         double ret = 0;
 
         CCWorld *world;
-        DictElement* el = NULL;
+        CCDictElement* el = NULL;
         CCDICT_FOREACH(mInnerWorldsMap, el) {
                 world = (CCWorld *) el->getObject();
                 ret += world->getSingleScore()->getRecord();
@@ -278,13 +278,13 @@ namespace soomla {
 
     void CCWorld::resetScores(bool save) {
         if (mScores == NULL || mScores->count() == 0) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "(ResetScores) You don't have any scores defined in this world. World id: %s", 
                     getId()->getCString())->getCString());
             return;
         }
 
-        DictElement* el = NULL;
+        CCDictElement* el = NULL;
         CCDICT_FOREACH(mScores, el) {
                 CCScore *score = (CCScore *) el->getObject();
                 score->reset(save);
@@ -301,22 +301,22 @@ namespace soomla {
         score->inc(amount);
     }
 
-    __Dictionary *CCWorld::getRecordScores() {
-        __Dictionary *records = __Dictionary::create();
-        DictElement* el = NULL;
+    CCDictionary *CCWorld::getRecordScores() {
+        CCDictionary *records = CCDictionary::create();
+        CCDictElement* el = NULL;
         CCDICT_FOREACH(mScores, el) {
                 CCScore *score = (CCScore *) el->getObject();
-                records->setObject(__Double::create(score->getRecord()), el->getStrKey());
+                records->setObject(CCDouble::create(score->getRecord()), el->getStrKey());
             }
         return records;
     }
 
-    __Dictionary *CCWorld::getLatestScores() {
-        __Dictionary *records = __Dictionary::create();
-        DictElement* el = NULL;
+    CCDictionary *CCWorld::getLatestScores() {
+        CCDictionary *records = CCDictionary::create();
+        CCDictElement* el = NULL;
         CCDICT_FOREACH(mScores, el) {
                 CCScore *score = (CCScore *) el->getObject();
-                records->setObject(__Double::create(score->getLatest()), el->getStrKey());
+                records->setObject(CCDouble::create(score->getLatest()), el->getStrKey());
             }
         return records;
     }
@@ -329,7 +329,7 @@ namespace soomla {
         CCScore *score = (CCScore *) mScores->objectForKey(id);
         if (score == NULL) {
             CCSoomlaUtils::logError(TAG,
-                    __String::createWithFormat(
+                    CCString::createWithFormat(
                             "(setScore) Can't find score id: %s world id: %s",
                             id,
                             this->getId()->getCString()
@@ -352,7 +352,7 @@ namespace soomla {
 
     void CCWorld::setCompleted(bool completed, bool recursive) {
         if (recursive) {
-            DictElement* el = NULL;
+            CCDictElement* el = NULL;
             CCDICT_FOREACH(mInnerWorldsMap, el) {
                     CCWorld *world = (CCWorld *) el->getObject();
                     world->setCompleted(completed, true);
@@ -365,7 +365,7 @@ namespace soomla {
     /** Reward Association **/
 
     void CCWorld::assignReward(CCReward *reward) {
-        __String *olderReward = this->getAssignedRewardId();
+        CCString *olderReward = this->getAssignedRewardId();
         if (olderReward != NULL && olderReward->length() > 0) {
             CCReward *oldReward = CCLevelUp::getInstance()->getReward(olderReward->getCString());
             if (oldReward != NULL) {
@@ -376,14 +376,14 @@ namespace soomla {
         // We have to make sure the assigned reward can be assigned unlimited times.
         // There's no real reason why it won't be.
         if (reward->getSchedule()->getActivationLimit() > 0) {
-            reward->getSchedule()->setActivationLimit(__Integer::create(0));
+            reward->getSchedule()->setActivationLimit(CCInteger::create(0));
         }
 
         reward->give();
         CCWorldStorage::getInstance()->setReward(this, reward->getId());
     }
 
-    cocos2d::__String *CCWorld::getAssignedRewardId() {
+    cocos2d::CCString *CCWorld::getAssignedRewardId() {
         return CCWorldStorage::getInstance()->getAssignedReward(this);
     }
 

@@ -14,23 +14,23 @@
 namespace soomla {
     class CCPurchasableGate: public CCGate {
         friend class CCPurchasableGateEventHanler;
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAssociatedItemId, AssociatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID)
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCString *, mAssociatedItemId, AssociatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID)
         CC_SYNTHESIZE_RETAIN(CCStoreEventHandler *, mEventHandler, EventHandler);
     public:
         CCPurchasableGate(): CCGate(), mAssociatedItemId(NULL), mEventHandler(NULL) {
         }
 
-        static CCPurchasableGate *create(cocos2d::__String *id, cocos2d::__String *associatedItemId);
+        static CCPurchasableGate *create(cocos2d::CCString *id, cocos2d::CCString *associatedItemId);
 
         SL_CREATE_WITH_DICTIONARY(CCPurchasableGate);
 
-        virtual bool init(cocos2d::__String *id, cocos2d::__String *associatedItemId);
+        virtual bool init(cocos2d::CCString *id, cocos2d::CCString *associatedItemId);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
         virtual const char *getType() const;
 
-        virtual cocos2d::__Dictionary *toDictionary();
+        virtual cocos2d::CCDictionary *toDictionary();
 
         virtual ~CCPurchasableGate();
 
@@ -53,7 +53,7 @@ namespace soomla {
 
         static CCPurchasableGateEventHanler *create(CCPurchasableGate *purchasableGate);
 
-        virtual void onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem) override;
+        virtual void onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem);
     };
 }
 

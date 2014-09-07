@@ -11,7 +11,7 @@
 #include "CCMission.h"
 
 namespace soomla {
-    class CCMissionStorage: cocos2d::Ref {
+    class CCMissionStorage: cocos2d::CCObject {
     public:
         static CCMissionStorage *getInstance();
 

@@ -31,72 +31,34 @@ namespace soomla {
         CCSoomlaEventDispatcher *eventDispatcher = CCSoomlaEventDispatcher::getInstance();
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED,
-                [this](__Dictionary *parameters) {
-                    this->onLevelUpInitialized();
-                });
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_LEVEL_UP_INITIALIZED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED,
-                [this](__Dictionary *parameters) {
-                    CCScore *score = CCLevelUp::getInstance()->getScore(parameters->valueForKey("scoreId")->getCString());
-                    CC_ASSERT(score);
-                    this->onScoreRecordReached(score);
-                });
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_SCORE_RECORD_REACHED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED,
-                [this](__Dictionary *parameters) {
-                    CCScore *score = CCLevelUp::getInstance()->getScore(parameters->valueForKey("scoreId")->getCString());
-                    CC_ASSERT(score);
-                    this->onScoreRecordChanged(score);
-                });
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_SCORE_RECORD_CHANGED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_GATE_OPENED,
-                [this](__Dictionary *parameters) {
-                    CCGate *gate = CCLevelUp::getInstance()->getGate(parameters->valueForKey("gateId")->getCString());
-                    CC_ASSERT(gate);
-                    this->onGateOpened(gate);
-                });
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_GATE_OPENED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_MISSION_COMPLETED,
-                [this](__Dictionary *parameters) {
-                    CCMission *mission = CCLevelUp::getInstance()->getMission(parameters->valueForKey("missionId")->getCString());
-                    CC_ASSERT(mission);
-                    this->onMissionCompleted(mission);
-                });
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_MISSION_COMPLETED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED,
-                [this](__Dictionary *parameters) {
-                    CCMission *mission = CCLevelUp::getInstance()->getMission(parameters->valueForKey("missionId")->getCString());
-                    CC_ASSERT(mission);
-                    this->onMissionCompletionRevoked(mission);
-                });
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_MISSION_COMPLETION_REVOKED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_WORLD_COMPLETED,
-                [this](__Dictionary *parameters) {
-                    CCWorld *world = CCLevelUp::getInstance()->getWorld(parameters->valueForKey("worldId")->getCString());
-                    CC_ASSERT(world);
-                    this->onWorldCompleted(world);
-                });
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_WORLD_COMPLETED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED,
-                [this](__Dictionary *parameters) {
-                    CCWorld *world = CCLevelUp::getInstance()->getWorld(parameters->valueForKey("worldId")->getCString());
-                    CC_ASSERT(world);
-                    this->onWorldRewardAssigned(world);
-                });
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_WORLD_REWARD_ASSIGNED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LEVEL_STARTED,
-                [this](__Dictionary *parameters) {
-                    CCLevel *level = (CCLevel *) CCLevelUp::getInstance()->getWorld(parameters->valueForKey("levelId")->getCString());
-                    CC_ASSERT(level);
-                    this->onLevelStarted(level);
-                });
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_LEVEL_STARTED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LEVEL_ENDED,
-                [this](__Dictionary *parameters) {
-                    CCLevel *level = (CCLevel *) CCLevelUp::getInstance()->getWorld(parameters->valueForKey("levelId")->getCString());
-                    CC_ASSERT(level);
-                    this->onLevelEnded(level);
-                });
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_LEVEL_ENDED));
 
         return true;
     }
@@ -159,5 +121,64 @@ namespace soomla {
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onLevelEnded(level);
         }
+    }
+
+
+    void CCLevelUpEventDispatcher::handle__EVENT_LEVEL_UP_INITIALIZED(cocos2d::CCDictionary *parameters) {
+        this->onLevelUpInitialized();
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_SCORE_RECORD_REACHED(cocos2d::CCDictionary *parameters) {
+        CCScore *score = CCLevelUp::getInstance()->getScore(parameters->valueForKey("scoreId")->getCString());
+        CC_ASSERT(score);
+        this->onScoreRecordReached(score);
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_SCORE_RECORD_CHANGED(cocos2d::CCDictionary *parameters) {
+        CCScore *score = CCLevelUp::getInstance()->getScore(parameters->valueForKey("scoreId")->getCString());
+        CC_ASSERT(score);
+        this->onScoreRecordChanged(score);
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_GATE_OPENED(cocos2d::CCDictionary *parameters) {
+        CCGate *gate = CCLevelUp::getInstance()->getGate(parameters->valueForKey("gateId")->getCString());
+        CC_ASSERT(gate);
+        this->onGateOpened(gate);
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_MISSION_COMPLETED(cocos2d::CCDictionary *parameters) {
+        CCMission *mission = CCLevelUp::getInstance()->getMission(parameters->valueForKey("missionId")->getCString());
+        CC_ASSERT(mission);
+        this->onMissionCompleted(mission);
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_MISSION_COMPLETION_REVOKED(cocos2d::CCDictionary *parameters) {
+        CCMission *mission = CCLevelUp::getInstance()->getMission(parameters->valueForKey("missionId")->getCString());
+        CC_ASSERT(mission);
+        this->onMissionCompletionRevoked(mission);
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_WORLD_COMPLETED(cocos2d::CCDictionary *parameters) {
+        CCWorld *world = CCLevelUp::getInstance()->getWorld(parameters->valueForKey("worldId")->getCString());
+        CC_ASSERT(world);
+        this->onWorldCompleted(world);
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_WORLD_REWARD_ASSIGNED(cocos2d::CCDictionary *parameters) {
+        CCWorld *world = CCLevelUp::getInstance()->getWorld(parameters->valueForKey("worldId")->getCString());
+        CC_ASSERT(world);
+        this->onWorldRewardAssigned(world);
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_LEVEL_STARTED(cocos2d::CCDictionary *parameters) {
+        CCLevel *level = (CCLevel *) CCLevelUp::getInstance()->getWorld(parameters->valueForKey("levelId")->getCString());
+        CC_ASSERT(level);
+        this->onLevelStarted(level);
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_LEVEL_ENDED(cocos2d::CCDictionary *parameters) {
+        CCLevel *level = (CCLevel *) CCLevelUp::getInstance()->getWorld(parameters->valueForKey("levelId")->getCString());
+        CC_ASSERT(level);
+        this->onLevelEnded(level);
     }
 }

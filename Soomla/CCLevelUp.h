@@ -19,10 +19,10 @@ namespace soomla {
     class CCMission;
     class CCLevel;
 
-    class CCLevelUp: public cocos2d::Ref {
+    class CCLevelUp: public cocos2d::CCObject {
     private:
         CCWorld *mInitialWorld;
-        cocos2d::__Dictionary *mRewards;
+        cocos2d::CCDictionary *mRewards;
 
         CCLevelUp(): mInitialWorld(NULL), mRewards(NULL) {
         }
@@ -30,11 +30,11 @@ namespace soomla {
     public:
         static CCLevelUp *getInstance();
 
-        virtual cocos2d::__Dictionary *toDictionary();
+        virtual cocos2d::CCDictionary *toDictionary();
 
         virtual ~CCLevelUp();
 
-        void initialize(CCWorld *initialWorld, cocos2d::__Array *rewards);
+        void initialize(CCWorld *initialWorld, cocos2d::CCArray *rewards);
 
         CCReward *getReward(char const *rewardId);
 
@@ -57,17 +57,17 @@ namespace soomla {
         int getCompletedWorldCount();
 
     private:
-        CCWorld *fetchWorld(char const *worldId, cocos2d::__Dictionary *worlds);
+        CCWorld *fetchWorld(char const *worldId, cocos2d::CCDictionary *worlds);
 
-        CCScore *fetchScoreFromWorlds(char const *scoreId, cocos2d::__Dictionary *worlds);
+        CCScore *fetchScoreFromWorlds(char const *scoreId, cocos2d::CCDictionary *worlds);
 
-        CCGate *fetchGate(char const *gateId, cocos2d::__Dictionary *worlds);
+        CCGate *fetchGate(char const *gateId, cocos2d::CCDictionary *worlds);
 
-        CCGate *fetchGateFromMissions(char const *gateId, cocos2d::__Array *missions);
+        CCGate *fetchGateFromMissions(char const *gateId, cocos2d::CCArray *missions);
 
         int getRecursiveCount(CCWorld *world, bool (*isAccepted)(CCWorld *));
 
-        CCMission *fetchMission(char const *missionId, cocos2d::__Dictionary *worlds);
+        CCMission *fetchMission(char const *missionId, cocos2d::CCDictionary *worlds);
     };
 
 }

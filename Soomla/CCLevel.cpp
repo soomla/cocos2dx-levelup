@@ -13,7 +13,7 @@ namespace soomla {
 
     USING_NS_CC;
 
-    CCLevel *CCLevel::create(cocos2d::__String *id) {
+    CCLevel *CCLevel::create(cocos2d::CCString *id) {
         CCLevel *ret = new CCLevel();
         if (ret->init(id)) {
             ret->autorelease();
@@ -25,7 +25,7 @@ namespace soomla {
         return ret;
     }
 
-    CCLevel *CCLevel::create(cocos2d::__String *id, CCGate *gate, cocos2d::__Dictionary *scores, cocos2d::__Array *missions) {
+    CCLevel *CCLevel::create(cocos2d::CCString *id, CCGate *gate, cocos2d::CCDictionary *scores, cocos2d::CCArray *missions) {
         CCLevel *ret = new CCLevel();
         if (ret->init(id, gate, NULL, scores, missions)) {
             ret->autorelease();
@@ -37,7 +37,7 @@ namespace soomla {
         return ret;
     }
 
-    CCLevel *CCLevel::create(cocos2d::__String *id, CCGate *gate, cocos2d::__Dictionary *innerWorlds, cocos2d::__Dictionary *scores, cocos2d::__Array *missions) {
+    CCLevel *CCLevel::create(cocos2d::CCString *id, CCGate *gate, cocos2d::CCDictionary *innerWorlds, cocos2d::CCDictionary *scores, cocos2d::CCArray *missions) {
         CCLevel *ret = new CCLevel();
         if (ret->init(id, gate, innerWorlds, scores, missions)) {
             ret->autorelease();
@@ -74,29 +74,29 @@ namespace soomla {
     }
 
     bool CCLevel::start() {
-        if (mState == LevelState::Running) {
+        if (mState == Running) {
             return false;
         }
 
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("Starting level with world id: %s", getId()->getCString())->getCString());
+                CCString::createWithFormat("Starting level with world id: %s", getId()->getCString())->getCString());
 
         if (!this->canStart()) {
             return false;
         }
 
-        if (mState != LevelState::Paused) {
+        if (mState != Paused) {
             mElapsed = 0;
             CCLevelStorage::getInstance()->incTimesStarted(this);
         }
 
         mStartTime = getCurrentTimeMs();
-        mState = LevelState::Running;
+        mState = Running;
         return true;
     }
 
     void CCLevel::pause() {
-        if (mState != LevelState::Running) {
+        if (mState != Running) {
             return;
         }
 
@@ -104,7 +104,7 @@ namespace soomla {
         mElapsed += now - mStartTime;
         mStartTime = 0;
 
-        mState = LevelState::Paused;
+        mState = Paused;
     }
 
     long CCLevel::getPlayDurationMillis() {
@@ -127,7 +127,7 @@ namespace soomla {
             return;
         }
 
-        mState = LevelState::Ended;
+        mState = Ended;
 
         if (completed) {
             long duration = getPlayDurationMillis();
@@ -142,9 +142,9 @@ namespace soomla {
                 CCLevelStorage::getInstance()->setFastestDurationMillis(this, duration);
             }
 
-            DictElement* el = NULL;
+            CCDictElement* el = NULL;
             CCScore *score;
-            __Dictionary *scoresDict = getScores();
+            CCDictionary *scoresDict = getScores();
             CCDICT_FOREACH(scoresDict, el) {
                     score = (CCScore *) el->getObject();
                     score->reset(true); // resetting scores
@@ -162,14 +162,14 @@ namespace soomla {
     }
 
     void CCLevel::restart(bool completed) {
-        if (mState == LevelState::Running || mState == LevelState::Paused) {
+        if (mState == Running || mState == Paused) {
             end(completed);
         }
         start();
     }
 
     void CCLevel::setCompleted(bool completed) {
-        mState = LevelState::Completed;
+        mState = Completed;
         CCWorld::setCompleted(completed);
     }
 

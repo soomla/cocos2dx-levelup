@@ -17,7 +17,7 @@ namespace soomla {
 
 #define TAG "SOOMLA WorldCompletionGate"
 
-    CCWorldCompletionGate *CCWorldCompletionGate::create(cocos2d::__String *id, cocos2d::__String *associatedWorldId) {
+    CCWorldCompletionGate *CCWorldCompletionGate::create(cocos2d::CCString *id, cocos2d::CCString *associatedWorldId) {
         CCWorldCompletionGate *ret = new CCWorldCompletionGate();
         if (ret->init(id, associatedWorldId)) {
             ret->autorelease();
@@ -29,7 +29,7 @@ namespace soomla {
         return ret;
     }
 
-    bool CCWorldCompletionGate::init(cocos2d::__String *id, cocos2d::__String *associatedWorldId) {
+    bool CCWorldCompletionGate::init(cocos2d::CCString *id, cocos2d::CCString *associatedWorldId) {
         bool result = CCGate::init(id, NULL);
         if (result) {
             setAssociatedWorldId(associatedWorldId);
@@ -38,7 +38,7 @@ namespace soomla {
         return result;
     }
 
-    bool CCWorldCompletionGate::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCWorldCompletionGate::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCGate::initWithDictionary(dict);
         if (result) {
             fillAssociatedWorldIdFromDict(dict);
@@ -51,8 +51,8 @@ namespace soomla {
         return CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE;
     }
 
-    cocos2d::__Dictionary *CCWorldCompletionGate::toDictionary() {
-        cocos2d::__Dictionary *dict = CCGate::toDictionary();
+    cocos2d::CCDictionary *CCWorldCompletionGate::toDictionary() {
+        cocos2d::CCDictionary *dict = CCGate::toDictionary();
 
         putAssociatedWorldIdToDict(dict);
 

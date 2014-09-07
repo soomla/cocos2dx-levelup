@@ -13,7 +13,7 @@
 
 namespace soomla {
     class CCWorld;
-    class CCWorldStorage: cocos2d::Ref {
+    class CCWorldStorage: cocos2d::CCObject {
     public:
         static CCWorldStorage *getInstance();
 
@@ -21,8 +21,8 @@ namespace soomla {
         void setCompleted(CCWorld *world, bool completed);
         bool isCompleted(CCWorld *world);
 
-        void setReward(CCWorld *world, cocos2d::__String *rewardId);
-        cocos2d::__String *getAssignedReward(CCWorld *world);
+        void setReward(CCWorld *world, cocos2d::CCString *rewardId);
+        cocos2d::CCString *getAssignedReward(CCWorld *world);
     };
 }
 

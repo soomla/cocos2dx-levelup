@@ -12,7 +12,7 @@ namespace soomla {
 
 #define TAG "SOOMLA RecordGate"
 
-    CCRecordGate *CCRecordGate::create(cocos2d::__String *id, cocos2d::__String *associatedScoreId, cocos2d::__Double *desiredRecord) {
+    CCRecordGate *CCRecordGate::create(cocos2d::CCString *id, cocos2d::CCString *associatedScoreId, cocos2d::CCDouble *desiredRecord) {
         CCRecordGate *ret = new CCRecordGate();
         if (ret->init(id, associatedScoreId, desiredRecord)) {
             ret->autorelease();
@@ -24,7 +24,7 @@ namespace soomla {
         return ret;
     }
 
-    bool CCRecordGate::init(cocos2d::__String *id, cocos2d::__String *associatedScoreId, cocos2d::__Double *desiredRecord) {
+    bool CCRecordGate::init(cocos2d::CCString *id, cocos2d::CCString *associatedScoreId, cocos2d::CCDouble *desiredRecord) {
         bool result = CCGate::init(id, NULL);
         if (result) {
             setAssociatedScoreId(associatedScoreId);
@@ -34,7 +34,7 @@ namespace soomla {
         return result;
     }
 
-    bool CCRecordGate::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCRecordGate::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCGate::initWithDictionary(dict);
         if (result) {
             fillAssociatedScoreIdFromDict(dict);
@@ -48,8 +48,8 @@ namespace soomla {
         return CCLevelUpConsts::JSON_JSON_TYPE_RECORD_GATE;
     }
 
-    cocos2d::__Dictionary *CCRecordGate::toDictionary() {
-        cocos2d::__Dictionary *dict = CCGate::toDictionary();
+    cocos2d::CCDictionary *CCRecordGate::toDictionary() {
+        cocos2d::CCDictionary *dict = CCGate::toDictionary();
 
         putAssociatedScoreIdToDict(dict);
         putDesiredRecordToDict(dict);
@@ -65,7 +65,7 @@ namespace soomla {
     bool CCRecordGate::canOpenInner() {
         CCScore *score = CCLevelUp::getInstance()->getScore(mAssociatedScoreId->getCString());
         if (score == NULL) {
-            CCSoomlaUtils::logError(TAG, cocos2d::__String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, cocos2d::CCString::createWithFormat(
                     "(canOpenInner) couldn't find score with scoreId: %s", mAssociatedScoreId->getCString()
             )->getCString());
             return false;

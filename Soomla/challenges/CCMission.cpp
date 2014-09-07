@@ -18,7 +18,7 @@ namespace soomla {
 
 #define TAG "SOOMLA Mission"
 
-    CCMission *CCMission::create(cocos2d::__String *id, cocos2d::__String *name, __Array *rewards, cocos2d::__Dictionary *gateInitParams) {
+    CCMission *CCMission::create(cocos2d::CCString *id, cocos2d::CCString *name, CCArray *rewards, cocos2d::CCDictionary *gateInitParams) {
         CCMission *ret = new CCMission();
         if (ret->init(id, name, rewards, gateInitParams)) {
             ret->autorelease();
@@ -30,7 +30,7 @@ namespace soomla {
         return ret;
     }
 
-    bool CCMission::init(cocos2d::__String *id, cocos2d::__String *name, __Array *rewards, cocos2d::__Dictionary *gateInitParams) {
+    bool CCMission::init(cocos2d::CCString *id, cocos2d::CCString *name, CCArray *rewards, cocos2d::CCDictionary *gateInitParams) {
         bool result = CCSoomlaEntity::init(id, name, NULL);
 
         if (result) {
@@ -59,30 +59,30 @@ namespace soomla {
         return result;
     }
 
-    bool CCMission::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCMission::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCSoomlaEntity::initWithDictionary(dict);
 
         if (result) {
-            Ref *ref;
+            CCObject *ref;
 
             // rewards
             ref = dict->objectForKey(CCLevelUpConsts::JSON_REWARDS);
             if (ref) {
-                __Array *rewardsDict = dynamic_cast<__Array *>(ref);
+                CCArray *rewardsDict = dynamic_cast<CCArray *>(ref);
                 setRewards(CCDomainHelper::getInstance()->getDomainsFromDictArray(rewardsDict));
             }
 
             // gate
             ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_GATE);
-            CC_ASSERT(dynamic_cast<__Dictionary *>(ref));
-            ref = CCDomainFactory::getInstance()->createWithDictionary(dynamic_cast<__Dictionary *>(ref));
+            CC_ASSERT(dynamic_cast<CCDictionary *>(ref));
+            ref = CCDomainFactory::getInstance()->createWithDictionary(dynamic_cast<CCDictionary *>(ref));
             CC_ASSERT(dynamic_cast<CCGate *>(ref));
             setGate(dynamic_cast<CCGate *>(ref));
 
             // schedule
             ref = dict->objectForKey(CCLevelUpConsts::JSON_SCHEDULE);
-            CC_ASSERT(dynamic_cast<__Dictionary *>(ref));
-            setSchedule(CCSchedule::createWithDictionary(dynamic_cast<__Dictionary *>(ref)));
+            CC_ASSERT(dynamic_cast<CCDictionary *>(ref));
+            setSchedule(CCSchedule::createWithDictionary(dynamic_cast<CCDictionary *>(ref)));
 
             registerEvents();
 
@@ -93,8 +93,8 @@ namespace soomla {
     }
 
 
-    cocos2d::__Dictionary *CCMission::toDictionary() {
-        __Dictionary *dict = CCSoomlaEntity::toDictionary();
+    cocos2d::CCDictionary *CCMission::toDictionary() {
+        CCDictionary *dict = CCSoomlaEntity::toDictionary();
 
         if (mRewards) {
             dict->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(mRewards), CCLevelUpConsts::JSON_REWARDS);
@@ -138,8 +138,8 @@ namespace soomla {
         }
     }
 
-    __String *CCMission::autoGateId() {
-        return __String::createWithFormat("gate_%s", getId()->getCString());
+    CCString *CCMission::autoGateId() {
+        return CCString::createWithFormat("gate_%s", getId()->getCString());
     }
 
     bool CCMission::isAvailable() {
@@ -157,7 +157,7 @@ namespace soomla {
             CCSoomlaUtils::logDebug(TAG, "missions cannot be completed b/c Schedule doesn't approve.");
             return false;
         }
-        CCSoomlaUtils::logDebug(TAG, __String::createWithFormat(
+        CCSoomlaUtils::logDebug(TAG, CCString::createWithFormat(
                 "trying opening gate to complete mission: %s", getId()->getCString())->getCString());
         return mGate->open();
     }
@@ -181,7 +181,7 @@ namespace soomla {
 
     void CCMission::takeRewards() {
         if (mRewards) {
-            Ref *ref;
+            CCObject *ref;
             CCReward *reward;
             CCARRAY_FOREACH(mRewards, ref) {
                     reward = dynamic_cast<CCReward *>(ref);
@@ -193,7 +193,7 @@ namespace soomla {
 
     void CCMission::giveRewards() {
         if (mRewards) {
-            Ref *ref;
+            CCObject *ref;
             CCReward *reward;
             CCARRAY_FOREACH(mRewards, ref) {
                     reward = dynamic_cast<CCReward *>(ref);

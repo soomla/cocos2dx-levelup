@@ -13,7 +13,7 @@ namespace soomla {
 
     USING_NS_CC;
 
-    CCScore *CCScore::create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter) {
+    CCScore *CCScore::create(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCBool *higherBetter) {
         CCScore *ret = new CCScore();
         if (ret->init(id, name, higherBetter)) {
             ret->autorelease();
@@ -25,18 +25,18 @@ namespace soomla {
         return ret;
     }
 
-    bool CCScore::init(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter) {
+    bool CCScore::init(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCBool *higherBetter) {
         bool result = CCSoomlaEntity::init(id, name);
         if (result) {
-            setStartValue(__Double::create(0));
-            setHigherBetter(higherBetter ? higherBetter : __Bool::create(true));
+            setStartValue(CCDouble::create(0));
+            setHigherBetter(higherBetter ? higherBetter : CCBool::create(true));
             return true;
         }
         return result;
     }
 
 
-    bool CCScore::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCScore::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCSoomlaEntity::initWithDictionary(dict);
         if (result) {
             fillStartValueFromDict(dict);
@@ -46,8 +46,8 @@ namespace soomla {
         return result;
     }
 
-    cocos2d::__Dictionary *CCScore::toDictionary() {
-        __Dictionary *dict = CCSoomlaEntity::toDictionary();
+    cocos2d::CCDictionary *CCScore::toDictionary() {
+        CCDictionary *dict = CCSoomlaEntity::toDictionary();
 
         putStartValueToDict(dict);
         putHigherBetterToDict(dict);

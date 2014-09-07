@@ -12,7 +12,7 @@ namespace soomla {
 
 #define TAG "SOOMLA BalanceGate"
 
-    soomla::CCBalanceGate *soomla::CCBalanceGate::create(cocos2d::__String *id, cocos2d::__String *associatedItemId, cocos2d::__Integer *desiredBalance) {
+    soomla::CCBalanceGate *soomla::CCBalanceGate::create(cocos2d::CCString *id, cocos2d::CCString *associatedItemId, cocos2d::CCInteger *desiredBalance) {
         CCBalanceGate *ret = new CCBalanceGate();
         if (ret->init(id, associatedItemId, desiredBalance)) {
             ret->autorelease();
@@ -24,7 +24,7 @@ namespace soomla {
         return ret;
     }
 
-    bool soomla::CCBalanceGate::init(cocos2d::__String *id, cocos2d::__String *associatedItemId, cocos2d::__Integer *desiredBalance) {
+    bool soomla::CCBalanceGate::init(cocos2d::CCString *id, cocos2d::CCString *associatedItemId, cocos2d::CCInteger *desiredBalance) {
         bool result = CCGate::init(id, NULL);
         if (result) {
             setAssociatedItemId(associatedItemId);
@@ -34,7 +34,7 @@ namespace soomla {
         return result;
     }
 
-    bool soomla::CCBalanceGate::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool soomla::CCBalanceGate::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCGate::initWithDictionary(dict);
         if (result) {
             fillAssociatedItemIdFromDict(dict);
@@ -48,8 +48,8 @@ namespace soomla {
         return CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE;
     }
 
-    cocos2d::__Dictionary *soomla::CCBalanceGate::toDictionary() {
-        cocos2d::__Dictionary *dict = CCGate::toDictionary();
+    cocos2d::CCDictionary *soomla::CCBalanceGate::toDictionary() {
+        cocos2d::CCDictionary *dict = CCGate::toDictionary();
 
         putAssociatedItemIdToDict(dict);
         putDesiredBalanceToDict(dict);
@@ -67,7 +67,7 @@ namespace soomla {
         CCError *error = NULL;
         int balance = CCStoreInventory::sharedStoreInventory()->getItemBalance(mAssociatedItemId->getCString(), &error);
         if (error) {
-            CCSoomlaUtils::logError(TAG, cocos2d::__String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, cocos2d::CCString::createWithFormat(
                     "(canOpenInner) Couldn't find itemId. itemId: %s", mAssociatedItemId->getCString())->getCString());
             CCSoomlaUtils::logError(TAG, error->getInfo());
             return false;
@@ -102,7 +102,7 @@ namespace soomla {
         }
     }
 
-    void CCBalanceGate::checkItemIdBalance(cocos2d::__String *itemId, int balance) {
+    void CCBalanceGate::checkItemIdBalance(cocos2d::CCString *itemId, int balance) {
         if (mAssociatedItemId->compare(itemId->getCString()) == 0 && balance >= mDesiredBalance->getValue()) {
             forceOpen(true);
         }

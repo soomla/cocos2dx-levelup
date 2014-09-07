@@ -7,7 +7,7 @@
 #include "CCLevelUpService.h"
 
 namespace soomla {
-    static CCGateStorage *sInstance = nullptr;
+    static CCGateStorage *sInstance = NULL;
 
     CCGateStorage *soomla::CCGateStorage::getInstance() {
         if (!sInstance)

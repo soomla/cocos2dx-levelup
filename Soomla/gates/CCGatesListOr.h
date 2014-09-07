@@ -12,12 +12,12 @@
 namespace soomla {
     class CCGatesListOr : public CCGatesList {
     public:
-        static CCGatesListOr *create(cocos2d::__String *id, cocos2d::__Array *gates = NULL);
-        static CCGatesListOr *create(cocos2d::__String *id, CCGate *singleGate);
+        static CCGatesListOr *create(cocos2d::CCString *id, cocos2d::CCArray *gates = NULL);
+        static CCGatesListOr *create(cocos2d::CCString *id, CCGate *singleGate);
 
         SL_CREATE_WITH_DICTIONARY(CCGatesListOr);
 
-        virtual const char *getType() const override;
+        virtual const char *getType() const;
     protected:
         virtual bool canOpenInner();
     };

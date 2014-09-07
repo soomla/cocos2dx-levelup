@@ -13,24 +13,24 @@
 namespace soomla {
     class CCRecordGate: public CCGate {
         friend class CCRecordGateEventHandler;
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAssociatedScoreId, AssociatedScoreId, CCLevelUpConsts::JSON_LU_ASSOCSCOREID)
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__Double *, mDesiredRecord, DesiredRecord, CCLevelUpConsts::JSON_LU_DESIRED_RECORD);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCString *, mAssociatedScoreId, AssociatedScoreId, CCLevelUpConsts::JSON_LU_ASSOCSCOREID)
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCDouble *, mDesiredRecord, DesiredRecord, CCLevelUpConsts::JSON_LU_DESIRED_RECORD);
         CC_SYNTHESIZE(CCLevelUpEventHandler *, mEventHandler, EventHandler);
     public:
         CCRecordGate(): CCGate(), mAssociatedScoreId(NULL), mDesiredRecord(NULL), mEventHandler(NULL) {
         }
 
-        static CCRecordGate *create(cocos2d::__String *id, cocos2d::__String *associatedScoreId, cocos2d::__Double *desiredRecord);
+        static CCRecordGate *create(cocos2d::CCString *id, cocos2d::CCString *associatedScoreId, cocos2d::CCDouble *desiredRecord);
 
         SL_CREATE_WITH_DICTIONARY(CCRecordGate);
 
-        virtual bool init(cocos2d::__String *id, cocos2d::__String *associatedScoreId, cocos2d::__Double *desiredRecord);
+        virtual bool init(cocos2d::CCString *id, cocos2d::CCString *associatedScoreId, cocos2d::CCDouble *desiredRecord);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
         virtual const char *getType() const;
 
-        virtual cocos2d::__Dictionary *toDictionary();
+        virtual cocos2d::CCDictionary *toDictionary();
 
         virtual ~CCRecordGate();
 

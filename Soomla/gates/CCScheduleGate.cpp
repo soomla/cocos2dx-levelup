@@ -12,7 +12,7 @@ namespace soomla {
 
 #define TAG "SOOMLA ScheduleGate"
 
-    CCScheduleGate *CCScheduleGate::create(cocos2d::__String *id, CCSchedule *schedule) {
+    CCScheduleGate *CCScheduleGate::create(cocos2d::CCString *id, CCSchedule *schedule) {
         CCScheduleGate *ret = new CCScheduleGate();
         if (ret->init(id, schedule)) {
             ret->autorelease();
@@ -24,7 +24,7 @@ namespace soomla {
         return ret;
     }
 
-    bool CCScheduleGate::init(cocos2d::__String *id, CCSchedule *schedule) {
+    bool CCScheduleGate::init(cocos2d::CCString *id, CCSchedule *schedule) {
         bool result = CCGate::init(id, NULL);
         if (result) {
             setSchedule(schedule);
@@ -33,12 +33,12 @@ namespace soomla {
         return result;
     }
 
-    bool CCScheduleGate::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCScheduleGate::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCGate::initWithDictionary(dict);
         if (result) {
-            Ref *ref = dict->objectForKey(CCLevelUpConsts::JSON_SCHEDULE);
+            CCObject *ref = dict->objectForKey(CCLevelUpConsts::JSON_SCHEDULE);
             if (ref) {
-                cocos2d::__Dictionary *scheduleDict = dynamic_cast<cocos2d::__Dictionary *>(ref);
+                cocos2d::CCDictionary *scheduleDict = dynamic_cast<cocos2d::CCDictionary *>(ref);
                 CC_ASSERT(scheduleDict);
                 setSchedule((CCSchedule *) CCDomainFactory::getInstance()->createWithDictionary(scheduleDict));
             }
@@ -48,8 +48,8 @@ namespace soomla {
         return result;
     }
 
-    cocos2d::__Dictionary *CCScheduleGate::toDictionary() {
-        cocos2d::__Dictionary *dict = CCSoomlaEntity::toDictionary();
+    cocos2d::CCDictionary *CCScheduleGate::toDictionary() {
+        cocos2d::CCDictionary *dict = CCSoomlaEntity::toDictionary();
 
         if (mSchedule) {
             dict->setObject(mSchedule->toDictionary(), CCLevelUpConsts::JSON_SCHEDULE);

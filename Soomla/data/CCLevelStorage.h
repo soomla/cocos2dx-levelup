@@ -11,7 +11,7 @@
 
 namespace soomla {
     class CCLevel;
-    class CCLevelStorage: cocos2d::Ref {
+    class CCLevelStorage: cocos2d::CCObject {
     public:
         static CCLevelStorage *getInstance();
 

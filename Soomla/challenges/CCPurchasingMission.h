@@ -15,11 +15,11 @@ namespace soomla {
         CCPurchasingMission(): CCMission() {
         }
 
-        static CCPurchasingMission *create(cocos2d::__String *id, cocos2d::__String *name,
-                cocos2d::__String *associatedItemId);
+        static CCPurchasingMission *create(cocos2d::CCString *id, cocos2d::CCString *name,
+                cocos2d::CCString *associatedItemId);
 
-        static CCPurchasingMission *create(cocos2d::__String *id, cocos2d::__String *name,
-                cocos2d::__Array *rewards, cocos2d::__String *associatedItemId);
+        static CCPurchasingMission *create(cocos2d::CCString *id, cocos2d::CCString *name,
+                cocos2d::CCArray *rewards, cocos2d::CCString *associatedItemId);
 
         SL_CREATE_WITH_DICTIONARY(CCPurchasingMission);
 

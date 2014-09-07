@@ -14,7 +14,7 @@ namespace soomla {
 
 #define TAG "SOOMLA PurchasableGate"
 
-    CCPurchasableGate *CCPurchasableGate::create(cocos2d::__String *id, cocos2d::__String *associatedItemId) {
+    CCPurchasableGate *CCPurchasableGate::create(cocos2d::CCString *id, cocos2d::CCString *associatedItemId) {
         CCPurchasableGate *ret = new CCPurchasableGate();
         if (ret->init(id, associatedItemId)) {
             ret->autorelease();
@@ -26,7 +26,7 @@ namespace soomla {
         return ret;
     }
 
-    bool CCPurchasableGate::init(cocos2d::__String *id, cocos2d::__String *associatedItemId) {
+    bool CCPurchasableGate::init(cocos2d::CCString *id, cocos2d::CCString *associatedItemId) {
         bool result = CCGate::init(id, NULL);
         if (result) {
             setAssociatedItemId(associatedItemId);
@@ -35,7 +35,7 @@ namespace soomla {
         return result;
     }
 
-    bool CCPurchasableGate::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCPurchasableGate::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCGate::initWithDictionary(dict);
         if (result) {
             fillAssociatedItemIdFromDict(dict);
@@ -48,8 +48,8 @@ namespace soomla {
         return CCLevelUpConsts::JSON_JSON_TYPE_PURCHASABLE_GATE;
     }
 
-    cocos2d::__Dictionary *CCPurchasableGate::toDictionary() {
-        cocos2d::__Dictionary *dict = CCGate::toDictionary();
+    cocos2d::CCDictionary *CCPurchasableGate::toDictionary() {
+        cocos2d::CCDictionary *dict = CCGate::toDictionary();
 
         putAssociatedItemIdToDict(dict);
 
@@ -85,7 +85,7 @@ namespace soomla {
         CCStoreInventory::sharedStoreInventory()->buyItem(mAssociatedItemId->getCString(), this->getId()->getCString(), &error);
         if (error) {
             if (error->getInfo())
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat("Cannot purchase this item. itemId: %s",
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat("Cannot purchase this item. itemId: %s",
                     mAssociatedItemId->getCString())->getCString());
             CCSoomlaUtils::logError(TAG, error->getInfo());
             return false;

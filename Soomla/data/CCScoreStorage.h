@@ -13,7 +13,7 @@
 namespace soomla {
     class CCScore;
 
-    class CCScoreStorage: cocos2d::Ref {
+    class CCScoreStorage: cocos2d::CCObject {
     public:
         static CCScoreStorage *getInstance();
 

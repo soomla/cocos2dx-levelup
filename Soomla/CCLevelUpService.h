@@ -19,7 +19,7 @@ namespace soomla {
     class CCScore;
     class CCWorld;
 
-    class CCLevelUpService : public cocos2d::Ref {
+    class CCLevelUpService : public cocos2d::CCObject {
     public:
         /**
         This class is singleton, use this function to access it.
@@ -32,7 +32,7 @@ namespace soomla {
 
         virtual bool init();
 
-        bool initLevelUp(CCWorld *initialWorld, cocos2d::__Array *rewards);
+        bool initLevelUp(CCWorld *initialWorld, cocos2d::CCArray *rewards);
 
         bool gateIsOpen(CCGate *gate);
         void gateSetOpen(CCGate *gate, bool open, bool b);
@@ -63,8 +63,8 @@ namespace soomla {
         void worldSetCompleted(CCWorld *world, bool completed, bool notify);
         bool worldIsCompleted(CCWorld *world);
 
-        void worldSetReward(CCWorld *world, cocos2d::__String *rewardId);
-        cocos2d::__String *worldGetAssignedReward(CCWorld *world);
+        void worldSetReward(CCWorld *world, cocos2d::CCString *rewardId);
+        cocos2d::CCString *worldGetAssignedReward(CCWorld *world);
     };
 }
 

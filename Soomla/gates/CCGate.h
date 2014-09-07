@@ -13,9 +13,9 @@ namespace soomla {
     class CCGate: public CCSoomlaEntity {
     public:
 
-        virtual bool init(cocos2d::__String *id, cocos2d::__String *name = NULL);
+        virtual bool init(cocos2d::CCString *id, cocos2d::CCString *name = NULL);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
         virtual const char *getType() const;
 

@@ -11,23 +11,23 @@
 namespace soomla {
     class CCChallenge: public CCMission {
         friend class CCChallengeEventHandler;
-        CC_SYNTHESIZE_RETAIN(cocos2d::__Array *, mMissions, Missions);
+        CC_SYNTHESIZE_RETAIN(cocos2d::CCArray *, mMissions, Missions);
     public:
         CCChallenge(): CCMission(), mMissions(NULL) {
         }
 
-        static CCChallenge *create(cocos2d::__String *id, cocos2d::__String *name,
-                cocos2d::__Array *missions = NULL, cocos2d::__Array *rewards = NULL);
+        static CCChallenge *create(cocos2d::CCString *id, cocos2d::CCString *name,
+                cocos2d::CCArray *missions = NULL, cocos2d::CCArray *rewards = NULL);
 
         SL_CREATE_WITH_DICTIONARY(CCChallenge);
 
-        bool init(cocos2d::__String *id, cocos2d::__String *name,
-                cocos2d::__Array *missions = NULL, cocos2d::__Array *rewards = NULL);
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        bool init(cocos2d::CCString *id, cocos2d::CCString *name,
+                cocos2d::CCArray *missions = NULL, cocos2d::CCArray *rewards = NULL);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
         virtual ~CCChallenge();
 
-        virtual cocos2d::__Dictionary* toDictionary();
+        virtual cocos2d::CCDictionary* toDictionary();
 
         virtual const char *getType() const;
 

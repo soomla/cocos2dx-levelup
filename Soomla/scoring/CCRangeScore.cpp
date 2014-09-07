@@ -7,11 +7,11 @@
 
 namespace soomla {
 
-    CCRangeScore *CCRangeScore::create(cocos2d::__String *id, CCSRange *range) {
+    CCRangeScore *CCRangeScore::create(cocos2d::CCString *id, CCSRange *range) {
         return CCRangeScore::create(id, NULL, NULL, range);
     }
 
-    CCRangeScore *CCRangeScore::create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range) {
+    CCRangeScore *CCRangeScore::create(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCBool *higherBetter, CCSRange *range) {
         CCRangeScore *ret = new CCRangeScore();
         if (ret->init(id, name, higherBetter, range)) {
             ret->autorelease();
@@ -23,7 +23,7 @@ namespace soomla {
         return ret;
     }
 
-    bool CCRangeScore::init(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range) {
+    bool CCRangeScore::init(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCBool *higherBetter, CCSRange *range) {
         bool result = CCScore::init(id, name, higherBetter);
         if (result) {
             setRange(range);
@@ -32,10 +32,10 @@ namespace soomla {
         return result;
     }
 
-    bool CCRangeScore::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCRangeScore::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCScore::initWithDictionary(dict);
         if (result) {
-            cocos2d::__Dictionary *rangeDict = dynamic_cast<cocos2d::__Dictionary *>(
+            cocos2d::CCDictionary *rangeDict = dynamic_cast<cocos2d::CCDictionary *>(
                     dict->objectForKey(CCLevelUpConsts::JSON_LU_SCORE_RANGE));
             if (rangeDict) {
                 setRange(CCSRange::createWithDictionary(rangeDict));
@@ -45,8 +45,8 @@ namespace soomla {
         return result;
     }
 
-    cocos2d::__Dictionary *CCRangeScore::toDictionary() {
-        cocos2d::__Dictionary *dict = CCScore::toDictionary();
+    cocos2d::CCDictionary *CCRangeScore::toDictionary() {
+        cocos2d::CCDictionary *dict = CCScore::toDictionary();
 
         if (mRange) {
             dict->setObject(mRange->toDictionary(), CCLevelUpConsts::JSON_LU_SCORE_RANGE);
@@ -111,12 +111,12 @@ namespace soomla {
         return true;
     }
 
-    bool CCSRange::initWithDictionary(cocos2d::__Dictionary *dict) {
-        cocos2d::Ref *ref;
-        cocos2d::__Double *aDouble;
+    bool CCSRange::initWithDictionary(cocos2d::CCDictionary *dict) {
+        cocos2d::CCObject *ref;
+        cocos2d::CCDouble *aDouble;
 
         ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_SCORE_RANGE_LOW);
-        aDouble = dynamic_cast<cocos2d::__Double *>(ref);
+        aDouble = dynamic_cast<cocos2d::CCDouble *>(ref);
         if (aDouble) {
             this->mLow = aDouble->getValue();
         }
@@ -125,7 +125,7 @@ namespace soomla {
         }
 
         ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_SCORE_RANGE_HIGH);
-        aDouble = dynamic_cast<cocos2d::__Double *>(ref);
+        aDouble = dynamic_cast<cocos2d::CCDouble *>(ref);
         if (aDouble) {
             this->mHigh = aDouble->getValue();
         }
@@ -136,11 +136,11 @@ namespace soomla {
         return true;
     }
 
-    cocos2d::__Dictionary *CCSRange::toDictionary() {
-        cocos2d::__Dictionary *dict = cocos2d::__Dictionary::create();
+    cocos2d::CCDictionary *CCSRange::toDictionary() {
+        cocos2d::CCDictionary *dict = cocos2d::CCDictionary::create();
 
-        dict->setObject(cocos2d::__Double::create(mLow), CCLevelUpConsts::JSON_LU_SCORE_RANGE_LOW);
-        dict->setObject(cocos2d::__Double::create(mHigh), CCLevelUpConsts::JSON_LU_SCORE_RANGE_HIGH);
+        dict->setObject(cocos2d::CCDouble::create(mLow), CCLevelUpConsts::JSON_LU_SCORE_RANGE_LOW);
+        dict->setObject(cocos2d::CCDouble::create(mHigh), CCLevelUpConsts::JSON_LU_SCORE_RANGE_HIGH);
 
         return dict;
     }

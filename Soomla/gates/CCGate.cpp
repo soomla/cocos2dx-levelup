@@ -6,14 +6,15 @@
 #include "CCGate.h"
 #include "CCLevelUpConsts.h"
 #include "CCGateStorage.h"
+#include "cocos2d.h"
 
 namespace soomla {
 
 #define TAG "SOOMLA Gate"
 
-    bool CCGate::init(cocos2d::__String *id, cocos2d::__String *name) {
+    bool CCGate::init(cocos2d::CCString *id, cocos2d::CCString *name) {
         if (!name) {
-            name = cocos2d::__String::create("");
+            name = cocos2d::CCString::create("");
         }
         bool result = CCSoomlaEntity::init(id, name, NULL);
 
@@ -26,7 +27,7 @@ namespace soomla {
         return result;
     }
 
-    bool CCGate::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCGate::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCSoomlaEntity::initWithDictionary(dict);
 
         if (result) {

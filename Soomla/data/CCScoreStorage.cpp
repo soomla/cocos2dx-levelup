@@ -8,7 +8,7 @@
 #include "CCLevelUpService.h"
 
 namespace soomla {
-    static CCScoreStorage *sInstance = nullptr;
+    static CCScoreStorage *sInstance = NULL;
 
     CCScoreStorage *soomla::CCScoreStorage::getInstance() {
         if (!sInstance)

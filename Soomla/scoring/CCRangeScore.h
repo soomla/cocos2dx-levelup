@@ -10,7 +10,7 @@
 
 namespace soomla {
 
-    class CCSRange: public cocos2d::Ref {
+    class CCSRange: public cocos2d::CCObject {
     public:
         double mLow;
         double mHigh;
@@ -23,9 +23,9 @@ namespace soomla {
 
         virtual bool init(double low, double high);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
-        virtual cocos2d::__Dictionary *toDictionary();
+        virtual cocos2d::CCDictionary *toDictionary();
     };
 
     class CCRangeScore : public CCScore {
@@ -34,22 +34,22 @@ namespace soomla {
         CCRangeScore(): CCScore(), mRange(NULL) {
         }
 
-        static CCRangeScore *create(cocos2d::__String *id, CCSRange *range);
-        static CCRangeScore *create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range);
+        static CCRangeScore *create(cocos2d::CCString *id, CCSRange *range);
+        static CCRangeScore *create(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCBool *higherBetter, CCSRange *range);
 
         SL_CREATE_WITH_DICTIONARY(CCRangeScore);
 
-        virtual bool init(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, CCSRange *range);
+        virtual bool init(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCBool *higherBetter, CCSRange *range);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
-        virtual cocos2d::__Dictionary *toDictionary() override;
+        virtual cocos2d::CCDictionary *toDictionary();
 
-        virtual void inc(double amount) override;
+        virtual void inc(double amount);
 
-        virtual void dec(double amount) override;
+        virtual void dec(double amount);
 
-        virtual void setTempScore(double score, bool onlyIfBetter) override;
+        virtual void setTempScore(double score, bool onlyIfBetter);
     };
 }
 

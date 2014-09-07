@@ -17,18 +17,18 @@ namespace soomla {
 
     class CCGatesList: public CCGate {
         friend class CCGateListEventHandler;
-        CC_SYNTHESIZE(cocos2d::__Array *, mGates, Gates);
+        CC_SYNTHESIZE(cocos2d::CCArray *, mGates, Gates);
         CC_SYNTHESIZE(CCLevelUpEventHandler *, mEventHandler, EventHandler);
     public:
         CCGatesList(): CCGate(), mGates(NULL), mEventHandler(NULL) {
         }
 
-        bool init(cocos2d::__String *id, cocos2d::__Array *gates = NULL);
-        bool init(cocos2d::__String *id, CCGate *gate);
+        bool init(cocos2d::CCString *id, cocos2d::CCArray *gates = NULL);
+        bool init(cocos2d::CCString *id, CCGate *gate);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
-        virtual cocos2d::__Dictionary *toDictionary();
+        virtual cocos2d::CCDictionary *toDictionary();
 
         virtual ~CCGatesList();
 

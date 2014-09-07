@@ -12,24 +12,24 @@
 namespace soomla {
 
     class CCVirtualItemScore: public CCScore {
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAssociatedItemId, AssociatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCString *, mAssociatedItemId, AssociatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID);
     public:
         CCVirtualItemScore(): CCScore(), mAssociatedItemId(NULL) {
         }
 
-        static CCVirtualItemScore *create(cocos2d::__String *id, cocos2d::__String *associatedItemId);
-        static CCVirtualItemScore *create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, cocos2d::__String *associatedItemId);
+        static CCVirtualItemScore *create(cocos2d::CCString *id, cocos2d::CCString *associatedItemId);
+        static CCVirtualItemScore *create(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCBool *higherBetter, cocos2d::CCString *associatedItemId);
 
         SL_CREATE_WITH_DICTIONARY(CCVirtualItemScore);
 
-        virtual bool init(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Bool *higherBetter, cocos2d::__String *associatedItemId);
+        virtual bool init(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCBool *higherBetter, cocos2d::CCString *associatedItemId);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
-        virtual cocos2d::__Dictionary *toDictionary();
+        virtual cocos2d::CCDictionary *toDictionary();
 
     protected:
-        virtual void performSaveActions() override;
+        virtual void performSaveActions();
     };
 
 }

@@ -18,7 +18,7 @@ namespace soomla {
     class CCMission: public CCSoomlaEntity {
         friend class CCMissionEventHandler;
         friend class CCChallengeEventHandler;
-        CC_SYNTHESIZE_RETAIN(cocos2d::__Array *, mRewards, Rewards)
+        CC_SYNTHESIZE_RETAIN(cocos2d::CCArray *, mRewards, Rewards)
         CC_SYNTHESIZE_RETAIN(CCSchedule *, mSchedule, Schedule)
         CC_SYNTHESIZE_RETAIN(CCGate *, mGate, Gate);
 
@@ -27,22 +27,22 @@ namespace soomla {
         CCMission(): CCSoomlaEntity(), mRewards(NULL), mSchedule(NULL), mGate(NULL), mEventHandler(NULL) {
         }
 
-        static CCMission *create(cocos2d::__String *id, cocos2d::__String *name,
-                cocos2d::__Array *rewards = NULL, cocos2d::__Dictionary *gateInitParams = NULL);
+        static CCMission *create(cocos2d::CCString *id, cocos2d::CCString *name,
+                cocos2d::CCArray *rewards = NULL, cocos2d::CCDictionary *gateInitParams = NULL);
 
         SL_CREATE_WITH_DICTIONARY(CCMission);
 
-        bool init(cocos2d::__String *id, cocos2d::__String *name,
-                cocos2d::__Array *rewards = NULL, cocos2d::__Dictionary *gateInitParams = NULL);
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        bool init(cocos2d::CCString *id, cocos2d::CCString *name,
+                cocos2d::CCArray *rewards = NULL, cocos2d::CCDictionary *gateInitParams = NULL);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
         virtual ~CCMission();
 
-        virtual cocos2d::__Dictionary* toDictionary();
+        virtual cocos2d::CCDictionary* toDictionary();
 
         virtual const char *getType() const;
 
-        cocos2d::__String *autoGateId();
+        cocos2d::CCString *autoGateId();
         virtual bool isAvailable();
         virtual bool isCompleted();
         bool complete();

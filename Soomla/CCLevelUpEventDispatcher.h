@@ -38,6 +38,18 @@ namespace soomla {
 
         virtual void onLevelStarted(CCLevel *level);
         virtual void onLevelEnded(CCLevel *level);
+
+    private:
+        void handle__EVENT_LEVEL_UP_INITIALIZED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_SCORE_RECORD_REACHED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_SCORE_RECORD_CHANGED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_GATE_OPENED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_MISSION_COMPLETED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_MISSION_COMPLETION_REVOKED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_WORLD_COMPLETED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_WORLD_REWARD_ASSIGNED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_LEVEL_STARTED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_LEVEL_ENDED(cocos2d::CCDictionary *parameters);
     };
 }
 

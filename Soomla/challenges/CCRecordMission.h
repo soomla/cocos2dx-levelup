@@ -14,11 +14,11 @@ namespace soomla {
         CCRecordMission(): CCMission() {
         }
 
-        static CCRecordMission *create(cocos2d::__String *id, cocos2d::__String *name,
-                cocos2d::__String *associatedScoreId, cocos2d::__Double *desiredRecord);
+        static CCRecordMission *create(cocos2d::CCString *id, cocos2d::CCString *name,
+                cocos2d::CCString *associatedScoreId, cocos2d::CCDouble *desiredRecord);
 
-        static CCRecordMission *create(cocos2d::__String *id, cocos2d::__String *name,
-                cocos2d::__Array *rewards, cocos2d::__String *associatedScoreId, cocos2d::__Double *desiredRecord);
+        static CCRecordMission *create(cocos2d::CCString *id, cocos2d::CCString *name,
+                cocos2d::CCArray *rewards, cocos2d::CCString *associatedScoreId, cocos2d::CCDouble *desiredRecord);
 
         SL_CREATE_WITH_DICTIONARY(CCRecordMission);
 

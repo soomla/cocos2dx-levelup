@@ -26,16 +26,16 @@ namespace soomla {
         LevelState mState;
     public:
 
-        CCLevel() : CCWorld(), mStartTime(0), mElapsed(0), mState(LevelState::Idle) {
+        CCLevel() : CCWorld(), mStartTime(0), mElapsed(0), mState(Idle) {
         }
 
-        static CCLevel *create(cocos2d::__String *id);
+        static CCLevel *create(cocos2d::CCString *id);
 
-        static CCLevel *create(cocos2d::__String *id,
-                CCGate *gate, cocos2d::__Dictionary *scores, cocos2d::__Array *missions);
+        static CCLevel *create(cocos2d::CCString *id,
+                CCGate *gate, cocos2d::CCDictionary *scores, cocos2d::CCArray *missions);
 
-        static CCLevel *create(cocos2d::__String *id,
-                CCGate *gate, cocos2d::__Dictionary *innerWorlds, cocos2d::__Dictionary *scores, cocos2d::__Array *missions);
+        static CCLevel *create(cocos2d::CCString *id,
+                CCGate *gate, cocos2d::CCDictionary *innerWorlds, cocos2d::CCDictionary *scores, cocos2d::CCArray *missions);
 
         SL_CREATE_WITH_DICTIONARY(CCLevel);
 

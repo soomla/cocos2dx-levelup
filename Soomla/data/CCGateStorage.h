@@ -11,7 +11,7 @@
 #include "CCMission.h"
 
 namespace soomla {
-    class CCGateStorage: cocos2d::Ref {
+    class CCGateStorage: cocos2d::CCObject {
     public:
         static CCGateStorage *getInstance();
 

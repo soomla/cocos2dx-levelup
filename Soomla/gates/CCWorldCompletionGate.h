@@ -16,22 +16,22 @@
 namespace soomla {
     class CCWorldCompletionGate: public CCGate {
         friend class CCWorldCompletionGateEventHanler;
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAssociatedWorldId, AssociatedWorldId, CCLevelUpConsts::JSON_LU_ASSOCWORLDID)
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCString *, mAssociatedWorldId, AssociatedWorldId, CCLevelUpConsts::JSON_LU_ASSOCWORLDID)
         CC_SYNTHESIZE_RETAIN(CCLevelUpEventHandler *, mEventHandler, EventHandler);
     public:
         CCWorldCompletionGate(): CCGate(), mAssociatedWorldId(NULL), mEventHandler(NULL) {
         }
 
-        static CCWorldCompletionGate *create(cocos2d::__String *id, cocos2d::__String *associatedWorldId);
+        static CCWorldCompletionGate *create(cocos2d::CCString *id, cocos2d::CCString *associatedWorldId);
 
         SL_CREATE_WITH_DICTIONARY(CCWorldCompletionGate)
-        bool init(cocos2d::__String *id, cocos2d::__String *associatedWorldId);
+        bool init(cocos2d::CCString *id, cocos2d::CCString *associatedWorldId);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
         virtual const char *getType() const;
 
-        virtual cocos2d::__Dictionary *toDictionary();
+        virtual cocos2d::CCDictionary *toDictionary();
 
         virtual ~CCWorldCompletionGate();
 

@@ -30,7 +30,7 @@ namespace soomla {
 
 #define TAG "SOOMLA CCLevelUpService"
 
-    static CCLevelUpService *sInstance = nullptr;
+    static CCLevelUpService *sInstance = NULL;
 
     CCLevelUpService *CCLevelUpService::getInstance() {
         if (!sInstance)
@@ -57,31 +57,31 @@ namespace soomla {
 
         CCDomainFactory *domainFactory = CCDomainFactory::getInstance();
 
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_MISSION, CCMission::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_MISSION, CCBalanceMission::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_CHALLENGE, CCChallenge::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_PURCHASE_MISSION, CCPurchasingMission::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_RECORD_MISSION, CCRecordMission::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_MISSION, CCWorldCompletionMission::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE, CCBalanceGate::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_AND, CCGatesListAnd::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_OR, CCGatesListOr::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_PURCHASABLE_GATE, CCPurchasableGate::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_RECORD_GATE, CCRecordGate::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SCHEDULE_GATE, CCScheduleGate::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE, CCWorldCompletionGate::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SCORE, CCScore::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD, CCWorld::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_LEVEL, CCLevel::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_MISSION, (SEL_DomainCreator)CCMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_MISSION, (SEL_DomainCreator)CCBalanceMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_CHALLENGE, (SEL_DomainCreator)CCChallenge::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_PURCHASE_MISSION, (SEL_DomainCreator)CCPurchasingMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_RECORD_MISSION, (SEL_DomainCreator)CCRecordMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_MISSION, (SEL_DomainCreator)CCWorldCompletionMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE, (SEL_DomainCreator)CCBalanceGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_AND, (SEL_DomainCreator)CCGatesListAnd::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_OR, (SEL_DomainCreator)CCGatesListOr::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_PURCHASABLE_GATE, (SEL_DomainCreator)CCPurchasableGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_RECORD_GATE, (SEL_DomainCreator)CCRecordGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SCHEDULE_GATE, (SEL_DomainCreator)CCScheduleGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE, (SEL_DomainCreator)CCWorldCompletionGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SCORE, (SEL_DomainCreator)CCScore::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD, (SEL_DomainCreator)CCWorld::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_LEVEL, (SEL_DomainCreator)CCLevel::createWithDictionary);
 
         return true;
     }
 
-    bool CCLevelUpService::initLevelUp(CCWorld *initialWorld, __Array *rewards) {
+    bool CCLevelUpService::initLevelUp(CCWorld *initialWorld, CCArray *rewards) {
 
         CCSoomlaUtils::logDebug(TAG, "call init");
 
-        __Dictionary *metadata = __Dictionary::create();
+        CCDictionary *metadata = CCDictionary::create();
         metadata->setObject(initialWorld->toDictionary(), "initialWorld");
         if (rewards) {
             metadata->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(rewards), "rewards");
@@ -91,54 +91,54 @@ namespace soomla {
         params->setObject(metadata, "metadata");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call init failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Bool, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCBool, ret, retParams);
 
         return ret->getValue();
     }
 
     bool CCLevelUpService::gateIsOpen(CCGate *gate) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call gateIsOpen with gate: %s", gate->getId()->getCString())->getCString());
+                CCString::createWithFormat("call gateIsOpen with gate: %s", gate->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::gateIsOpen");
         params->setObject(gate->getId(), "gateId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call gateIsOpen failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Bool, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCBool, ret, retParams);
 
         return ret->getValue();
     }
 
     void CCLevelUpService::gateSetOpen(CCGate *gate, bool open, bool notify) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call gateSetOpen with gate: %s", gate->getId()->getCString())->getCString());
+                CCString::createWithFormat("call gateSetOpen with gate: %s", gate->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::gateSetOpen");
         params->setObject(gate->getId(), "gateId");
-        params->setObject(__Bool::create(open), "open");
-        params->setObject(__Bool::create(notify), "notify");
+        params->setObject(CCBool::create(open), "open");
+        params->setObject(CCBool::create(notify), "notify");
 
         CCError *error = NULL;
         CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call gateIsOpen failed with error: %s", error->getInfo())->getCString());
         }
     }
@@ -146,38 +146,38 @@ namespace soomla {
 
     void CCLevelUpService::levelSetSlowestDurationMillis(CCLevel *level, long duration) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call levelSetSlowestDurationMillis with level: %s", level->getId()->getCString())->getCString());
+                CCString::createWithFormat("call levelSetSlowestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelSetSlowestDurationMillis");
         params->setObject(level->getId(), "levelId");
-        params->setObject(__Integer::create(duration), "duration");
+        params->setObject(CCInteger::create(duration), "duration");
 
         CCError *error = NULL;
         CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call levelSetSlowestDurationMillis failed with error: %s", error->getInfo())->getCString());
         }
     }
 
     long CCLevelUpService::levelGetSlowestDurationMillis(CCLevel *level) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call levelGetSlowestDurationMillis with level: %s", level->getId()->getCString())->getCString());
+                CCString::createWithFormat("call levelGetSlowestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelGetSlowestDurationMillis");
         params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call levelGetSlowestDurationMillis failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Integer, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
 
         return ret->getValue();
     }
@@ -185,38 +185,38 @@ namespace soomla {
 
     void CCLevelUpService::levelSetFastestDurationMillis(CCLevel *level, long duration) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call levelSetFastestDurationMillis with level: %s", level->getId()->getCString())->getCString());
+                CCString::createWithFormat("call levelSetFastestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelSetFastestDurationMillis");
         params->setObject(level->getId(), "gateId");
-        params->setObject(__Integer::create(duration), "duration");
+        params->setObject(CCInteger::create(duration), "duration");
 
         CCError *error = NULL;
         CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call levelSetFastestDurationMillis failed with error: %s", error->getInfo())->getCString());
         }
     }
 
     long CCLevelUpService::levelGetFastestDurationMillis(CCLevel *level) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call levelGetFastestDurationMillis with level: %s", level->getId()->getCString())->getCString());
+                CCString::createWithFormat("call levelGetFastestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelGetFastestDurationMillis");
         params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call levelGetFastestDurationMillis failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Integer, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
 
         return ret->getValue();
     }
@@ -224,63 +224,63 @@ namespace soomla {
 
     int CCLevelUpService::levelIncTimesStarted(CCLevel *level) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call levelIncTimesStarted with level: %s", level->getId()->getCString())->getCString());
+                CCString::createWithFormat("call levelIncTimesStarted with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelIncTimesStarted");
         params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call levelIncTimesStarted failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Integer, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
 
         return ret->getValue();
     }
 
     int CCLevelUpService::levelDecTimesStarted(CCLevel *level) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call levelDecTimesStarted with level: %s", level->getId()->getCString())->getCString());
+                CCString::createWithFormat("call levelDecTimesStarted with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelDecTimesStarted");
         params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call levelDecTimesStarted failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Integer, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
 
         return ret->getValue();
     }
 
     int CCLevelUpService::levelGetTimesStarted(CCLevel *level) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call levelGetTimesStarted with level: %s", level->getId()->getCString())->getCString());
+                CCString::createWithFormat("call levelGetTimesStarted with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelGetTimesStarted");
         params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call levelGetTimesStarted failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Integer, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
 
         return ret->getValue();
     }
@@ -288,63 +288,63 @@ namespace soomla {
 
     int CCLevelUpService::levelGetTimesPlayed(CCLevel *level) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call levelGetTimesPlayed with level: %s", level->getId()->getCString())->getCString());
+                CCString::createWithFormat("call levelGetTimesPlayed with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelGetTimesPlayed");
         params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call levelGetTimesPlayed failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Integer, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
 
         return ret->getValue();
     }
 
     int CCLevelUpService::levelIncTimesPlayed(CCLevel *level) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call levelIncTimesPlayed with level: %s", level->getId()->getCString())->getCString());
+                CCString::createWithFormat("call levelIncTimesPlayed with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelIncTimesPlayed");
         params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call levelIncTimesPlayed failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Integer, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
 
         return ret->getValue();
     }
 
     int CCLevelUpService::levelDecTimesPlayed(CCLevel *level) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call levelDecTimesPlayed with level: %s", level->getId()->getCString())->getCString());
+                CCString::createWithFormat("call levelDecTimesPlayed with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelDecTimesPlayed");
         params->setObject(level->getId(), "levelId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call levelDecTimesPlayed failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Integer, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
 
         return ret->getValue();
     }
@@ -352,72 +352,72 @@ namespace soomla {
 
     void CCLevelUpService::missionSetCompleted(CCMission *mission, bool completed, bool notify) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call missionSetCompleted with mission: %s", mission->getId()->getCString())->getCString());
+                CCString::createWithFormat("call missionSetCompleted with mission: %s", mission->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::missionSetCompleted");
         params->setObject(mission->getId(), "missionId");
-        params->setObject(__Bool::create(completed), "completed");
-        params->setObject(__Bool::create(notify), "notify");
+        params->setObject(CCBool::create(completed), "completed");
+        params->setObject(CCBool::create(notify), "notify");
 
         CCError *error = NULL;
         CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call missionSetCompleted failed with error: %s", error->getInfo())->getCString());
         }
     }
 
     int CCLevelUpService::missionGetTimesCompleted(CCMission *mission) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call missionGetTimesCompleted with mission: %s", mission->getId()->getCString())->getCString());
+                CCString::createWithFormat("call missionGetTimesCompleted with mission: %s", mission->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::missionGetTimesCompleted");
         params->setObject(mission->getId(), "missionId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call missionGetTimesCompleted failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Integer, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
 
         return ret->getValue();
     }
 
     void CCLevelUpService::scoreSetLatestScore(CCScore *score, double newValue) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call scoreSetLatestScore with score: %s", score->getId()->getCString())->getCString());
+                CCString::createWithFormat("call scoreSetLatestScore with score: %s", score->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::scoreSetLatestScore");
         params->setObject(score->getId(), "scoreId");
-        params->setObject(__Double::create(newValue), "newValue");
+        params->setObject(CCDouble::create(newValue), "newValue");
 
         CCError *error = NULL;
         CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call scoreSetLatestScore failed with error: %s", error->getInfo())->getCString());
         }
     }
 
     double CCLevelUpService::scoreGetLatestScore(CCScore *score) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call scoreGetLatestScore with score: %s", score->getId()->getCString())->getCString());
+                CCString::createWithFormat("call scoreGetLatestScore with score: %s", score->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::scoreGetLatestScore");
         params->setObject(score->getId(), "scoreId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call scoreGetLatestScore failed with error: %s", error->getInfo())->getCString());
             return false;
         }
@@ -429,33 +429,33 @@ namespace soomla {
 
     void CCLevelUpService::scoreSetRecordScore(CCScore *score, double newValue) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call scoreSetRecordScore with score: %s", score->getId()->getCString())->getCString());
+                CCString::createWithFormat("call scoreSetRecordScore with score: %s", score->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::scoreSetRecordScore");
         params->setObject(score->getId(), "scoreId");
-        params->setObject(__Double::create(newValue), "newValue");
+        params->setObject(CCDouble::create(newValue), "newValue");
 
         CCError *error = NULL;
         CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call scoreSetRecordScore failed with error: %s", error->getInfo())->getCString());
         }
     }
 
     double CCLevelUpService::scoreGetRecordScore(CCScore *score) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call scoreGetRecordScore with score: %s", score->getId()->getCString())->getCString());
+                CCString::createWithFormat("call scoreGetRecordScore with score: %s", score->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::scoreGetRecordScore");
         params->setObject(score->getId(), "scoreId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call scoreGetRecordScore failed with error: %s", error->getInfo())->getCString());
             return false;
         }
@@ -467,46 +467,46 @@ namespace soomla {
 
     void CCLevelUpService::worldSetCompleted(CCWorld *world, bool completed, bool notify) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call worldSetCompleted with world: %s", world->getId()->getCString())->getCString());
+                CCString::createWithFormat("call worldSetCompleted with world: %s", world->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::worldSetCompleted");
         params->setObject(world->getId(), "worldId");
-        params->setObject(__Bool::create(completed), "completed");
-        params->setObject(__Bool::create(notify), "notify");
+        params->setObject(CCBool::create(completed), "completed");
+        params->setObject(CCBool::create(notify), "notify");
 
         CCError *error = NULL;
         CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call worldSetCompleted failed with error: %s", error->getInfo())->getCString());
         }
     }
 
     bool CCLevelUpService::worldIsCompleted(CCWorld *world) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call worldIsCompleted with world: %s", world->getId()->getCString())->getCString());
+                CCString::createWithFormat("call worldIsCompleted with world: %s", world->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::worldIsCompleted");
         params->setObject(world->getId(), "worldId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call worldIsCompleted failed with error: %s", error->getInfo())->getCString());
             return false;
         }
 
-        SL_EXTRACT_FROM_RETURN(__Bool, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCBool, ret, retParams);
 
         return ret->getValue();
     }
 
-    void CCLevelUpService::worldSetReward(CCWorld *world, cocos2d::__String *rewardId) {
+    void CCLevelUpService::worldSetReward(CCWorld *world, cocos2d::CCString *rewardId) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call worldSetReward with world: %s", world->getId()->getCString())->getCString());
+                CCString::createWithFormat("call worldSetReward with world: %s", world->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::worldSetReward");
         params->setObject(world->getId(), "worldId");
@@ -516,28 +516,28 @@ namespace soomla {
         CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call worldSetReward failed with error: %s", error->getInfo())->getCString());
         }
     }
 
-    cocos2d::__String *CCLevelUpService::worldGetAssignedReward(CCWorld *world) {
+    cocos2d::CCString *CCLevelUpService::worldGetAssignedReward(CCWorld *world) {
         CCSoomlaUtils::logDebug(TAG,
-                __String::createWithFormat("call worldGetAssignedReward with world: %s", world->getId()->getCString())->getCString());
+                CCString::createWithFormat("call worldGetAssignedReward with world: %s", world->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::worldGetAssignedReward");
         params->setObject(world->getId(), "worldId");
 
         CCError *error = NULL;
-        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
 
         if (error) {
-            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
                     "call worldGetAssignedReward failed with error: %s", error->getInfo())->getCString());
             return NULL;
         }
 
-        SL_EXTRACT_FROM_RETURN(__String, ret, retParams);
+        SL_EXTRACT_FROM_RETURN(CCString, ret, retParams);
 
         return ret;
     }

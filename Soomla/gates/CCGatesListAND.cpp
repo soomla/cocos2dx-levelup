@@ -9,7 +9,7 @@ namespace soomla {
 
     USING_NS_CC;
 
-    CCGatesListAnd *CCGatesListAnd::create(cocos2d::__String *id, cocos2d::__Array *gates) {
+    CCGatesListAnd *CCGatesListAnd::create(cocos2d::CCString *id, cocos2d::CCArray *gates) {
         CCGatesListAnd *ret = new CCGatesListAnd();
         if (ret->init(id, gates)) {
             ret->autorelease();
@@ -21,7 +21,7 @@ namespace soomla {
         return ret;
     }
 
-    CCGatesListAnd *CCGatesListAnd::create(cocos2d::__String *id, CCGate *singleGate) {
+    CCGatesListAnd *CCGatesListAnd::create(cocos2d::CCString *id, CCGate *singleGate) {
         CCGatesListAnd *ret = new CCGatesListAnd();
         if (ret->init(id, singleGate)) {
             ret->autorelease();
@@ -34,7 +34,7 @@ namespace soomla {
     }
 
     bool CCGatesListAnd::canOpenInner() {
-        Ref *ref;
+        CCObject *ref;
         CCGate *gate;
         CCARRAY_FOREACH(getGates(), ref) {
                 gate = dynamic_cast<CCGate *>(ref);

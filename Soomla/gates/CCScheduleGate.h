@@ -15,17 +15,17 @@ namespace soomla {
     class CCScheduleGate: public CCGate {
         CC_SYNTHESIZE_RETAIN(CCSchedule *, mSchedule, Schedule);
     public:
-        static CCScheduleGate *create(cocos2d::__String *id, CCSchedule *schedule);
+        static CCScheduleGate *create(cocos2d::CCString *id, CCSchedule *schedule);
 
         SL_CREATE_WITH_DICTIONARY(CCScheduleGate);
 
-        virtual bool init(cocos2d::__String *id, CCSchedule *schedule);
+        virtual bool init(cocos2d::CCString *id, CCSchedule *schedule);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
-        virtual const char *getType() const override;
+        virtual const char *getType() const;
 
-        virtual cocos2d::__Dictionary *toDictionary();
+        virtual cocos2d::CCDictionary *toDictionary();
 
         virtual ~CCScheduleGate();
 

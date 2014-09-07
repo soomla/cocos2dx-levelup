@@ -16,7 +16,7 @@ namespace soomla {
     
     #define TAG "SOOMLA Challenge"
 
-    CCChallenge *CCChallenge::create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Array *missions, cocos2d::__Array *rewards) {
+    CCChallenge *CCChallenge::create(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCArray *missions, cocos2d::CCArray *rewards) {
         CCChallenge *ret = new CCChallenge();
         if (ret->init(id, name, missions, rewards)) {
             ret->autorelease();
@@ -28,7 +28,7 @@ namespace soomla {
         return ret;
     }
 
-    bool CCChallenge::init(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Array *missions, cocos2d::__Array *rewards) {
+    bool CCChallenge::init(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCArray *missions, cocos2d::CCArray *rewards) {
         bool result = CCMission::init(id, name, rewards);
         if (result) {
             setMissions(missions);
@@ -37,12 +37,12 @@ namespace soomla {
         return result;
     }
 
-    bool CCChallenge::initWithDictionary(cocos2d::__Dictionary *dict) {
+    bool CCChallenge::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCMission::initWithDictionary(dict);
         if (result) {
-            Ref *ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_MISSIONS);
+            CCObject *ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_MISSIONS);
             if (ref) {
-                __Array *missionsDict = dynamic_cast<__Array *>(ref);
+                CCArray *missionsDict = dynamic_cast<CCArray *>(ref);
                 setMissions(CCDomainHelper::getInstance()->getDomainsFromDictArray(missionsDict));
             }
             return true;
@@ -50,8 +50,8 @@ namespace soomla {
         return result;
     }
 
-    cocos2d::__Dictionary *CCChallenge::toDictionary() {
-        __Dictionary *dict = CCMission::toDictionary();
+    cocos2d::CCDictionary *CCChallenge::toDictionary() {
+        CCDictionary *dict = CCMission::toDictionary();
 
         if (mMissions) {
             dict->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(mMissions), CCLevelUpConsts::JSON_LU_MISSIONS);
@@ -75,7 +75,7 @@ namespace soomla {
             return false;
         }
 
-        Ref *ref;
+        CCObject *ref;
         CCMission *mission;
         CCARRAY_FOREACH(mMissions, ref) {
                 mission = dynamic_cast<CCMission *>(ref);
@@ -114,18 +114,18 @@ namespace soomla {
     void CCChallengeEventHandler::onMissionCompleted(CCMission *completedMission) {
         CCSoomlaUtils::logDebug (TAG, "onMissionCompleted");
         if (mChallenge->mMissions->containsObject(completedMission)) {
-            CCSoomlaUtils::logDebug (TAG, __String::createWithFormat("Mission %s is part of challenge %s (%zi) total",
+            CCSoomlaUtils::logDebug (TAG, CCString::createWithFormat("Mission %s is part of challenge %s (%zi) total",
                     completedMission->getId()->getCString(),
                     mChallenge->getId()->getCString(),
                     mChallenge->mMissions->count())->getCString());
             bool completed = true;
-            Ref *ref;
+            CCObject *ref;
             CCMission *mission;
             CCARRAY_FOREACH(mChallenge->mMissions, ref) {
                     mission = dynamic_cast<CCMission *>(ref);
                     CC_ASSERT(mission);
                     if (!mission->isCompleted()) {
-                        CCSoomlaUtils::logDebug(TAG, __String::createWithFormat(
+                        CCSoomlaUtils::logDebug(TAG, CCString::createWithFormat(
                                 "challenge mission not completed?=%s",
                                 mission->getId()->getCString()
                         )->getCString());
@@ -135,7 +135,7 @@ namespace soomla {
                 }
 
             if (completed) {
-                CCSoomlaUtils::logDebug(TAG, __String::createWithFormat(
+                CCSoomlaUtils::logDebug(TAG, CCString::createWithFormat(
                         "Challenge %s completed!", mChallenge->getId()->getCString())->getCString());
                 mChallenge->setCompletedInner(true);
             }

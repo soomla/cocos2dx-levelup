@@ -50,8 +50,8 @@ namespace soomla {
         return ifWorld(innerWorld) || ifLevel(innerWorld);
     }
 
-    cocos2d::__Dictionary *CCLevelUp::toDictionary() {
-        cocos2d::__Dictionary *dict = cocos2d::__Dictionary::create();
+    cocos2d::CCDictionary *CCLevelUp::toDictionary() {
+        cocos2d::CCDictionary *dict = cocos2d::CCDictionary::create();
 
         dict->setObject(mInitialWorld, CCLevelUpConsts::JSON_LU_MAIN_WORLD);
 
@@ -63,7 +63,7 @@ namespace soomla {
         CC_SAFE_RELEASE(mRewards);
     }
 
-    void CCLevelUp::initialize(CCWorld *initialWorld, __Array *rewards) {
+    void CCLevelUp::initialize(CCWorld *initialWorld, CCArray *rewards) {
         if (mInitialWorld) {
             mInitialWorld->release();
         }
@@ -74,8 +74,8 @@ namespace soomla {
 //			save();
 
         if (rewards != NULL) {
-            __Dictionary *rewardMap = __Dictionary::create();
-            Ref *ref;
+            CCDictionary *rewardMap = CCDictionary::create();
+            CCObject *ref;
             CCReward *reward;
             CCARRAY_FOREACH(rewards, ref) {
                     reward = (CCReward *) ref;
@@ -113,7 +113,7 @@ namespace soomla {
     CCMission *CCLevelUp::getMission(char const *missionId) {
         CCMission *retMission = NULL;
 
-        Ref *ref;
+        CCObject *ref;
         CCMission *mission;
         CCARRAY_FOREACH(mInitialWorld->getMissions(), ref) {
                 mission = dynamic_cast<CCMission *>(ref);
@@ -132,7 +132,7 @@ namespace soomla {
     }
 
     CCScore *CCLevelUp::getScore(const char *scoreId) {
-        __Dictionary *scores = mInitialWorld->getScores();
+        CCDictionary *scores = mInitialWorld->getScores();
         CCScore *score = dynamic_cast<CCScore *>(scores->objectForKey(scoreId));
         if (score == NULL) {
             score = fetchScoreFromWorlds(scoreId, mInitialWorld->getInnerWorldsMap());
@@ -165,8 +165,8 @@ namespace soomla {
     int CCLevelUp::getLevelCountInWorld(CCWorld *world) {
         int count = 0;
 
-        __Dictionary *innerWorldsMap = world->getInnerWorldsMap();
-        DictElement *el;
+        CCDictionary *innerWorldsMap = world->getInnerWorldsMap();
+        CCDictElement *el;
         CCDICT_FOREACH(innerWorldsMap, el) {
                 count += getRecursiveCount(mInitialWorld, &ifLevel);
             }
@@ -209,10 +209,10 @@ namespace soomla {
 //			// KeyValueStorage.setValue(key, lu_json);
 //		}
 
-    CCScore *CCLevelUp::fetchScoreFromWorlds(const char *scoreId, __Dictionary *worlds) {
+    CCScore *CCLevelUp::fetchScoreFromWorlds(const char *scoreId, CCDictionary *worlds) {
         CCScore *retScore = NULL;
 
-        DictElement *el;
+        CCDictElement *el;
         CCWorld *world;
         CCDICT_FOREACH(worlds, el) {
                 world = (CCWorld *) el->getObject();
@@ -228,11 +228,11 @@ namespace soomla {
         return retScore;
     }
 
-    CCWorld *CCLevelUp::fetchWorld(const char *worldId, __Dictionary *worlds) {
+    CCWorld *CCLevelUp::fetchWorld(const char *worldId, CCDictionary *worlds) {
         CCWorld *retWorld;
         retWorld = dynamic_cast<CCWorld *>(worlds->objectForKey(worldId));
         if (retWorld == NULL) {
-            DictElement *el;
+            CCDictElement *el;
             CCDICT_FOREACH(worlds, el) {
                     retWorld = fetchWorld(worldId, ((CCWorld *)el->getObject())->getInnerWorldsMap());
                     if (retWorld != NULL) {
@@ -252,8 +252,8 @@ namespace soomla {
             count++;
         }
 
-        __Dictionary *innerWorldsMap = world->getInnerWorldsMap();
-        DictElement *el;
+        CCDictionary *innerWorldsMap = world->getInnerWorldsMap();
+        CCDictElement *el;
         CCDICT_FOREACH(innerWorldsMap, el) {
             // Recursively count for inner world
             count += getRecursiveCount((CCWorld *) el->getObject(), isAccepted);
@@ -261,14 +261,14 @@ namespace soomla {
         return count;
     }
 
-    CCGate *CCLevelUp::fetchGate(char const *gateId, __Dictionary *worlds) {
+    CCGate *CCLevelUp::fetchGate(char const *gateId, CCDictionary *worlds) {
         if (worlds == NULL) {
             return NULL;
         }
 
         CCGate *retGate = NULL;
 
-        DictElement *el;
+        CCDictElement *el;
         CCWorld *world;
         CCDICT_FOREACH(worlds, el) {
                 world = (CCWorld *) el->getObject();
@@ -300,10 +300,10 @@ namespace soomla {
 
     }
 
-    CCGate *CCLevelUp::fetchGateFromMissions(char const *gateId, cocos2d::__Array *missions) {
+    CCGate *CCLevelUp::fetchGateFromMissions(char const *gateId, cocos2d::CCArray *missions) {
         CCGate *retGate = NULL;
 
-        Ref *ref;
+        CCObject *ref;
         CCMission *mission;
         CCARRAY_FOREACH(missions, ref) {
                 mission = (CCMission *) ref;
@@ -329,14 +329,14 @@ namespace soomla {
         return retGate;
     }
 
-    CCMission *CCLevelUp::fetchMission(char const *missionId, cocos2d::__Dictionary *worlds) {
-        DictElement *el;
+    CCMission *CCLevelUp::fetchMission(char const *missionId, cocos2d::CCDictionary *worlds) {
+        CCDictElement *el;
         CCWorld *world;
         CCMission *mission;
         CCDICT_FOREACH(worlds, el) {
                 world = (CCWorld *) el->getObject();
 
-                Ref *ref;
+                CCObject *ref;
                 CCARRAY_FOREACH(mInitialWorld->getMissions(), ref) {
                         mission = dynamic_cast<CCMission *>(ref);
                         CC_ASSERT(mission);

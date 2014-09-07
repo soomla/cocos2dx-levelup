@@ -12,8 +12,8 @@
 namespace soomla {
 
     class CCScore: public CCSoomlaEntity {
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__Double *, mStartValue, StartValue, CCLevelUpConsts::JSON_LU_SCORE_STARTVAL);
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__Bool *, mHigherBetter, HigherBetter, CCLevelUpConsts::JSON_LU_SCORE_HIGHBETTER);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCDouble *, mStartValue, StartValue, CCLevelUpConsts::JSON_LU_SCORE_STARTVAL);
+        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCBool *, mHigherBetter, HigherBetter, CCLevelUpConsts::JSON_LU_SCORE_HIGHBETTER);
     protected:
         double mTempScore;
     private:
@@ -22,16 +22,16 @@ namespace soomla {
         CCScore(): mStartValue(NULL), mHigherBetter(NULL), mTempScore(0), mScoreRecordReachedSent(false) {
         }
 
-        static CCScore *create(cocos2d::__String *id, cocos2d::__String *name = NULL, cocos2d::__Bool *higherBetter = NULL);
+        static CCScore *create(cocos2d::CCString *id, cocos2d::CCString *name = NULL, cocos2d::CCBool *higherBetter = NULL);
 
         SL_CREATE_WITH_DICTIONARY(CCScore);
 
-        virtual bool init(cocos2d::__String *id, cocos2d::__String *name = NULL, cocos2d::__Bool *higherBetter = NULL);
+        virtual bool init(cocos2d::CCString *id, cocos2d::CCString *name = NULL, cocos2d::CCBool *higherBetter = NULL);
 
-        virtual bool initWithDictionary(cocos2d::__Dictionary* dict);
+        virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
 
-        virtual cocos2d::__Dictionary *toDictionary() override;
+        virtual cocos2d::CCDictionary *toDictionary();
 
         virtual char const *getType() const;
 

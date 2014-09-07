@@ -9,15 +9,15 @@
 USING_NS_CC;
 
 namespace soomla {
-    CCBalanceMission *CCBalanceMission::create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__String *associatedItemId, cocos2d::__Integer *desiredBalance) {
+    CCBalanceMission *CCBalanceMission::create(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCString *associatedItemId, cocos2d::CCInteger *desiredBalance) {
         return CCBalanceMission::create(id, name, NULL, associatedItemId, desiredBalance);
     }
 
-    CCBalanceMission *CCBalanceMission::create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Array *rewards, cocos2d::__String *associatedItemId, cocos2d::__Integer *desiredBalance) {
+    CCBalanceMission *CCBalanceMission::create(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCArray *rewards, cocos2d::CCString *associatedItemId, cocos2d::CCInteger *desiredBalance) {
         CCBalanceMission *ret = new CCBalanceMission();
 
-        __Dictionary *dict = __Dictionary::create();
-        dict->setObject(__String::create(CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE),
+        CCDictionary *dict = CCDictionary::create();
+        dict->setObject(CCString::create(CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE),
                 CCLevelUpConsts::JSON_JSON_TYPE);
         dict->setObject(associatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID);
         dict->setObject(desiredBalance, CCLevelUpConsts::JSON_LU_DESIRED_BALANCE);
