@@ -13,26 +13,14 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
- 
-#ifndef ___InitialWorldFixture__H
-#define ___InitialWorldFixture__H
 
-#include "CCWorld.h"
-#include "TestingLevelUpEventHandler.h"
 #include "TestingCoreEventHandler.h"
+#include "CCCoreConsts.h"
 
-using namespace cocos2d;
-using namespace soomla;
+void TestingCoreEventHandler::onRewardGivenEvent(soomla::CCReward *reward) {
+    addToEventStack(soomla::CCCoreConsts::EVENT_REWARD_GIVEN, reward);
+}
 
-struct InitialWorldFixture {
-    InitialWorldFixture();
-    ~InitialWorldFixture();
-    
-    void Reinitialize();
-    
-    CCWorld *initialWorld;
-    TestingLevelUpEventHandler *handler;
-    TestingCoreEventHandler *coreHandler;
+void TestingCoreEventHandler::onRewardTakenEvent(soomla::CCReward *reward) {
+    addToEventStack(soomla::CCCoreConsts::EVENT_REWARD_TAKEN, reward);
 };
-
-#endif // ___InitialWorldFixture__H

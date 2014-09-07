@@ -20,12 +20,11 @@
 #include "CCLevelUpEventHandler.h"
 #include "cocos2d.h"
 #include "CCLevelUpConsts.h"
+#include "BaseTestingEventHandler.h"
 
-class TestingLevelUpEventHandler : public soomla::CCLevelUpEventHandler {
+class TestingLevelUpEventHandler : public soomla::CCLevelUpEventHandler, public BaseTestingEventHandler {
     
 public:
-    TestingLevelUpEventHandler();
-    ~TestingLevelUpEventHandler();
     
     void onLevelUpInitialized();
     
@@ -42,12 +41,6 @@ public:
     
     void onLevelStarted(soomla::CCLevel *level);
     void onLevelEnded(soomla::CCLevel *level);
-    
-    cocos2d::Ref *getEventData(const std::string& eventName);
-    bool checkEventFired(const std::string& eventName);
-    
-private:
-    cocos2d::__Dictionary *eventStack;
 };
 
 #endif // __TestingLevelUpEventHandler_H

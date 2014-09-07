@@ -21,59 +21,42 @@
 #include "CCWorld.h"
 #include "CCLevel.h"
 
-TestingLevelUpEventHandler::TestingLevelUpEventHandler() {
-    eventStack = cocos2d::__Dictionary::create();
-    eventStack->retain();
-}
-
-TestingLevelUpEventHandler::~TestingLevelUpEventHandler() {
-    CC_SAFE_RELEASE(eventStack);
-}
-
 void TestingLevelUpEventHandler::onLevelUpInitialized() {
-    eventStack->setObject(cocos2d::__String::create(""), soomla::CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED);
+    addToEventStack(soomla::CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED, cocos2d::__String::create(""));
 }
 
 void TestingLevelUpEventHandler::onScoreRecordReached(soomla::CCScore *score) {
-    eventStack->setObject(score, soomla::CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED);
+    addToEventStack(soomla::CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED, score);
 }
 
 void TestingLevelUpEventHandler::onScoreRecordChanged(soomla::CCScore *score) {
-    eventStack->setObject(score, soomla::CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED);
+    addToEventStack(soomla::CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED, score);
 }
 
 void TestingLevelUpEventHandler::onGateOpened(soomla::CCGate *gate) {
-    eventStack->setObject(gate, soomla::CCLevelUpConsts::EVENT_GATE_OPENED);
+    addToEventStack(soomla::CCLevelUpConsts::EVENT_GATE_OPENED, gate);
 }
 
 void TestingLevelUpEventHandler::onMissionCompleted(soomla::CCMission *mission) {
-    eventStack->setObject(mission, soomla::CCLevelUpConsts::EVENT_MISSION_COMPLETED);
+    addToEventStack(soomla::CCLevelUpConsts::EVENT_MISSION_COMPLETED, mission);
 }
 
 void TestingLevelUpEventHandler::onMissionCompletionRevoked(soomla::CCMission *mission) {
-    eventStack->setObject(mission, soomla::CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED);
+    addToEventStack(soomla::CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED, mission);
 }
 
 void TestingLevelUpEventHandler::onWorldCompleted(soomla::CCWorld *world) {
-    eventStack->setObject(world, soomla::CCLevelUpConsts::EVENT_WORLD_COMPLETED);
+    addToEventStack(soomla::CCLevelUpConsts::EVENT_WORLD_COMPLETED, world);
 }
 
 void TestingLevelUpEventHandler::onWorldRewardAssigned(soomla::CCWorld *world) {
-    eventStack->setObject(world, soomla::CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED);
+    addToEventStack(soomla::CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED, world);
 }
 
 void TestingLevelUpEventHandler::onLevelStarted(soomla::CCLevel *level) {
-    eventStack->setObject(level, soomla::CCLevelUpConsts::EVENT_LEVEL_STARTED);
+    addToEventStack(soomla::CCLevelUpConsts::EVENT_LEVEL_STARTED, level);
 }
 
 void TestingLevelUpEventHandler::onLevelEnded(soomla::CCLevel *level) {
-    eventStack->setObject(level, soomla::CCLevelUpConsts::EVENT_LEVEL_ENDED);
-}
-
-cocos2d::Ref *TestingLevelUpEventHandler::getEventData(const std::string& eventName) {
-    return eventStack->objectForKey(eventName);
-}
-
-bool TestingLevelUpEventHandler::checkEventFired(const std::string& eventName) {
-    return (getEventData(eventName) != NULL);
+    addToEventStack(soomla::CCLevelUpConsts::EVENT_LEVEL_ENDED, level);
 }

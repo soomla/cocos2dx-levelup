@@ -1,4 +1,4 @@
-/*
+ /*
  Copyright (C) 2012-2014 Soomla Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,15 +19,15 @@
 #define TAG "SOOMLA Testing"
 
 void CocosTestReporter::ReportTestStart(TestDetails const& test) {
-    cocos2d::log("%s Test %s STARTED", TAG, test.testName);
+//    cocos2d::log("%s Test %s STARTED", TAG, test.testName);
 }
 
 void CocosTestReporter::ReportFailure(TestDetails const& test, char const* failure){
-    cocos2d::log("%s Test %s FAILED: %s", TAG, test.testName, failure);
+    cocos2d::log("%s Test %s:%s FAILED (%s:%d) : %s", TAG, test.suiteName, test.testName, test.filename, test.lineNumber, failure);
 }
 
 void CocosTestReporter::ReportTestFinish(TestDetails const& test, float secondsElapsed){
-    cocos2d::log("%s Test %s PASSED", TAG, test.testName);
+    cocos2d::log("%s Test %s:%s FINISHED", TAG, test.suiteName, test.testName);
 }
 
 void CocosTestReporter::ReportSummary(int totalTestCount, int failedTestCount, int failureCount, float secondsElapsed){

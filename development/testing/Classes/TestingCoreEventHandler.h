@@ -14,25 +14,18 @@
  limitations under the License.
  */
  
-#ifndef ___InitialWorldFixture__H
-#define ___InitialWorldFixture__H
+#ifndef __TestingCoreEventHandler_H
+#define __TestingCoreEventHandler_H
 
-#include "CCWorld.h"
-#include "TestingLevelUpEventHandler.h"
-#include "TestingCoreEventHandler.h"
+#include "cocos2d.h"
+#include "CCCoreEventHandler.h"
+#include "BaseTestingEventHandler.h"
+#include "CCReward.h"
 
-using namespace cocos2d;
-using namespace soomla;
-
-struct InitialWorldFixture {
-    InitialWorldFixture();
-    ~InitialWorldFixture();
-    
-    void Reinitialize();
-    
-    CCWorld *initialWorld;
-    TestingLevelUpEventHandler *handler;
-    TestingCoreEventHandler *coreHandler;
+class TestingCoreEventHandler : public soomla::CCCoreEventHandler, public BaseTestingEventHandler {
+public:
+    void onRewardGivenEvent(soomla::CCReward *reward);
+    void onRewardTakenEvent(soomla::CCReward *reward);
 };
 
-#endif // ___InitialWorldFixture__H
+#endif // __TestingCoreEventHandler_H
