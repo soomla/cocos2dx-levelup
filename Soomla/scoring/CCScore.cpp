@@ -55,7 +55,6 @@ namespace soomla {
         return dict;
     }
 
-
     char const *CCScore::getType() const {
         return CCLevelUpConsts::JSON_JSON_TYPE_SCORE;
     }

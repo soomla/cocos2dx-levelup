@@ -144,4 +144,8 @@ namespace soomla {
 
         return dict;
     }
+
+    char const *CCRangeScore::getType() const {
+        return CCLevelUpConsts::JSON_JSON_TYPE_RANGE_SCORE;
+    }
 }

@@ -28,6 +28,7 @@ namespace soomla {
 
         virtual cocos2d::CCDictionary *toDictionary();
 
+        char const *getType() const;
     protected:
         virtual void performSaveActions();
     };

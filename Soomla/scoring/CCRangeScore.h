@@ -50,6 +50,8 @@ namespace soomla {
         virtual void dec(double amount);
 
         virtual void setTempScore(double score, bool onlyIfBetter);
+
+        char const *getType() const;
     };
 }
 
