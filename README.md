@@ -48,7 +48,8 @@ All this is backed by Soomla's core tools, and can be easily integrated with mor
 
 5. Initialize `CCServiceManager`, `CCStoreService`, `CCProfileService`, and `CCLevelUpService` with the class you just created, a `customSecret` and other params:
 
-    	``` cpp
+    	
+	``` cpp
     	__Dictionary *commonParams = __Dictionary::create();
 	commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
 
@@ -71,15 +72,17 @@ All this is backed by Soomla's core tools, and can be easily integrated with mor
 
 6. Make sure to include the `Cocos2dxLevelUp.h` header whenever you use any of the **cocos2dx-levelup** functions:
 
-    ``` cpp
-    #include "Cocos2dxLevelUp.h"
-    ```
+    
+	``` cpp
+    	#include "Cocos2dxLevelUp.h"
+    	```
 
 7. Add an instance of your event handler to `CCLevelUpEventDispatcher` after `CCLevelUpService` initialization:
 
-    ``` cpp
-    soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
-    ```
+    
+	``` cpp
+    	soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
+    	```
 
 **The next steps are different according to which platform you're using.**
 
@@ -109,11 +112,13 @@ In your XCode project, perform the following steps:
 
 4. Register the native `StoreService`, `ProfileService`, and `LevelUpService` by adding:
 
+
     	``` cpp
 	[[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
 	[[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
 	[[ServiceManager sharedServiceManager] registerService:[LevelUpService sharedLevelUpService]];
     	```
+	
 	at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
 5. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
@@ -125,6 +130,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
 ####**Instructions for Android**
 
 1. Import cocos2dx-store, cocos2dx-profile, and cocos2dx-levelup module into your project's Android.mk by adding the following:
+
 
     	```
 	LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_store_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
@@ -160,6 +166,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
 
 3. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
 
+
 	``` java
 	public Cocos2dxGLSurfaceView onCreateView() {
 		// initialize services
@@ -173,6 +180,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
 	```
 
 4. Override `onPause`, `onResume`:
+
 
 	``` java
     @Override
@@ -189,6 +197,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
 	```
 
 5. Update your AndroidManifest.xml to include permissions and the SoomlaApp:
+
 
     ``` xml
     <uses-permission android:name="android.permission.INTERNET"/>
