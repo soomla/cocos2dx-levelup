@@ -73,13 +73,13 @@ All this is backed by Soomla's core tools, and can be easily integrated with mor
 
 6. Make sure to include the `Cocos2dxLevelUp.h` header whenever you use any of the **cocos2dx-levelup** functions:
     
-	```
+	```cpp
     	#include "Cocos2dxLevelUp.h"
     	```
 
 7. Add an instance of your event handler to `CCLevelUpEventDispatcher` after `CCLevelUpService` initialization:
 
-	```
+	```cpp
     	soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
     	```
 
