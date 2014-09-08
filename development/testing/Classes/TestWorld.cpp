@@ -16,12 +16,18 @@
 
 #include "UnitTestPP.h"
 #include "InitialWorldFixture.h"
-#include "CCLevel.h"
 #include "CCScheduleGate.h"
 #include "CCLevelUpConsts.h"
 #include "CCCoreConsts.h"
 #include "CCRecordMission.h"
 #include "CCBadgeReward.h"
+#include "CCLevel.h"
+#include "CCWorldCompletionGate.h"
+#include "CCLevelUp.h"
+#include "CCLevelUpEventDispatcher.h"
+#include "CCWorldCompletionMission.h"
+#include "CCVirtualItemReward.h"
+#include "MuffinRushAssets.h"
 
 using namespace UnitTest;
 
@@ -312,6 +318,26 @@ SUITE(TestWorld)
         
         CHECK(handler->checkEventFiredWith(CCLevelUpConsts::EVENT_GATE_OPENED, mission->getGate()));
         CHECK(handler->checkEventFiredWith(CCLevelUpConsts::EVENT_MISSION_COMPLETED, mission));
+        
+        __Array *eventData = coreHandler->getEventData(CCCoreConsts::EVENT_REWARD_GIVEN);
+        Ref *object = NULL;
+        bool foundId = false;
+        CCARRAY_FOREACH(eventData, object) {
+            CCReward *arrReward = dynamic_cast<CCReward *>(object);
+            if ((arrReward != NULL) && (arrReward->getId()->isEqual(reward->getId()))) {
+                foundId = true;
+                break;
+            }
+        }
+        
+        CHECK(foundId);
+    }
+    
+    TEST_FIXTURE(InitialWorldFixture, SanityAssignReward) {
+        CCBadgeReward *reward = CCBadgeReward::create(__String::create("test_badge_reward"),
+                                                      __String::create("Test Badge Reward"));
+        
+        initialWorld->assignReward(reward);
         
         __Array *eventData = coreHandler->getEventData(CCCoreConsts::EVENT_REWARD_GIVEN);
         Ref *object = NULL;
