@@ -49,7 +49,7 @@ All this is backed by Soomla's core tools, and can be easily integrated with mor
 5. Initialize `CCServiceManager`, `CCStoreService`, `CCProfileService`, and `CCLevelUpService` with the class you just created, a `customSecret` and other params:
 
     	
-	``` cpp
+	```cpp
     	__Dictionary *commonParams = __Dictionary::create();
 	commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
 
@@ -66,21 +66,22 @@ All this is backed by Soomla's core tools, and can be easily integrated with mor
 	
     	soomla::CCLevelUpService::initShared();
     	soomla::CCLevelUp::getInstance()->initialize(ExampleWorldFactory::createWorld(), NULL);
-    	```
+    	
+	```
 
-    NOTE: *Custom Secret* - is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game! Initialize `CCLevelUpService` ONLY ONCE when your application loads.
+	NOTE: *Custom Secret* - is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game! Initialize `CCLevelUpService` ONLY ONCE when your application loads.
 
 6. Make sure to include the `Cocos2dxLevelUp.h` header whenever you use any of the **cocos2dx-levelup** functions:
 
     
-	``` cpp
+	```cpp
     	#include "Cocos2dxLevelUp.h"
     	```
 
 7. Add an instance of your event handler to `CCLevelUpEventDispatcher` after `CCLevelUpService` initialization:
 
     
-	``` cpp
+	```cpp
     	soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
     	```
 
