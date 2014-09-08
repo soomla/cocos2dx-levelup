@@ -60,6 +60,10 @@ namespace soomla {
         return dict;
     }
 
+    char const *CCVirtualItemScore::getType() const {
+        return CCLevelUpConsts::JSON_JSON_TYPE_VIRTUAL_ITEM_SCORE;
+    }
+
     void CCVirtualItemScore::performSaveActions() {
         CCScore::performSaveActions();
 
