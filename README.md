@@ -50,7 +50,7 @@ All this is backed by Soomla's core tools, and can be easily integrated with mor
 
     	
 	```cpp
-    	__Dictionary *commonParams = __Dictionary::create();
+    __Dictionary *commonParams = __Dictionary::create();
 	commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
 
 	__Dictionary *storeParams = __Dictionary::create();
@@ -58,14 +58,14 @@ All this is backed by Soomla's core tools, and can be easily integrated with mor
 
 	__Dictionary *profileParams = __Dictionary::create();
 
-    	soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+    soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
     
 	soomla::CCStoreService::initShared(assets, storeParams);
 	
 	soomla::CCProfileService::initShared(profileParams);
 	
-    	soomla::CCLevelUpService::initShared();
-    	soomla::CCLevelUp::getInstance()->initialize(ExampleWorldFactory::createWorld(), NULL);
+    soomla::CCLevelUpService::initShared();
+    soomla::CCLevelUp::getInstance()->initialize(ExampleWorldFactory::createWorld(), NULL);
     	
 	```
 
