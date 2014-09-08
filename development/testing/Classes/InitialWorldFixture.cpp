@@ -34,7 +34,9 @@ InitialWorldFixture::InitialWorldFixture() {
     
     CCKeyValueStorage::getInstance()->purge();
     
-    Reinitialize();
+    if (doInitializeOnBuildUp()) {
+        reinitialize();
+    }
 }
 
 InitialWorldFixture::~InitialWorldFixture() {
@@ -42,6 +44,10 @@ InitialWorldFixture::~InitialWorldFixture() {
     CCCoreEventDispatcher::getInstance()->removeEventHandler(coreHandler);
 }
 
-void InitialWorldFixture::Reinitialize(__Array *rewards) {
+bool InitialWorldFixture::doInitializeOnBuildUp() {
+    return true;
+}
+
+void InitialWorldFixture::reinitialize(__Array *rewards) {
     CCLevelUp::getInstance()->initialize(initialWorld, rewards);
 }

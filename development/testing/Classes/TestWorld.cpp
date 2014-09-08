@@ -339,7 +339,7 @@ SUITE(TestWorld)
                                                              __String::create("Replace Test Badge Reward"));
         
         // replacing takes LevelUp rewards dependency
-        this->Reinitialize(__Array::create(reward, replaceReward, NULL));
+        this->reinitialize(__Array::create(reward, replaceReward, NULL));
         
         initialWorld->assignReward(reward);
         

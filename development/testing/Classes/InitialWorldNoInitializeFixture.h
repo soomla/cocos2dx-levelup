@@ -14,26 +14,13 @@
  limitations under the License.
  */
  
-#ifndef ___InitialWorldFixture__H
-#define ___InitialWorldFixture__H
+#ifndef ___InitialWorldNoInitializeFixture_H
+#define ___InitialWorldNoInitializeFixture_H
 
-#include "CCWorld.h"
-#include "TestingLevelUpEventHandler.h"
-#include "TestingCoreEventHandler.h"
+#include "InitialWorldFixture.h"
 
-using namespace cocos2d;
-using namespace soomla;
-
-struct InitialWorldFixture {
-    InitialWorldFixture();
-    ~InitialWorldFixture();
-    
-    void reinitialize(__Array *rewards = NULL);
-    virtual bool doInitializeOnBuildUp();
-    
-    CCWorld *initialWorld;
-    TestingLevelUpEventHandler *handler;
-    TestingCoreEventHandler *coreHandler;
+class InitialWorldNoInitializeFixture : public InitialWorldFixture {
+    bool doInitializeOnBuildUp();
 };
 
-#endif // ___InitialWorldFixture__H
+#endif // ___InitialWorldNoInitializeFixture_H
