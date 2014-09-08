@@ -186,7 +186,7 @@
 
     [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::worldGetAssignedReward" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *worldId = parameters[@"worldId"];
-        retParameters[@"return"] = [WorldStorage getAssignedReward:worldId];
+        retParameters[@"return"] = ([WorldStorage getAssignedReward:worldId] ?: [NSNull null]);
     }];
 
     /* -= Callback handlers =- */
