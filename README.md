@@ -15,47 +15,7 @@ cocos2dx-levelup is an open code initiative as part of The SOOMLA Project. It or
 It acts as sort of a 'blueprint' for the game, modeling worlds/levels, gates to levels, missions and rewards that can be completed and achieved.
 All this is backed by Soomla's core tools, and can be easily integrated with more Soomla modules, like cocos2dx-store for IAP, or cocos2dx-profile for social related functions.
 
-
 <!-- Check out our [Wiki] (https://github.com/soomla/android-store/wiki) for more information about the project and how to use it better. -->
-
-## Model Overview
-
-<!-- attach UML style simple diagram -->
-
-
-Generally, the Soomla sources contain detailed documentation on the different entities and how to use them, but here's a quick glance:
-
-** World/Level **
-
-A _Level_ is pretty clear, and most games have them.
-A simple example is an Angry Birds single level, where you need to knock out all the pigs.
-It measures specific things, such as duration it takes to complete, and can be started and ended.
-
-
-A _World_ is a more general concept than a Level (a Level **Is-a** World), and can have innerWorlds to create hierarchies. Another example from Angry Birds is level pages and episodes, which contain the actual levels.
-
-** Score **
-
-A _Score_ is something which can be accumulated or measured within a _World_ (or _Level_ of course).
-It can be incremented or decremented based on user actions, and recorded at the completion of the _World/Level_.
-
-This, in turn, can later be applied to high scores or best times, or treated as collectibles that can be awared upon completion.
-
-** Gate **
-
-A _Gate_ is closed portal from one _World_ to the next. It can be unlocked in many different ways (according to Gate type), and can also be combined into _GatesList_ to build more complex _Gates_.
-
-** Mission/Challenge **
-
-A _Mission_ is a single task a player can complete in a game, usually for a _Reward_.
-
-A _Challenge_ is a set of _Missions_ that need to be completed, so it's a big _Mission_ built out of several smaller _Missions_.
-
-** Reward **
-
-A _Reward_ is some kind of perk or status a player can achieve in the game.
-This can be either a badge, a virtual item from the game's economy (sword, coins etc.) or anything you can think of, really (unlocking game content or levels comes to mind).
-
 
 
 ##**Getting Started (With pre-built libraries - RECOMMENDED)**
@@ -64,9 +24,9 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 
 	NOTE: LevelUp depends on SOOMLA's other modules: Core, Store, and Profile. This document assumes that you are new to SOOMLA and have not worked with any of the other SOOMLA modules. If this is not the case, and you already *have* some or all of the other modules, please follow these directions only for the modules you are missing and of course, for the **LevelUp** module.
 
-1. If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by cocos2dx-store (the tag is the version).
+1. If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by cocos2dx-levelup (the tag is the version).
 
-2. Clone [soomla-cocos2dx-core](https://github.com/soomla/soomla-cocos2dx-core), [cocos2dx-store](https://github.com/soomla/cocos2dx-store), and **cocos2dx-levelup** into the `extensions` directory located at the root of your Cocos2d-x framework:
+2. Clone [soomla-cocos2dx-core](https://github.com/soomla/soomla-cocos2dx-core), [cocos2dx-store](https://github.com/soomla/cocos2dx-store), [cocos2dx-profile](https://github.com/soomla/cocos2dx-profile), and **cocos2dx-levelup** into the `extensions` directory located at the root of your Cocos2d-x framework:
 
     ```
     $ git clone git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
@@ -88,28 +48,24 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 
 5. Initialize `CCServiceManager`, `CCStoreService`, `CCProfileService`, and `CCLevelUpService` with the class you just created, a `customSecret` and other params:
 
-    ``` cpp
-    __Dictionary *commonParams = __Dictionary::create();
-    commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-    soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
-    ```
+    	``` cpp
+    	__Dictionary *commonParams = __Dictionary::create();
+	commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
 
-	``` cpp
 	__Dictionary *storeParams = __Dictionary::create();
 	storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
 
-	soomla::CCStoreService::initShared(assets, storeParams);
-	```
-
-	``` cpp
 	__Dictionary *profileParams = __Dictionary::create();
-	soomla::CCProfileService::initShared(profileParams);
-	```
 
-    ``` cpp
-    soomla::CCLevelUpService::initShared();
-    soomla::CCLevelUp::getInstance()->initialize(ExampleWorldFactory::createWorld(), NULL);
-    ```
+    	soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+    
+	soomla::CCStoreService::initShared(assets, storeParams);
+	
+	soomla::CCProfileService::initShared(profileParams);
+	
+    	soomla::CCLevelUpService::initShared();
+    	soomla::CCLevelUp::getInstance()->initialize(ExampleWorldFactory::createWorld(), NULL);
+    	```
 
     NOTE: *Custom Secret* - is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game! Initialize `CCLevelUpService` ONLY ONCE when your application loads.
 
@@ -139,19 +95,16 @@ In your XCode project, perform the following steps:
 	- `Cocos2dXProfile.xcodeproj` (**extensions/soomla-cocos2dx-profile/**).  
 	- `Cocos2dXLevelUp.xcodeproj` (**extensions/cocos2dx-levelup/**).
 
-	Perform the following:
-		- Drag the project into your project.
-		- Add its targets to your **Build Phases->Target Dependencies**.
-		- Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
+	Perform the following: a) Drag the project into your project, b) Add its targets to your **Build Phases->Target Dependencies**, c) Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
 3. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Store/**`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Profile/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/build/ios/headers/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/LevelUp/**`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/build/ios/headers/**`
 
 4. Register the native `StoreService`, `ProfileService`, and `LevelUpService` by adding:
@@ -194,15 +147,15 @@ That's it! Now all you have to do is build your XCode project and run your game 
         - Cocos2dxAndroidCore.jar
 
 	From `extensions/cocos2dx-store/build/android`
-        - SoomlaAndroidStore.jar
+        - AndroidStore.jar
         - Cocos2dxAndroidStore.jar
 
     	From `extensions/cocos2dx-profile/build/android`
-        - SoomlaAndroidProfile.jar
+        - AndroidProfile.jar
         - Cocos2dxAndroidProfile.jar
 
 	From `extensions/cocos2dx-levelup/build/android`
-        - SoomlaAndroidLevelUp.jar
+        - AndroidLevelUp.jar
         - Cocos2dxAndroidLevelUp.jar
 
 3. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
@@ -286,6 +239,44 @@ To integrate cocos2dx-profile into your game, follow these steps:
 
 3. For Android: You can use our "sourced" modules for Android Studio (or IntelliJ IDEA) (`extensions/soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.iml`, `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.iml`), just including them to your project.
 
+
+## Model Overview
+
+<!-- attach UML style simple diagram -->
+
+
+Generally, the Soomla sources contain detailed documentation on the different entities and how to use them, but here's a quick glance:
+
+** World/Level **
+
+A _Level_ is pretty clear, and most games have them.
+A simple example is an Angry Birds single level, where you need to knock out all the pigs.
+It measures specific things, such as duration it takes to complete, and can be started and ended.
+
+
+A _World_ is a more general concept than a Level (a Level **Is-a** World), and can have innerWorlds to create hierarchies. Another example from Angry Birds is level pages and episodes, which contain the actual levels.
+
+** Score **
+
+A _Score_ is something which can be accumulated or measured within a _World_ (or _Level_ of course).
+It can be incremented or decremented based on user actions, and recorded at the completion of the _World/Level_.
+
+This, in turn, can later be applied to high scores or best times, or treated as collectibles that can be awared upon completion.
+
+** Gate **
+
+A _Gate_ is closed portal from one _World_ to the next. It can be unlocked in many different ways (according to Gate type), and can also be combined into _GatesList_ to build more complex _Gates_.
+
+** Mission/Challenge **
+
+A _Mission_ is a single task a player can complete in a game, usually for a _Reward_.
+
+A _Challenge_ is a set of _Missions_ that need to be completed, so it's a big _Mission_ built out of several smaller _Missions_.
+
+** Reward **
+
+A _Reward_ is some kind of perk or status a player can achieve in the game.
+This can be either a badge, a virtual item from the game's economy (sword, coins etc.) or anything you can think of, really (unlocking game content or levels comes to mind).
 
 
 
