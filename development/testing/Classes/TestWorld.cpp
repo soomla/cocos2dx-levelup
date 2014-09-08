@@ -319,18 +319,7 @@ SUITE(TestWorld)
         CHECK(handler->checkEventFiredWith(CCLevelUpConsts::EVENT_GATE_OPENED, mission->getGate()));
         CHECK(handler->checkEventFiredWith(CCLevelUpConsts::EVENT_MISSION_COMPLETED, mission));
         
-        __Array *eventData = coreHandler->getEventData(CCCoreConsts::EVENT_REWARD_GIVEN);
-        Ref *object = NULL;
-        bool foundId = false;
-        CCARRAY_FOREACH(eventData, object) {
-            CCReward *arrReward = dynamic_cast<CCReward *>(object);
-            if ((arrReward != NULL) && (arrReward->getId()->isEqual(reward->getId()))) {
-                foundId = true;
-                break;
-            }
-        }
-        
-        CHECK(foundId);
+        CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_GIVEN, reward));
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityAssignReward) {
@@ -339,17 +328,45 @@ SUITE(TestWorld)
         
         initialWorld->assignReward(reward);
         
-        __Array *eventData = coreHandler->getEventData(CCCoreConsts::EVENT_REWARD_GIVEN);
-        Ref *object = NULL;
-        bool foundId = false;
-        CCARRAY_FOREACH(eventData, object) {
-            CCReward *arrReward = dynamic_cast<CCReward *>(object);
-            if ((arrReward != NULL) && (arrReward->getId()->isEqual(reward->getId()))) {
-                foundId = true;
-                break;
-            }
-        }
-        
-        CHECK(foundId);
+        CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_GIVEN, reward));
     }
+    
+    TEST_FIXTURE(InitialWorldFixture, SanityReplaceReward) {
+        CCBadgeReward *reward = CCBadgeReward::create(__String::create("test_badge_reward"),
+                                                      __String::create("Test Badge Reward"));
+        
+        CCBadgeReward *replaceReward = CCBadgeReward::create(__String::create("replace_test_badge_reward"),
+                                                             __String::create("Replace Test Badge Reward"));
+        
+        // replacing takes LevelUp rewards dependency
+        this->Reinitialize(__Array::create(reward, replaceReward, NULL));
+        
+        initialWorld->assignReward(reward);
+        
+        CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_GIVEN, reward));
+        
+        initialWorld->assignReward(replaceReward);
+        
+        CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_TAKEN, reward));
+        CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_GIVEN, replaceReward));
+    }
+
+    // Waiting for batch add fix
+//    TEST_FIXTURE(InitialWorldFixture, SanityBatchAddLevels) {
+//        int levelCount = 5;
+//        
+//        CCScore *score = CCScore::create(__String::create("test_score"));
+//        CCRecordMission *mission = CCRecordMission::create(__String::create("test_record_mission"),
+//                                                           __String::create("Test Record Mission"),
+//                                                           NULL,
+//                                                           score->getId(),
+//                                                           __Double::create(20.0));
+//        CCScheduleGate *gate = CCScheduleGate::create(__String::create("unopened_gate"),
+//                                                      CCSchedule::createAnyTimeOnce());
+//        
+//        initialWorld->batchAddLevelsWithTemplates(levelCount, gate, score, mission);
+//        __Dictionary *innerWolds = initialWorld->getInnerWorldsMap();
+//        
+//        CHECK_EQUAL(levelCount, innerWolds->count());
+//    }
 }

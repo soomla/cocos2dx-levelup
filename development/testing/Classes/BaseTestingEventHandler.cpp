@@ -15,6 +15,7 @@
  */
 
 #include "BaseTestingEventHandler.h"
+#include "CCSoomlaEntity.h"
 
 using namespace cocos2d;
 
@@ -56,6 +57,32 @@ bool BaseTestingEventHandler::checkEventFiredWith(const std::string& eventName, 
     CCARRAY_FOREACH(eventArray, object) {
         if (object == data) {
             return true;
+        }
+    }
+    
+    return false;
+}
+
+bool BaseTestingEventHandler::checkEventFiredWithById(const std::string& eventName, cocos2d::Ref *data) {
+    cocos2d::__Array *eventArray = getEventData(eventName);
+    
+    if (eventArray == nullptr) {
+        return false;
+    }
+    
+    cocos2d::Ref *object;
+    CCARRAY_FOREACH(eventArray, object) {
+        if (object == data) {
+            return true;
+        }
+        else {
+            soomla::CCSoomlaEntity *dataEntity = dynamic_cast<soomla::CCSoomlaEntity *>(data);
+            soomla::CCSoomlaEntity *objectEntity = dynamic_cast<soomla::CCSoomlaEntity *>(object);
+            if ((dataEntity != NULL) && (objectEntity != NULL)) {
+                if (dataEntity->getId()->isEqual(objectEntity->getId())) {
+                    return  true;
+                }
+            }
         }
     }
     

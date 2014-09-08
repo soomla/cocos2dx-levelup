@@ -28,7 +28,7 @@ struct InitialWorldFixture {
     InitialWorldFixture();
     ~InitialWorldFixture();
     
-    void Reinitialize();
+    void Reinitialize(__Array *rewards = NULL);
     
     CCWorld *initialWorld;
     TestingLevelUpEventHandler *handler;

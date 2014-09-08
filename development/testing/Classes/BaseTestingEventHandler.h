@@ -27,6 +27,7 @@ public:
     cocos2d::__Array *getEventData(const std::string& eventName);
     bool checkEventFired(const std::string& eventName);
     bool checkEventFiredWith(const std::string& eventName, cocos2d::Ref *data);
+    bool checkEventFiredWithById(const std::string& eventName, cocos2d::Ref *data);
     
     void clearEventStack();
     

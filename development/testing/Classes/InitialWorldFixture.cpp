@@ -42,6 +42,6 @@ InitialWorldFixture::~InitialWorldFixture() {
     CCCoreEventDispatcher::getInstance()->removeEventHandler(coreHandler);
 }
 
-void InitialWorldFixture::Reinitialize() {
-    CCLevelUp::getInstance()->initialize(initialWorld, NULL);
+void InitialWorldFixture::Reinitialize(__Array *rewards) {
+    CCLevelUp::getInstance()->initialize(initialWorld, rewards);
 }
