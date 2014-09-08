@@ -352,21 +352,21 @@ SUITE(TestWorld)
     }
 
     // Waiting for batch add fix
-//    TEST_FIXTURE(InitialWorldFixture, SanityBatchAddLevels) {
-//        int levelCount = 5;
-//        
-//        CCScore *score = CCScore::create(__String::create("test_score"));
-//        CCRecordMission *mission = CCRecordMission::create(__String::create("test_record_mission"),
-//                                                           __String::create("Test Record Mission"),
-//                                                           NULL,
-//                                                           score->getId(),
-//                                                           __Double::create(20.0));
-//        CCScheduleGate *gate = CCScheduleGate::create(__String::create("unopened_gate"),
-//                                                      CCSchedule::createAnyTimeOnce());
-//        
-//        initialWorld->batchAddLevelsWithTemplates(levelCount, gate, score, mission);
-//        __Dictionary *innerWolds = initialWorld->getInnerWorldsMap();
-//        
-//        CHECK_EQUAL(levelCount, innerWolds->count());
-//    }
+    TEST_FIXTURE(InitialWorldFixture, SanityBatchAddLevels) {
+        int levelCount = 5;
+        
+        CCScore *score = CCScore::create(__String::create("test_score"));
+        CCRecordMission *mission = CCRecordMission::create(__String::create("test_record_mission"),
+                                                           __String::create("Test Record Mission"),
+                                                           NULL,
+                                                           score->getId(),
+                                                           __Double::create(20.0));
+        CCScheduleGate *gate = CCScheduleGate::create(__String::create("unopened_gate"),
+                                                      CCSchedule::createAnyTimeOnce());
+        
+        initialWorld->batchAddLevelsWithTemplates(levelCount, gate, score, mission);
+        __Dictionary *innerWolds = initialWorld->getInnerWorldsMap();
+        
+        CHECK_EQUAL(levelCount, innerWolds->count());
+    }
 }

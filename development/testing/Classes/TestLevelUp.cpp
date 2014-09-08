@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2012-2014 Soomla Inc.
+ Copyright (C) 2012-2014 ; Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -16,11 +16,13 @@
 
 #include "UnitTestPP.h"
 #include "InitialWorldNoInitializeFixture.h"
+#include "CCLevelUp.h"
 
 SUITE(TestLevelUp) {
     
     TEST_FIXTURE(InitialWorldNoInitializeFixture, TestInitialize) {
+        CCLevelUp::getInstance()->initialize(initialWorld, NULL);
         
+        CHECK_EQUAL(initialWorld, CCLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
     }
-    
 }
