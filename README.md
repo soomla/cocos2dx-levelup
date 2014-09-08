@@ -73,15 +73,15 @@ All this is backed by Soomla's core tools, and can be easily integrated with mor
 
 6. Make sure to include the `Cocos2dxLevelUp.h` header whenever you use any of the **cocos2dx-levelup** functions:
     
-	```cpp
-    	#include "Cocos2dxLevelUp.h"
-    	```
+    ```cpp
+    #include "Cocos2dxLevelUp.h"
+    ```
 
 7. Add an instance of your event handler to `CCLevelUpEventDispatcher` after `CCLevelUpService` initialization:
 
-	```cpp
-    	soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
-    	```
+    ```cpp
+    soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
+    ```
 
 **The next steps are different according to which platform you're using.**
 
@@ -111,13 +111,13 @@ In your XCode project, perform the following steps:
 
 4. Register the native `StoreService`, `ProfileService`, and `LevelUpService` by adding:
 
-    	```cpp
-	[[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
-	[[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
-	[[ServiceManager sharedServiceManager] registerService:[LevelUpService sharedLevelUpService]];
-    	```
+    ```cpp
+    [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
+    [[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
+    [[ServiceManager sharedServiceManager] registerService:[LevelUpService sharedLevelUpService]];
+    ```
 
-	at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
+    at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
 5. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
@@ -129,20 +129,16 @@ That's it! Now all you have to do is build your XCode project and run your game 
 
 1. Import cocos2dx-store, cocos2dx-profile, and cocos2dx-levelup module into your project's Android.mk by adding the following:
 
-    	```
-	LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_store_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
+    ```
+    LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_store_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
+    $(call import-module, extensions/cocos2dx-store) # add this line at the end of the file, along with the other import-module calls
 
-	$(call import-module, extensions/cocos2dx-store) # add this line at the end of the file, along with the other import-module calls
+    LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_profile_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
+    $(call import-module, extensions/cocos2dx-profile) # add this line at the end of the file, along with the other import-module calls
 
-	LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_profile_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
-
-	$(call import-module, extensions/cocos2dx-profile) # add this line at the end of the file, along with the other import-module calls
-
-	LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_levelup_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
-
-	$(call import-module, extensions/cocos2dx-levelup) # add this line at the end of the file, along with the other import-module calls
-
-    	```
+    LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_levelup_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
+    $(call import-module, extensions/cocos2dx-levelup) # add this line at the end of the file, along with the other import-module calls
+    ```
 
 2. Add the following jars to your android project's classpath:
     From `extensions/soomla-cocos2dx-core/build/android`
@@ -220,23 +216,23 @@ To integrate cocos2dx-profile into your game, follow these steps:
 
 1. **Recursively** clone soomla-cocos2dx-core, cocos2dx-store, cocos2dx-profile, and cocos2dx-levelup.
 
-	```
-	$ git clone --recursive git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
+    ```
+    $ git clone --recursive git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
 
-	$ git clone --recursive git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
+    $ git clone --recursive git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
 
-	$ git clone --recursive git@github.com:soomla/cocos2dx-profile.git extensions/cocos2dx-profile
+    $ git clone --recursive git@github.com:soomla/cocos2dx-profile.git extensions/cocos2dx-profile
 
-	$ git clone --recursive git@github.com:soomla/cocos2dx-levelup.git extensions/cocos2dx-levelup
-	```
+    $ git clone --recursive git@github.com:soomla/cocos2dx-levelup.git extensions/cocos2dx-levelup
+    ```
 
-    	**OR:** If you have already cloned the repositories, to obtain submodules, use command:
+    **OR:** If you have already cloned the repositories, to obtain submodules, use command:
 
-    	```
-   	 $ git submodule update --init --recursive
-    	```
+    ```
+    $ git submodule update --init --recursive
+    ```
 	
-	**NOTE:** You should run this command in every repository.
+    **NOTE:** You should run this command in every repository.
 
 2. For iOS: Use sourced versions of Linked projects (`extensions/soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.xcodeproj`, `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.xcodeproj`)
 
