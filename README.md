@@ -94,17 +94,17 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
     soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
     ```
 
-``` cpp
-__Dictionary *storeParams = __Dictionary::create();
-storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
+	``` cpp
+	__Dictionary *storeParams = __Dictionary::create();
+	storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
 
-soomla::CCStoreService::initShared(assets, storeParams);
-```
+	soomla::CCStoreService::initShared(assets, storeParams);
+	```
 
-``` cpp
-__Dictionary *profileParams = __Dictionary::create();
-soomla::CCProfileService::initShared(profileParams);
-```
+	``` cpp
+	__Dictionary *profileParams = __Dictionary::create();
+	soomla::CCProfileService::initShared(profileParams);
+	```
 
     ``` cpp
     soomla::CCLevelUpService::initShared();
@@ -141,9 +141,12 @@ In your XCode project, perform the following steps:
  * `Cocos2dXLevelUp.xcodeproj` (**extensions/cocos2dx-levelup/**).
 
 	Perform the following:
-    a. Drag the project into your project.
-    b. Add its targets to your **Build Phases->Target Dependencies**.
-    c. Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
+
+	a. Drag the project into your project.
+
+	b. Add its targets to your **Build Phases->Target Dependencies**.
+
+	c. Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
 3. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla/**`
@@ -174,28 +177,27 @@ That's it! Now all you have to do is build your XCode project and run your game 
 
 1. Import cocos2dx-store, cocos2dx-profile, and cocos2dx-levelup module into your project's Android.mk by adding the following:
 
-    ```
-    LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_store_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
+    	```
+	LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_store_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
 
-    $(call import-module, extensions/cocos2dx-store) # add this line at the end of the file, along with the other import-module calls
+	$(call import-module, extensions/cocos2dx-store) # add this line at the end of the file, along with the other import-module calls
 
-LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_profile_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
+	LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_profile_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
 
-    $(call import-module, extensions/cocos2dx-profile) # add this line at the end of the file, along with the other import-module calls
+	$(call import-module, extensions/cocos2dx-profile) # add this line at the end of the file, along with the other import-module calls
 
+	LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_levelup_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
 
-LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_levelup_static # add this line along with your other LOCAL_WHOLE_STATIC_LIBRARIES
+	$(call import-module, extensions/cocos2dx-levelup) # add this line at the end of the file, along with the other import-module calls
 
-    $(call import-module, extensions/cocos2dx-levelup) # add this line at the end of the file, along with the other import-module calls
-
-    ```
+    	```
 
 2. Add the following jars to your android project's classpath:
     From `extensions/soomla-cocos2dx-core/build/android`
         - SoomlaAndroidCore.jar
         - Cocos2dxAndroidCore.jar
 
-From `extensions/cocos2dx-store/build/android`
+	From `extensions/cocos2dx-store/build/android`
         - SoomlaAndroidStore.jar
         - Cocos2dxAndroidStore.jar
 
@@ -203,7 +205,7 @@ From `extensions/cocos2dx-store/build/android`
         - SoomlaAndroidProfile.jar
         - Cocos2dxAndroidProfile.jar
 
-From `extensions/cocos2dx-levelup/build/android`
+	From `extensions/cocos2dx-levelup/build/android`
         - SoomlaAndroidLevelUp.jar
         - Cocos2dxAndroidLevelUp.jar
 
@@ -216,8 +218,8 @@ From `extensions/cocos2dx-levelup/build/android`
 		serviceManager.setActivity(this);
 		serviceManager.setGlSurfaceView(glSurfaceView);
 		serviceManager.registerService(StoreService.getInstance());
-serviceManager.registerService(ProfileService.getInstance());
-serviceManager.registerService(LevelUpService.getInstance());
+		serviceManager.registerService(ProfileService.getInstance());
+		serviceManager.registerService(LevelUpService.getInstance());
 	}
 	```
 
@@ -258,7 +260,9 @@ That's it! Don't forget to run the **build_native.sh** script so cocos2dx-levelu
 
 ##**Working with sources**
 
-SOOMLA appreciates code contributions, so we try to make contributing an easy task. For those of you who want to contribute, please use our "sources environment".
+**SOOMLA appreciates code contributions!** You are more than welcome to extend the capabilities of cocos2dx-levelup.
+
+NOTE: If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/cocos2dx-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.
 
 To integrate cocos2dx-profile into your game, follow these steps:
 
@@ -274,11 +278,12 @@ To integrate cocos2dx-profile into your game, follow these steps:
 	$ git clone --recursive git@github.com:soomla/cocos2dx-levelup.git extensions/cocos2dx-levelup
 	```
 
-    **OR:** If you have already cloned the repositories, to obtain submodules, use command:
+    	**OR:** If you have already cloned the repositories, to obtain submodules, use command:
 
-    ```
-    $ git submodule update --init --recursive
-    ```
+    	```
+   	 $ git submodule update --init --recursive
+    	```
+	
 	**NOTE:** You should run this command in every repository.
 
 2. For iOS: Use sourced versions of Linked projects (`extensions/soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.xcodeproj`, `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.xcodeproj`)
@@ -286,11 +291,9 @@ To integrate cocos2dx-profile into your game, follow these steps:
 3. For Android: You can use our "sourced" modules for Android Studio (or IntelliJ IDEA) (`extensions/soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.iml`, `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.iml`), just including them to your project.
 
 
-##**Contribution**
 
-**SOOMLA appreciates code contributions!** You are more than welcome to extend the capabilities of cocos2dx-levelup.
 
-NOTE: If you would like to contribute, please follow our [Documentation Guidelines](https://github.com/soomla/cocos2dx-store/blob/master/documentation.md). Clear, consistent comments will make our code easy to understand.
+
 
 
 
