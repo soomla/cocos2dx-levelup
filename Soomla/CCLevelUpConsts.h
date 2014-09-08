@@ -91,6 +91,8 @@ namespace soomla {
         static char const *JSON_JSON_TYPE_SOCIAL_UPLOAD_GATE;
 
         static char const *JSON_JSON_TYPE_SCORE;
+        static char const *JSON_JSON_TYPE_RANGE_SCORE;
+        static char const *JSON_JSON_TYPE_VIRTUAL_ITEM_SCORE;
 
         static char const *JSON_JSON_TYPE_WORLD;
         static char const *JSON_JSON_TYPE_LEVEL;

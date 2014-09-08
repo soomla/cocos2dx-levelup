@@ -22,6 +22,8 @@
 #include "CCPurchasingMission.h"
 #include "CCLevelUp.h"
 #include "CCDomainHelper.h"
+#include "CCRangeScore.h"
+#include "CCVirtualItemScore.h"
 
 USING_NS_CC;
 
@@ -71,6 +73,8 @@ namespace soomla {
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SCHEDULE_GATE, CCScheduleGate::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE, CCWorldCompletionGate::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SCORE, CCScore::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_RANGE_SCORE, CCRangeScore::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_VIRTUAL_ITEM_SCORE, CCVirtualItemScore::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD, CCWorld::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_LEVEL, CCLevel::createWithDictionary);
 

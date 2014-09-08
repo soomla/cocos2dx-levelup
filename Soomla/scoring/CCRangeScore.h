@@ -50,6 +50,8 @@ namespace soomla {
         virtual void dec(double amount) override;
 
         virtual void setTempScore(double score, bool onlyIfBetter) override;
+
+        char const *getType() const;
     };
 }
 
