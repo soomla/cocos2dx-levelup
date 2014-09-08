@@ -134,19 +134,15 @@ In your XCode project, perform the following steps:
 1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder).
 
 2. For each of the following XCode projects:
-
- * `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**).  
- * `Cocos2dXStore.xcodeproj` (**extensions/cocos2dx-store/**).
- * `Cocos2dXProfile.xcodeproj` (**extensions/soomla-cocos2dx-profile/**).  
- * `Cocos2dXLevelUp.xcodeproj` (**extensions/cocos2dx-levelup/**).
+	- `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**).  
+	- `Cocos2dXStore.xcodeproj` (**extensions/cocos2dx-store/**).
+	- `Cocos2dXProfile.xcodeproj` (**extensions/soomla-cocos2dx-profile/**).  
+	- `Cocos2dXLevelUp.xcodeproj` (**extensions/cocos2dx-levelup/**).
 
 	Perform the following:
-
-	a. Drag the project into your project.
-
-	b. Add its targets to your **Build Phases->Target Dependencies**.
-
-	c. Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
+		- Drag the project into your project.
+		- Add its targets to your **Build Phases->Target Dependencies**.
+		- Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
 3. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla/**`
@@ -160,12 +156,12 @@ In your XCode project, perform the following steps:
 
 4. Register the native `StoreService`, `ProfileService`, and `LevelUpService` by adding:
 
-    ``` cpp
-[[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
-[[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
-[[ServiceManager sharedServiceManager] registerService:[LevelUpService sharedLevelUpService]];
-    ```
-at the begining of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
+    	``` cpp
+	[[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
+	[[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
+	[[ServiceManager sharedServiceManager] registerService:[LevelUpService sharedLevelUpService]];
+    	```
+	at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
 5. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
