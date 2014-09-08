@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>0311C8D8-CD20-44AD-821E-B6CBEC5D12E7</string>
+	<string>BF751F12-8E32-479E-A597-3E88DAB7DE15</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Cocos2dXLevelUp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>E0759C5A-1B76-4FE0-8847-F2AFC4B6FAE6</key>
-		<string>https://github.com/soomla/cocos2dx-levelup</string>
+		<key>1DE5F81F-286D-448C-B535-5D7EF4FEC5C8</key>
+		<string>ssh://github.com/soomla/cocos2dx-levelup.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Cocos2dXLevelUp.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>E0759C5A-1B76-4FE0-8847-F2AFC4B6FAE6</key>
+		<key>1DE5F81F-286D-448C-B535-5D7EF4FEC5C8</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/soomla/cocos2dx-levelup</string>
+	<string>ssh://github.com/soomla/cocos2dx-levelup.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>E0759C5A-1B76-4FE0-8847-F2AFC4B6FAE6</string>
+	<string>1DE5F81F-286D-448C-B535-5D7EF4FEC5C8</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E0759C5A-1B76-4FE0-8847-F2AFC4B6FAE6</string>
+			<string>1DE5F81F-286D-448C-B535-5D7EF4FEC5C8</string>
 			<key>IDESourceControlWCCName</key>
 			<string>cocos2dx-levelup</string>
 		</dict>
