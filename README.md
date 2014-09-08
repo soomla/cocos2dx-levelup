@@ -104,7 +104,7 @@ In your XCode project, perform the following steps:
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Profile/**`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/build/ios/headers/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/build/ios/headers/**`
@@ -260,7 +260,7 @@ A _World_ is a more general concept than a Level (a Level **Is-a** World), and c
 A _Score_ is something which can be accumulated or measured within a _World_ (or _Level_ of course).
 It can be incremented or decremented based on user actions, and recorded at the completion of the _World/Level_.
 
-This, in turn, can later be applied to high scores or best times, or treated as collectibles that can be awared upon completion.
+This, in turn, can later be applied to high scores or best times, or treated as collectibles that can be awarded upon completion.
 
 ** Gate **
 
