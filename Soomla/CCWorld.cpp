@@ -43,9 +43,9 @@ namespace soomla {
 
     bool CCWorld::init(cocos2d::CCString *id) {
         bool result = CCSoomlaEntity::init(id);
-        setInnerWorldsMap(__Dictionary::create());
-        setScores(__Dictionary::create());
-        setMissions(__Array::create());
+        setInnerWorldsMap(CCDictionary::create());
+        setScores(CCDictionary::create());
+        setMissions(CCArray::create());
         if (result) {
             return true;
         }

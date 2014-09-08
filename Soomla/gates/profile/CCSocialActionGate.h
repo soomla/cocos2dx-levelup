@@ -45,7 +45,7 @@ namespace soomla {
     public:
         static CCSocialActionGateEventHandler *create(CCSocialActionGate *socialActionGate);
 
-        virtual void onSocialActionFinishedEvent(CCProvider provider, CCSocialActionType socialActionType) override;
+        virtual void onSocialActionFinishedEvent(CCProvider provider, CCSocialActionType socialActionType);
     };
 }
 

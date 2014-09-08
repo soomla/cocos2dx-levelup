@@ -27,7 +27,7 @@ namespace soomla {
 
         virtual bool initWithDictionary(cocos2d::CCDictionary* dict);
 
-        virtual const char *getType() const override;
+        virtual const char *getType() const;
 
         virtual cocos2d::CCDictionary *toDictionary();
 
