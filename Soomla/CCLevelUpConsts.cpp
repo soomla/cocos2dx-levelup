@@ -24,7 +24,6 @@ namespace soomla {
     char const *CCLevelUpConsts::JSON_LU_ASSOCWORLDID       = "associatedWorldId";
     char const *CCLevelUpConsts::JSON_LU_DESIRED_RECORD     = "desiredRecord";
     char const *CCLevelUpConsts::JSON_LU_DESIRED_BALANCE    = "desiredBalance";
-    char const *CCLevelUpConsts::JSON_LU_NAME               = "name";
 
     /** LevelUp **/
     char const *CCLevelUpConsts::JSON_LU_MAIN_WORLD         = "mainWorld";
@@ -48,6 +47,17 @@ namespace soomla {
     /** World **/
     char const *CCLevelUpConsts::JSON_LU_WORLDS             = "worlds";
 
+    /** Profile **/
+    char const *CCLevelUpConsts::JSON_LU_SOCIAL_PROVIDER = "provider";
+    char const *CCLevelUpConsts::JSON_LU_PAGE_NAME = "pageName";
+    char const *CCLevelUpConsts::JSON_LU_STATUS = "status";
+    char const *CCLevelUpConsts::JSON_LU_MESSAGE = "message";
+    char const *CCLevelUpConsts::JSON_LU_STORY_NAME = "name";
+    char const *CCLevelUpConsts::JSON_LU_CAPTION = "caption";
+    char const *CCLevelUpConsts::JSON_LU_LINK = "link";
+    char const *CCLevelUpConsts::JSON_LU_IMG_LINK = "imgLink";
+    char const *CCLevelUpConsts::JSON_LU_FILE_NAME = "fileName";
+
     /** Types **/
     char const *CCLevelUpConsts::JSON_JSON_TYPE_MISSION     = "mission";
     char const *CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_MISSION = "balanceMission";
@@ -55,6 +65,11 @@ namespace soomla {
     char const *CCLevelUpConsts::JSON_JSON_TYPE_PURCHASE_MISSION = "purchaseMission";
     char const *CCLevelUpConsts::JSON_JSON_TYPE_RECORD_MISSION = "recordMission";
     char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_MISSION = "worldCompletionMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_MISSION = "socialLikeMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_MISSION = "socialStatusMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_MISSION = "socialStoryMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_MISSION = "socialUploadMission";
+
     char const *CCLevelUpConsts::JSON_JSON_TYPE_GATE        = "gate";
     char const *CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE = "balanceGate";
     char const *CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_AND = "gatesListAnd";
@@ -63,6 +78,10 @@ namespace soomla {
     char const *CCLevelUpConsts::JSON_JSON_TYPE_RECORD_GATE = "recordGate";
     char const *CCLevelUpConsts::JSON_JSON_TYPE_SCHEDULE_GATE = "scheduleGate";
     char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE = "worldCompletionGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_GATE = "socialLikeGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_GATE = "socialStatusGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_GATE = "socialStoryGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_GATE = "socialUploadGate";
 
     char const *CCLevelUpConsts::JSON_JSON_TYPE_SCORE       = "score";
 

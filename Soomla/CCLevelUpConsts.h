@@ -32,7 +32,6 @@ namespace soomla {
         static char const *JSON_LU_ASSOCWORLDID;
         static char const *JSON_LU_DESIRED_RECORD;
         static char const *JSON_LU_DESIRED_BALANCE;
-        static char const *JSON_LU_NAME;
 
         /** LevelUp **/
         static char const *JSON_LU_MAIN_WORLD;
@@ -56,12 +55,27 @@ namespace soomla {
         /** World **/
         static char const *JSON_LU_WORLDS;
 
+        /** Profile **/
+        static char const *JSON_LU_SOCIAL_PROVIDER;
+        static char const *JSON_LU_PAGE_NAME;
+        static char const *JSON_LU_STATUS;
+        static char const *JSON_LU_MESSAGE;
+        static char const *JSON_LU_STORY_NAME;
+        static char const *JSON_LU_CAPTION;
+        static char const *JSON_LU_LINK;
+        static char const *JSON_LU_IMG_LINK;
+        static char const *JSON_LU_FILE_NAME;
+
         static char const *JSON_JSON_TYPE_MISSION;
         static char const *JSON_JSON_TYPE_BALANCE_MISSION;
         static char const *JSON_JSON_TYPE_CHALLENGE;
         static char const *JSON_JSON_TYPE_PURCHASE_MISSION;
         static char const *JSON_JSON_TYPE_RECORD_MISSION;
         static char const *JSON_JSON_TYPE_WORLD_COMPLETION_MISSION;
+        static char const *JSON_JSON_TYPE_SOCIAL_LIKE_MISSION;
+        static char const *JSON_JSON_TYPE_SOCIAL_STATUS_MISSION;
+        static char const *JSON_JSON_TYPE_SOCIAL_STORY_MISSION;
+        static char const *JSON_JSON_TYPE_SOCIAL_UPLOAD_MISSION;
 
         static char const *JSON_JSON_TYPE_GATE;
         static char const *JSON_JSON_TYPE_BALANCE_GATE;
@@ -71,6 +85,10 @@ namespace soomla {
         static char const *JSON_JSON_TYPE_RECORD_GATE;
         static char const *JSON_JSON_TYPE_SCHEDULE_GATE;
         static char const *JSON_JSON_TYPE_WORLD_COMPLETION_GATE;
+        static char const *JSON_JSON_TYPE_SOCIAL_LIKE_GATE;
+        static char const *JSON_JSON_TYPE_SOCIAL_STATUS_GATE;
+        static char const *JSON_JSON_TYPE_SOCIAL_STORY_GATE;
+        static char const *JSON_JSON_TYPE_SOCIAL_UPLOAD_GATE;
 
         static char const *JSON_JSON_TYPE_SCORE;
 

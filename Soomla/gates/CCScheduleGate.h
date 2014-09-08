@@ -4,11 +4,11 @@
 //
 
 
-#include "CCGate.h"
-#include "CCSchedule.h"
-
 #ifndef __CCScheduleGate_H_
 #define __CCScheduleGate_H_
+
+#include "CCGate.h"
+#include "CCSchedule.h"
 
 namespace soomla {
 
