@@ -8,7 +8,7 @@
     <content url="file://$MODULE_DIR$/submodules/android-levelup/SoomlaAndroidLevelUp/src">
       <sourceFolder url="file://$MODULE_DIR$/submodules/android-levelup/SoomlaAndroidLevelUp/src" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Android API 20 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Cocos2dxCoreFromSources" />
     <orderEntry type="module-library">
