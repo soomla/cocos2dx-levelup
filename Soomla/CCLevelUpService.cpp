@@ -536,9 +536,12 @@ namespace soomla {
                     "call worldGetAssignedReward failed with error: %s", error->getInfo())->getCString());
             return NULL;
         }
+        
+        if ((retParams == NULL) || (retParams->count() == 0)) {
+            return NULL;
+        }
 
         SL_EXTRACT_FROM_RETURN(__String, ret, retParams);
-
         return ret;
     }
 }
