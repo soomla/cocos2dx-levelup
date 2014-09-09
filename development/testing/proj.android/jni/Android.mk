@@ -9,27 +9,13 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 CLASSES_FILES   := $(wildcard $(LOCAL_PATH)/../../Classes/*.cpp)
 CLASSES_FILES   := $(CLASSES_FILES:$(LOCAL_PATH)/%=%)
 
+UNITTESTCPP_FILES := $(wildcard $(LOCAL_PATH)/../../cocos2d/external/unittest-cpp/UnitTest++/*.cpp)
+UNITTESTCPP_FILES += $(wildcard $(LOCAL_PATH)/../../cocos2d/external/unittest-cpp/UnitTest++/Posix/*.cpp)
+UNITTESTCPP_FILES   := $(UNITTESTCPP_FILES:$(LOCAL_PATH)/%=%)
+
 LOCAL_SRC_FILES := hellocpp/main.cpp
 LOCAL_SRC_FILES += $(CLASSES_FILES)
-LOCAL_SRC_FILES += ../../cocos2d/external/unittest-cpp/UnitTest++/AssertException.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/Checks.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/CompositeTestReporter.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/CurrentTest.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/DeferredTestReporter.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/DeferredTestResult.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/MemoryOutStream.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/ReportAssert.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/Test.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/TestDetails.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/TestList.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/TestReporter.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/TestReporterStdout.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/TestResults.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/TestRunner.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/TimeConstraint.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/XmlTestReporter.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/Posix/SignalTranslator.cpp \
-    ../../cocos2d/external/unittest-cpp/UnitTest++/Posix/TimeHelpers.cpp \
+LOCAL_SRC_FILES += $(UNITTESTCPP_FILES)
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../cocos2d/external/unittest-cpp/UnitTest++
