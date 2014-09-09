@@ -84,6 +84,8 @@ namespace soomla {
     char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_GATE = "socialUploadGate";
 
     char const *CCLevelUpConsts::JSON_JSON_TYPE_SCORE       = "score";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_RANGE_SCORE = "rangeScore";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_VIRTUAL_ITEM_SCORE = "virtualItemScore";
 
     char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD       = "world";
     char const *CCLevelUpConsts::JSON_JSON_TYPE_LEVEL       = "level";
