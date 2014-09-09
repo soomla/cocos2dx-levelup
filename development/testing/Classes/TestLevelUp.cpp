@@ -74,7 +74,6 @@ SUITE(TestLevelUp) {
     }
     
     TEST_FIXTURE(InitialWorldFixture, TestGetGate) {
-        initialWorld->setMissions(__Array::create());
         
         CCLevel *level = CCLevel::create(__String::create("test_level"));
         CCWorldCompletionGate *gate = CCWorldCompletionGate::create(__String::create("test_level_complete_gate"),
@@ -88,9 +87,5 @@ SUITE(TestLevelUp) {
         reinitialize();
         
         CHECK_EQUAL(gate, CCLevelUp::getInstance()->getGate(gate->getId()->getCString()));
-        
-        // This is here since there's no way of cleaning all the event handlers
-        // which were created for this gate when reinitializing
-        gate->forceOpen(true);
     }
 }
