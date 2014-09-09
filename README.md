@@ -141,17 +141,18 @@ That's it! Now all you have to do is build your XCode project and run your game 
     ```
 
 2. Add the following jars to your android project's classpath:
-    From `extensions/soomla-cocos2dx-core/build/android`
-        - SoomlaAndroidCore.jar
-        - Cocos2dxAndroidCore.jar
+    - from `extensions/soomla-cocos2dx-core/build/android`
+        1. SoomlaAndroidCore.jar
+        2. Cocos2dxAndroidCore.jar
+        3. square-otto-1.3.2.jar
 
-	From `extensions/cocos2dx-store/build/android`
-        - AndroidStore.jar
-        - Cocos2dxAndroidStore.jar
+    - from `extensions/cocos2dx-store/build/android`
+        1. AndroidStore.jar
+        2. Cocos2dxAndroidStore.jar
 
-    	From `extensions/cocos2dx-profile/build/android`
-        - AndroidProfile.jar
-        - Cocos2dxAndroidProfile.jar
+    - from `extensions/cocos2dx-profile/build/android`
+    	1. AndroidProfile.jar
+        2. Cocos2dxAndroidProfile.jar
 
 	From `extensions/cocos2dx-levelup/build/android`
         - AndroidLevelUp.jar
