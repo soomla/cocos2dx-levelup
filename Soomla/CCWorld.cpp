@@ -56,9 +56,26 @@ namespace soomla {
         bool result = CCSoomlaEntity::init(id);
         if (result) {
             setGate(gate);
-            setInnerWorldsMap(innerWorldsMap);
-            setScores(scores);
-            setMissions(missions);
+            if (innerWorldsMap) {
+                setInnerWorldsMap(innerWorldsMap);
+            }
+            else {
+                setInnerWorldsMap(__Dictionary::create());
+            }
+            
+            if (scores) {
+                setScores(scores);
+            }
+            else {
+                setScores(__Dictionary::create());
+            }
+            
+            if (missions) {
+                setMissions(missions);
+            }
+            else {
+                setMissions(__Array::create());
+            }
 
             return true;
         }
