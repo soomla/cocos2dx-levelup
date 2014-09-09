@@ -33,19 +33,11 @@ InitialWorldFixture::InitialWorldFixture() {
     CCCoreEventDispatcher::getInstance()->addEventHandler(coreHandler);
     
     CCKeyValueStorage::getInstance()->purge();
-    
-    if (doInitializeOnBuildUp()) {
-        reinitialize();
-    }
 }
 
 InitialWorldFixture::~InitialWorldFixture() {
     CCLevelUpEventDispatcher::getInstance()->removeEventHandler(handler);
     CCCoreEventDispatcher::getInstance()->removeEventHandler(coreHandler);
-}
-
-bool InitialWorldFixture::doInitializeOnBuildUp() {
-    return true;
 }
 
 void InitialWorldFixture::reinitialize(__Array *rewards) {

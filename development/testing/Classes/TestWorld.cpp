@@ -35,6 +35,8 @@ SUITE(TestWorld)
 {
 
     TEST_FIXTURE(InitialWorldFixture, SanityCanStart) {
+        reinitialize();
+        
         CCScheduleGate *gate = CCScheduleGate::create(__String::create("unopened_gate"),
                                                   CCSchedule::createAnyTimeOnce());
         initialWorld->setGate(gate);
@@ -48,6 +50,8 @@ SUITE(TestWorld)
     }
 
     TEST_FIXTURE(InitialWorldFixture, SanityAddInnerWorld) {
+        reinitialize();
+        
         CCLevel *level = CCLevel::create(__String::create("test_level"));
         initialWorld->addInnerWorld(level);
     
@@ -59,6 +63,8 @@ SUITE(TestWorld)
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityAddScore) {
+        reinitialize();
+        
         CCScore *score = CCScore::create(__String::create("test_score"));
         initialWorld->addScore(score);
         
@@ -73,6 +79,8 @@ SUITE(TestWorld)
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityResetScores) {
+        reinitialize();
+        
         CCScore *score = CCScore::create(__String::create("test_score"));
         initialWorld->addScore(score);
         
@@ -93,6 +101,8 @@ SUITE(TestWorld)
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityComplete) {
+        reinitialize();
+        
         CCLevel *level = CCLevel::create(__String::create("test_level"));
         initialWorld->addInnerWorld(level);
         
@@ -106,6 +116,8 @@ SUITE(TestWorld)
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityCompleteRecursive) {
+        reinitialize();
+        
         CCLevel *level = CCLevel::create(__String::create("test_level"));
         initialWorld->addInnerWorld(level);
         
@@ -121,6 +133,8 @@ SUITE(TestWorld)
     }
     
     TEST_FIXTURE(InitialWorldFixture, FullSingleScore) {
+        reinitialize();
+        
         double initialRecord = 2.0;
         
         CCScore *score = CCScore::create(__String::create("test_score"));
@@ -169,6 +183,8 @@ SUITE(TestWorld)
     }
     
     TEST_FIXTURE(InitialWorldFixture, FullMultipleScores) {
+        reinitialize();
+        
         // Adding two differnt scores
         CCScore *score = CCScore::create(__String::create("test_score"));
         initialWorld->addScore(score);
@@ -271,6 +287,8 @@ SUITE(TestWorld)
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityAddMission) {
+        reinitialize();
+        
         CCScore *score = CCScore::create(__String::create("test_score"));
         initialWorld->addScore(score);
         
@@ -296,6 +314,8 @@ SUITE(TestWorld)
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityMission) {
+        reinitialize();
+        
         CCScore *score = CCScore::create(__String::create("test_score"));
         initialWorld->addScore(score);
         
@@ -323,6 +343,8 @@ SUITE(TestWorld)
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityAssignReward) {
+        reinitialize();
+        
         CCBadgeReward *reward = CCBadgeReward::create(__String::create("test_badge_reward"),
                                                       __String::create("Test Badge Reward"));
         
@@ -332,6 +354,8 @@ SUITE(TestWorld)
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityReplaceReward) {
+        reinitialize();
+        
         CCBadgeReward *reward = CCBadgeReward::create(__String::create("test_badge_reward"),
                                                       __String::create("Test Badge Reward"));
         
@@ -350,23 +374,59 @@ SUITE(TestWorld)
         CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_TAKEN, reward));
         CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_GIVEN, replaceReward));
     }
-
-    // Waiting for batch add fix
+    
     TEST_FIXTURE(InitialWorldFixture, SanityBatchAddLevels) {
+        reinitialize();
+        
         int levelCount = 5;
         
-        CCScore *score = CCScore::create(__String::create("test_score"));
-        CCRecordMission *mission = CCRecordMission::create(__String::create("test_record_mission"),
+        CCScore *testScore = CCScore::create(__String::create("test_score"));
+        CCRecordMission *recordMission = CCRecordMission::create(__String::create("test_record_mission"),
                                                            __String::create("Test Record Mission"),
                                                            NULL,
-                                                           score->getId(),
+                                                           testScore->getId(),
                                                            __Double::create(20.0));
-        CCScheduleGate *gate = CCScheduleGate::create(__String::create("unopened_gate"),
+        CCScheduleGate *testGate = CCScheduleGate::create(__String::create("unopened_gate"),
                                                       CCSchedule::createAnyTimeOnce());
         
-        initialWorld->batchAddLevelsWithTemplates(levelCount, gate, score, mission);
+        initialWorld->batchAddLevelsWithTemplates(levelCount, testGate, testScore, recordMission);
         __Dictionary *innerWolds = initialWorld->getInnerWorldsMap();
         
         CHECK_EQUAL(levelCount, innerWolds->count());
+        
+        DictElement *element = NULL;
+        CCDICT_FOREACH(innerWolds, element) {
+            CCLevel *level = dynamic_cast<CCLevel *>(element->getObject());
+            
+            __Dictionary *innerMap = level->getInnerWorldsMap();
+            CHECK_EQUAL(0, innerMap->count());
+            
+            CHECK_EQUAL(testGate->getType(), level->getGate()->getType());
+            CHECK(!testGate->getId()->isEqual(level->getId()));
+            CHECK_EQUAL(testGate->isOpen(), level->getGate()->isOpen());
+            CHECK(testGate != level->getGate());
+            
+            __Array *missions = level->getMissions();
+            CHECK_EQUAL(1, missions->count());
+            
+            Ref *missionObject = NULL;
+            CCARRAY_FOREACH(missions, missionObject) {
+                CCMission *mission = dynamic_cast<CCMission *>(missionObject);
+                CHECK_EQUAL(mission->getType(), recordMission->getType());
+                CHECK(!mission->getId()->isEqual(recordMission->getId()));
+                CHECK(mission != recordMission);
+            }
+            
+            __Dictionary *scores = level->getScores();
+            CHECK_EQUAL(1, scores->count());
+            
+            DictElement *scoreElement = NULL;
+            CCDICT_FOREACH(scores, scoreElement) {
+                CCScore *score = dynamic_cast<CCScore *>(scoreElement->getObject());
+                CHECK_EQUAL(score->getType(), testScore->getType());
+                CHECK(!score->getId()->isEqual(testScore->getId()));
+                CHECK(score != testScore);
+            }
+        }
     }
 }

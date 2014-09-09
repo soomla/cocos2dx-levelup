@@ -15,14 +15,82 @@
  */
 
 #include "UnitTestPP.h"
-#include "InitialWorldNoInitializeFixture.h"
+#include "InitialWorldFixture.h"
 #include "CCLevelUp.h"
+#include "CCBadgeReward.h"
+#include "CCLevel.h"
+#include "CCWorldCompletionGate.h"
 
 SUITE(TestLevelUp) {
     
-    TEST_FIXTURE(InitialWorldNoInitializeFixture, TestInitialize) {
-        CCLevelUp::getInstance()->initialize(initialWorld, NULL);
+    TEST_FIXTURE(InitialWorldFixture, SanityInitialize) {
+        reinitialize();
         
         CHECK_EQUAL(initialWorld, CCLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
+        // crashes
+        // CHECK(CCLevelUp::getInstance()->getReward("reward") == NULL);
+    }
+    
+    TEST_FIXTURE(InitialWorldFixture, SanityInitializeRewards) {
+        CCBadgeReward *reward = CCBadgeReward::create(__String::create("test_badge_reward"),
+                                                      __String::create("Test Badge Reward"));
+        
+        CCBadgeReward *secondReward = CCBadgeReward::create(__String::create("rsecond_test_badge_reward"),
+                                                             __String::create("Second Test Badge Reward"));
+        
+        reinitialize(__Array::create(reward, secondReward, NULL));
+        
+        CHECK_EQUAL(initialWorld, CCLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
+        CHECK_EQUAL(reward, CCLevelUp::getInstance()->getReward(reward->getId()->getCString()));
+        CHECK_EQUAL(secondReward, CCLevelUp::getInstance()->getReward(secondReward->getId()->getCString()));
+    }
+    
+    TEST_FIXTURE(InitialWorldFixture, TestGetWorld) {
+        CCLevel *level = CCLevel::create(__String::create("test_level"));
+        CCLevel *innerLevel = CCLevel::create(__String::create("test_inner_level"));
+        level->addInnerWorld(innerLevel);
+        initialWorld->addInnerWorld(level);
+        
+        reinitialize();
+        
+        CHECK_EQUAL(initialWorld, CCLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
+        CHECK_EQUAL(level, CCLevelUp::getInstance()->getWorld(level->getId()->getCString()));
+        CHECK_EQUAL(innerLevel, CCLevelUp::getInstance()->getWorld(innerLevel->getId()->getCString()));
+    }
+    
+    TEST_FIXTURE(InitialWorldFixture, TestGetScore) {
+        CCLevel *level = CCLevel::create(__String::create("test_level"));
+        CCScore *score = CCScore::create(__String::create("test_score"));
+        CCScore *innerScore = CCScore::create(__String::create("test_inner_score"));
+        
+        level->addScore(innerScore);
+        initialWorld->addInnerWorld(level);
+        initialWorld->addScore(score);
+        
+        reinitialize();
+        
+        CHECK_EQUAL(score, CCLevelUp::getInstance()->getScore(score->getId()->getCString()));
+        CHECK_EQUAL(innerScore, CCLevelUp::getInstance()->getScore(innerScore->getId()->getCString()));
+    }
+    
+    TEST_FIXTURE(InitialWorldFixture, TestGetGate) {
+        initialWorld->setMissions(__Array::create());
+        
+        CCLevel *level = CCLevel::create(__String::create("test_level"));
+        CCWorldCompletionGate *gate = CCWorldCompletionGate::create(__String::create("test_level_complete_gate"),
+                                                                    level->getId());
+        CCLevel *secondLevel = CCLevel::create(__String::create("test_second_level"),
+                                               gate, NULL, NULL);
+        
+        initialWorld->addInnerWorld(level);
+        initialWorld->addInnerWorld(secondLevel);
+        
+        reinitialize();
+        
+        CHECK_EQUAL(gate, CCLevelUp::getInstance()->getGate(gate->getId()->getCString()));
+        
+        // This is here since there's no way of cleaning all the event handlers
+        // which were created for this gate when reinitializing
+        gate->forceOpen(true);
     }
 }

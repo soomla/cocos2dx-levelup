@@ -273,7 +273,7 @@ namespace soomla {
         CCDICT_FOREACH(worlds, el) {
                 world = (CCWorld *) el->getObject();
                 CCGate *gate = world->getGate();
-                if (gate != NULL && gate->getId()->create(gateId) == 0) {
+                if (gate != NULL && gate->getId()->compare(gateId) == 0) {
                     retGate = gate;
                     break;
                 }

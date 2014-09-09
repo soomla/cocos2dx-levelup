@@ -109,7 +109,6 @@
 		F8BBFE3219BCA80F002D6A31 /* TestingCoreEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8BBFE3019BCA80F002D6A31 /* TestingCoreEventHandler.cpp */; };
 		F8DA3BC919B70BBB00438250 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8DA3BC819B70BBB00438250 /* GameController.framework */; };
 		F8DBECD219BDF26D0093252C /* TestLevelUp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8DBECD019BDF26D0093252C /* TestLevelUp.cpp */; };
-		F8DBECDC19BDF3170093252C /* InitialWorldNoInitializeFixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8DBECDA19BDF3170093252C /* InitialWorldNoInitializeFixture.cpp */; };
 		F8F8BAB319BCF51C006880FD /* libCocos2dxCoreFromSources.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F8BA9A19BCF449006880FD /* libCocos2dxCoreFromSources.a */; };
 		F8F8E39A19B869B2000F048A /* TestWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F8E39819B869B2000F048A /* TestWorld.cpp */; };
 		F8F8E39D19B86B84000F048A /* InitialWorldFixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8F8E39B19B86B84000F048A /* InitialWorldFixture.cpp */; };
@@ -426,8 +425,6 @@
 		F8BBFE3119BCA80F002D6A31 /* TestingCoreEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingCoreEventHandler.h; sourceTree = "<group>"; };
 		F8DA3BC819B70BBB00438250 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		F8DBECD019BDF26D0093252C /* TestLevelUp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestLevelUp.cpp; sourceTree = "<group>"; };
-		F8DBECDA19BDF3170093252C /* InitialWorldNoInitializeFixture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InitialWorldNoInitializeFixture.cpp; sourceTree = "<group>"; };
-		F8DBECDB19BDF3170093252C /* InitialWorldNoInitializeFixture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialWorldNoInitializeFixture.h; sourceTree = "<group>"; };
 		F8F8BA9519BCF449006880FD /* Cocos2dxCoreFromSources.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Cocos2dxCoreFromSources.xcodeproj; path = "../../../../soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.xcodeproj"; sourceTree = "<group>"; };
 		F8F8E39819B869B2000F048A /* TestWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestWorld.cpp; sourceTree = "<group>"; };
 		F8F8E39B19B86B84000F048A /* InitialWorldFixture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InitialWorldFixture.cpp; sourceTree = "<group>"; };
@@ -532,8 +529,6 @@
 				F8BBFE3019BCA80F002D6A31 /* TestingCoreEventHandler.cpp */,
 				F8BBFE3119BCA80F002D6A31 /* TestingCoreEventHandler.h */,
 				F8DBECD019BDF26D0093252C /* TestLevelUp.cpp */,
-				F8DBECDA19BDF3170093252C /* InitialWorldNoInitializeFixture.cpp */,
-				F8DBECDB19BDF3170093252C /* InitialWorldNoInitializeFixture.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -1065,7 +1060,6 @@
 				F8ADF4C919B7448300C4FE4B /* dump.c in Sources */,
 				F8F8E3B019B8A259000F048A /* TestingLevelUpEventHandler.cpp in Sources */,
 				F8ADF52319B744A100C4FE4B /* XmlTestReporter.cpp in Sources */,
-				F8DBECDC19BDF3170093252C /* InitialWorldNoInitializeFixture.cpp in Sources */,
 				F8ADF51519B744A100C4FE4B /* SignalTranslator.cpp in Sources */,
 				F8ADF51119B744A100C4FE4B /* DeferredTestReporter.cpp in Sources */,
 				F8ADF4CC19B7448300C4FE4B /* load.c in Sources */,
