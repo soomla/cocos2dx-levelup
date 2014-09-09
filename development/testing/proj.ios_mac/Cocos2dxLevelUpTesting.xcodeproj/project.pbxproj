@@ -60,6 +60,8 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
+		EF0F251819BEFFDD00596AAB /* TestScore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0F251619BEFFDD00596AAB /* TestScore.cpp */; };
+		EF0F252219BF008200596AAB /* ScoreFixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0F252019BF008200596AAB /* ScoreFixture.cpp */; };
 		F80A538C19BCA61100786DCE /* BaseTestingEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F80A538A19BCA61100786DCE /* BaseTestingEventHandler.cpp */; };
 		F821042819A7759A008DB661 /* ProfileEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F821042619A7759A008DB661 /* ProfileEventHandler.cpp */; };
 		F821042B19A775DF008DB661 /* ProfileScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F821042919A775DF008DB661 /* ProfileScreen.cpp */; };
@@ -335,6 +337,9 @@
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		EF0F251619BEFFDD00596AAB /* TestScore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestScore.cpp; sourceTree = "<group>"; };
+		EF0F252019BF008200596AAB /* ScoreFixture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreFixture.cpp; sourceTree = "<group>"; };
+		EF0F252119BF008200596AAB /* ScoreFixture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreFixture.h; sourceTree = "<group>"; };
 		F80A538A19BCA61100786DCE /* BaseTestingEventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseTestingEventHandler.cpp; sourceTree = "<group>"; };
 		F80A538B19BCA61100786DCE /* BaseTestingEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTestingEventHandler.h; sourceTree = "<group>"; };
 		F821042619A7759A008DB661 /* ProfileEventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProfileEventHandler.cpp; sourceTree = "<group>"; };
@@ -529,6 +534,9 @@
 				F8BBFE3019BCA80F002D6A31 /* TestingCoreEventHandler.cpp */,
 				F8BBFE3119BCA80F002D6A31 /* TestingCoreEventHandler.h */,
 				F8DBECD019BDF26D0093252C /* TestLevelUp.cpp */,
+				EF0F251619BEFFDD00596AAB /* TestScore.cpp */,
+				EF0F252019BF008200596AAB /* ScoreFixture.cpp */,
+				EF0F252119BF008200596AAB /* ScoreFixture.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -1053,6 +1061,7 @@
 				F8ADF4CA19B7448300C4FE4B /* error.c in Sources */,
 				F8ADF51A19B744A100C4FE4B /* TestList.cpp in Sources */,
 				F8A0EC9119ACCD46006CB3C2 /* CoreEventHandler.cpp in Sources */,
+				EF0F252219BF008200596AAB /* ScoreFixture.cpp in Sources */,
 				F8ADF50E19B744A100C4FE4B /* Checks.cpp in Sources */,
 				F8ADF51019B744A100C4FE4B /* CurrentTest.cpp in Sources */,
 				F80A538C19BCA61100786DCE /* BaseTestingEventHandler.cpp in Sources */,
@@ -1062,6 +1071,7 @@
 				F8ADF52319B744A100C4FE4B /* XmlTestReporter.cpp in Sources */,
 				F8ADF51519B744A100C4FE4B /* SignalTranslator.cpp in Sources */,
 				F8ADF51119B744A100C4FE4B /* DeferredTestReporter.cpp in Sources */,
+				EF0F251819BEFFDD00596AAB /* TestScore.cpp in Sources */,
 				F8ADF4CC19B7448300C4FE4B /* load.c in Sources */,
 				F8ADF4CE19B7448300C4FE4B /* pack_unpack.c in Sources */,
 				F8ADF51619B744A100C4FE4B /* TimeHelpers.cpp in Sources */,
