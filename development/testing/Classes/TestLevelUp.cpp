@@ -20,6 +20,7 @@
 #include "CCBadgeReward.h"
 #include "CCLevel.h"
 #include "CCWorldCompletionGate.h"
+#include "CCWorldCompletionMission.h"
 
 SUITE(TestLevelUp) {
     
@@ -87,5 +88,22 @@ SUITE(TestLevelUp) {
         reinitialize();
         
         CHECK_EQUAL(gate, CCLevelUp::getInstance()->getGate(gate->getId()->getCString()));
+    }
+    
+    TEST_FIXTURE(InitialWorldFixture, TestGetMission) {
+        
+        CCLevel *level = CCLevel::create(__String::create("test_level"));
+        CCWorldCompletionMission *mission = CCWorldCompletionMission::create(__String::create("test_complete_mission"),
+                                                                             __String::create("Test Complete Mission"),
+                                                                             level->getId());
+        CCLevel *secondLevel = CCLevel::create(__String::create("test_second_level"));
+        
+        initialWorld->addInnerWorld(level);
+        initialWorld->addInnerWorld(secondLevel);
+        initialWorld->addMission(mission);
+        
+        reinitialize();
+        
+        CHECK_EQUAL(mission, CCLevelUp::getInstance()->getMission(mission->getId()->getCString()));
     }
 }
