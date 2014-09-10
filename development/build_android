@@ -8,7 +8,7 @@ mkdir -p $build
 cd submodules/android-levelup/SoomlaAndroidLevelUp
 ./build_all
 cd -
-cp -R submodules/android-levelup/build/* $build/
+cp -L submodules/android-levelup/build/AndroidLevelUp.jar $build/
 
 for path in "${paths[@]}"
 do
@@ -17,5 +17,3 @@ do
   cd -
   cp -R $path/build/* $build/
 done
-
-
