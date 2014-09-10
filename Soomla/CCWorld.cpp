@@ -60,21 +60,21 @@ namespace soomla {
                 setInnerWorldsMap(innerWorldsMap);
             }
             else {
-                setInnerWorldsMap(__Dictionary::create());
+                setInnerWorldsMap(CCDictionary::create());
             }
             
             if (scores) {
                 setScores(scores);
             }
             else {
-                setScores(__Dictionary::create());
+                setScores(CCDictionary::create());
             }
             
             if (missions) {
                 setMissions(missions);
             }
             else {
-                setMissions(__Array::create());
+                setMissions(CCArray::create());
             }
 
             return true;
