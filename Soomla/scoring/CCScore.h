@@ -12,7 +12,7 @@
 namespace soomla {
 
     class CCScore: public CCSoomlaEntity {
-        SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__Double *, mStartValue, StartValue, CCLevelUpConsts::JSON_LU_SCORE_STARTVAL);
+        SL_SYNTHESIZE_DOUBLE_RETAIN_WITH_DICT( mStartValue, StartValue, CCLevelUpConsts::JSON_LU_SCORE_STARTVAL);
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__Bool *, mHigherBetter, HigherBetter, CCLevelUpConsts::JSON_LU_SCORE_HIGHBETTER);
     protected:
         double mTempScore;
