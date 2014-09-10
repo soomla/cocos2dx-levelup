@@ -14,7 +14,7 @@ namespace soomla {
     class CCRecordGate: public CCGate {
         friend class CCRecordGateEventHandler;
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCString *, mAssociatedScoreId, AssociatedScoreId, CCLevelUpConsts::JSON_LU_ASSOCSCOREID)
-    SL_SYNTHESIZE_DOUBLE_RETAIN_WITH_DICT(mDesiredRecord, DesiredRecord, CCLevelUpConsts::JSON_LU_DESIRED_RECORD);
+        SL_SYNTHESIZE_DOUBLE_RETAIN_WITH_DICT(mDesiredRecord, DesiredRecord, CCLevelUpConsts::JSON_LU_DESIRED_RECORD);
         CC_SYNTHESIZE(CCLevelUpEventHandler *, mEventHandler, EventHandler);
     public:
         CCRecordGate(): CCGate(), mAssociatedScoreId(NULL), mDesiredRecord(NULL), mEventHandler(NULL) {
