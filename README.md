@@ -44,11 +44,11 @@ All this is backed by Soomla's core tools, and can be easily integrated with mor
     $ git clone git@github.com:vedi/jansson.git external/jansson
     ```
 
-4. Implement your `CCLevelUpEventHandler` class in order to be notified about LevelUp-related events. 
+4. Implement your `CCLevelUpEventHandler` class in order to be notified about LevelUp-related events.
 
 5. Initialize `CCServiceManager`, `CCStoreService`, `CCProfileService`, and `CCLevelUpService` with the class you just created, a `customSecret` and other params:
 
-    	
+
 	```cpp
     __Dictionary *commonParams = __Dictionary::create();
 	commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
@@ -59,20 +59,20 @@ All this is backed by Soomla's core tools, and can be easily integrated with mor
 	__Dictionary *profileParams = __Dictionary::create();
 
     soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
-    
+
 	soomla::CCStoreService::initShared(assets, storeParams);
-	
+
 	soomla::CCProfileService::initShared(profileParams);
-	
+
     soomla::CCLevelUpService::initShared();
     soomla::CCLevelUp::getInstance()->initialize(ExampleWorldFactory::createWorld(), NULL);
-    	
+
 	```
 
 	NOTE: *Custom Secret* - is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game! Initialize `CCLevelUpService` ONLY ONCE when your application loads.
 
 6. Make sure to include the `Cocos2dxLevelUp.h` header whenever you use any of the **cocos2dx-levelup** functions:
-    
+
     ```cpp
     #include "Cocos2dxLevelUp.h"
     ```
@@ -91,7 +91,7 @@ In your XCode project, perform the following steps:
 
 1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder).
 
-2. For each of the following XCode projects:
+1. For each of the following XCode projects:
 	- `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**).  
 	- `Cocos2dXStore.xcodeproj` (**extensions/cocos2dx-store/**).
 	- `Cocos2dXProfile.xcodeproj` (**extensions/soomla-cocos2dx-profile/**).  
@@ -99,7 +99,7 @@ In your XCode project, perform the following steps:
 
 	Perform the following: a) Drag the project into your project, b) Add its targets to your **Build Phases->Target Dependencies**, c) Add the Products (\*.a) of the project to **Build Phases->Link Binary With Libraries**.
 
-3. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
+1. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla/**`
@@ -109,19 +109,27 @@ In your XCode project, perform the following steps:
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/Soomla/**`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/build/ios/headers/**`
 
-4. Register the native `StoreService`, `ProfileService`, and `LevelUpService` by adding:
+1. To register services on the native application (`AppController`):
 
+  1. Import the following headers:
     ```cpp
-    [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
-    [[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
-    [[ServiceManager sharedServiceManager] registerService:[LevelUpService sharedLevelUpService]];
+		#import "ServiceManager.h"
+		#import "StoreService.h"
+		#import "ProfileService.h"
+		#import "LevelUpService.h"
     ```
 
-    at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
+  1. Register the native `StoreService`, `ProfileService`, and `LevelUpService` by adding:
+    ```cpp
+		[[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
+		[[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
+		[[ServiceManager sharedServiceManager] registerService:[LevelUpService sharedLevelUpService]];
+    ```
+    at the begining of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
-5. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
+1. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
-6. See the last step of [cocos2dx-profile instructions for iOS](https://github.com/soomla/cocos2dx-profile#instructions-for-ios) in order to connect the Profile module to a social network provider (in this case Facebook).
+1. See the last step of [cocos2dx-profile instructions for iOS](https://github.com/soomla/cocos2dx-profile#instructions-for-ios) in order to connect the Profile module to a social network provider (in this case Facebook).
 
 That's it! Now all you have to do is build your XCode project and run your game with cocos2dx-levelup.
 
@@ -232,7 +240,7 @@ To integrate cocos2dx-profile into your game, follow these steps:
     ```
     $ git submodule update --init --recursive
     ```
-	
+
     **NOTE:** You should run this command in every repository.
 
 2. For iOS: Use sourced versions of Linked projects (`extensions/soomla-cocos2dx-core/development/Cocos2dxCoreFromSources.xcodeproj`, `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.xcodeproj`)
@@ -277,10 +285,3 @@ A _Challenge_ is a set of _Missions_ that need to be completed, so it's a big _M
 
 A _Reward_ is some kind of perk or status a player can achieve in the game.
 This can be either a badge, a virtual item from the game's economy (sword, coins etc.) or anything you can think of, really (unlocking game content or levels comes to mind).
-
-
-
-
-
-
-
