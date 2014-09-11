@@ -196,7 +196,7 @@ namespace soomla {
             return NULL;
         }
         
-        DictElement *element = NULL;
+        CCDictElement *element = NULL;
         int i = 0;
         CCDICT_FOREACH(mInnerWorldsMap, element) {
             if (i == index) {
