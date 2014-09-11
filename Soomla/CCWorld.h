@@ -46,6 +46,8 @@ namespace soomla {
         void addInnerWorld(CCWorld *world);
         void addMission(CCMission *mission);
         void addScore(CCScore *score);
+        
+        CCWorld *getInnerWorldAt(int index);
 
         void batchAddLevelsWithTemplates(int numLevels, CCGate *gateTemplate, CCScore *scoreTemplate, CCMission *missionTemplate);
         void batchAddLevelsWithTemplates(int numLevels, CCGate *gateTemplate, cocos2d::__Array *scoreTemplates, cocos2d::__Array *missionTemplates);
