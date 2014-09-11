@@ -375,6 +375,60 @@ SUITE(TestWorld)
         CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_GIVEN, replaceReward));
     }
     
+    TEST_FIXTURE(InitialWorldFixture, SanityBatchAddLevelsTemplateNull) {
+        reinitialize();
+        
+        int levelCount = 5;
+        
+        initialWorld->batchAddLevelsWithTemplates(levelCount, NULL, (CCScore *)NULL, NULL);
+        __Dictionary *innerWolds = initialWorld->getInnerWorldsMap();
+        
+        CHECK_EQUAL(levelCount, innerWolds->count());
+        
+        DictElement *element = NULL;
+        CCDICT_FOREACH(innerWolds, element) {
+            CCLevel *level = dynamic_cast<CCLevel *>(element->getObject());
+            
+            __Dictionary *innerMap = level->getInnerWorldsMap();
+            CHECK_EQUAL(0, innerMap->count());
+            
+            CHECK(level->getGate() == NULL);
+            
+            __Array *missions = level->getMissions();
+            CHECK_EQUAL(0, missions->count());
+            
+            __Dictionary *scores = level->getScores();
+            CHECK_EQUAL(0, scores->count());
+        }
+    }
+    
+    TEST_FIXTURE(InitialWorldFixture, SanityBatchAddLevelsTemplatesNull) {
+        reinitialize();
+        
+        int levelCount = 5;
+        
+        initialWorld->batchAddLevelsWithTemplates(levelCount, NULL, (CCScore *)NULL, NULL);
+        __Dictionary *innerWolds = initialWorld->getInnerWorldsMap();
+        
+        CHECK_EQUAL(levelCount, innerWolds->count());
+        
+        DictElement *element = NULL;
+        CCDICT_FOREACH(innerWolds, element) {
+            CCLevel *level = dynamic_cast<CCLevel *>(element->getObject());
+            
+            __Dictionary *innerMap = level->getInnerWorldsMap();
+            CHECK_EQUAL(0, innerMap->count());
+            
+            CHECK(level->getGate() == NULL);
+            
+            __Array *missions = level->getMissions();
+            CHECK_EQUAL(0, missions->count());
+            
+            __Dictionary *scores = level->getScores();
+            CHECK_EQUAL(0, scores->count());
+        }
+    }
+    
     TEST_FIXTURE(InitialWorldFixture, SanityBatchAddLevels) {
         reinitialize();
         
