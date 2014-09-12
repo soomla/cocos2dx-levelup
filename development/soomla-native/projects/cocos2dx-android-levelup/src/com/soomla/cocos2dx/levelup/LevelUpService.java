@@ -42,7 +42,7 @@ public class LevelUpService extends AbstractSoomlaService {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 LevelUpService.getInstance().init();
-                JSONObject metadata = retParams.optJSONObject("metadata");
+                JSONObject metadata = params.optJSONObject("metadata");
                 WorldStorage.initLevelUp(metadata != null ? metadata.toString() : "{}");
                 retParams.put("return", true);
             }
