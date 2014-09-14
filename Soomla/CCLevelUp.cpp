@@ -95,6 +95,10 @@ namespace soomla {
     }
 
     CCReward *CCLevelUp::getReward(const char *rewardId) {
+        if (mRewards == NULL) {
+            return NULL;
+        }
+        
         return dynamic_cast<CCReward *>(mRewards->objectForKey(rewardId));
     }
 
