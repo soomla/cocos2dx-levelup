@@ -330,6 +330,8 @@ SUITE(TestWorld)
         CHECK(!mission->isCompleted());
         initialWorld->addMission(mission);
         
+        CHECK(!reward->isOwned());
+        
         initialWorld->setSingleScoreValue(35.0);
         CHECK(!mission->isCompleted());
         
@@ -340,6 +342,7 @@ SUITE(TestWorld)
         CHECK(handler->checkEventFiredWith(CCLevelUpConsts::EVENT_MISSION_COMPLETED, mission));
         
         CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_GIVEN, reward));
+        CHECK(reward->isOwned());
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityAssignReward) {
@@ -351,6 +354,7 @@ SUITE(TestWorld)
         initialWorld->assignReward(reward);
         
         CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_GIVEN, reward));
+        CHECK(reward->isOwned());
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityReplaceReward) {
@@ -368,11 +372,14 @@ SUITE(TestWorld)
         initialWorld->assignReward(reward);
         
         CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_GIVEN, reward));
+        CHECK(reward->isOwned());
         
         initialWorld->assignReward(replaceReward);
         
         CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_TAKEN, reward));
+        CHECK(!reward->isOwned());
         CHECK(coreHandler->checkEventFiredWithById(CCCoreConsts::EVENT_REWARD_GIVEN, replaceReward));
+        CHECK(replaceReward->isOwned());
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityBatchAddLevelsTemplateNull) {
