@@ -24,12 +24,11 @@
 
 SUITE(TestLevelUp) {
     
-    TEST_FIXTURE(InitialWorldFixture, SanityInitialize) {
+    TEST_FIXTURE(InitialWorldFixture, SanityInitializeNoRewards) {
         reinitialize();
         
         CHECK_EQUAL(initialWorld, CCLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
-        // crashes
-        // CHECK(CCLevelUp::getInstance()->getReward("reward") == NULL);
+        CHECK(CCLevelUp::getInstance()->getReward("reward") == NULL);
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityInitializeRewards) {
