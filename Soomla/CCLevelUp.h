@@ -41,6 +41,8 @@ namespace soomla {
         CCScore *getScore(char const *scoreId);
 
         CCWorld *getWorld(char const *worldId);
+        
+        CCLevel *getLevel(char const *levelId);
 
         CCGate *getGate(char const *gateId);
 
