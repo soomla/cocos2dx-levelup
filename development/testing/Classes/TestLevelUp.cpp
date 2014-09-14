@@ -59,6 +59,24 @@ SUITE(TestLevelUp) {
         CHECK_EQUAL(innerLevel, CCLevelUp::getInstance()->getWorld(innerLevel->getId()->getCString()));
     }
     
+    TEST_FIXTURE(InitialWorldFixture, TestGetLevel) {
+        CCLevel *level = CCLevel::create(__String::create("test_level"));
+        CCLevel *innerLevel = CCLevel::create(__String::create("test_inner_level"));
+        level->addInnerWorld(innerLevel);
+        initialWorld->addInnerWorld(level);
+        
+        CCWorld *innerWorld = CCWorld::create(__String::create("test_world"));
+        initialWorld->addInnerWorld(innerWorld);
+        
+        reinitialize();
+        
+        CHECK_EQUAL(initialWorld, CCLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
+        CHECK_EQUAL(level, CCLevelUp::getInstance()->getLevel(level->getId()->getCString()));
+        CHECK_EQUAL(innerLevel, CCLevelUp::getInstance()->getLevel(innerLevel->getId()->getCString()));
+        
+        CHECK(CCLevelUp::getInstance()->getLevel(innerWorld->getId()->getCString()) == NULL);
+    }
+    
     TEST_FIXTURE(InitialWorldFixture, TestGetScore) {
         CCLevel *level = CCLevel::create(__String::create("test_level"));
         CCScore *score = CCScore::create(__String::create("test_score"));
