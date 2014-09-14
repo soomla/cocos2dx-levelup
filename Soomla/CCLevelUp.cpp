@@ -148,6 +148,10 @@ namespace soomla {
 
         return fetchWorld(worldId, mInitialWorld->getInnerWorldsMap());
     }
+    
+    CCLevel *CCLevelUp::getLevel(char const *levelId) {
+        return dynamic_cast<CCLevel *>(getWorld(levelId));
+    }
 
     /// <summary>
     /// Counts all levels in all worlds and inner worlds.
