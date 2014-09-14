@@ -34,7 +34,7 @@ namespace soomla {
 
         virtual ~CCLevelUp();
 
-        void initialize(CCWorld *initialWorld, cocos2d::__Array *rewards);
+        void initialize(CCWorld *initialWorld, cocos2d::__Array *rewards = NULL);
 
         CCReward *getReward(char const *rewardId);
 
