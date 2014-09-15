@@ -70,57 +70,93 @@ namespace soomla {
     }
 
     void CCLevelUpEventDispatcher::onGateOpened(CCGate *gate) {
+        lockEventHandlers();
+        
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onGateOpened(gate);
         }
+
+        unlockEventHandlers();
     }
 
     void CCLevelUpEventDispatcher::onMissionCompleted(CCMission *mission) {
+        lockEventHandlers();
+        
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onMissionCompleted(mission);
         }
+
+        unlockEventHandlers();
     }
 
     void CCLevelUpEventDispatcher::onMissionCompletionRevoked(CCMission *mission) {
+        lockEventHandlers();
+        
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onMissionCompletionRevoked(mission);
         }
+
+        unlockEventHandlers();
     }
 
     void CCLevelUpEventDispatcher::onScoreRecordReached(CCScore *score) {
+        lockEventHandlers();
+        
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onScoreRecordReached(score);
         }
+
+        unlockEventHandlers();
     }
 
     void CCLevelUpEventDispatcher::onScoreRecordChanged(CCScore *score) {
+        lockEventHandlers();
+        
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onScoreRecordChanged(score);
         }
+
+        unlockEventHandlers();
     }
 
     void CCLevelUpEventDispatcher::onWorldCompleted(CCWorld *world) {
+        lockEventHandlers();
+        
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onWorldCompleted(world);
         }
+
+        unlockEventHandlers();
     }
 
     void CCLevelUpEventDispatcher::onWorldRewardAssigned(CCWorld *world) {
+        lockEventHandlers();
+        
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onWorldRewardAssigned(world);
         }
+
+        unlockEventHandlers();
     }
 
     void CCLevelUpEventDispatcher::onLevelStarted(CCLevel *level) {
+        lockEventHandlers();
+        
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onLevelStarted(level);
         }
+
+        unlockEventHandlers();
     }
 
     void CCLevelUpEventDispatcher::onLevelEnded(CCLevel *level) {
+        lockEventHandlers();
+        
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onLevelEnded(level);
         }
+
+        unlockEventHandlers();
     }
 
 
