@@ -436,6 +436,48 @@ SUITE(TestWorld)
         }
     }
     
+    TEST_FIXTURE(InitialWorldFixture, SanityBatchAddDependentLevels) {
+        reinitialize();
+        
+        int levelCount = 5;
+        
+        initialWorld->batchAddDependentLevelsWithTemplates(levelCount, (CCScore *)NULL, NULL);
+        __Dictionary *innerWolds = initialWorld->getInnerWorldsMap();
+        
+        CHECK_EQUAL(levelCount, innerWolds->count());
+        
+        DictElement *element = NULL;
+        int i = 0;
+        CCDICT_FOREACH(innerWolds, element) {
+            CCLevel *level = dynamic_cast<CCLevel *>(element->getObject());
+            
+            __Dictionary *innerMap = level->getInnerWorldsMap();
+            CHECK_EQUAL(0, innerMap->count());
+            
+            __Array *missions = level->getMissions();
+            CHECK_EQUAL(0, missions->count());
+            
+            __Dictionary *scores = level->getScores();
+            CHECK_EQUAL(0, scores->count());
+            
+            if (i == 0) {
+                CHECK(level->canStart());
+            }
+            else {
+                CHECK(!level->canStart());
+            }
+            i++;
+        }
+        
+        for (i = 0; i < levelCount - 1; i++) {
+            CCWorld *innerWorld = initialWorld->getInnerWorldAt(i);
+            CCWorld *nextWorld = initialWorld->getInnerWorldAt(i + 1);
+            
+            innerWorld->setCompleted(true);
+            CHECK(nextWorld->canStart());
+        }
+    }
+    
     TEST_FIXTURE(InitialWorldFixture, SanityBatchAddLevels) {
         reinitialize();
         
