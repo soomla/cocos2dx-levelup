@@ -345,7 +345,7 @@ namespace soomla {
                 world = (CCWorld *) el->getObject();
 
                 CCObject *ref;
-                CCARRAY_FOREACH(mInitialWorld->getMissions(), ref) {
+                CCARRAY_FOREACH(world->getMissions(), ref) {
                         mission = dynamic_cast<CCMission *>(ref);
                         CC_ASSERT(mission);
                         if (mission->getId()->compare(missionId) == 0) {
