@@ -5,7 +5,7 @@
 
 #include "CCSocialLikeGate.h"
 #include "CCGateStorage.h"
-#include "CCProfileController.h"
+#include "CCSoomlaProfile.h"
 
 namespace soomla {
 
@@ -64,7 +64,7 @@ namespace soomla {
     bool CCSocialLikeGate::openInner() {
         if (canOpen()) {
 
-            CCProfileController::getInstance()->like(getProvider(), getPageName()->getCString(), NULL, NULL);
+            CCSoomlaProfile::getInstance()->like(getProvider(), getPageName()->getCString(), NULL, NULL);
 
             return true;
         }

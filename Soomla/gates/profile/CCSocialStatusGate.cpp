@@ -5,7 +5,7 @@
 
 #include "CCSocialStatusGate.h"
 #include "CCGateStorage.h"
-#include "CCProfileController.h"
+#include "CCSoomlaProfile.h"
 
 namespace soomla {
 
@@ -64,7 +64,7 @@ namespace soomla {
     bool CCSocialStatusGate::openInner() {
         if (canOpen()) {
 
-            CCProfileController::getInstance()->updateStatus(getProvider(), getStatus()->getCString(), NULL, NULL);
+            CCSoomlaProfile::getInstance()->updateStatus(getProvider(), getStatus()->getCString(), NULL, NULL);
 
             return true;
         }

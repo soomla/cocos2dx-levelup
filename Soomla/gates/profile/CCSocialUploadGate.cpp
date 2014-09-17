@@ -5,7 +5,7 @@
 
 #include "CCSocialUploadGate.h"
 #include "CCGateStorage.h"
-#include "CCProfileController.h"
+#include "CCSoomlaProfile.h"
 
 namespace soomla {
 
@@ -72,7 +72,7 @@ namespace soomla {
     bool CCSocialUploadGate::openInner() {
         if (canOpen()) {
 
-            CCProfileController::getInstance()->uploadImage(getProvider(),
+            CCSoomlaProfile::getInstance()->uploadImage(getProvider(),
                     getMessage()->getCString(), getFileName()->getCString(), NULL, NULL);
 
             return true;
