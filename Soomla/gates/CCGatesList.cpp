@@ -20,7 +20,7 @@ namespace soomla {
                 setGates(gates);
             }
             else {
-                setGates(cocos2d::__Array::create());
+                setGates(cocos2d::CCArray::create());
             }
             return true;
         }
