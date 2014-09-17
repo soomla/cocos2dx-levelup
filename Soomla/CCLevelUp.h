@@ -66,6 +66,8 @@ namespace soomla {
         CCGate *fetchGate(char const *gateId, cocos2d::__Dictionary *worlds);
 
         CCGate *fetchGateFromMissions(char const *gateId, cocos2d::__Array *missions);
+        
+        CCGate *fetchGateFromGate(char const *gateId, CCGate *targetGate);
 
         int getRecursiveCount(CCWorld *world, bool (*isAccepted)(CCWorld *));
 
