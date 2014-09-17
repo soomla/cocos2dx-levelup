@@ -33,6 +33,14 @@
 #include "CCScheduleGate.h"
 #include "CCWorldCompletionGate.h"
 
+#include "CCPurchasableGate.h"
+#include "CCBalanceGate.h"
+
+#include "CCSocialLikeGate.h"
+#include "CCSocialStatusGate.h"
+#include "CCSocialStoryGate.h"
+#include "CCSocialUploadGate.h"
+
 #include "CCRangeScore.h"
 #include "CCScore.h"
 #include "CCVirtualItemScore.h"
