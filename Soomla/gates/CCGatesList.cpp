@@ -16,7 +16,12 @@ namespace soomla {
     bool CCGatesList::init(cocos2d::CCString *id, CCArray *gates) {
         bool result = CCGate::init(id, NULL);
         if (result) {
-            setGates(gates);
+            if (gates != NULL) {
+                setGates(gates);
+            }
+            else {
+                setGates(cocos2d::__Array::create());
+            }
             return true;
         }
         return result;

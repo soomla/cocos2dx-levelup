@@ -17,8 +17,8 @@ namespace soomla {
 
     class CCGatesList: public CCGate {
         friend class CCGateListEventHandler;
-        CC_SYNTHESIZE(cocos2d::CCArray *, mGates, Gates);
-        CC_SYNTHESIZE(CCLevelUpEventHandler *, mEventHandler, EventHandler);
+        CC_SYNTHESIZE_RETAIN(cocos2d::CCArray *, mGates, Gates);
+        CC_SYNTHESIZE_RETAIN(CCLevelUpEventHandler *, mEventHandler, EventHandler);
     public:
         CCGatesList(): CCGate(), mGates(NULL), mEventHandler(NULL) {
         }
