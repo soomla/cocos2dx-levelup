@@ -5,7 +5,7 @@
 
 #include "CCSocialStoryGate.h"
 #include "CCGateStorage.h"
-#include "CCProfileController.h"
+#include "CCSoomlaProfile.h"
 
 namespace soomla {
 
@@ -88,7 +88,7 @@ namespace soomla {
     bool CCSocialStoryGate::openInner() {
         if (canOpen()) {
 
-            CCProfileController::getInstance()->updateStory(getProvider(),
+            CCSoomlaProfile::getInstance()->updateStory(getProvider(),
                     getMessage()->getCString(), getStoryName()->getCString(),
                     getCaption()->getCString(), "",
                     getLink()->getCString(), getImgUrl()->getCString(), NULL, NULL);
