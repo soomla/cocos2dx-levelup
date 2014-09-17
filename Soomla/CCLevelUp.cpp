@@ -8,6 +8,7 @@
 #include "CCWorld.h"
 #include "CCLevel.h"
 #include "CCChallenge.h"
+#include "CCGatesList.h"
 #include "CCLevelUpService.h"
 
 namespace soomla {
@@ -103,11 +104,13 @@ namespace soomla {
     }
 
     CCGate *CCLevelUp::getGate(char const *gateId) {
-        if (mInitialWorld->getGate() != NULL && mInitialWorld->getGate()->getId()->compare(gateId) == 0) {
-            return mInitialWorld->getGate();
+        CCGate *gate = NULL;
+        gate = fetchGateFromGate(gateId, mInitialWorld->getGate());
+        if (gate != NULL) {
+            return gate;
         }
 
-        CCGate *gate = fetchGateFromMissions(gateId, mInitialWorld->getMissions());
+        gate = fetchGateFromMissions(gateId, mInitialWorld->getMissions());
         if (gate != NULL) {
             return gate;
         }
@@ -281,8 +284,8 @@ namespace soomla {
         CCDICT_FOREACH(worlds, el) {
                 world = (CCWorld *) el->getObject();
                 CCGate *gate = world->getGate();
-                if (gate != NULL && gate->getId()->compare(gateId) == 0) {
-                    retGate = gate;
+                retGate = fetchGateFromGate(gateId, gate);
+                if (retGate != NULL) {
                     break;
                 }
             }
@@ -315,9 +318,9 @@ namespace soomla {
         CCMission *mission;
         CCARRAY_FOREACH(missions, ref) {
                 mission = (CCMission *) ref;
-                if (mission->getGate() != NULL && mission->getGate()->getId()->compare(gateId) == 0) {
-                    retGate = mission->getGate();
-                    break;
+                retGate = fetchGateFromGate(gateId, mission->getGate());
+                if (retGate != NULL) {
+                    return retGate;
                 }
             }
 
@@ -335,6 +338,32 @@ namespace soomla {
         }
 
         return retGate;
+    }
+    
+    CCGate *CCLevelUp::fetchGateFromGate(char const *gateId, CCGate *targetGate) {
+        if (targetGate == NULL) {
+            return NULL;
+        }
+        
+        if ((targetGate != NULL) && (targetGate->getId()->compare(gateId) == 0)) {
+            return targetGate;
+        }
+        
+        CCGate *result = NULL;
+        CCGatesList *gatesList = dynamic_cast<CCGatesList *>(targetGate);
+        if (gatesList != NULL) {
+            CCArray *gatesArray = gatesList->getGates();
+            CCObject* gate = NULL;
+            CCARRAY_FOREACH(gatesArray, gate) {
+                CCGate *innerGate = dynamic_cast<CCGate *>(gate);
+                result = fetchGateFromGate(gateId, innerGate);
+                if (result != NULL) {
+                    break;
+                }
+            }
+        }
+        
+        return result;
     }
 
     CCMission *CCLevelUp::fetchMission(char const *missionId, cocos2d::CCDictionary *worlds) {
