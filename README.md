@@ -536,3 +536,26 @@ To integrate cocos2dx-levelup into your game, follow these steps:
   gatesListOR->isOpen(); // still true
   gatesListAND->isOpen(); // true
   ```
+
+# Contribution
+
+We want you!
+
+Fork -> Clone -> Implement -> Insert Comments -> Test -> Pull-Request.
+
+We have great RESPECT for contributors.
+
+# Code Documentation
+
+cocos2dx-levelup follows strict code documentation conventions. If you would like to contribute please read our [Documentation Guidelines](https://github.com/soomla/cocos2dx-store/blob/master/documentation.md) and follow them. Clear, consistent  comments will make our code easy to understand.
+
+# SOOMLA, Elsewhere ...
+
++ [Framework Website](http://www.soom.la/)
++ [On Facebook](https://www.facebook.com/pages/The-SOOMLA-Project/389643294427376).
++ [On AngelList](https://angel.co/the-soomla-project)
+
+# License
+
+Apache License. Copyright (c) 2012-2014 SOOMLA. http://www.soom.la
++ http://opensource.org/licenses/Apache-2.0
