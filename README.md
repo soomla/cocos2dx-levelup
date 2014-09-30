@@ -329,7 +329,6 @@ To integrate cocos2dx-levelup into your game, follow these steps:
 	```cpp
   CCVirtualItemReward *virtualItemReward = CCVirtualItemReward::create(__String::create("mega_star_reward_id"),
                                                                     __String::create("MegaStarReward"),
-                                                                    __Bool::create(false),
                                                                     __Integer::create(1),
                                                                     megaStarItemId);
 	__Array *rewards = __Array::create(virtualItemReward, NULL);
