@@ -10,57 +10,71 @@ end short code teaser -->
 <!-- updates when you have any -->
 <!-- end updates -->
 
-cocos2dx-levelup is an open code initiative as part of The SOOMLA Project. It organizes and simplifies structuring of games for user progress.
-
-It acts as sort of a 'blueprint' for the game, modeling worlds/levels, gates to levels, missions and rewards that can be completed and achieved.
-All this is backed by Soomla's core tools, and can be easily integrated with more Soomla modules, like cocos2dx-store for IAP, or cocos2dx-profile for social related functions.
+cocos2dx-levelup is a library built for easily modeling game structure and user progression, and allows rapid protoyping using a standard and simplified model.  It acts as sort of a 'blueprint' for the game, modeling worlds/levels, gates to levels, missions and rewards that can be completed and achieved.  All this is backed by SOOMLA's core tools, and can be easily integrated with more SOOMLA modules, like cocos2dx-store for IAP, or cocos2dx-profile for social related functions.
 
 cocos2dx-levelup is the implementation of the LevelUp module for the Cocos2d-x framework, using the C++ flavour.
 
 <!-- Check out our [Wiki] (https://github.com/soomla/android-store/wiki) for more information about the project and how to use it better. -->
+
+## Contents
+
+- [Model Overview](#model-overview)
+    - [World / Level](#world--level)
+    - [Score](#score)
+    - [Gate](#gate)
+    - [Mission/Challenge](#missionchallenge)
+    - [Reward](#reward)
+- [Getting Started (With pre-built libraries - RECOMMENDED)](#getting-started-with-pre-built-libraries---recommended)
+    - [Integration with SOOMLA cocos2dx-store](#integration-with-soomla-cocos2dx-store)
+    - [Integration with SOOMLA cocos2dx-profile](#integration-with-soomla-cocos2dx-profile)
+- [Debugging](#debugging)
+- [Working with sources](#working-with-sources)
+- [Example Usages](#example-usages)
+
+<!-- end toc -->
 
 ## Model Overview
 
 <!-- attach UML style simple diagram -->
 
 
-Generally, the Soomla sources contain detailed documentation on the different entities and how to use them, but here's a quick glance:
+Generally, the SOOMLA sources contain detailed documentation on the different entities and how to use them, but here's a quick glance:
 
-###World/Level
+![Model Overview](http://know.soom.la/img/tutorial_img/soomla_diagrams/levelup.png)
+
+### World / Level
 
 A _Level_ is pretty clear, and most games have them.
 A simple example is an Angry Birds single level, where you need to knock out all the pigs.
 It measures specific things, such as duration it takes to complete, and can be started and ended.
 
-A _World_ is a more general concept than a Level (a Level **Is-a** World), and can have innerWorlds to create hierarchies. Another example from Angry Birds is level pages and episodes, which contain the actual levels.
+A _World_ is a more general concept than a Level (a Level **Is-a** World), and can have `innerWorlds` to create hierarchies. Another example from Angry Birds is level pages and episodes, which contain the actual levels.
 
 The _Initial World_ is a container world for all worlds and levels in the game. We use the _Initial World_ to intialize the LevelUp module.
 
-###Score
+### Score
 
 A _Score_ is something which can be accumulated or measured within a _World_ (or _Level_ of course).
-It can be incremented or decremented based on user actions, and recorded at the completion of the _World/Level_.
+It can be incremented or decremented based on user actions, and recorded at the completion of the _World / Level_.
 
 This, in turn, can later be applied to high scores or best times, or treated as collectibles that can be awarded upon completion.
 
-###Gate
+### Gate
 
-A _Gate_ is a closed portal from one _World_ to the next. It can be unlocked in many different ways (according to _Gate_ type), and can also be combined into _GatesList_ to build more complex _Gates_.
+A _Gate_ is a closed portal from one _World_ to the next. It can be unlocked in many different ways (according to _Gate_ type), and can also be combined into a _GatesList_ to build more complex _Gates_.
 
-###Mission/Challenge
+### Mission/Challenge
 
 A _Mission_ is a single task a player can complete in a game, usually for a _Reward_.
 
 A _Challenge_ is a set of _Missions_ that need to be completed, so it's a big _Mission_ built out of several smaller _Missions_.
 
-###Reward
+### Reward
 
 A _Reward_ is some kind of perk or status a player can achieve in the game.
 This can be either a badge, a virtual item from the game's economy (sword, coins etc.) or anything you can think of, really (unlocking game content or levels comes to mind).
 
-![Model Overview](http://know.soom.la/img/tutorial_img/soomla_diagrams/levelup.png)
-
-##Getting Started (With pre-built libraries - RECOMMENDED)
+## Getting Started (With pre-built libraries - RECOMMENDED)
 
 *If you want to develop with sources, refer to the [Working with sources](#working-with-sources) section below*.
 
@@ -209,7 +223,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
 		1. AndroidProfile.jar
 		1. Cocos2dxAndroidProfile.jar
 
-		- From `extensions/cocos2dx-levelup/build/android`
+    - From `extensions/cocos2dx-levelup/build/android`
 		1. AndroidLevelUp.jar
 		1. Cocos2dxAndroidLevelUp.jar
 
@@ -243,7 +257,7 @@ That's it! Now all you have to do is build your XCode project and run your game 
     }
 	```
 
-1. Update your AndroidManifest.xml to include permissions and the SoomlaApp:
+1. Update your `AndroidManifest.xml` to include permissions and the `SoomlaApp`:
 
     ``` xml
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -262,14 +276,14 @@ That's it! Now all you have to do is build your XCode project and run your game 
 
 That's it! Don't forget to run the **build_native.py** script so cocos2dx-levelup sources will be built with cocos2d-x.
 
-### Integration with Soomla cocos2dx-store
+### Integration with SOOMLA cocos2dx-store
 
-Please follow steps in [cocos2dx-store](https://github.com/soomla/cocos2dx-store) for the _Store_ part of the setup.
+Please follow the steps in [cocos2dx-store](https://github.com/soomla/cocos2dx-store) for the _Store_ part of the setup.
 Then, you can use the **store-related _LevelUp_ classes**, such as _CCVirtualItemScore_ or _CCVirtualItemReward_ or _CCBalanceGate_.
 
-### Integration with Soomla cocos2dx-profile
+### Integration with SOOMLA cocos2dx-profile
 
-Please follow steps in [cocos2dx-profile](https://github.com/soomla/cocos2dx-profile) for the _Profile_ part of the setup.
+Please follow the steps in [cocos2dx-profile](https://github.com/soomla/cocos2dx-profile) for the _Profile_ part of the setup.
 Then, you can use the **profile-related _LevelUp_ classes**, such as _CCSocialLikeMission_.
 
 ## Debugging
@@ -280,7 +294,7 @@ If you want to see debug messages from _android-levelup_, set the `logDebug` var
 
 To see debug messages on iOS, make sure you have also `DEBUG=1` in your Build Settings' `Preprocessor Macros` (for Debug only).
 
-##**Working with sources**
+## Working with sources
 
 **SOOMLA appreciates code contributions!** You are more than welcome to extend the capabilities of cocos2dx-levelup.
 
@@ -322,7 +336,7 @@ To integrate cocos2dx-levelup into your game, follow these steps:
 
 ## Example Usages
 
-  > Examples using virtual items are dependent on cocos2dx-store module, with proper CCSoomlaStore initialization and CCStoreAssets definitions. See the cocos2dx-store integration section for more details.
+  > Examples using virtual items are dependent on cocos2dx-store module, with proper `CCSoomlaStore` initialization and `CCStoreAssets` definitions. See the cocos2dx-store integration section for more details.
 
 * CCMission with CCReward (collect 5 stars to get 1 mega star)
 
