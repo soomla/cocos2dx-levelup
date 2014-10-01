@@ -86,7 +86,7 @@ namespace soomla {
         CCSoomlaUtils::logDebug(TAG, "call init");
 
         CCDictionary *metadata = CCDictionary::create();
-        metadata->setObject(initialWorld->toDictionary(), "initialWorld");
+        metadata->setObject(initialWorld->toDictionary(), CCLevelUpConsts::JSON_LU_MAIN_WORLD);
         if (rewards) {
             metadata->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(rewards), "rewards");
         }
