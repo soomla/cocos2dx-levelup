@@ -16,6 +16,23 @@ cocos2dx-levelup is the implementation of the LevelUp module for the Cocos2d-x f
 
 <!-- Check out our [Wiki] (https://github.com/soomla/android-store/wiki) for more information about the project and how to use it better. -->
 
+## Contents
+
+- [Model Overview](#model-overview)
+    - [World / Level](#world--level)
+    - [Score](#score)
+    - [Gate](#gate)
+    - [Mission/Challenge](#missionchallenge)
+    - [Reward](#reward)
+- [Getting Started (With pre-built libraries - RECOMMENDED)](#getting-started-with-pre-built-libraries---recommended)
+    - [Integration with SOOMLA cocos2dx-store](#integration-with-soomla-cocos2dx-store)
+    - [Integration with SOOMLA cocos2dx-profile](#integration-with-soomla-cocos2dx-profile)
+- [Debugging](#debugging)
+- [Working with sources](#working-with-sources)
+- [Example Usages](#example-usages)
+
+<!-- end toc -->
+
 ## Model Overview
 
 <!-- attach UML style simple diagram -->
@@ -23,7 +40,9 @@ cocos2dx-levelup is the implementation of the LevelUp module for the Cocos2d-x f
 
 Generally, the SOOMLA sources contain detailed documentation on the different entities and how to use them, but here's a quick glance:
 
-###World / Level
+![Model Overview](http://know.soom.la/img/tutorial_img/soomla_diagrams/levelup.png)
+
+### World / Level
 
 A _Level_ is pretty clear, and most games have them.
 A simple example is an Angry Birds single level, where you need to knock out all the pigs.
@@ -33,31 +52,29 @@ A _World_ is a more general concept than a Level (a Level **Is-a** World), and c
 
 The _Initial World_ is a container world for all worlds and levels in the game. We use the _Initial World_ to intialize the LevelUp module.
 
-###Score
+### Score
 
 A _Score_ is something which can be accumulated or measured within a _World_ (or _Level_ of course).
 It can be incremented or decremented based on user actions, and recorded at the completion of the _World / Level_.
 
 This, in turn, can later be applied to high scores or best times, or treated as collectibles that can be awarded upon completion.
 
-###Gate
+### Gate
 
 A _Gate_ is a closed portal from one _World_ to the next. It can be unlocked in many different ways (according to _Gate_ type), and can also be combined into a _GatesList_ to build more complex _Gates_.
 
-###Mission/Challenge
+### Mission/Challenge
 
 A _Mission_ is a single task a player can complete in a game, usually for a _Reward_.
 
 A _Challenge_ is a set of _Missions_ that need to be completed, so it's a big _Mission_ built out of several smaller _Missions_.
 
-###Reward
+### Reward
 
 A _Reward_ is some kind of perk or status a player can achieve in the game.
 This can be either a badge, a virtual item from the game's economy (sword, coins etc.) or anything you can think of, really (unlocking game content or levels comes to mind).
 
-![Model Overview](http://know.soom.la/img/tutorial_img/soomla_diagrams/levelup.png)
-
-##Getting Started (With pre-built libraries - RECOMMENDED)
+## Getting Started (With pre-built libraries - RECOMMENDED)
 
 *If you want to develop with sources, refer to the [Working with sources](#working-with-sources) section below*.
 
@@ -277,7 +294,7 @@ If you want to see debug messages from _android-levelup_, set the `logDebug` var
 
 To see debug messages on iOS, make sure you have also `DEBUG=1` in your Build Settings' `Preprocessor Macros` (for Debug only).
 
-##**Working with sources**
+## Working with sources
 
 **SOOMLA appreciates code contributions!** You are more than welcome to extend the capabilities of cocos2dx-levelup.
 
