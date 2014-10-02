@@ -59,36 +59,36 @@ namespace soomla {
     char const *CCLevelUpConsts::JSON_LU_FILE_NAME = "fileName";
 
     /** Types **/
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_MISSION     = "mission";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_MISSION = "balanceMission";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_CHALLENGE   = "challenge";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_PURCHASE_MISSION = "purchaseMission";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_RECORD_MISSION = "recordMission";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_MISSION = "worldCompletionMission";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_MISSION = "socialLikeMission";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_MISSION = "socialStatusMission";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_MISSION = "socialStoryMission";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_MISSION = "socialUploadMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_MISSION     = "Mission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_MISSION = "BalanceMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_CHALLENGE   = "Challenge";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_PURCHASE_MISSION = "PurchasingMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_RECORD_MISSION = "RecordMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_MISSION = "WorldCompletionMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_MISSION = "SocialLikeMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_MISSION = "SocialStatusMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_MISSION = "SocialStoryMission";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_MISSION = "SocialUploadMission";
 
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_GATE        = "gate";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE = "balanceGate";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_AND = "gatesListAnd";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_OR = "gatesListOr";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_PURCHASABLE_GATE = "purchasableGate";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_RECORD_GATE = "recordGate";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_SCHEDULE_GATE = "scheduleGate";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE = "worldCompletionGate";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_GATE = "socialLikeGate";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_GATE = "socialStatusGate";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_GATE = "socialStoryGate";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_GATE = "socialUploadGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_GATE        = "Gate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE = "BalanceGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_AND = "GatesListAND";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_OR = "GatesListOR";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_PURCHASABLE_GATE = "PurchasableGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_RECORD_GATE = "RecordGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SCHEDULE_GATE = "ScheduleGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE = "WorldCompletionGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_GATE = "SocialLikeGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_GATE = "SocialStatusGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_GATE = "SocialStoryGate";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_GATE = "SocialUploadGate";
 
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_SCORE       = "score";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_RANGE_SCORE = "rangeScore";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_VIRTUAL_ITEM_SCORE = "virtualItemScore";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_SCORE       = "Score";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_RANGE_SCORE = "RangeScore";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_VIRTUAL_ITEM_SCORE = "VirtualItemScore";
 
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD       = "world";
-    char const *CCLevelUpConsts::JSON_JSON_TYPE_LEVEL       = "level";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD       = "World";
+    char const *CCLevelUpConsts::JSON_JSON_TYPE_LEVEL       = "Level";
 
     char const *CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED = "CCLevelUpEventHandler::onLevelUpInitialized";
     char const *CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED = "CCLevelUpEventHandler::onScoreRecordReached";
