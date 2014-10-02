@@ -301,8 +301,8 @@
 		9DEA538419B4A4000093D5D9 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				9DEA538519B4A4000093D5D9 /* CCGateStorage.cpp */,
 				9DEA538619B4A4000093D5D9 /* CCGateStorage.h */,
+				9DEA538519B4A4000093D5D9 /* CCGateStorage.cpp */,
 				9DEA538719B4A4000093D5D9 /* CCLevelStorage.cpp */,
 				9DEA538819B4A4000093D5D9 /* CCLevelStorage.h */,
 				9DEA538919B4A4000093D5D9 /* CCMissionStorage.cpp */,

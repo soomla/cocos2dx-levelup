@@ -26,6 +26,13 @@ namespace soomla {
     class CCWorld;
     class CCLevel;
 
+    /**
+     @class CCLevelUpEventHandler
+     @brief an Interface for all receivers of LevelUp events
+     
+     To receive events about any LevelUp-related actions a class must inherit
+     from this class and sign up for events on CCLevelUpEventDispatcher
+     */
     class CCLevelUpEventHandler : public cocos2d::CCObject {
     public:
         virtual void onLevelUpInitialized() = 0;
