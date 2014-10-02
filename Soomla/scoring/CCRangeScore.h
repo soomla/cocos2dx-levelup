@@ -86,7 +86,7 @@ namespace soomla {
          Converts this `Score` to a Dictionary.
          @return The Dictionary representation of this `CCRangeScore`.
          */
-        virtual cocos2d::CCDictionary *toDictionary() override;
+        virtual cocos2d::CCDictionary *toDictionary();
         
         /**
          Increases this `Score` by the given amount after checking that it will 

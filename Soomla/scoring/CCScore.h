@@ -68,7 +68,7 @@ namespace soomla {
          Converts this `CCScore` into a Dictionary.
          @return The Dictionary representation of this `CCScore`.
          */
-        virtual cocos2d::CCDictionary *toDictionary() override;
+        virtual cocos2d::CCDictionary *toDictionary();
 
         virtual char const *getType() const;
         
