@@ -97,15 +97,11 @@ namespace soomla {
         return true;
     }
 
-    bool CCLevelUpService::initLevelUp(CCWorld *initialWorld, __Array *rewards) {
+    bool CCLevelUpService::initLevelUp() {
 
         CCSoomlaUtils::logDebug(TAG, "call init");
 
         __Dictionary *metadata = __Dictionary::create();
-        metadata->setObject(initialWorld->toDictionary(), CCLevelUpConsts::JSON_LU_MAIN_WORLD);
-        if (rewards) {
-            metadata->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(rewards), "rewards");
-        }
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::initLevelUp");
         params->setObject(metadata, "metadata");
