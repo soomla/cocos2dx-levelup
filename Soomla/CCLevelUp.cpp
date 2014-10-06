@@ -260,7 +260,7 @@ namespace soomla {
         json_t *metadata = CCJsonHelper::getJsonFromCCObject(toDictionary());
         char *metadataS = json_dumps(metadata, JSON_COMPACT | JSON_ENSURE_ASCII);
 
-        CCKeyValueStorage::getInstance()->setValue(metadataS, keyS);
+        CCKeyValueStorage::getInstance()->setValue(keyS, metadataS);
     }
 
     CCScore *CCLevelUp::fetchScoreFromWorlds(const char *scoreId, CCDictionary *worlds) {
