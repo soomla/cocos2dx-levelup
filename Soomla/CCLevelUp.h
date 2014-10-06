@@ -180,6 +180,8 @@ namespace soomla {
         int getRecursiveCount(CCWorld *world, bool (*isAccepted)(CCWorld *));
 
         CCMission *fetchMission(char const *missionId, cocos2d::CCDictionary *worlds);
+        
+        void save();
     };
 
 }

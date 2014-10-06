@@ -63,7 +63,7 @@
     [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::initLevelUp" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         BOOL res = [[LevelUpService sharedLevelUpService] init] != nil;
         if (res) {
-            [WorldStorage initLevelUp:parameters[@"metadata"]];
+            [WorldStorage initLevelUp];
         }
         retParameters[@"return"] = @(res);
     }];

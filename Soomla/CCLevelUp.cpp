@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2012-2014 Soomla Inc.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,13 +16,13 @@
 
 /*
  Copyright (C) 2012-2014 Soomla Inc.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,6 +42,9 @@
 #include "CCChallenge.h"
 #include "CCGatesList.h"
 #include "CCLevelUpService.h"
+#include "CCDomainHelper.h"
+#include "CCKeyValueStorage.h"
+#include "CCJsonHelper.h"
 
 namespace soomla {
 
@@ -88,6 +91,14 @@ namespace soomla {
 
         dict->setObject(mInitialWorld, CCLevelUpConsts::JSON_LU_MAIN_WORLD);
 
+        if (mRewards) {
+            __Array *rewardArray = __Array::create();
+            DictElement* el = NULL;
+            CCDICT_FOREACH(mRewards, el) {
+                rewardArray->addObject(el->getObject());
+            }
+            dict->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(rewardArray), CCLevelUpConsts::JSON_REWARDS);
+        }
         return dict;
     }
 
@@ -104,7 +115,6 @@ namespace soomla {
         if (mInitialWorld) {
             mInitialWorld->retain();
         }
-//			save();
 
         if (rewards != NULL) {
             CCDictionary *rewardMap = CCDictionary::create();
@@ -124,14 +134,16 @@ namespace soomla {
             }
         }
 
-        CCLevelUpService::getInstance()->initLevelUp(initialWorld, rewards);
+        save();
+
+        CCLevelUpService::getInstance()->initLevelUp();
     }
 
     CCReward *CCLevelUp::getReward(const char *rewardId) {
         if (mRewards == NULL) {
             return NULL;
         }
-        
+
         return dynamic_cast<CCReward *>(mRewards->objectForKey(rewardId));
     }
 
@@ -187,7 +199,7 @@ namespace soomla {
 
         return fetchWorld(worldId, mInitialWorld->getInnerWorldsMap());
     }
-    
+
     CCLevel *CCLevelUp::getLevel(char const *levelId) {
         return dynamic_cast<CCLevel *>(getWorld(levelId));
     }
@@ -241,16 +253,16 @@ namespace soomla {
         return getRecursiveCount(mInitialWorld, &ifCompletedWorld);
     }
 
-    // NOTE: Not sure we need a save function.
 
-//		private void save() {
-//			string lu_json = toJSONObject().print();
-//			SoomlaUtils.LogDebug(TAG, "saving LevelUp to DB. json is: " + lu_json);
-//			string key = DB_KEY_PREFIX + "model";
-//
-//			// TODO: save on Android and iOS with KeyValueStorage
-//			// KeyValueStorage.setValue(key, lu_json);
-//		}
+    void CCLevelUp::save() {
+        __String *key = __String::createWithFormat("%s%s", DB_KEY_PREFIX, "model");
+        json_t *metadata = CCJsonHelper::getJsonFromCCObject(toDictionary());
+
+        const char *keyS = key->getCString();
+        char *metadataS = json_dumps(metadata, JSON_COMPACT | JSON_ENSURE_ASCII);
+
+        CCKeyValueStorage::getInstance()->setValue(metadataS, keyS);
+    }
 
     CCScore *CCLevelUp::fetchScoreFromWorlds(const char *scoreId, CCDictionary *worlds) {
         CCScore *retScore = NULL;
@@ -371,16 +383,16 @@ namespace soomla {
 
         return retGate;
     }
-    
+
     CCGate *CCLevelUp::fetchGateFromGate(char const *gateId, CCGate *targetGate) {
         if (targetGate == NULL) {
             return NULL;
         }
-        
+
         if ((targetGate != NULL) && (targetGate->getId()->compare(gateId) == 0)) {
             return targetGate;
         }
-        
+
         CCGate *result = NULL;
         CCGatesList *gatesList = dynamic_cast<CCGatesList *>(targetGate);
         if (gatesList != NULL) {
@@ -394,7 +406,7 @@ namespace soomla {
                 }
             }
         }
-        
+
         return result;
     }
 

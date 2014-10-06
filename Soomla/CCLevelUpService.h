@@ -52,7 +52,7 @@ namespace soomla {
 
         virtual bool init();
 
-        bool initLevelUp(CCWorld *initialWorld, cocos2d::CCArray *rewards);
+        bool initLevelUp();
 
         bool gateIsOpen(CCGate *gate);
         void gateSetOpen(CCGate *gate, bool open, bool b);
