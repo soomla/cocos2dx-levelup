@@ -62,5 +62,5 @@
 
 + (void)postLevelEnded:(NSString *)levelId;
 
-+ (void)postLevelUpInitialized:(NSDictionary *)metadata;
++ (void)postLevelUpInitialized;
 @end
