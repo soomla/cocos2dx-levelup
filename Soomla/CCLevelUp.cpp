@@ -90,10 +90,10 @@ namespace soomla {
         cocos2d::CCDictionary *dict = cocos2d::CCDictionary::create();
 
         dict->setObject(mInitialWorld, CCLevelUpConsts::JSON_LU_MAIN_WORLD);
-
+        
         if (mRewards) {
-            __Array *rewardArray = __Array::create();
-            DictElement* el = NULL;
+            CCArray *rewardArray = CCArray::create();
+            CCDictElement* el = NULL;
             CCDICT_FOREACH(mRewards, el) {
                 rewardArray->addObject(el->getObject());
             }
@@ -255,7 +255,7 @@ namespace soomla {
 
 
     void CCLevelUp::save() {
-        __String *key = __String::createWithFormat("%s%s", DB_KEY_PREFIX, "model");
+        CCString *key = CCString::createWithFormat("%s%s", DB_KEY_PREFIX, "model");
         json_t *metadata = CCJsonHelper::getJsonFromCCObject(toDictionary());
 
         const char *keyS = key->getCString();
