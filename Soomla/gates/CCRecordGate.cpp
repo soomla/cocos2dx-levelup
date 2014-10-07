@@ -21,7 +21,7 @@
 
 #include "CCRecordGate.h"
 #include "CCLevelUpEventDispatcher.h"
-#include "CCLevelUp.h"
+#include "CCSoomlaLevelUp.h"
 #include "CCSoomlaUtils.h"
 
 namespace soomla {
@@ -79,7 +79,7 @@ namespace soomla {
     }
 
     bool CCRecordGate::canOpenInner() {
-        CCScore *score = CCLevelUp::getInstance()->getScore(mAssociatedScoreId->getCString());
+        CCScore *score = CCSoomlaLevelUp::getInstance()->getScore(mAssociatedScoreId->getCString());
         if (score == NULL) {
             CCSoomlaUtils::logError(TAG, cocos2d::CCString::createWithFormat(
                     "(canOpenInner) couldn't find score with scoreId: %s", mAssociatedScoreId->getCString()

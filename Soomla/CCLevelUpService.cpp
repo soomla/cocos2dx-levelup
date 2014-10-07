@@ -36,7 +36,6 @@
 #include "CCGatesListOr.h"
 #include "CCRecordMission.h"
 #include "CCPurchasingMission.h"
-#include "CCLevelUp.h"
 #include "CCDomainHelper.h"
 #include "CCRangeScore.h"
 #include "CCVirtualItemScore.h"

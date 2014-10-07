@@ -25,7 +25,7 @@
 #include "CCSoomlaUtils.h"
 #include "CCLevelUpEventDispatcher.h"
 #include "CCWorld.h"
-#include "CCLevelUp.h"
+#include "CCSoomlaLevelUp.h"
 
 namespace soomla {
 
@@ -96,7 +96,7 @@ namespace soomla {
     }
 
     bool CCWorldCompletionGate::canOpenInner() {
-        CCWorld *world = CCLevelUp::getInstance()->getWorld(mAssociatedWorldId->getCString());
+        CCWorld *world = CCSoomlaLevelUp::getInstance()->getWorld(mAssociatedWorldId->getCString());
         return world != NULL && world->isCompleted();
     }
 

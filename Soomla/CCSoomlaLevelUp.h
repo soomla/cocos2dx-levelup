@@ -35,8 +35,8 @@
 // Copyright (c) 2014 SOOMLA. All rights reserved.
 //
 
-#ifndef __CCLevelUp_H_
-#define __CCLevelUp_H_
+#ifndef __CCSoomlaLevelUp_H_
+#define __CCSoomlaLevelUp_H_
 
 #include "cocos2d.h"
 #include "CCGate.h"
@@ -52,12 +52,12 @@ namespace soomla {
     class CCLevel;
 
     /**
-     @class CCLevelUp
+     @class CCSoomlaLevelUp
      @brief This is the top level container for the cocos2dx-levelup model and 
      definitions. It stores the configurations of the game's world-hierarchy and 
      provides lookup functions for levelup model elements.
      */
-    class CCLevelUp: public cocos2d::CCObject {
+    class CCSoomlaLevelUp: public cocos2d::CCObject {
         
     private:
         // Initial `World` to begin the game.
@@ -66,19 +66,19 @@ namespace soomla {
         // Potential rewards of the `InitialWorld`.
         cocos2d::CCDictionary *mRewards;
 
-        CCLevelUp(): mInitialWorld(NULL), mRewards(NULL) {
+        CCSoomlaLevelUp(): mInitialWorld(NULL), mRewards(NULL) {
         }
 
     public:
         // The instance of `LevelUp` for this game.
-        static CCLevelUp *getInstance();
+        static CCSoomlaLevelUp *getInstance();
 
         /**
          Converts this instance of `LevelUp` to a `Dictionary`.
          */
         virtual cocos2d::CCDictionary *toDictionary();
 
-        virtual ~CCLevelUp();
+        virtual ~CCSoomlaLevelUp();
 
         /**
          Initializes the specified `InitialWorld` and rewards.
@@ -187,4 +187,4 @@ namespace soomla {
 }
 
 
-#endif //__CCLevelUp_H_
+#endif //__CCSoomlaLevelUp_H_

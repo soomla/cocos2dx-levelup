@@ -25,7 +25,7 @@
 #include "CCLevel.h"
 #include "CCSoomlaUtils.h"
 #include "CCWorldStorage.h"
-#include "CCLevelUp.h"
+#include "CCSoomlaLevelUp.h"
 #include "CCWorldCompletionGate.h"
 
 #define TAG "SOOMLA World"
@@ -467,7 +467,7 @@ namespace soomla {
     void CCWorld::assignReward(CCReward *reward) {
         CCString *olderReward = this->getAssignedRewardId();
         if (olderReward != NULL && olderReward->length() > 0) {
-            CCReward *oldReward = CCLevelUp::getInstance()->getReward(olderReward->getCString());
+            CCReward *oldReward = CCSoomlaLevelUp::getInstance()->getReward(olderReward->getCString());
             if (oldReward != NULL) {
                 oldReward->take();
             }
