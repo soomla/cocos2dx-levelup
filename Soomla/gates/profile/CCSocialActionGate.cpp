@@ -21,7 +21,6 @@
 
 #include "CCSocialActionGate.h"
 #include "CCLevelUpEventDispatcher.h"
-#include "CCLevelUp.h"
 #include "CCProfileEventDispatcher.h"
 
 namespace soomla {
