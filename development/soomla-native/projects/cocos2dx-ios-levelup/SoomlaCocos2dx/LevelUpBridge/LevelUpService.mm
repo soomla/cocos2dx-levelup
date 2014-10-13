@@ -1,6 +1,3 @@
-//
-// Created by Fedor Shubin on 6/12/14.
-//
 
 #import "LevelUpService.h"
 #import "NdkGlue.h"
