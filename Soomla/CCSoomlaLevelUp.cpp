@@ -30,10 +30,6 @@
  limitations under the License.
  */
 
-//
-// Created by Shubin Fedor on 25/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
 
 #include "CCSoomlaLevelUp.h"
 
