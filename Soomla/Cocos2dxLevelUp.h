@@ -22,7 +22,7 @@
 #include "Cocos2dxProfile.h"
 
 #include "CCLevel.h"
-#include "CCLevelUp.h"
+#include "CCSoomlaLevelUp.h"
 #include "CCLevelUpEventDispatcher.h"
 #include "CCLevelUpEventHandler.h"
 #include "CCLevelUpService.h"
