@@ -123,7 +123,7 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 
 	// initialWorld - should be created here and contain all worlds and levels of the game
 	// rewards - should contain a list of all rewards that are given through LevelUp
-	soomla::CCLevelUp::getInstance()->initialize(initialWorld, rewards);
+	soomla::CCSoomlaLevelUp::getInstance()->initialize(initialWorld, rewards);
 
 	```
 	- NOTE: *Custom Secret* - is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game!
@@ -388,7 +388,7 @@ To integrate cocos2dx-levelup into your game, follow these steps:
   world->addInnerWorld(lvl1);
   world->addInnerWorld(lvl2);
 
-  CCLevelUp::getInstance()->initialize(world);
+  CCSoomlaLevelUp::getInstance()->initialize(world);
 
   lvl1->start();
 
@@ -428,7 +428,7 @@ To integrate cocos2dx-levelup into your game, follow these steps:
 
   world->addInnerWorld(lvl1);
 
-  CCLevelUp::getInstance()->initialize(world);
+  CCSoomlaLevelUp::getInstance()->initialize(world);
 
   lvl1->start();
   // events posted:
@@ -481,7 +481,7 @@ To integrate cocos2dx-levelup into your game, follow these steps:
   world->addMission(challenge);
   world->addScore(score);
 
-  CCLevelUp::getInstance()->initialize(world);
+  CCSoomlaLevelUp::getInstance()->initialize(world);
 
   score->setTempScore(20.0);
   score->reset(true);
@@ -533,7 +533,7 @@ To integrate cocos2dx-levelup into your game, follow these steps:
   CCGatesListAnd *gatesListAND = CCGatesListAnd::create(__String::create("gate_list_AND_id"),
                                                         gates);
 
-  CCLevelUp::getInstance()->initialize(world);
+  CCSoomlaLevelUp::getInstance()->initialize(world);
 
   score1->setTempScore(desiredRecord1->getValue());
   score1->reset(true);
