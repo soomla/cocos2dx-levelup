@@ -163,14 +163,14 @@ In your XCode project, perform the following steps:
 1. Add the following directories to **Build Settings->Header Search Paths** (with `recursive` option):
 > This article assumes you have a `cocos2d` folder under your project folder and which either contains the Cocos2d-x framework, or links to to its root folder
 
- - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla/**`
- - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Soomla/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/build/ios/headers/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/Soomla/**`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/build/ios/headers/**`
+ - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla`
+ - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Soomla`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/build/ios/headers`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/Soomla`
+ - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/build/ios/headers`
 
 1. To register services on the native application (`AppController`):
 
