@@ -94,9 +94,9 @@ namespace soomla {
         return ret;
     }
 
-    void CCSocialActionGateEventHandler::onSocialActionFinishedEvent(CCProvider provider, CCSocialActionType socialActionType) {
-//        TODO: Add payload: if (payload == this.ID) {
+    void CCSocialActionGateEventHandler::onSocialActionFinishedEvent(CCProvider provider, CCSocialActionType socialActionType, cocos2d::__String *payload) {
+        if (payload->isEqual(this->mSocialActionGate->getId())) {
             mSocialActionGate->forceOpen(true);
-//        }
+        }
     }
 }
