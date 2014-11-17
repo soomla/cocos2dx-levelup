@@ -98,7 +98,7 @@ namespace soomla {
          @param socialActionType The type of the social action that was finished.
          @param payload Payload to compare with this `Gate`'s ID.
          */
-        virtual void onSocialActionFinishedEvent(CCProvider provider, CCSocialActionType socialActionType) override;
+        virtual void onSocialActionFinishedEvent(CCProvider provider, CCSocialActionType socialActionType, cocos2d::__String *payload) override;
     };
 }
 
