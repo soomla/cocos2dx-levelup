@@ -88,7 +88,7 @@ namespace soomla {
     bool CCSocialUploadGate::openInner() {
         if (canOpen()) {
 
-            CCSoomlaProfile::getInstance()->uploadImage(getProvider(),
+            CCSoomlaProfile::getInstance()->uploadImage(getProvider(), getId()->getCString(),
                     getMessage()->getCString(), getFileName()->getCString(), NULL, NULL);
 
             return true;

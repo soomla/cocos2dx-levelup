@@ -107,7 +107,7 @@ namespace soomla {
             CCSoomlaProfile::getInstance()->updateStory(getProvider(),
                     getMessage()->getCString(), getStoryName()->getCString(),
                     getCaption()->getCString(), "",
-                    getLink()->getCString(), getImgUrl()->getCString(), NULL, NULL);
+                    getLink()->getCString(), getId()->getCString(), getImgUrl()->getCString(), NULL, NULL);
 
             return true;
         }

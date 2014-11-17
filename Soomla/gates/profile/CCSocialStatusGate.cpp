@@ -80,7 +80,7 @@ namespace soomla {
     bool CCSocialStatusGate::openInner() {
         if (canOpen()) {
 
-            CCSoomlaProfile::getInstance()->updateStatus(getProvider(), getStatus()->getCString(), NULL, NULL);
+            CCSoomlaProfile::getInstance()->updateStatus(getProvider(), getId()->getCString(), getStatus()->getCString(), NULL, NULL);
 
             return true;
         }
