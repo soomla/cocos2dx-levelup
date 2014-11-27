@@ -149,8 +149,9 @@ namespace soomla {
 
     void CCLevel::end(bool completed) {
 
-        // check end() called without matching start()
-        if(mStartTime == 0) {
+        // check end() called without matching start(),
+        // i.e, the level is not running nor paused
+        if(mState != LevelState::Running && mState != LevelState::Paused) {
             CCSoomlaUtils::logError(TAG, "end() called without prior start()! ignoring.");
             return;
         }
@@ -181,12 +182,12 @@ namespace soomla {
             // Count number of times this level was played
             CCLevelStorage::getInstance()->incTimesPlayed(this);
 
-            // reset timers
-            mStartTime = 0;
-            mElapsed = 0;
-
             setCompleted(true);
         }
+        
+        // reset timers
+        mStartTime = 0;
+        mElapsed = 0;
     }
 
     void CCLevel::restart(bool completed) {
