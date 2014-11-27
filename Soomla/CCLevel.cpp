@@ -103,6 +103,7 @@ namespace soomla {
 
     bool CCLevel::start() {
         if (mState == LevelState::Running) {
+            CCSoomlaUtils::logError(TAG, "Can't start a level that is already running.");
             return false;
         }
 
@@ -125,6 +126,7 @@ namespace soomla {
 
     void CCLevel::pause() {
         if (mState != LevelState::Running) {
+            CCSoomlaUtils::logError(TAG, "Can't pause a level that is not running.");
             return;
         }
 
