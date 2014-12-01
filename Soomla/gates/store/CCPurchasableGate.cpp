@@ -114,10 +114,9 @@ namespace soomla {
         return ret;
     }
 
-    void CCPurchasableGateEventHanler::onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem) {
-        // TODO: Implement payload onItemPurchased
-        if (purchasableVirtualItem->getItemId()->compare(mPurchasableGate->getAssociatedItemId()->getCString()) == 0) {
-//                && payload == this._id) {
+    void CCPurchasableGateEventHanler::onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::__String *payload) {
+        if ((purchasableVirtualItem->getItemId()->compare(mPurchasableGate->getAssociatedItemId()->getCString()) == 0)
+                && payload->isEqual(mPurchasableGate->getId())) {
             mPurchasableGate->forceOpen(true);
         }
     }

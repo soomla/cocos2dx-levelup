@@ -97,6 +97,14 @@ namespace soomla {
         virtual char const *getType() const;
 
         virtual ~CCLevel();
+        
+        /**
+         Gets the level's current state
+         The initial state is idle, later in the game can be any of: 
+         running, paused, ended, or completed.
+         @return the level's current state
+         */
+        virtual LevelState getState() { return mState; }
 
         /**
          Gets the number of times this `Level` was started.

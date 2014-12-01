@@ -109,7 +109,7 @@ namespace soomla {
          @param pvi The item that was purchased.
          @param payload Payment ID of the item purchased.
          */
-        virtual void onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem) override;
+        virtual void onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::__String *payload) override;
     };
 }
 

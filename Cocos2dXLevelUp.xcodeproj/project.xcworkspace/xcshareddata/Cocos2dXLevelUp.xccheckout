@@ -10,29 +10,41 @@
 	<string>Cocos2dXLevelUp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1DE5F81F-286D-448C-B535-5D7EF4FEC5C8</key>
-		<string>ssh://github.com/soomla/cocos2dx-levelup.git</string>
+		<key>6CAB0994FDE7AB136F1393B85BD645AA90A63AFA</key>
+		<string>github.com:soomla/cocos2dx-levelup.git</string>
+		<key>852ED3691A47A99B0D19C820A500AE9772B2A44E</key>
+		<string>https://github.com/cocos2d/cocos2d-x.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Cocos2dXLevelUp.xcodeproj/project.xcworkspace</string>
+	<string>Cocos2dXLevelUp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1DE5F81F-286D-448C-B535-5D7EF4FEC5C8</key>
+		<key>6CAB0994FDE7AB136F1393B85BD645AA90A63AFA</key>
 		<string>../..</string>
+		<key>852ED3691A47A99B0D19C820A500AE9772B2A44E</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/soomla/cocos2dx-levelup.git</string>
+	<string>github.com:soomla/cocos2dx-levelup.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1DE5F81F-286D-448C-B535-5D7EF4FEC5C8</string>
+	<string>6CAB0994FDE7AB136F1393B85BD645AA90A63AFA</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1DE5F81F-286D-448C-B535-5D7EF4FEC5C8</string>
+			<string>852ED3691A47A99B0D19C820A500AE9772B2A44E</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6CAB0994FDE7AB136F1393B85BD645AA90A63AFA</string>
 			<key>IDESourceControlWCCName</key>
 			<string>cocos2dx-levelup</string>
 		</dict>
