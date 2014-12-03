@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2012-2014 Soomla Inc.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,13 +16,13 @@
 
 /*
  Copyright (C) 2012-2014 Soomla Inc.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,10 +30,6 @@
  limitations under the License.
  */
 
-//
-// Created by Shubin Fedor on 25/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
 
 #ifndef __CCSoomlaLevelUp_H_
 #define __CCSoomlaLevelUp_H_
@@ -53,16 +49,16 @@ namespace soomla {
 
     /**
      @class CCSoomlaLevelUp
-     @brief This is the top level container for the cocos2dx-levelup model and 
-     definitions. It stores the configurations of the game's world-hierarchy and 
+     @brief This is the top level container for the cocos2dx-levelup model and
+     definitions. It stores the configurations of the game's world-hierarchy and
      provides lookup functions for levelup model elements.
      */
     class CCSoomlaLevelUp: public cocos2d::CCObject {
-        
+
     private:
         // Initial `World` to begin the game.
         CCWorld *mInitialWorld;
-        
+
         // Potential rewards of the `InitialWorld`.
         cocos2d::CCDictionary *mRewards;
 
@@ -107,7 +103,7 @@ namespace soomla {
          @return The world.
          */
         CCWorld *getWorld(char const *worldId);
-        
+
         /**
          Retrieves the `Level` with the given level ID.
          @param levelId ID of the `Level` to be fetched.
@@ -174,13 +170,13 @@ namespace soomla {
         CCGate *fetchGate(char const *gateId, cocos2d::CCDictionary *worlds);
 
         CCGate *fetchGateFromMissions(char const *gateId, cocos2d::CCArray *missions);
-        
+
         CCGate *fetchGateFromGate(char const *gateId, CCGate *targetGate);
 
         int getRecursiveCount(CCWorld *world, bool (*isAccepted)(CCWorld *));
 
         CCMission *fetchMission(char const *missionId, cocos2d::CCDictionary *worlds);
-        
+
         void save();
     };
 
