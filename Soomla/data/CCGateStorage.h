@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2012-2014 Soomla Inc.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,13 +16,13 @@
 
 /*
  Copyright (C) 2012-2014 Soomla Inc.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,10 +30,7 @@
  limitations under the License.
  */
 
-//
-// Created by Shubin Fedor on 19/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
+
 
 
 #ifndef __CCGateStorage_H_
@@ -43,24 +40,24 @@
 #include "CCMission.h"
 
 namespace soomla {
-    
+
     /**
      @class
      @brief A utility class for persisting and querying the state of `Gate`s.
      Use this class to check if a certain `Gate` is open, or to open it.
      */
     class CCGateStorage: cocos2d::CCObject {
-        
+
     public:
         static CCGateStorage *getInstance();
-        
+
         /**
          Determines if the given `Gate` is open.
          @param gate `Gate` to check if is open.
          @return If the given `Gate` is open returns `true`; otherwise, `false`.
          */
         bool isOpen(CCGate *gate);
-        
+
         /**
          Sets the given `Gate` as open if the given parameter `open` is `true`;
          otherwise sets as closed.

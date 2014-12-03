@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2012-2014 Soomla Inc.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,10 +14,6 @@
  limitations under the License.
  */
 
-//
-// Created by Shubin Fedor on 19/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
 
 #include "CCChallenge.h"
 #include "CCDomainHelper.h"
@@ -27,9 +23,9 @@
 #include "CCMissionStorage.h"
 
 namespace soomla {
-    
+
     USING_NS_CC;
-    
+
     #define TAG "SOOMLA Challenge"
 
     CCChallenge *CCChallenge::create(cocos2d::CCString *id, cocos2d::CCString *name, cocos2d::CCArray *missions, cocos2d::CCArray *rewards) {

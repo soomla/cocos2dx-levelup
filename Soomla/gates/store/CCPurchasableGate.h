@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2012-2014 Soomla Inc.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,10 +14,6 @@
  limitations under the License.
  */
 
-//
-// Created by Shubin Fedor on 20/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
 
 
 #ifndef __CCPurchasableGate_H_
@@ -28,7 +24,7 @@
 #include "CCSimpleStoreEventHandler.h"
 
 namespace soomla {
-    
+
     /**
      A specific type of `Gate` that has an associated virtual item. The `Gate`
      opens once the item has been purchased.
@@ -40,7 +36,7 @@ namespace soomla {
     public:
         CCPurchasableGate(): CCGate(), mAssociatedItemId(NULL), mEventHandler(NULL) {
         }
-        
+
         /**
          Creates an instance of `CCPurchasableGate`.
          @param id ID of this `CCPurchasableGate`.
@@ -65,23 +61,23 @@ namespace soomla {
         virtual ~CCPurchasableGate();
 
     protected:
-        
+
         /**
          Registers relevant events: item-purchased event.
          */
         virtual void registerEvents();
-        
+
         /**
          Unregisters relevant events: item-purchased event.
          */
         virtual void unregisterEvents();
-        
+
         /**
          Checks if this `Gate` meets its criteria for opening.
          @return Always `true`.
          */
         virtual bool canOpenInner();
-        
+
         /**
          Opens this `Gate` by buying its associated item.
          @return If purchase was successfully made returns `true`; otherwise
@@ -91,29 +87,29 @@ namespace soomla {
     };
 
     class CCPurchasableGateEventHanler: public CCSimpleStoreEventHandler {
-        
+
     private:
         CCPurchasableGate *mPurchasableGate;
-        
+
     public:
-        
+
         CCPurchasableGateEventHanler(): mPurchasableGate(NULL) {
         }
-        
+
         /**
          Creates an instance of `CCPurchasableGateEventHanler`.
-         @param purchasableGate The `PurchasableGate` associated with this 
+         @param purchasableGate The `PurchasableGate` associated with this
          event handler.
          */
         static CCPurchasableGateEventHanler *create(CCPurchasableGate *purchasableGate);
-        
+
         /**
-         Opens this `Gate` if the item-purchased event causes the `Gate`'s 
+         Opens this `Gate` if the item-purchased event causes the `Gate`'s
          criteria to be met.
          @param pvi The item that was purchased.
          @param payload Payment ID of the item purchased.
          */
-        virtual void onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem);
+        virtual void onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::CCString *payload);
     };
 }
 

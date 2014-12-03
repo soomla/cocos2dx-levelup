@@ -1,12 +1,12 @@
 /*
  Copyright (C) 2012-2014 Soomla Inc.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,24 +16,19 @@
 
 /*
  Copyright (C) 2012-2014 Soomla Inc.
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-
-//
-// Created by Shubin Fedor on 19/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
 
 
 #ifndef __CCScoreStorage_H_
@@ -43,7 +38,7 @@
 #include "CCMission.h"
 
 namespace soomla {
-    
+
     class CCScore;
 
     /**
@@ -52,32 +47,32 @@ namespace soomla {
      Use this class to get or set the values of `Score`s and records.
      */
     class CCScoreStorage: cocos2d::CCObject {
-        
+
     public:
-      
+
         static CCScoreStorage *getInstance();
-        
+
         /**
          Sets the given `Score` to the given value.
          @param score `Score` to set.
          @param latest The value to set for the `Score`.
          */
         void setLatestScore(CCScore *score, double newValue);
-        
+
         /**
          Retrieves the most recently saved value of the given `Score`.
          @param score Score whose most recent value it to be retrieved.
          @return The latest `Score`.
          */
         double getLatestScore(CCScore *score);
-        
+
         /**
          Sets the given record for the given `Score`.
          @param score `Score` whose record is to change.
          @param record The new record.
          */
         void setRecordScore(CCScore *score, double newValue);
-        
+
         /**
          Retrieves the record of the given `Score`.
          @param score `Score` whose record is to be retrieved.
