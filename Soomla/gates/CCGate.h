@@ -61,6 +61,10 @@ namespace soomla {
          @return If this `Gate` can be opened returns `true`; otherwise, `false`.
          */
         virtual bool canOpen();
+        
+        //***** INTERNAL *****//
+        virtual void onAttached();
+        virtual void onDetached();
 
     protected:
 
@@ -90,6 +94,9 @@ namespace soomla {
          @return If this `Gate` was opened returns `true`; otherwise `false`.
          */
         virtual bool openInner() = 0;
+        
+    private:
+        bool eventsRegistered;
     };
 }
 

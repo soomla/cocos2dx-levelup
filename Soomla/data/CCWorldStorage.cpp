@@ -32,12 +32,6 @@ namespace soomla {
     }
 
     void CCWorldStorage::setCompleted(CCWorld *world, bool completed, bool notify) {
-        bool currentStatus = isCompleted(world);
-        if (currentStatus == completed) {
-            // we don't need to set the status of a world to the same status over and over again.
-            // couldn't only cause trouble.
-            return;
-        }
         CCLevelUpService::getInstance()->worldSetCompleted(world, completed, notify);
     }
 
