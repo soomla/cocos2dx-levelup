@@ -30,7 +30,7 @@ namespace soomla {
         bool result = CCSoomlaEntity::init(id, name, NULL);
 
         if (result) {
-            registerEvents();
+            eventsRegistered = false;
 
             return true;
         }
@@ -42,7 +42,7 @@ namespace soomla {
         bool result = CCSoomlaEntity::initWithDictionary(dict);
 
         if (result) {
-            registerEvents();
+            eventsRegistered = false;
 
             return true;
         }
@@ -89,5 +89,22 @@ namespace soomla {
 
         return canOpenInner();
     }
-
+    
+    void CCGate::onAttached() {
+        if (eventsRegistered) {
+            return;
+        }
+        
+        registerEvents();
+        eventsRegistered = true;
+    }
+    
+    void CCGate::onDetached() {
+        if (!eventsRegistered) {
+            return;
+        }
+        
+        unregisterEvents();
+        eventsRegistered = false;
+    }
 }
