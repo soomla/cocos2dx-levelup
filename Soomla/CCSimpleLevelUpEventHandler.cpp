@@ -28,12 +28,20 @@ void soomla::CCSimpleLevelUpEventHandler::onGateOpened(soomla::CCGate *gate) {
 
 }
 
+void soomla::CCSimpleLevelUpEventHandler::onGateClosed(CCGate *gate) {
+    
+}
+
 void soomla::CCSimpleLevelUpEventHandler::onMissionCompleted(soomla::CCMission *completedMission) {
 
 }
 
 void soomla::CCSimpleLevelUpEventHandler::onMissionCompletionRevoked(soomla::CCMission *mission) {
 
+}
+
+void soomla::CCSimpleLevelUpEventHandler::onLatestScoreChanged(CCScore *score) {
+    
 }
 
 void soomla::CCSimpleLevelUpEventHandler::onScoreRecordReached(soomla::CCScore *score) {

@@ -15,3 +15,21 @@
  */
 
 #define LU_DB_KEY_PREFIX @"soomla.levelup."
+
+@interface LevelUp : NSObject
+
++ (NSDictionary *)getLevelUpState;
+
++ (BOOL)resetLevelUpState:(NSDictionary *)state;
+
++ (NSDictionary *)getLevelUpModel;
+
++ (NSDictionary *)getWorlds:(NSDictionary *)model;
+
++ (NSDictionary *)getMissions:(NSDictionary *)model;
+
++ (NSDictionary *)getGates:(NSDictionary *)model;
+
++ (NSDictionary *)getScores:(NSDictionary *)model;
+
+@end

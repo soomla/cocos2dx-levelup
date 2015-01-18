@@ -26,6 +26,7 @@
  @param latest the latest value to save
  */
 + (void)setLatest:(double)latest toScore:(NSString *)scoreId;
++ (void)setLatest:(double)latest toScore:(NSString *)scoreId andNotify:(BOOL)notify;
 
 /**
  Gets the most recently saved value of the given score.
@@ -45,6 +46,7 @@
  @param record the new record value
  */
 + (void)setRecord:(double)record toScore:(NSString *)scoreId;
++ (void)setRecord:(double)record toScore:(NSString *)scoreId andNotify:(BOOL)notify;
 
 /**
  Retrieves the record of the given score
@@ -53,5 +55,7 @@
  @return the record of the given score
  */
 + (double)getRecordScore:(NSString *)scoreId;
+
++ (NSString *)keyScorePrefix;
 
 @end

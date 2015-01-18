@@ -37,10 +37,12 @@ namespace soomla {
     public:
         virtual void onLevelUpInitialized() = 0;
 
+        virtual void onLatestScoreChanged(CCScore *score) = 0;
         virtual void onScoreRecordReached(CCScore *score) = 0;
         virtual void onScoreRecordChanged(CCScore *score) = 0;
 
         virtual void onGateOpened(CCGate *gate) = 0;
+        virtual void onGateClosed(CCGate *gate) = 0;
 
         virtual void onMissionCompleted(CCMission *mission) = 0;
         virtual void onMissionCompletionRevoked(CCMission *mission) = 0;

@@ -16,8 +16,10 @@
 
 // Events
 #define EVENT_SCORE_RECORD_CHANGED           @"lu_score_record_changed"
+#define EVENT_SCORE_LATEST_CHANGED           @"lu_score_latest_changed"
 #define EVENT_SCORE_RECORD_REACHED           @"lu_score_record_reached"
 #define EVENT_GATE_OPENED                    @"lu_gate_opened"
+#define EVENT_GATE_CLOSED                    @"lu_gate_closed"
 #define EVENT_MISSION_COMPLETED              @"lu_mission_completed"
 #define EVENT_MISSION_COMPLETION_REVOKED     @"lu_mission_completeion_revoked"
 #define EVENT_WORLD_COMPLETED                @"lu_world_completed"
@@ -46,9 +48,13 @@
 
 + (void)postScoreRecordChanged:(NSString *)scoreId;
 
++ (void)postScoreLatestChanged:(NSString *)scoreId;
+
 + (void)postScoreRecordReached:(NSString *)scoreId;
 
 + (void)postGateOpened:(NSString *)gateId;
+
++ (void)postGateClosed:(NSString *)gateId;
 
 + (void)postMissionCompleted:(NSString *)missionId;
 

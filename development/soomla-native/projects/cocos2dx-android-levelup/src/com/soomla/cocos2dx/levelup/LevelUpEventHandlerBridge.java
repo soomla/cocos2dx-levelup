@@ -35,6 +35,22 @@ public class LevelUpEventHandlerBridge {
     }
 
     @Subscribe
+    public void onLatestScoreChanged(final LatestScoreChangedEvent latestScoreChangedEvent) {
+        mGLThread.queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject parameters = createJsonObjectForMethod("CCLevelUpEventHandler::onLatestScoreChanged");
+                    parameters.put("scoreId", latestScoreChangedEvent.ScoreId);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
+                } catch (JSONException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        });
+    }
+
+    @Subscribe
     public void onScoreRecordReached(final ScoreRecordReachedEvent scoreRecordReachedEvent) {
         mGLThread.queueEvent(new Runnable() {
             @Override
@@ -74,6 +90,22 @@ public class LevelUpEventHandlerBridge {
                 try {
                     JSONObject parameters = createJsonObjectForMethod("CCLevelUpEventHandler::onGateOpened");
                     parameters.put("gateId", gateOpenedEvent.GateId);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
+                } catch (JSONException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        });
+    }
+
+    @Subscribe
+    public void onGateClosed(final GateClosedEvent gateClosedEvent) {
+        mGLThread.queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject parameters = createJsonObjectForMethod("CCLevelUpEventHandler::onGateClosed");
+                    parameters.put("gateId", gateClosedEvent.GateId);
                     NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);

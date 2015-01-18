@@ -147,6 +147,30 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
+        ndkGlue.registerCallHandler("CCLevelUpService::levelGetTimesCompleted", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String levelId = params.getString("levelId");
+                retParams.put("return", LevelStorage.getTimesCompleted(levelId));
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCLevelUpService::levelIncTimesCompleted", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String levelId = params.getString("levelId");
+                retParams.put("return", LevelStorage.incTimesCompleted(levelId));
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCLevelUpService::levelDecTimesCompleted", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String levelId = params.getString("levelId");
+                retParams.put("return", LevelStorage.decTimesCompleted(levelId));
+            }
+        });
+
         ndkGlue.registerCallHandler("CCLevelUpService::missionSetCompleted", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {

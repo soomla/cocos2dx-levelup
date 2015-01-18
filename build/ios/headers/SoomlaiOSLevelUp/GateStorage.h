@@ -23,4 +23,6 @@
 
 + (BOOL)isOpen:(NSString *)gateId;
 
++ (NSString *)keyGatePrefix;
+
 @end

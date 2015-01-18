@@ -47,6 +47,13 @@ namespace soomla {
                 [this](__Dictionary *parameters) {
                     this->onLevelUpInitialized();
                 });
+        
+        eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LATEST_SCORE_CHANGED,
+                [this](__Dictionary *parameters) {
+                    CCScore *score = CCSoomlaLevelUp::getInstance()->getScore(parameters->valueForKey("scoreId")->getCString());
+                    CC_ASSERT(score);
+                    this->onLatestScoreChanged(score);
+                });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED,
                 [this](__Dictionary *parameters) {
@@ -67,6 +74,13 @@ namespace soomla {
                     CCGate *gate = CCSoomlaLevelUp::getInstance()->getGate(parameters->valueForKey("gateId")->getCString());
                     CC_ASSERT(gate);
                     this->onGateOpened(gate);
+                });
+        
+        eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_GATE_CLOSED,
+                [this](__Dictionary *parameters) {
+                    CCGate *gate = CCSoomlaLevelUp::getInstance()->getGate(parameters->valueForKey("gateId")->getCString());
+                    CC_ASSERT(gate);
+                    this->onGateClosed(gate);
                 });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_MISSION_COMPLETED,
@@ -130,6 +144,16 @@ namespace soomla {
         unlockEventHandlers();
     }
 
+    void CCLevelUpEventDispatcher::onGateClosed(CCGate *gate) {
+        lockEventHandlers();
+        
+        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
+            eventHandler->onGateClosed(gate);
+        }
+
+        unlockEventHandlers();
+    }
+
     void CCLevelUpEventDispatcher::onMissionCompleted(CCMission *mission) {
         lockEventHandlers();
 
@@ -145,6 +169,16 @@ namespace soomla {
 
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onMissionCompletionRevoked(mission);
+        }
+
+        unlockEventHandlers();
+    }
+
+    void CCLevelUpEventDispatcher::onLatestScoreChanged(CCScore *score) {
+        lockEventHandlers();
+        
+        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
+            eventHandler->onLatestScoreChanged(score);
         }
 
         unlockEventHandlers();

@@ -26,6 +26,12 @@
 
 + (void)setReward:(NSString*)rewardId forWorld:(NSString *)worldId;
 
++ (void)setReward:(NSString*)rewardId forWorld:(NSString *)worldId andNotify:(BOOL)notify;
+
 + (NSString*)getAssignedReward:(NSString *)worldId;
+
++ (BOOL)isLevel:(NSString *)worldId;
+
++ (NSString *)keyWorldPrefix;
 
 @end
