@@ -70,15 +70,15 @@ namespace soomla {
         return CCLevelUpService::getInstance()->levelDecTimesPlayed(level);
     }
     
-    int getTimesCompleted(CCLevel *level) {
+    int CCLevelStorage::getTimesCompleted(CCLevel *level) {
         return CCLevelUpService::getInstance()->levelGetTimesCompleted(level);
     }
     
-    int incTimesCompleted(CCLevel *level) {
+    int CCLevelStorage::incTimesCompleted(CCLevel *level) {
         return CCLevelUpService::getInstance()->levelIncTimesCompleted(level);
     }
     
-    int decTimesCompleted(CCLevel *level) {
+    int CCLevelStorage::decTimesCompleted(CCLevel *level) {
         return CCLevelUpService::getInstance()->levelDecTimesCompleted(level);
     }
 }

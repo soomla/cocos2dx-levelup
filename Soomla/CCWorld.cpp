@@ -370,7 +370,7 @@ namespace soomla {
     void CCWorld::createAddAutoLevel(const char *id, CCLevel *target, CCGate *targetGate,
                                      cocos2d::__Array *scoreTemplates, cocos2d::__Array *missionTemplates) {
         if (targetGate) {
-            target->mGate = targetGate;
+            target->setGate(targetGate);
         }
 
         if (scoreTemplates != NULL) {
