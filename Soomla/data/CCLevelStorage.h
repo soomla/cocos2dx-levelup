@@ -105,6 +105,27 @@ namespace soomla {
          @return The number of times played after decreasing.
          */
         int decTimesPlayed(CCLevel *level);
+        
+        /**
+         Retrieves the number of times this `Level` has been completed.
+         @param level `Level` whose times completed is to be retrieved.
+         @return The number of times completed.
+         */
+        int getTimesCompleted(CCLevel *level);
+        
+        /**
+         Increases by 1 the number of times the given `Level` has been completed.
+         @param level `Level` to increase its times completed.
+         @return The number of times completed after increasing.
+         */
+        int incTimesCompleted(CCLevel *level);
+        
+        /**
+         Decreases by 1 the number of times the given `Level` has been completed.
+         @param level `Level` to decrease its times completed.
+         @return The number of times completed after decreasing.
+         */
+        int decTimesCompleted(CCLevel *level);
 
     private:
 

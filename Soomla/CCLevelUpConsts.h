@@ -98,9 +98,11 @@ namespace soomla {
         static char const *JSON_JSON_TYPE_LEVEL;
 
         static char const *EVENT_LEVEL_UP_INITIALIZED;
+        static char const *EVENT_LATEST_SCORE_CHANGED;
         static char const *EVENT_SCORE_RECORD_REACHED;
         static char const *EVENT_SCORE_RECORD_CHANGED;
         static char const *EVENT_GATE_OPENED;
+        static char const *EVENT_GATE_CLOSED;
         static char const *EVENT_MISSION_COMPLETED;
         static char const *EVENT_MISSION_COMPLETION_REVOKED;
         static char const *EVENT_WORLD_COMPLETED;

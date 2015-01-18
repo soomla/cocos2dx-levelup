@@ -128,6 +128,21 @@
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage decTimesPlayedForLevel:levelId]);
     }];
+    
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelGetTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+        NSString *levelId = parameters[@"levelId"];
+        retParameters[@"return"] = @([LevelStorage getTimesCompletedForLevel:levelId]);
+    }];
+    
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelIncTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+        NSString *levelId = parameters[@"levelId"];
+        retParameters[@"return"] = @([LevelStorage incTimesCompletedForLevel:levelId]);
+    }];
+    
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelDecTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+        NSString *levelId = parameters[@"levelId"];
+        retParameters[@"return"] = @([LevelStorage decTimesCompletedForLevel:levelId]);
+    }];
 
     [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::missionSetCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *missionId = parameters[@"missionId"];
@@ -190,6 +205,11 @@
     [ndkGlue registerCallbackHandlerForKey:EVENT_LEVEL_UP_INITIALIZED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {
         parameters[@"method"] = @"CCLevelUpEventHandler::onLevelUpInitialized";
     }];
+    
+    [ndkGlue registerCallbackHandlerForKey:EVENT_SCORE_LATEST_CHANGED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {
+        parameters[@"method"] = @"CCLevelUpEventHandler::onLatestScoreChanged";
+        parameters[@"scoreId"] = (notification.userInfo)[DICT_ELEMENT_SCORE];
+    }];
 
     [ndkGlue registerCallbackHandlerForKey:EVENT_SCORE_RECORD_REACHED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {
         parameters[@"method"] = @"CCLevelUpEventHandler::onScoreRecordReached";
@@ -203,6 +223,11 @@
 
     [ndkGlue registerCallbackHandlerForKey:EVENT_GATE_OPENED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {
         parameters[@"method"] = @"CCLevelUpEventHandler::onGateOpened";
+        parameters[@"gateId"] = (notification.userInfo)[DICT_ELEMENT_GATE];
+    }];
+    
+    [ndkGlue registerCallbackHandlerForKey:EVENT_GATE_CLOSED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {
+        parameters[@"method"] = @"CCLevelUpEventHandler::onGateClosed";
         parameters[@"gateId"] = (notification.userInfo)[DICT_ELEMENT_GATE];
     }];
 

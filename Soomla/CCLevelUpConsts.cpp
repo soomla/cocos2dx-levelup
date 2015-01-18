@@ -91,9 +91,11 @@ namespace soomla {
     char const *CCLevelUpConsts::JSON_JSON_TYPE_LEVEL       = "Level";
 
     char const *CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED = "CCLevelUpEventHandler::onLevelUpInitialized";
-    char const *CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED = "CCLevelUpEventHandler::onScoreRecordReached";
     char const *CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED = "CCLevelUpEventHandler::onScoreRecordChanged";
+    char const *CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED = "CCLevelUpEventHandler::onScoreRecordReached";
+    char const *CCLevelUpConsts::EVENT_LATEST_SCORE_CHANGED = "CCLevelUpEventHandler::onLatestScoreChanged";
     char const *CCLevelUpConsts::EVENT_GATE_OPENED = "CCLevelUpEventHandler::onGateOpened";
+    char const *CCLevelUpConsts::EVENT_GATE_CLOSED = "CCLevelUpEventHandler::onGateClosed";
     char const *CCLevelUpConsts::EVENT_MISSION_COMPLETED = "CCLevelUpEventHandler::onMissionCompleted";
     char const *CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED = "CCLevelUpEventHandler::onMissionCompletionRevoked";
     char const *CCLevelUpConsts::EVENT_WORLD_COMPLETED = "CCLevelUpEventHandler::onWorldCompleted";
