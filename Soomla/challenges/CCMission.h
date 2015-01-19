@@ -41,7 +41,6 @@ namespace soomla {
         friend class CCChallengeEventHandler;
         CC_SYNTHESIZE_RETAIN(cocos2d::CCArray *, mRewards, Rewards)
         CC_SYNTHESIZE_RETAIN(CCSchedule *, mSchedule, Schedule)
-        CC_SYNTHESIZE_RETAIN(CCGate *, mGate, Gate);
 
         CC_SYNTHESIZE_RETAIN(CCLevelUpEventHandler *, mEventHandler, EventHandler);
 
@@ -109,6 +108,9 @@ namespace soomla {
          in standard scenarios.
          */
         void forceComplete();
+        
+        virtual CCGate *getGate() const;
+        virtual void setGate(CCGate *gate);
 
     protected:
 
@@ -134,6 +136,8 @@ namespace soomla {
         void takeRewards();
 
         void giveRewards();
+        
+        CCGate *mGate;
     };
 
     class CCMissionEventHandler: public CCSimpleLevelUpEventHandler {

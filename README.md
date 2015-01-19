@@ -74,6 +74,14 @@ A _Challenge_ is a set of _Missions_ that need to be completed, so it's a big _M
 A _Reward_ is some kind of perk or status a player can achieve in the game.
 This can be either a badge, a virtual item from the game's economy (sword, coins etc.) or anything you can think of, really (unlocking game content or levels comes to mind).
 
+## Download
+
+####Pre baked zip:
+- [soomla-cocos2dx-core 1.0.1](http://library.soom.la/fetch/cocos2dx-v2-core/1.0.1?cf=github)
+- [cocos2dx-store 4.3.1](http://library.soom.la/fetch/cocos2dx-v2-store/4.3.1?cf=github)
+- [cocos2dx-profile 1.0.2](http://library.soom.la/fetch/cocos2dx-v2-profile/1.0.2?cf=github)
+- [cocos2dx-levelup 1.0.1](http://library.soom.la/fetch/cocos2dx-v2-levelup/1.0.1?cf=github)
+
 ## Getting Started (With pre-built libraries - RECOMMENDED)
 
 *If you want to develop with sources, refer to the [Working with sources](#working-with-sources) section below*.

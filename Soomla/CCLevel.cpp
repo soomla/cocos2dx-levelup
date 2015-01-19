@@ -200,7 +200,13 @@ namespace soomla {
     }
 
     void CCLevel::setCompleted(bool completed) {
-        mState = Completed;
+        if (completed) {
+            mState = Completed;
+            CCLevelStorage::getInstance()->incTimesCompleted(this);
+        }
+        else {
+            mState = Idle;
+        }
         CCWorld::setCompleted(completed);
     }
 

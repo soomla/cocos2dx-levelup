@@ -178,6 +178,27 @@ namespace soomla {
 
         return dict;
     }
+    
+    CCGate *CCWorld::getGate() const {
+        return mGate;
+    }
+    
+    void CCWorld::setGate(CCGate *gate) {
+        if (mGate != gate)
+        {
+            if (mGate != NULL) {
+                mGate->onDetached();
+            }
+            
+            CC_SAFE_RETAIN(gate);
+            CC_SAFE_RELEASE(mGate);
+            mGate = gate;
+            
+            if (mGate != NULL) {
+                mGate->onAttached();
+            }
+        }
+    }
 
     char const *CCWorld::getType() const {
         return CCLevelUpConsts::JSON_JSON_TYPE_WORLD;
@@ -349,7 +370,7 @@ namespace soomla {
     void CCWorld::createAddAutoLevel(const char *id, CCLevel *target, CCGate *targetGate,
                                      cocos2d::CCArray *scoreTemplates, cocos2d::CCArray *missionTemplates) {
         if (targetGate) {
-            target->mGate = targetGate;
+            target->setGate(targetGate);
         }
 
         if (scoreTemplates != NULL) {

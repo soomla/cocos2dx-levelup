@@ -74,11 +74,52 @@ namespace soomla {
     }
 
     void CCGatesList::add(CCGate *gate) {
+        if (gate == NULL) {
+            return;
+        }
+        
+        gate->onAttached();
         mGates->addObject(gate);
     }
 
     void CCGatesList::remove(CCGate *gate) {
+        if (gate == NULL) {
+            return;
+        }
+        
+        gate->onDetached();
         mGates->removeObject(gate);
+    }
+    
+    cocos2d::CCArray *CCGatesList::getGates() const {
+        return mGates;
+    }
+    
+    void CCGatesList::setGates(cocos2d::CCArray *gates) {
+        if (mGates != gates)
+        {
+            if (mGates != NULL) {
+                CCObject *ref;
+                CCGate *gate;
+                CCARRAY_FOREACH(mGates, ref) {
+                    gate = dynamic_cast<CCGate *>(ref);
+                    gate->onDetached();
+                }
+            }
+            
+            CC_SAFE_RETAIN(gates);
+            CC_SAFE_RELEASE(mGates);
+            mGates = gates;
+            
+            if (mGates != NULL) {
+                CCObject *ref;
+                CCGate *gate;
+                CCARRAY_FOREACH(mGates, ref) {
+                    gate = dynamic_cast<CCGate *>(ref);
+                    gate->onAttached();
+                }
+            }
+        }
     }
 
     bool CCGatesList::openInner() {

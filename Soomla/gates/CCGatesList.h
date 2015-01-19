@@ -35,7 +35,6 @@ namespace soomla {
     class CCGatesList: public CCGate {
 
         friend class CCGateListEventHandler;
-        CC_SYNTHESIZE_RETAIN(cocos2d::CCArray *, mGates, Gates);
         CC_SYNTHESIZE_RETAIN(CCLevelUpEventHandler *, mEventHandler, EventHandler);
 
     public:
@@ -67,6 +66,9 @@ namespace soomla {
          @param gate Gate to remove.
          */
         void remove(CCGate *gate);
+        
+        cocos2d::CCArray *getGates() const;
+        void setGates(cocos2d::CCArray *gates);
 
     protected:
 
@@ -85,6 +87,9 @@ namespace soomla {
          Unregisters relevant events: gate-opened event.
          */
         virtual void unregisterEvents();
+        
+    private:
+        cocos2d::CCArray *mGates;
     };
 
     class CCGateListEventHandler: public CCSimpleLevelUpEventHandler {

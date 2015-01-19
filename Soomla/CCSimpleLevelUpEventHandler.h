@@ -34,10 +34,12 @@ namespace soomla {
         virtual void onLevelUpInitialized();
 
         virtual void onGateOpened(CCGate* gate);
+        virtual void onGateClosed(CCGate *gate);
 
         virtual void onMissionCompleted(CCMission* completedMission);
         virtual void onMissionCompletionRevoked(CCMission* mission);
 
+        virtual void onLatestScoreChanged(CCScore *score);
         virtual void onScoreRecordReached(CCScore *score);
         virtual void onScoreRecordChanged(CCScore *score);
 

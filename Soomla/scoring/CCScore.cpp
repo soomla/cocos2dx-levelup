@@ -82,6 +82,8 @@ namespace soomla {
 
     void CCScore::reset(bool save) {
         if (save) {
+            CCScoreStorage::getInstance()->setLatestScore(this, mTempScore);
+            
             double record = CCScoreStorage::getInstance()->getRecordScore(this);
             if (hasTempReached(record)) {
                 CCScoreStorage::getInstance()->setRecordScore(this, mTempScore);
@@ -89,8 +91,6 @@ namespace soomla {
             }
 
             performSaveActions();
-
-            CCScoreStorage::getInstance()->setLatestScore(this, mTempScore);
         }
 
         setTempScore(mStartValue->getValue());

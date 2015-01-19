@@ -106,6 +106,7 @@
 		9DEA549419B4A6350093D5D9 /* LevelUpEventHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA548419B4A6350093D5D9 /* LevelUpEventHandling.m */; };
 		9DEA549519B4A6350093D5D9 /* SoomlaiOSLevelUp-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA548519B4A6350093D5D9 /* SoomlaiOSLevelUp-Prefix.pch */; };
 		C0B3C5F3168C6D0C00161FAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B3C5F2168C6D0C00161FAA /* Foundation.framework */; };
+		F8667F5D1A6C0AC00004B45B /* LevelUp.m in Sources */ = {isa = PBXBuildFile; fileRef = F8667F5C1A6C0AC00004B45B /* LevelUp.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -211,6 +212,7 @@
 		9DEA548519B4A6350093D5D9 /* SoomlaiOSLevelUp-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SoomlaiOSLevelUp-Prefix.pch"; sourceTree = "<group>"; };
 		C0B3C5EF168C6D0C00161FAA /* libCocos2dxLevelUpFromSources.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocos2dxLevelUpFromSources.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0B3C5F2168C6D0C00161FAA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F8667F5C1A6C0AC00004B45B /* LevelUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelUp.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -408,6 +410,7 @@
 			children = (
 				9DEA547519B4A6350093D5D9 /* data */,
 				9DEA548219B4A6350093D5D9 /* LevelUp.h */,
+				F8667F5C1A6C0AC00004B45B /* LevelUp.m */,
 				9DEA548319B4A6350093D5D9 /* LevelUpEventHandling.h */,
 				9DEA548419B4A6350093D5D9 /* LevelUpEventHandling.m */,
 				9DEA548519B4A6350093D5D9 /* SoomlaiOSLevelUp-Prefix.pch */,
@@ -609,6 +612,7 @@
 				9DEA543019B4A5F00093D5D9 /* CCLevel.cpp in Sources */,
 				9DEA547319B4A6010093D5D9 /* LevelUpService.mm in Sources */,
 				9DEA548719B4A6350093D5D9 /* GateStorage.m in Sources */,
+				F8667F5D1A6C0AC00004B45B /* LevelUp.m in Sources */,
 				9DEA546C19B4A5F00093D5D9 /* CCVirtualItemScore.cpp in Sources */,
 				372B7EA72AD78519E217FE1D /* CCBalanceMission.cpp in Sources */,
 				372B7367CE943BCDCB7624D2 /* CCPurchasingMission.cpp in Sources */,

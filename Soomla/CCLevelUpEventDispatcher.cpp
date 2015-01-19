@@ -45,6 +45,9 @@ namespace soomla {
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED,
                 this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_LEVEL_UP_INITIALIZED));
+        
+        eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LATEST_SCORE_CHANGED,
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_LATEST_SCORE_CHANGED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED,
                 this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_SCORE_RECORD_REACHED));
@@ -54,6 +57,9 @@ namespace soomla {
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_GATE_OPENED,
                 this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_GATE_OPENED));
+        
+        eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_GATE_CLOSED,
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_GATE_CLOSED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_MISSION_COMPLETED,
                 this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_MISSION_COMPLETED));
@@ -92,6 +98,16 @@ namespace soomla {
         unlockEventHandlers();
     }
 
+    void CCLevelUpEventDispatcher::onGateClosed(CCGate *gate) {
+        lockEventHandlers();
+        
+        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
+            eventHandler->onGateClosed(gate);
+        }
+
+        unlockEventHandlers();
+    }
+
     void CCLevelUpEventDispatcher::onMissionCompleted(CCMission *mission) {
         lockEventHandlers();
 
@@ -107,6 +123,16 @@ namespace soomla {
 
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onMissionCompletionRevoked(mission);
+        }
+
+        unlockEventHandlers();
+    }
+
+    void CCLevelUpEventDispatcher::onLatestScoreChanged(CCScore *score) {
+        lockEventHandlers();
+        
+        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
+            eventHandler->onLatestScoreChanged(score);
         }
 
         unlockEventHandlers();
@@ -177,6 +203,12 @@ namespace soomla {
         this->onLevelUpInitialized();
     }
 
+    void CCLevelUpEventDispatcher::handle__EVENT_LATEST_SCORE_CHANGED(cocos2d::CCDictionary *parameters) {
+        CCScore *score = CCSoomlaLevelUp::getInstance()->getScore(parameters->valueForKey("scoreId")->getCString());
+        CC_ASSERT(score);
+        this->onLatestScoreChanged(score);
+    }
+
     void CCLevelUpEventDispatcher::handle__EVENT_SCORE_RECORD_REACHED(cocos2d::CCDictionary *parameters) {
         CCScore *score = CCSoomlaLevelUp::getInstance()->getScore(parameters->valueForKey("scoreId")->getCString());
         CC_ASSERT(score);
@@ -193,6 +225,12 @@ namespace soomla {
         CCGate *gate = CCSoomlaLevelUp::getInstance()->getGate(parameters->valueForKey("gateId")->getCString());
         CC_ASSERT(gate);
         this->onGateOpened(gate);
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_GATE_CLOSED(cocos2d::CCDictionary *parameters) {
+        CCGate *gate = CCSoomlaLevelUp::getInstance()->getGate(parameters->valueForKey("gateId")->getCString());
+        CC_ASSERT(gate);
+        this->onGateClosed(gate);
     }
 
     void CCLevelUpEventDispatcher::handle__EVENT_MISSION_COMPLETED(cocos2d::CCDictionary *parameters) {

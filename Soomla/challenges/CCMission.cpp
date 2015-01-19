@@ -86,10 +86,12 @@ namespace soomla {
 
             // gate
             ref = dict->objectForKey(CCLevelUpConsts::JSON_LU_GATE);
-            CC_ASSERT(dynamic_cast<CCDictionary *>(ref));
-            ref = CCDomainFactory::getInstance()->createWithDictionary(dynamic_cast<CCDictionary *>(ref));
-            CC_ASSERT(dynamic_cast<CCGate *>(ref));
-            setGate(dynamic_cast<CCGate *>(ref));
+            CCDictionary *gateDict = dynamic_cast<CCDictionary *>(ref);
+            if (gateDict != NULL) {
+                ref = CCDomainFactory::getInstance()->createWithDictionary(dynamic_cast<CCDictionary *>(ref));
+                CC_ASSERT(dynamic_cast<CCGate *>(ref));
+                setGate(dynamic_cast<CCGate *>(ref));
+            }
 
             // schedule
             ref = dict->objectForKey(CCLevelUpConsts::JSON_SCHEDULE);
@@ -121,6 +123,27 @@ namespace soomla {
         }
 
         return dict;
+    }
+    
+    CCGate *CCMission::getGate() const {
+        return mGate;
+    }
+    
+    void CCMission::setGate(CCGate *gate) {
+        if (mGate != gate)
+        {
+            if (mGate != NULL) {
+                mGate->onDetached();
+            }
+            
+            CC_SAFE_RETAIN(gate);
+            CC_SAFE_RELEASE(mGate);
+            mGate = gate;
+            
+            if (mGate != NULL) {
+                mGate->onAttached();
+            }
+        }
     }
 
     const char *CCMission::getType() const {

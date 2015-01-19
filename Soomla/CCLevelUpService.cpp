@@ -361,7 +361,69 @@ namespace soomla {
 
         return ret->getValue();
     }
-
+    
+    int CCLevelUpService::levelGetTimesCompleted(CCLevel *level) {
+        CCSoomlaUtils::logDebug(TAG,
+                                CCString::createWithFormat("call levelGetTimesCompleted with level: %s", level->getId()->getCString())->getCString());
+        
+        SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelGetTimesCompleted");
+        params->setObject(level->getId(), "levelId");
+        
+        CCError *error = NULL;
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
+        
+        if (error) {
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
+                                                                    "call levelGetTimesCompleted failed with error: %s", error->getInfo())->getCString());
+            return false;
+        }
+        
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
+        
+        return ret->getValue();
+    }
+    
+    int CCLevelUpService::levelIncTimesCompleted(CCLevel *level) {
+        CCSoomlaUtils::logDebug(TAG,
+                                CCString::createWithFormat("call levelIncTimesCompleted with level: %s", level->getId()->getCString())->getCString());
+        
+        SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelIncTimesCompleted");
+        params->setObject(level->getId(), "levelId");
+        
+        CCError *error = NULL;
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
+        
+        if (error) {
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
+                                                                    "call levelIncTimesCompleted failed with error: %s", error->getInfo())->getCString());
+            return false;
+        }
+        
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
+        
+        return ret->getValue();
+    }
+    
+    int CCLevelUpService::levelDecTimesCompleted(CCLevel *level) {
+        CCSoomlaUtils::logDebug(TAG,
+                                CCString::createWithFormat("call levelDecTimesCompleted with level: %s", level->getId()->getCString())->getCString());
+        
+        SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelDecTimesCompleted");
+        params->setObject(level->getId(), "levelId");
+        
+        CCError *error = NULL;
+        CCDictionary *retParams = (CCDictionary *) CCNdkBridge::callNative (params, &error);
+        
+        if (error) {
+            CCSoomlaUtils::logError(TAG, CCString::createWithFormat(
+                                                                    "call levelDecTimesCompleted failed with error: %s", error->getInfo())->getCString());
+            return false;
+        }
+        
+        SL_EXTRACT_FROM_RETURN(CCInteger, ret, retParams);
+        
+        return ret->getValue();
+    }
 
     void CCLevelUpService::missionSetCompleted(CCMission *mission, bool completed, bool notify) {
         CCSoomlaUtils::logDebug(TAG,

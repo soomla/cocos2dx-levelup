@@ -67,6 +67,10 @@ namespace soomla {
         int levelGetTimesPlayed(CCLevel *level);
         int levelIncTimesPlayed(CCLevel *level);
         int levelDecTimesPlayed(CCLevel *level);
+        
+        int levelGetTimesCompleted(CCLevel *level);
+        int levelIncTimesCompleted(CCLevel *level);
+        int levelDecTimesCompleted(CCLevel *level);
 
         void missionSetCompleted(CCMission *mission, bool completed, bool notify);
         int missionGetTimesCompleted(CCMission *mission);

@@ -47,10 +47,12 @@ namespace soomla {
         virtual void onLevelUpInitialized();
 
         virtual void onGateOpened(CCGate *gate);
+        virtual void onGateClosed(CCGate *gate);
 
         virtual void onMissionCompleted(CCMission *mission);
         virtual void onMissionCompletionRevoked(CCMission *mission);
 
+        virtual void onLatestScoreChanged(CCScore *score);
         virtual void onScoreRecordReached(CCScore *score);
         virtual void onScoreRecordChanged(CCScore *score);
 
@@ -62,9 +64,11 @@ namespace soomla {
 
     private:
         void handle__EVENT_LEVEL_UP_INITIALIZED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_LATEST_SCORE_CHANGED(cocos2d::CCDictionary *parameters);
         void handle__EVENT_SCORE_RECORD_REACHED(cocos2d::CCDictionary *parameters);
         void handle__EVENT_SCORE_RECORD_CHANGED(cocos2d::CCDictionary *parameters);
         void handle__EVENT_GATE_OPENED(cocos2d::CCDictionary *parameters);
+        void handle__EVENT_GATE_CLOSED(cocos2d::CCDictionary *parameters);
         void handle__EVENT_MISSION_COMPLETED(cocos2d::CCDictionary *parameters);
         void handle__EVENT_MISSION_COMPLETION_REVOKED(cocos2d::CCDictionary *parameters);
         void handle__EVENT_WORLD_COMPLETED(cocos2d::CCDictionary *parameters);

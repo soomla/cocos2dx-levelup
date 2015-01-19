@@ -160,16 +160,7 @@ namespace soomla {
     CCMission *CCSoomlaLevelUp::getMission(char const *missionId) {
         CCMission *retMission = NULL;
 
-        CCObject *ref;
-        CCMission *mission;
-        CCARRAY_FOREACH(mInitialWorld->getMissions(), ref) {
-                mission = dynamic_cast<CCMission *>(ref);
-                CC_ASSERT(mission);
-                if (mission->getId()->compare(missionId) == 0) {
-                    retMission = mission;
-                    break;
-                }
-            }
+        retMission = fetchMission(missionId, mInitialWorld->getMissions());
 
         if (retMission == NULL) {
             return fetchMission(missionId, mInitialWorld->getInnerWorldsMap());
@@ -411,15 +402,12 @@ namespace soomla {
         CCMission *mission;
         CCDICT_FOREACH(worlds, el) {
                 world = (CCWorld *) el->getObject();
-
-                CCObject *ref;
-                CCARRAY_FOREACH(world->getMissions(), ref) {
-                        mission = dynamic_cast<CCMission *>(ref);
-                        CC_ASSERT(mission);
-                        if (mission->getId()->compare(missionId) == 0) {
-                            return mission;
-                        }
-                    }
+            
+                mission = fetchMission(missionId, world->getMissions());
+            
+                if (mission) {
+                    return mission;
+                }
 
                 mission = fetchMission(missionId, world->getInnerWorldsMap());
 
@@ -429,5 +417,43 @@ namespace soomla {
             }
 
         return NULL;
+    }
+    
+    CCMission *CCSoomlaLevelUp::fetchMission(char const *missionId, cocos2d::CCArray *missions) {
+        CCMission *retMission = NULL;
+        
+        if (!missions) {
+            return NULL;
+        }
+        
+        CCObject *ref;
+        CCARRAY_FOREACH(missions, ref) {
+            CCMission *mission = dynamic_cast<CCMission *>(ref);
+            CC_ASSERT(mission);
+            retMission = fetchMission(missionId, mission);
+            if (retMission) {
+                return retMission;
+            }
+        }
+        
+        return retMission;
+    }
+    
+    CCMission *CCSoomlaLevelUp::fetchMission(char const *missionId, CCMission *targetMission) {
+        if (!targetMission) {
+            return NULL;
+        }
+        
+        if (targetMission && (targetMission->getId()->compare(missionId) == 0)) {
+            return targetMission;
+        }
+        
+        CCMission *result = NULL;
+        CCChallenge *challenge = dynamic_cast<CCChallenge *>(targetMission);
+        if (challenge) {
+            return fetchMission(missionId, challenge->getMissions());
+        }
+        
+        return result;
     }
 }
