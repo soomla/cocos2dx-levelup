@@ -200,7 +200,7 @@ namespace soomla {
                 __String::createWithFormat("call levelSetFastestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelSetFastestDurationMillis");
-        params->setObject(level->getId(), "gateId");
+        params->setObject(level->getId(), "levelId");
         params->setObject(__Integer::create(duration), "duration");
 
         CCError *error = NULL;
