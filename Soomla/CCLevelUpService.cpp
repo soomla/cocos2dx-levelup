@@ -36,6 +36,14 @@
 #include "CCDomainHelper.h"
 #include "CCRangeScore.h"
 #include "CCVirtualItemScore.h"
+#include "CCSocialLikeGate.h"
+#include "CCSocialStatusGate.h"
+#include "CCSocialStoryGate.h"
+#include "CCSocialUploadGate.h"
+#include "CCSocialLikeMission.h"
+#include "CCSocialStatusMission.h"
+#include "CCSocialStoryMission.h"
+#include "CCSocialUploadMission.h"
 
 USING_NS_CC;
 
@@ -77,10 +85,10 @@ namespace soomla {
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_PURCHASE_MISSION, (SEL_DomainCreator)CCPurchasingMission::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_RECORD_MISSION, (SEL_DomainCreator)CCRecordMission::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_MISSION, (SEL_DomainCreator)CCWorldCompletionMission::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE, (SEL_DomainCreator)CCBalanceGate::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_AND, (SEL_DomainCreator)CCGatesListAnd::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_OR, (SEL_DomainCreator)CCGatesListOr::createWithDictionary);
-        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_PURCHASABLE_GATE, (SEL_DomainCreator)CCPurchasableGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_MISSION, (SEL_DomainCreator)CCSocialLikeMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_MISSION, (SEL_DomainCreator)CCSocialStatusMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_MISSION, (SEL_DomainCreator)CCSocialStoryMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_MISSION, (SEL_DomainCreator)CCSocialUploadMission::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_RECORD_GATE, (SEL_DomainCreator)CCRecordGate::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SCHEDULE_GATE, (SEL_DomainCreator)CCScheduleGate::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE, (SEL_DomainCreator)CCWorldCompletionGate::createWithDictionary);
@@ -89,6 +97,10 @@ namespace soomla {
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_VIRTUAL_ITEM_SCORE, (SEL_DomainCreator)CCVirtualItemScore::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD, (SEL_DomainCreator)CCWorld::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_LEVEL, (SEL_DomainCreator)CCLevel::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_GATE, (SEL_DomainCreator)CCSocialLikeGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_GATE, (SEL_DomainCreator)CCSocialStatusGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_GATE, (SEL_DomainCreator)CCSocialStoryGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_GATE, (SEL_DomainCreator)CCSocialUploadGate::createWithDictionary);
 
         return true;
     }
@@ -201,7 +213,7 @@ namespace soomla {
                 CCString::createWithFormat("call levelSetFastestDurationMillis with level: %s", level->getId()->getCString())->getCString());
 
         SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::levelSetFastestDurationMillis");
-        params->setObject(level->getId(), "gateId");
+        params->setObject(level->getId(), "levelId");
         params->setObject(CCInteger::create(duration), "duration");
 
         CCError *error = NULL;

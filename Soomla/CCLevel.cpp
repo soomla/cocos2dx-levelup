@@ -169,7 +169,9 @@ namespace soomla {
                 CCLevelStorage::getInstance()->setSlowestDurationMillis(this, duration);
             }
 
-            if (duration < getFastestDurationMillis()) {
+            // We assume that levels' duration is never 0
+            long fastest = getFastestDurationMillis();
+            if ((fastest == 0) || (duration < getFastestDurationMillis())) {
                 CCLevelStorage::getInstance()->setFastestDurationMillis(this, duration);
             }
 
@@ -213,7 +215,7 @@ namespace soomla {
     long CCLevel::getCurrentTimeMs() {
         struct timeval now;
         gettimeofday(&now, NULL);
-
-        return (long) (1000 * now.tv_sec + now.tv_usec / 1000.0f);
+        
+        return (1000 * now.tv_sec + (long)(now.tv_usec / 1000.0f));
     }
 }
