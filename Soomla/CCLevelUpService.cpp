@@ -36,6 +36,14 @@
 #include "CCDomainHelper.h"
 #include "CCRangeScore.h"
 #include "CCVirtualItemScore.h"
+#include "CCSocialLikeGate.h"
+#include "CCSocialStatusGate.h"
+#include "CCSocialStoryGate.h"
+#include "CCSocialUploadGate.h"
+#include "CCSocialLikeMission.h"
+#include "CCSocialStatusMission.h"
+#include "CCSocialStoryMission.h"
+#include "CCSocialUploadMission.h"
 
 USING_NS_CC;
 
@@ -77,6 +85,10 @@ namespace soomla {
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_PURCHASE_MISSION, CCPurchasingMission::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_RECORD_MISSION, CCRecordMission::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_MISSION, CCWorldCompletionMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_MISSION, CCSocialLikeMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_MISSION, CCSocialStatusMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_MISSION, CCSocialStoryMission::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_MISSION, CCSocialUploadMission::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE, CCBalanceGate::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_AND, CCGatesListAnd::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_GATES_LIST_OR, CCGatesListOr::createWithDictionary);
@@ -84,6 +96,10 @@ namespace soomla {
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_RECORD_GATE, CCRecordGate::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SCHEDULE_GATE, CCScheduleGate::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE, CCWorldCompletionGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_GATE, CCSocialLikeGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_GATE, CCSocialStatusGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_GATE, CCSocialStoryGate::createWithDictionary);
+        domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_UPLOAD_GATE, CCSocialUploadGate::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_SCORE, CCScore::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_RANGE_SCORE, CCRangeScore::createWithDictionary);
         domainFactory->registerCreator(CCLevelUpConsts::JSON_JSON_TYPE_VIRTUAL_ITEM_SCORE, CCVirtualItemScore::createWithDictionary);
