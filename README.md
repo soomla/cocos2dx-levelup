@@ -78,7 +78,7 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 
 ####Pre baked zip:
 - [soomla-cocos2dx-core 1.0.2](http://library.soom.la/fetch/cocos2dx-v2-core/1.0.2?cf=github)
-- [cocos2dx-store 4.3.2](http://library.soom.la/fetch/cocos2dx-v2-store/4.3.2?cf=github)
+- [cocos2dx-store 4.3.3](http://library.soom.la/fetch/cocos2dx-v2-store/4.3.3?cf=github)
 - [cocos2dx-profile 1.0.3](http://library.soom.la/fetch/cocos2dx-v2-profile/1.0.3?cf=github)
 - [cocos2dx-levelup 1.0.2](http://library.soom.la/fetch/cocos2dx-v2-levelup/1.0.2?cf=github)
 
