@@ -634,4 +634,45 @@ namespace soomla {
         SL_EXTRACT_FROM_RETURN(__String, ret, retParams);
         return ret;
     }
+    
+    void CCLevelUpService::worldSetLastCompletedInnerWorld(CCWorld *world, cocos2d::__String *innerWorldId) {
+        CCSoomlaUtils::logDebug(TAG,
+                                __String::createWithFormat("call worldSetLastCompletedInnerWorld with world: %s", world->getId()->getCString())->getCString());
+        
+        SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::worldSetLastCompletedInnerWorld");
+        params->setObject(world->getId(), "worldId");
+        params->setObject(innerWorldId, "innerWorldId");
+        
+        CCError *error = NULL;
+        CCNdkBridge::callNative (params, &error);
+        
+        if (error) {
+            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+                                                                    "call worldSetLastCompletedInnerWorld failed with error: %s", error->getInfo())->getCString());
+        }
+    }
+    
+    cocos2d::__String *CCLevelUpService::worldGetLastCompletedInnerWorld(CCWorld *world) {
+        CCSoomlaUtils::logDebug(TAG,
+                                __String::createWithFormat("call worldGetLastCompletedInnerWorld with world: %s", world->getId()->getCString())->getCString());
+        
+        SL_CREATE_PARAMS_FOR_METHOD(params, "CCLevelUpService::worldGetLastCompletedInnerWorld");
+        params->setObject(world->getId(), "worldId");
+        
+        CCError *error = NULL;
+        __Dictionary *retParams = (__Dictionary *) CCNdkBridge::callNative (params, &error);
+        
+        if (error) {
+            CCSoomlaUtils::logError(TAG, __String::createWithFormat(
+                                                                    "call worldGetLastCompletedInnerWorld failed with error: %s", error->getInfo())->getCString());
+            return NULL;
+        }
+        
+        if ((retParams == NULL) || (retParams->count() == 0)) {
+            return NULL;
+        }
+        
+        SL_EXTRACT_FROM_RETURN(__String, ret, retParams);
+        return ret;
+    }
 }

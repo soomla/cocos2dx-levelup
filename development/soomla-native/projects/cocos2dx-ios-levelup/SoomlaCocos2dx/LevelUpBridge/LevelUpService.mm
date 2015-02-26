@@ -200,6 +200,17 @@
         NSString *worldId = parameters[@"worldId"];
         retParameters[@"return"] = ([WorldStorage getAssignedReward:worldId] ?: [NSNull null]);
     }];
+    
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::worldSetLastCompletedInnerWorld" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+        NSString *worldId = parameters[@"worldId"];
+        NSString *innerWorldId = parameters[@"innerWorldId"];
+        [WorldStorage setLastCompletedInnerWorld:innerWorldId forWorld:worldId];
+    }];
+    
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::worldGetLastCompletedInnerWorld" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+        NSString *worldId = parameters[@"worldId"];
+        retParameters[@"return"] = ([WorldStorage getLastCompletedInnerWorld:worldId] ?: [NSNull null]);
+    }];
 
     /* -= Callback handlers =- */
     [ndkGlue registerCallbackHandlerForKey:EVENT_LEVEL_UP_INITIALIZED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {
@@ -244,6 +255,12 @@
     [ndkGlue registerCallbackHandlerForKey:EVENT_WORLD_COMPLETED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {
         parameters[@"method"] = @"CCLevelUpEventHandler::onWorldCompleted";
         parameters[@"worldId"] = (notification.userInfo)[DICT_ELEMENT_WORLD];
+    }];
+    
+    [ndkGlue registerCallbackHandlerForKey:EVENT_LAST_COMPLETED_INNER_WORLD_CHANGED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {
+        parameters[@"method"] = @"CCLevelUpEventHandler::onLastCompletedInnerWorldChanged";
+        parameters[@"worldId"] = (notification.userInfo)[DICT_ELEMENT_WORLD];
+        parameters[@"innerWorldId"] = (notification.userInfo)[DICT_ELEMENT_INNER_WORLD];
     }];
 
     [ndkGlue registerCallbackHandlerForKey:EVENT_WORLD_REWARD_ASSIGNED withBlock:^(NSNotification *notification, NSMutableDictionary *parameters) {

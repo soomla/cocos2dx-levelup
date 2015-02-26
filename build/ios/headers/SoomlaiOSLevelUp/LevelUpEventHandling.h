@@ -15,30 +15,32 @@
  */
 
 // Events
-#define EVENT_SCORE_RECORD_CHANGED           @"lu_score_record_changed"
-#define EVENT_SCORE_LATEST_CHANGED           @"lu_score_latest_changed"
-#define EVENT_SCORE_RECORD_REACHED           @"lu_score_record_reached"
-#define EVENT_GATE_OPENED                    @"lu_gate_opened"
-#define EVENT_GATE_CLOSED                    @"lu_gate_closed"
-#define EVENT_MISSION_COMPLETED              @"lu_mission_completed"
-#define EVENT_MISSION_COMPLETION_REVOKED     @"lu_mission_completeion_revoked"
-#define EVENT_WORLD_COMPLETED                @"lu_world_completed"
-#define EVENT_LEVEL_STARTED                  @"lu_level_started"
-#define EVENT_LEVEL_ENDED                    @"lu_level_ended"
-#define EVENT_WORLD_REWARD_ASSIGNED          @"lu_world_reward_assigned"
-#define EVENT_LEVEL_UP_INITIALIZED           @"lu_level_up_initialized"
+#define EVENT_SCORE_RECORD_CHANGED                  @"lu_score_record_changed"
+#define EVENT_SCORE_LATEST_CHANGED                  @"lu_score_latest_changed"
+#define EVENT_SCORE_RECORD_REACHED                  @"lu_score_record_reached"
+#define EVENT_GATE_OPENED                           @"lu_gate_opened"
+#define EVENT_GATE_CLOSED                           @"lu_gate_closed"
+#define EVENT_MISSION_COMPLETED                     @"lu_mission_completed"
+#define EVENT_MISSION_COMPLETION_REVOKED            @"lu_mission_completeion_revoked"
+#define EVENT_WORLD_COMPLETED                       @"lu_world_completed"
+#define EVENT_LEVEL_STARTED                         @"lu_level_started"
+#define EVENT_LEVEL_ENDED                           @"lu_level_ended"
+#define EVENT_WORLD_REWARD_ASSIGNED                 @"lu_world_reward_assigned"
+#define EVENT_LAST_COMPLETED_INNER_WORLD_CHANGED    @"lu_last_completed_inner_world_changed"
+#define EVENT_LEVEL_UP_INITIALIZED                  @"lu_level_up_initialized"
 
 
 // UserInfo Elements
-#define DICT_ELEMENT_SCORE                   @"score"
-#define DICT_ELEMENT_GATE                    @"gate"
-#define DICT_ELEMENT_REWARD                  @"reward"
-#define DICT_ELEMENT_WORLD                   @"world"
-#define DICT_ELEMENT_MISSION                 @"mission"
-#define DICT_ELEMENT_LEVEL                   @"level"
-#define DICT_ELEMENT_IS_CHALLENGE            @"isChallenge"
-#define DICT_ELEMENT_IS_BADGE                @"isBadge"
-#define DICT_ELEMENT_METADATA                @"metadata"
+#define DICT_ELEMENT_SCORE                      @"score"
+#define DICT_ELEMENT_GATE                       @"gate"
+#define DICT_ELEMENT_REWARD                     @"reward"
+#define DICT_ELEMENT_WORLD                      @"world"
+#define DICT_ELEMENT_MISSION                    @"mission"
+#define DICT_ELEMENT_LEVEL                      @"level"
+#define DICT_ELEMENT_IS_CHALLENGE               @"isChallenge"
+#define DICT_ELEMENT_IS_BADGE                   @"isBadge"
+#define DICT_ELEMENT_METADATA                   @"metadata"
+#define DICT_ELEMENT_INNER_WORLD                @"innerWorld"
 
 
 @interface LevelUpEventHandling : NSObject
@@ -63,6 +65,8 @@
 + (void)postWorldCompleted:(NSString *)worldId;
 
 + (void)postWorldRewardAssigned:(NSString *)worldId;
+
++ (void)postLastCompletedInnerWorldChanged:(NSString *)worldId andInnerWorld:(NSString *)innerWorldId;
 
 + (void)postLevelStarted:(NSString *)levelId;
 

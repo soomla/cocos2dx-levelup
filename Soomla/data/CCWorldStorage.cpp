@@ -50,4 +50,12 @@ namespace soomla {
     cocos2d::__String *CCWorldStorage::getAssignedReward(CCWorld *world) {
         return CCLevelUpService::getInstance()->worldGetAssignedReward(world);
     }
+    
+    void CCWorldStorage::setLastCompletedInnerWorld(CCWorld *world, cocos2d::__String *innerWorldId) {
+        CCLevelUpService::getInstance()->worldSetLastCompletedInnerWorld(world, innerWorldId);
+    }
+    
+    cocos2d::__String *CCWorldStorage::getLastCompletedInnerWorld(CCWorld *world) {
+        return CCLevelUpService::getInstance()->worldGetLastCompletedInnerWorld(world);
+    }
 }

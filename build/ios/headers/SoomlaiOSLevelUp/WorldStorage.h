@@ -30,6 +30,12 @@
 
 + (NSString*)getAssignedReward:(NSString *)worldId;
 
++ (void)setLastCompletedInnerWorld:(NSString*)innerWorldId forWorld:(NSString *)worldId;
+
++ (void)setLastCompletedInnerWorld:(NSString*)innerWorldId forWorld:(NSString *)worldId andNotify:(BOOL)notify;
+
++ (NSString*)getLastCompletedInnerWorld:(NSString *)worldId;
+
 + (BOOL)isLevel:(NSString *)worldId;
 
 + (NSString *)keyWorldPrefix;
