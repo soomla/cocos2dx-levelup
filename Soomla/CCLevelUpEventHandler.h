@@ -48,6 +48,7 @@ namespace soomla {
         virtual void onMissionCompletionRevoked(CCMission *mission) = 0;
 
         virtual void onWorldCompleted(CCWorld *world) = 0;
+        virtual void onLastCompletedInnerWorldChanged(CCWorld *world, cocos2d::CCString *innerWorldId) = 0;
         virtual void onWorldRewardAssigned(CCWorld *world) = 0;
 
         virtual void onLevelStarted(CCLevel *level) = 0;

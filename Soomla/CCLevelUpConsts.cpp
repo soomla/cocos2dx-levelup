@@ -99,6 +99,7 @@ namespace soomla {
     char const *CCLevelUpConsts::EVENT_MISSION_COMPLETED = "CCLevelUpEventHandler::onMissionCompleted";
     char const *CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED = "CCLevelUpEventHandler::onMissionCompletionRevoked";
     char const *CCLevelUpConsts::EVENT_WORLD_COMPLETED = "CCLevelUpEventHandler::onWorldCompleted";
+    char const *CCLevelUpConsts::EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED = "CCLevelUpEventHandler::onLastCompletedInnerWorldChanged";
     char const *CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED = "CCLevelUpEventHandler::onWorldRewardAssigned";
     char const *CCLevelUpConsts::EVENT_LEVEL_STARTED = "CCLevelUpEventHandler::onLevelStarted";
     char const *CCLevelUpConsts::EVENT_LEVEL_ENDED = "CCLevelUpEventHandler::onLevelEnded";

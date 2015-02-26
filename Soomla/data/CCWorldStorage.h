@@ -68,6 +68,21 @@ namespace soomla {
          @return The assigned reward to retrieve.
          */
         cocos2d::CCString *getAssignedReward(CCWorld *world);
+        
+        /**
+         Sets the given inner world ID as the last completed inner world
+         for the given `World`.
+         @param world `World` to set inner completed world ID.
+         @param innerWorldId the inner world ID that was last completed.
+         */
+        void setLastCompletedInnerWorld(CCWorld *world, cocos2d::CCString *innerWorldId);
+        
+        /**
+         Retrieves the given `World`'s last completed inner world.
+         @param world `World` whose last completed inner world is to be retrieved.
+         @return The last completed inner world ID.
+         */
+        cocos2d::CCString *getLastCompletedInnerWorld(CCWorld *world);
     };
 }
 

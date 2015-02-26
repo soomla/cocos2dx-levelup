@@ -56,6 +56,10 @@ void soomla::CCSimpleLevelUpEventHandler::onWorldCompleted(soomla::CCWorld *worl
 
 }
 
+void soomla::CCSimpleLevelUpEventHandler::onLastCompletedInnerWorldChanged(CCWorld *world, cocos2d::CCString *innerWorldId) {
+    
+}
+
 void soomla::CCSimpleLevelUpEventHandler::onWorldRewardAssigned(soomla::CCWorld *world) {
 
 }

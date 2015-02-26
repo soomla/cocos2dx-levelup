@@ -86,6 +86,9 @@ namespace soomla {
 
         void worldSetReward(CCWorld *world, cocos2d::CCString *rewardId);
         cocos2d::CCString *worldGetAssignedReward(CCWorld *world);
+        
+        void worldSetLastCompletedInnerWorld(CCWorld *world, cocos2d::CCString *innerWorldId);
+        cocos2d::CCString *worldGetLastCompletedInnerWorld(CCWorld *world);
     };
 }
 

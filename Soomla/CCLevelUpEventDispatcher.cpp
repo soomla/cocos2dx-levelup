@@ -69,6 +69,9 @@ namespace soomla {
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_WORLD_COMPLETED,
                 this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_WORLD_COMPLETED));
+        
+        eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED,
+                this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED));
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED,
                 this, (SEL_EventHandler) (&CCLevelUpEventDispatcher::handle__EVENT_WORLD_REWARD_ASSIGNED));
@@ -168,6 +171,16 @@ namespace soomla {
         unlockEventHandlers();
     }
 
+    void CCLevelUpEventDispatcher::onLastCompletedInnerWorldChanged(CCWorld *world, cocos2d::CCString *innerWorldId) {
+        lockEventHandlers();
+        
+        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
+            eventHandler->onLastCompletedInnerWorldChanged(world, innerWorldId);
+        }
+
+        unlockEventHandlers();
+    }
+
     void CCLevelUpEventDispatcher::onWorldRewardAssigned(CCWorld *world) {
         lockEventHandlers();
 
@@ -249,6 +262,14 @@ namespace soomla {
         CCWorld *world = CCSoomlaLevelUp::getInstance()->getWorld(parameters->valueForKey("worldId")->getCString());
         CC_ASSERT(world);
         this->onWorldCompleted(world);
+    }
+
+    void CCLevelUpEventDispatcher::handle__EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED(cocos2d::CCDictionary *parameters) {
+        CCWorld *world = CCSoomlaLevelUp::getInstance()->getWorld(parameters->valueForKey("worldId")->getCString());
+        CC_ASSERT(world);
+        const CCString *innerWorldId = parameters->valueForKey("innerWorldId");
+        CC_ASSERT(innerWorldId);
+        this->onLastCompletedInnerWorldChanged(world, CCString::create(innerWorldId->getCString()));
     }
 
     void CCLevelUpEventDispatcher::handle__EVENT_WORLD_REWARD_ASSIGNED(cocos2d::CCDictionary *parameters) {

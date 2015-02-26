@@ -70,6 +70,7 @@ namespace soomla {
             setGate(gate);
             if (innerWorldsMap) {
                 setInnerWorldsMap(innerWorldsMap);
+                applyParentToInnerWorlds();
             }
             else {
                 setInnerWorldsMap(CCDictionary::create());
@@ -118,6 +119,7 @@ namespace soomla {
                         world = dynamic_cast<CCWorld *>(ref);
                         CC_ASSERT(world);
                         worldsMap->setObject(world, world->getId()->getCString());
+                        world->setParentWorld(this);
                     }
             }
 
@@ -199,6 +201,19 @@ namespace soomla {
             }
         }
     }
+    
+    CCWorld *CCWorld::getParentWorld() const {
+        return mParentWorld;
+    }
+    
+    void CCWorld::setParentWorld(CCWorld *parentWorld) {
+        if (mParentWorld != parentWorld)
+        {
+            CC_SAFE_RETAIN(parentWorld);
+            CC_SAFE_RELEASE(mParentWorld);
+            mParentWorld = parentWorld;
+        }
+    }
 
     char const *CCWorld::getType() const {
         return CCLevelUpConsts::JSON_JSON_TYPE_WORLD;
@@ -214,6 +229,7 @@ namespace soomla {
     /** Add elements to world. **/
     void CCWorld::addInnerWorld(CCWorld *world) {
         mInnerWorldsMap->setObject(world, world->getId()->getCString());
+        world->setParentWorld(this);
     }
 
     void CCWorld::addMission(CCMission *mission) {
@@ -388,6 +404,8 @@ namespace soomla {
         }
 
         this->mInnerWorldsMap->setObject(target, id);
+        
+        target->setParentWorld(this);
     }
 
     /** For more than one Score **/
@@ -474,7 +492,14 @@ namespace soomla {
                     world->setCompleted(completed, true);
                 }
         }
+        
+        bool alreadyCompleted = CCWorldStorage::getInstance()->isCompleted(this);
+        
         CCWorldStorage::getInstance()->setCompleted(this, completed);
+        
+        if (!alreadyCompleted && completed && (mParentWorld != NULL)) {
+            mParentWorld->notifyInnerWorldFirstCompleted(this);
+        }
     }
 
 
@@ -502,9 +527,27 @@ namespace soomla {
     cocos2d::CCString *CCWorld::getAssignedRewardId() {
         return CCWorldStorage::getInstance()->getAssignedReward(this);
     }
+    
+    cocos2d::CCString *CCWorld::getLastCompletedInnerWorld() {
+        return CCWorldStorage::getInstance()->getLastCompletedInnerWorld(this);
+    }
 
     bool CCWorld::canStart() {
         return mGate == NULL || mGate->isOpen();
+    }
+    
+    void CCWorld::applyParentToInnerWorlds() {
+        CCDictElement* el = NULL;
+        CCDICT_FOREACH(mInnerWorldsMap, el) {
+            CCWorld *world = (CCWorld *) el->getObject();
+            world->setParentWorld(this);
+        }
+    }
+    
+    void CCWorld::notifyInnerWorldFirstCompleted(CCWorld *innerWorld) {
+        if (innerWorld != NULL) {
+            CCWorldStorage::getInstance()->setLastCompletedInnerWorld(this, innerWorld->getId());
+        }
     }
 
 }
