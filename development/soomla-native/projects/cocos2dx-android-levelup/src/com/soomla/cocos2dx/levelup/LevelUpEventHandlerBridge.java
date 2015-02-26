@@ -163,6 +163,23 @@ public class LevelUpEventHandlerBridge {
     }
 
     @Subscribe
+    public void onLastCompletedInnerWorldChanged(final LastCompletedInnerWorldChanged lastCompletedInnerWorldChanged) {
+        mGLThread.queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject parameters = createJsonObjectForMethod("CCLevelUpEventHandler::onLastCompletedInnerWorldChanged");
+                    parameters.put("worldId", lastCompletedInnerWorldChanged.WorldId);
+                    parameters.put("innerWorldId", lastCompletedInnerWorldChanged.InnerWorldId);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
+                } catch (JSONException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        });
+    }
+
+    @Subscribe
     public void onWorldRewardAssigned(final WorldAssignedRewardEvent worldAssignedRewardEvent) {
         mGLThread.queueEvent(new Runnable() {
             @Override

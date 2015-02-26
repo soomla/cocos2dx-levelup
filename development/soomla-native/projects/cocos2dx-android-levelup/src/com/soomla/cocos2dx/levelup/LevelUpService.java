@@ -258,6 +258,23 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
+        ndkGlue.registerCallHandler("CCLevelUpService::worldSetLastCompletedInnerWorld", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String worldId = params.getString("worldId");
+                String innerWorldId = params.getString("innerWorldId");
+                WorldStorage.setLastCompletedInnerWorld(worldId, innerWorldId);
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCLevelUpService::worldGetLastCompletedInnerWorld", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String worldId = params.getString("worldId");
+                retParams.put("return", WorldStorage.getLastCompletedInnerWorld(worldId));
+            }
+        });
+
     }
 
     public void init() {

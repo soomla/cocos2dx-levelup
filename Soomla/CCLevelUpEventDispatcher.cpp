@@ -103,6 +103,15 @@ namespace soomla {
                     CC_ASSERT(world);
                     this->onWorldCompleted(world);
                 });
+        
+        eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED,
+                [this](__Dictionary *parameters) {
+                    CCWorld *world = CCSoomlaLevelUp::getInstance()->getWorld(parameters->valueForKey("worldId")->getCString());
+                    CC_ASSERT(world);
+                    const __String *innerWorldId = parameters->valueForKey("innerWorldId");
+                    CC_ASSERT(innerWorldId);
+                    this->onLastCompletedInnerWorldChanged(world, innerWorldId->clone());
+                });
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED,
                 [this](__Dictionary *parameters) {
@@ -209,6 +218,16 @@ namespace soomla {
 
         FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
             eventHandler->onWorldCompleted(world);
+        }
+
+        unlockEventHandlers();
+    }
+
+    void CCLevelUpEventDispatcher::onLastCompletedInnerWorldChanged(CCWorld *world, cocos2d::__String *innerWorldId) {
+        lockEventHandlers();
+        
+        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
+            eventHandler->onLastCompletedInnerWorldChanged(world, innerWorldId);
         }
 
         unlockEventHandlers();

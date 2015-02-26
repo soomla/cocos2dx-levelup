@@ -106,6 +106,7 @@ namespace soomla {
         static char const *EVENT_MISSION_COMPLETED;
         static char const *EVENT_MISSION_COMPLETION_REVOKED;
         static char const *EVENT_WORLD_COMPLETED;
+        static char const *EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED;
         static char const *EVENT_WORLD_REWARD_ASSIGNED;
         static char const *EVENT_LEVEL_STARTED;
         static char const *EVENT_LEVEL_ENDED;
