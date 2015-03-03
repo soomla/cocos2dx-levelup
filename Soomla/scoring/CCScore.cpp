@@ -85,7 +85,7 @@ namespace soomla {
             CCScoreStorage::getInstance()->setLatestScore(this, mTempScore);
             
             double record = CCScoreStorage::getInstance()->getRecordScore(this);
-            if (hasTempReached(record)) {
+            if ((record == -1) || hasTempReached(record)) {
                 CCScoreStorage::getInstance()->setRecordScore(this, mTempScore);
                 mScoreRecordReachedSent = false;
             }
