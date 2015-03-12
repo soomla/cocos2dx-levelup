@@ -25,7 +25,7 @@
 #include "CCSoomlaLevelUp.h"
 #include "CCLevelUpEventDispatcher.h"
 #include "CCLevelUpEventHandler.h"
-#include "CCLevelUpService.h"
+#include "CCLevelUpBridge.h"
 #include "CCSimpleLevelUpEventHandler.h"
 #include "CCWorld.h"
 #include "CCChallenge.h"
