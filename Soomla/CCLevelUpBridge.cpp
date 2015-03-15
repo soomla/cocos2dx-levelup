@@ -85,13 +85,13 @@ namespace soomla {
     }
 
     CCLevelUpBridge::CCLevelUpBridge() {
+        // Just bind to native before initing
+        this->bindNative();
     }
 
     bool CCLevelUpBridge::init() {
 
         CCLevelUpEventDispatcher::getInstance();
-        
-        this->bindNative();
 
         CCDomainFactory *domainFactory = CCDomainFactory::getInstance();
 

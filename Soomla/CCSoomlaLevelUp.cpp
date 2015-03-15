@@ -135,6 +135,8 @@ namespace soomla {
         }
         
         save();
+        
+        CCLevelUpBridge::getInstance()->initLevelUp();
     }
 
     CCReward *CCSoomlaLevelUp::getReward(const char *rewardId) {
