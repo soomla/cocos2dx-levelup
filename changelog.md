@@ -1,3 +1,10 @@
+### v1.1.0 [view commit logs](https://github.com/soomla/cocos2dx-levelup/compare/v1.0.3...v1.1.0)
+
+**BREAKING API VERSION**
+
+* Features
+  * Better integration process for LevelUp module (see README for instructions)
+
 ### v1.0.3 [view commit logs](https://github.com/soomla/cocos2dx-levelup/compare/v1.0.2...v1.0.3)
 
 * New Features
