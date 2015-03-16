@@ -16,7 +16,7 @@
 
 #include "CCLevelStorage.h"
 #include "CCLevel.h"
-#include "CCLevelUpService.h"
+#include "CCLevelUpBridge.h"
 
 namespace soomla {
     static CCLevelStorage *sInstance = NULL;
@@ -31,54 +31,54 @@ namespace soomla {
     }
 
     void CCLevelStorage::setSlowestDurationMillis(CCLevel *level, long duration) {
-        CCLevelUpService::getInstance()->levelSetSlowestDurationMillis(level, duration);
+        CCLevelUpBridge::getInstance()->levelSetSlowestDurationMillis(level, duration);
     }
 
     long CCLevelStorage::getSlowestDurationMillis(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelGetSlowestDurationMillis(level);
+        return CCLevelUpBridge::getInstance()->levelGetSlowestDurationMillis(level);
     }
 
     void CCLevelStorage::setFastestDurationMillis(CCLevel *level, long duration) {
-        CCLevelUpService::getInstance()->levelSetFastestDurationMillis(level, duration);
+        CCLevelUpBridge::getInstance()->levelSetFastestDurationMillis(level, duration);
     }
 
     long CCLevelStorage::getFastestDurationMillis(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelGetFastestDurationMillis(level);
+        return CCLevelUpBridge::getInstance()->levelGetFastestDurationMillis(level);
     }
 
     int CCLevelStorage::incTimesStarted(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelIncTimesStarted(level);
+        return CCLevelUpBridge::getInstance()->levelIncTimesStarted(level);
     }
 
     int CCLevelStorage::decTimesStarted(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelDecTimesStarted(level);
+        return CCLevelUpBridge::getInstance()->levelDecTimesStarted(level);
     }
 
     int CCLevelStorage::getTimesStarted(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelGetTimesStarted(level);
+        return CCLevelUpBridge::getInstance()->levelGetTimesStarted(level);
     }
 
     int CCLevelStorage::getTimesPlayed(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelGetTimesPlayed(level);
+        return CCLevelUpBridge::getInstance()->levelGetTimesPlayed(level);
     }
 
     int CCLevelStorage::incTimesPlayed(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelIncTimesPlayed(level);
+        return CCLevelUpBridge::getInstance()->levelIncTimesPlayed(level);
     }
 
     int CCLevelStorage::decTimesPlayed(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelDecTimesPlayed(level);
+        return CCLevelUpBridge::getInstance()->levelDecTimesPlayed(level);
     }
     
     int CCLevelStorage::getTimesCompleted(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelGetTimesCompleted(level);
+        return CCLevelUpBridge::getInstance()->levelGetTimesCompleted(level);
     }
     
     int CCLevelStorage::incTimesCompleted(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelIncTimesCompleted(level);
+        return CCLevelUpBridge::getInstance()->levelIncTimesCompleted(level);
     }
     
     int CCLevelStorage::decTimesCompleted(CCLevel *level) {
-        return CCLevelUpService::getInstance()->levelDecTimesCompleted(level);
+        return CCLevelUpBridge::getInstance()->levelDecTimesCompleted(level);
     }
 }

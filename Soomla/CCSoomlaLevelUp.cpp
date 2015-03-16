@@ -37,7 +37,7 @@
 #include "CCLevel.h"
 #include "CCChallenge.h"
 #include "CCGatesList.h"
-#include "CCLevelUpService.h"
+#include "CCLevelUpBridge.h"
 #include "CCDomainHelper.h"
 #include "CCKeyValueStorage.h"
 #include "CCJsonHelper.h"
@@ -56,6 +56,10 @@ namespace soomla {
         {
             sInstance = new CCSoomlaLevelUp();
             sInstance->retain();
+            
+            // This is like this since we need to register DomainFactory
+            // Before the developer can create an initial world
+            CCLevelUpBridge::initShared();
         }
         return sInstance;
     }
@@ -102,7 +106,7 @@ namespace soomla {
         CC_SAFE_RELEASE(mInitialWorld);
         CC_SAFE_RELEASE(mRewards);
     }
-
+    
     void CCSoomlaLevelUp::initialize(CCWorld *initialWorld, CCArray *rewards) {
         if (mInitialWorld) {
             mInitialWorld->release();
@@ -111,16 +115,16 @@ namespace soomla {
         if (mInitialWorld) {
             mInitialWorld->retain();
         }
-
+        
         if (rewards != NULL) {
             CCDictionary *rewardMap = CCDictionary::create();
             CCObject *ref;
             CCReward *reward;
             CCARRAY_FOREACH(rewards, ref) {
-                    reward = (CCReward *) ref;
-                    rewardMap->setObject(reward, reward->getId()->getCString());
-                }
-
+                reward = (CCReward *) ref;
+                rewardMap->setObject(reward, reward->getId()->getCString());
+            }
+            
             if (mRewards) {
                 mRewards->release();
             }
@@ -129,10 +133,10 @@ namespace soomla {
                 mRewards->retain();
             }
         }
-
+        
         save();
-
-        CCLevelUpService::getInstance()->initLevelUp();
+        
+        CCLevelUpBridge::getInstance()->initLevelUp();
     }
 
     CCReward *CCSoomlaLevelUp::getReward(const char *rewardId) {
