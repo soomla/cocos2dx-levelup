@@ -16,8 +16,8 @@
 
 
 
-#ifndef __CCLevelUpService_H_
-#define __CCLevelUpService_H_
+#ifndef __CCLevelUpBridge_H_
+#define __CCLevelUpBridge_H_
 
 
 #include "cocos2d.h"
@@ -36,16 +36,16 @@ namespace soomla {
      This class calls the bridge functions that call the relative native
      functions.
      */
-    class CCLevelUpService : public cocos2d::CCObject {
+    class CCLevelUpBridge : public cocos2d::CCObject {
     public:
         /**
         This class is singleton, use this function to access it.
         */
-        static CCLevelUpService *getInstance();
+        static CCLevelUpBridge *getInstance();
 
         static void initShared();
 
-        CCLevelUpService();
+        CCLevelUpBridge();
 
         virtual bool init();
 
@@ -89,7 +89,9 @@ namespace soomla {
         
         void worldSetLastCompletedInnerWorld(CCWorld *world, cocos2d::CCString *innerWorldId);
         cocos2d::CCString *worldGetLastCompletedInnerWorld(CCWorld *world);
+    private:
+        void bindNative();
     };
 }
 
-#endif //__CCLevelUpService_H_
+#endif //__CCLevelUpBridge_H_

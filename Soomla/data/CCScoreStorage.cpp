@@ -33,7 +33,7 @@
 
 #include "CCScoreStorage.h"
 #include "CCScore.h"
-#include "CCLevelUpService.h"
+#include "CCLevelUpBridge.h"
 
 namespace soomla {
     static CCScoreStorage *sInstance = NULL;
@@ -48,18 +48,18 @@ namespace soomla {
     }
 
     void CCScoreStorage::setLatestScore(CCScore *score, double newValue) {
-        CCLevelUpService::getInstance()->scoreSetLatestScore(score, newValue);
+        CCLevelUpBridge::getInstance()->scoreSetLatestScore(score, newValue);
     }
 
     double CCScoreStorage::getLatestScore(CCScore *score) {
-        return CCLevelUpService::getInstance()->scoreGetLatestScore(score);
+        return CCLevelUpBridge::getInstance()->scoreGetLatestScore(score);
     }
 
     void CCScoreStorage::setRecordScore(CCScore *score, double newValue) {
-        CCLevelUpService::getInstance()->scoreSetRecordScore(score, newValue);
+        CCLevelUpBridge::getInstance()->scoreSetRecordScore(score, newValue);
     }
 
     double CCScoreStorage::getRecordScore(CCScore *score) {
-        return CCLevelUpService::getInstance()->scoreGetRecordScore(score);
+        return CCLevelUpBridge::getInstance()->scoreGetRecordScore(score);
     }
 }

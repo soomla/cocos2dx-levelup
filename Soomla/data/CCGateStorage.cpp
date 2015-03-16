@@ -32,7 +32,7 @@
 
 
 #include "CCGateStorage.h"
-#include "CCLevelUpService.h"
+#include "CCLevelUpBridge.h"
 
 namespace soomla {
     static CCGateStorage *sInstance = NULL;
@@ -47,7 +47,7 @@ namespace soomla {
     }
 
     bool CCGateStorage::isOpen(CCGate *gate) {
-        return CCLevelUpService::getInstance()->gateIsOpen(gate);
+        return CCLevelUpBridge::getInstance()->gateIsOpen(gate);
     }
 
     void CCGateStorage::setOpen(CCGate *gate, bool open) {
@@ -55,6 +55,6 @@ namespace soomla {
     }
 
     void CCGateStorage::setOpen(CCGate *gate, bool open, bool notify) {
-        CCLevelUpService::getInstance()->gateSetOpen(gate, open, notify);
+        CCLevelUpBridge::getInstance()->gateSetOpen(gate, open, notify);
     }
 }

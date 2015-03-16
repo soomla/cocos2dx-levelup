@@ -7,17 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		372B75B34C77C6104011311A /* LevelUpService.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B740D6FDFF90ADE3342AB /* LevelUpService.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		372B78966D18F2EBEB0E3604 /* LevelUpService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 372B7BAE42F9F350693EAA73 /* LevelUpService.mm */; };
 		C0B3C5F3168C6D0C00161FAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B3C5F2168C6D0C00161FAA /* Foundation.framework */; };
+		F8BBDCBC1AB1FCC500FD9403 /* LevelUpBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = F8BBDCB81AB1FCC500FD9403 /* LevelUpBridge.mm */; };
+		F8BBDCBD1AB1FCC500FD9403 /* CCLevelUpBridgeBinderIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = F8BBDCB91AB1FCC500FD9403 /* CCLevelUpBridgeBinderIos.mm */; };
+		F8BBDCBE1AB1FCC500FD9403 /* CCLevelUpBridgeBinderIos.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BBDCBA1AB1FCC500FD9403 /* CCLevelUpBridgeBinderIos.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8BBDCBF1AB1FCC500FD9403 /* LevelUpBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BBDCBB1AB1FCC500FD9403 /* LevelUpBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		372B740D6FDFF90ADE3342AB /* LevelUpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelUpService.h; sourceTree = "<group>"; };
-		372B7BAE42F9F350693EAA73 /* LevelUpService.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelUpService.mm; sourceTree = "<group>"; };
 		9D1D39B719018BB0000EC503 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		C0B3C5EF168C6D0C00161FAA /* libCocos2dXiOSLevelUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocos2dXiOSLevelUp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0B3C5F2168C6D0C00161FAA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F8BBDCB81AB1FCC500FD9403 /* LevelUpBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelUpBridge.mm; sourceTree = "<group>"; };
+		F8BBDCB91AB1FCC500FD9403 /* CCLevelUpBridgeBinderIos.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCLevelUpBridgeBinderIos.mm; sourceTree = "<group>"; };
+		F8BBDCBA1AB1FCC500FD9403 /* CCLevelUpBridgeBinderIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpBridgeBinderIos.h; sourceTree = "<group>"; };
+		F8BBDCBB1AB1FCC500FD9403 /* LevelUpBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelUpBridge.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,8 +39,10 @@
 		372B7A44C0550E964CA7C86D /* LevelUpBridge */ = {
 			isa = PBXGroup;
 			children = (
-				372B740D6FDFF90ADE3342AB /* LevelUpService.h */,
-				372B7BAE42F9F350693EAA73 /* LevelUpService.mm */,
+				F8BBDCB81AB1FCC500FD9403 /* LevelUpBridge.mm */,
+				F8BBDCB91AB1FCC500FD9403 /* CCLevelUpBridgeBinderIos.mm */,
+				F8BBDCBA1AB1FCC500FD9403 /* CCLevelUpBridgeBinderIos.h */,
+				F8BBDCBB1AB1FCC500FD9403 /* LevelUpBridge.h */,
 			);
 			path = LevelUpBridge;
 			sourceTree = "<group>";
@@ -82,7 +88,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				372B75B34C77C6104011311A /* LevelUpService.h in Headers */,
+				F8BBDCBE1AB1FCC500FD9403 /* CCLevelUpBridgeBinderIos.h in Headers */,
+				F8BBDCBF1AB1FCC500FD9403 /* LevelUpBridge.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +161,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				372B78966D18F2EBEB0E3604 /* LevelUpService.mm in Sources */,
+				F8BBDCBD1AB1FCC500FD9403 /* CCLevelUpBridgeBinderIos.mm in Sources */,
+				F8BBDCBC1AB1FCC500FD9403 /* LevelUpBridge.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

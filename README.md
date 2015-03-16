@@ -16,22 +16,28 @@ cocos2dx-levelup is the implementation of the LevelUp module for the Cocos2d-x f
 
 <!-- Check out our [Wiki] (https://github.com/soomla/android-store/wiki) for more information about the project and how to use it better. -->
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 ## Contents
 
-- [Model Overview](#model-overview)
+  - [Contents](#contents)
+  - [Model Overview](#model-overview)
     - [World / Level](#world--level)
     - [Score](#score)
     - [Gate](#gate)
     - [Mission/Challenge](#missionchallenge)
     - [Reward](#reward)
-- [Getting Started (With pre-built libraries - RECOMMENDED)](#getting-started-with-pre-built-libraries---recommended)
+  - [Download](#download)
+  - [Getting Started (With pre-built libraries - RECOMMENDED)](#getting-started-with-pre-built-libraries---recommended)
     - [Integration with SOOMLA cocos2dx-store](#integration-with-soomla-cocos2dx-store)
     - [Integration with SOOMLA cocos2dx-profile](#integration-with-soomla-cocos2dx-profile)
-- [Debugging](#debugging)
-- [Working with sources](#working-with-sources)
-- [Example Usages](#example-usages)
+  - [Debugging](#debugging)
+  - [Working with sources](#working-with-sources)
+  - [How to move from v1.0.x to v1.1.x?](#how-to-move-from-v10x-to-v11x)
+  - [Example Usages](#example-usages)
 
-<!-- end toc -->
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Model Overview
 
@@ -77,10 +83,10 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 ## Download
 
 ####Pre baked zip:
-- [soomla-cocos2dx-core 1.0.2](http://library.soom.la/fetch/cocos2dx-v2-core/1.0.2?cf=github)
-- [cocos2dx-store 4.3.3](http://library.soom.la/fetch/cocos2dx-v2-store/4.3.3?cf=github)
-- [cocos2dx-profile 1.0.3](http://library.soom.la/fetch/cocos2dx-v2-profile/1.0.3?cf=github)
-- [cocos2dx-levelup 1.0.2](http://library.soom.la/fetch/cocos2dx-v2-levelup/1.0.3?cf=github)
+- [soomla-cocos2dx-core 1.1.0](http://library.soom.la/fetch/cocos2dx-v2-core/1.1.0?cf=github)
+- [cocos2dx-store 4.4.0](http://library.soom.la/fetch/cocos2dx-v2-store/4.4.0?cf=github)
+- [cocos2dx-profile 1.1.0](http://library.soom.la/fetch/cocos2dx-v2-profile/1.1.0?cf=github)
+- [cocos2dx-levelup 1.1.0](http://library.soom.la/fetch/cocos2dx-v2-levelup/1.1.0?cf=github)
 
 ## Getting Started (With pre-built libraries - RECOMMENDED)
 
@@ -90,7 +96,7 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 
 1. If you didn't already, clone the Cocos2d-x framework from [here](https://github.com/cocos2d/cocos2d-x), or download it from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure the version you clone is supported by cocos2dx-levelup (the tag is the version).
 
-2. Clone [soomla-cocos2dx-core](https://github.com/soomla/soomla-cocos2dx-core), [cocos2dx-store](https://github.com/soomla/cocos2dx-store), [cocos2dx-profile](https://github.com/soomla/cocos2dx-profile), and **cocos2dx-levelup** into the `extensions` directory located at the root of your Cocos2d-x framework:
+1. Clone [soomla-cocos2dx-core](https://github.com/soomla/soomla-cocos2dx-core), [cocos2dx-store](https://github.com/soomla/cocos2dx-store), [cocos2dx-profile](https://github.com/soomla/cocos2dx-profile), and **cocos2dx-levelup** into the `extensions` directory located at the root of your Cocos2d-x framework:
 
     ```
     $ git clone git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
@@ -102,32 +108,36 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
     $ git clone git@github.com:soomla/cocos2dx-levelup.git extensions/cocos2dx-levelup
     ```
 
-3. We use a [fork](https://github.com/vedi/jansson) of the jansson library for JSON parsing, clone our fork into the `external` directory at the root of your framework:
+1. We use a [fork](https://github.com/soomla/jansson) of the jansson library for JSON parsing, clone our fork into the `external` directory at the root of your framework:
 
     ```
-    $ git clone git@github.com:vedi/jansson.git external/jansson
+    $ git clone git@github.com:soomla/jansson.git external/jansson
     ```
 
-4. Implement your `CCLevelUpEventHandler` class in order to be notified about LevelUp-related events.
+1. Implement your `CCLevelUpEventHandler` class in order to be notified about LevelUp-related events.
 
-5. Initialize `CCServiceManager`, `CCStoreService`, `CCProfileService`, and `CCLevelUpService` with the class you just created, a `customSecret` and other params:
+1. Make sure to include the `Cocos2dxLevelUp.h` header whenever you use any of the **cocos2dx-levelup** functions:
+
+    ```cpp
+    #include "Cocos2dxLevelUp.h"
+    ```
+1. Add an instance of your event handler to `CCLevelUpEventDispatcher` before `CCSoomlaLevelUp` initialization:
+
+    ```cpp
+    soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
+    ```
+
+1. Initialize `CCSoomla`, `CCSoomlaStore`, `CCSoomlaProfile`, and `CCSoomlaLevelUp` with the class you just created, a `customSecret` and other params:
 
 	```cpp
-	__Dictionary *commonParams = __Dictionary::create();
-		commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
+  soomla::CCSoomla::initialize("customSecret");
 
 	__Dictionary *storeParams = __Dictionary::create();
 	storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
+  soomla::CCSoomlaStore::initialize(assets, storeParams);
 
-	__Dictionary *profileParams = __Dictionary::create();
-
-    soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
-
-	soomla::CCStoreService::initShared(assets, storeParams);
-
-	soomla::CCProfileService::initShared(profileParams);
-
-	soomla::CCLevelUpService::initShared();
+  __Dictionary *profileParams = __Dictionary::create();
+	soomla::CCSoomlaProfile::initialize(profileParams);
 
 	// initialWorld - should be created here and contain all worlds and levels of the game
 	// rewards - should contain a list of all rewards that are given through LevelUp
@@ -135,19 +145,7 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 
 	```
 	- NOTE: *Custom Secret* - is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game!
-	> Initialize `CCLevelUpService` ONLY ONCE when your application loads.
-
-6. Make sure to include the `Cocos2dxLevelUp.h` header whenever you use any of the **cocos2dx-levelup** functions:
-
-    ```cpp
-    #include "Cocos2dxLevelUp.h"
-    ```
-
-7. Add an instance of your event handler to `CCLevelUpEventDispatcher` after `CCLevelUpService` initialization:
-
-    ```cpp
-    soomla::CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
-    ```
+	> Initialize `CCSoomlaLevelUp` ONLY ONCE when your application loads.
 
 **The next steps are different according to which platform you're using.**
 
@@ -155,7 +153,7 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 
 In your XCode project, perform the following steps:
 
-1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder).
+1. Add `jansson` (**external/jansson/**) to your project (just add it as a source folder, make sure to check "create group").
 
 1. For each of the following XCode projects:
 	- `Cocos2dXCore.xcodeproj` (**extensions/soomla-cocos2dx-core/**).  
@@ -174,29 +172,9 @@ In your XCode project, perform the following steps:
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/soomla-cocos2dx-core/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/Soomla`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-store/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/Soomla`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-profile/build/ios/headers`
  - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/Soomla`
- - `$(SRCROOT)/../cocos2d/extensions/cocos2dx-levelup/build/ios/headers`
-
-1. To register services on the native application (`AppController`):
-
-  1. Import the following headers:
-    ```cpp
-		#import "ServiceManager.h"
-		#import "StoreService.h"
-		#import "ProfileService.h"
-		#import "LevelUpService.h"
-    ```
-
-  1. Register the native `StoreService`, `ProfileService`, and `LevelUpService` by adding:
-    ```cpp
-		[[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
-		[[ServiceManager sharedServiceManager] registerService:[ProfileService sharedProfileService]];
-		[[ServiceManager sharedServiceManager] registerService:[LevelUpService sharedLevelUpService]];
-    ```
-    at the beginning of the method `application: didFinishLaunchingWithOptions:` of `AppController`.
 
 1. Make sure you have these 3 Frameworks linked to your XCode project: **Security, libsqlite3.0.dylib, StoreKit**.
 
@@ -236,36 +214,6 @@ That's it! Now all you have to do is build your XCode project and run your game 
     - From `extensions/cocos2dx-levelup/build/android`
 		1. AndroidLevelUp.jar
 		1. Cocos2dxAndroidLevelUp.jar
-
-1. In your game's main `Cocos2dxActivity`, call the following in the `onCreateView` method:
-
-	``` java
-	public Cocos2dxGLSurfaceView onCreateView() {
-		// initialize services
-		final ServiceManager serviceManager = ServiceManager.getInstance();
-		serviceManager.setActivity(this);
-		serviceManager.setGlSurfaceView(glSurfaceView);
-		serviceManager.registerService(StoreService.getInstance());
-		serviceManager.registerService(ProfileService.getInstance());
-		serviceManager.registerService(LevelUpService.getInstance());
-	}
-	```
-
-1. Override `onPause`, `onResume`:
-
-	``` java
-    @Override
-    protected void onPause() {
-        super.onPause();
-        ServiceManager.getInstance().onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        ServiceManager.getInstance().onResume();
-        super.onResume();
-    }
-	```
 
 1. Update your `AndroidManifest.xml` to include permissions and the `SoomlaApp`:
 
@@ -343,6 +291,20 @@ To integrate cocos2dx-levelup into your game, follow these steps:
 	1. `extensions/cocos2dx-store/development/Cocos2dxStoreFromSources.iml`
 	1. `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.iml`
 	1. `extensions/cocos2dx-levelup/development/Cocos2dxLevelUpFromSources.iml`
+
+## How to move from v1.0.x to v1.1.x?
+
+  Version 1.1.x is all about making the integration process on iOS and Android easier.
+  If you are using v1.0.x and want to move to v1.1.x follow these steps:
+
+  1. Pull the latest version to your `extensions` folder
+  1. Remove any Soomla-related code in iOS (`AppController.mm`) and Android (`Cocos2dxActivity`), especially code related to `ServiceManager` and any other `Service`s.
+  1. In your AppDelegate.cpp:
+    - Change `soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);` to `soomla::CCSoomla::initialize("customSecret");`
+    - Change `soomla::CCStoreService::initShared(assets, storeParams);` to `soomla::CCSoomlaStore::initialize(assets, storeParams);`
+    - Change `soomla::CCProfileService::initShared(profileParams);` to `soomla::CCSoomlaProfile::initialize(profileParams);`
+    - Remove `soomla::CCLevelUpService::initShared();`
+    - Remove any `#include`s to missing header files, you only need `Cocos2dxStore.h`, `Cocos2dxProfile.h` and `Cocos2dxLevelUp.h`
 
 ## Example Usages
 

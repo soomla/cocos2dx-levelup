@@ -42,8 +42,8 @@
 		9DEA543619B4A5F00093D5D9 /* CCLevelUpEventDispatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA53F319B4A5F00093D5D9 /* CCLevelUpEventDispatcher.cpp */; };
 		9DEA543719B4A5F00093D5D9 /* CCLevelUpEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA53F419B4A5F00093D5D9 /* CCLevelUpEventDispatcher.h */; };
 		9DEA543819B4A5F00093D5D9 /* CCLevelUpEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA53F519B4A5F00093D5D9 /* CCLevelUpEventHandler.h */; };
-		9DEA543919B4A5F00093D5D9 /* CCLevelUpService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA53F619B4A5F00093D5D9 /* CCLevelUpService.cpp */; };
-		9DEA543A19B4A5F00093D5D9 /* CCLevelUpService.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA53F719B4A5F00093D5D9 /* CCLevelUpService.h */; };
+		9DEA543919B4A5F00093D5D9 /* CCLevelUpBridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA53F619B4A5F00093D5D9 /* CCLevelUpBridge.cpp */; };
+		9DEA543A19B4A5F00093D5D9 /* CCLevelUpBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA53F719B4A5F00093D5D9 /* CCLevelUpBridge.h */; };
 		9DEA543B19B4A5F00093D5D9 /* CCSimpleLevelUpEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA53F819B4A5F00093D5D9 /* CCSimpleLevelUpEventHandler.cpp */; };
 		9DEA543C19B4A5F00093D5D9 /* CCSimpleLevelUpEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA53F919B4A5F00093D5D9 /* CCSimpleLevelUpEventHandler.h */; };
 		9DEA543D19B4A5F00093D5D9 /* CCWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA53FA19B4A5F00093D5D9 /* CCWorld.cpp */; };
@@ -87,8 +87,8 @@
 		9DEA546B19B4A5F00093D5D9 /* CCScore.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA542D19B4A5F00093D5D9 /* CCScore.h */; };
 		9DEA546C19B4A5F00093D5D9 /* CCVirtualItemScore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA542E19B4A5F00093D5D9 /* CCVirtualItemScore.cpp */; };
 		9DEA546D19B4A5F00093D5D9 /* CCVirtualItemScore.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA542F19B4A5F00093D5D9 /* CCVirtualItemScore.h */; };
-		9DEA547219B4A6010093D5D9 /* LevelUpService.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA547019B4A6010093D5D9 /* LevelUpService.h */; };
-		9DEA547319B4A6010093D5D9 /* LevelUpService.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA547119B4A6010093D5D9 /* LevelUpService.mm */; };
+		9DEA547219B4A6010093D5D9 /* LevelUpBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA547019B4A6010093D5D9 /* LevelUpBridge.h */; };
+		9DEA547319B4A6010093D5D9 /* LevelUpBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA547119B4A6010093D5D9 /* LevelUpBridge.mm */; };
 		9DEA548619B4A6350093D5D9 /* GateStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA547619B4A6350093D5D9 /* GateStorage.h */; };
 		9DEA548719B4A6350093D5D9 /* GateStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA547719B4A6350093D5D9 /* GateStorage.m */; };
 		9DEA548819B4A6350093D5D9 /* LevelStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA547819B4A6350093D5D9 /* LevelStorage.h */; };
@@ -107,6 +107,8 @@
 		9DEA549519B4A6350093D5D9 /* SoomlaiOSLevelUp-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA548519B4A6350093D5D9 /* SoomlaiOSLevelUp-Prefix.pch */; };
 		C0B3C5F3168C6D0C00161FAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0B3C5F2168C6D0C00161FAA /* Foundation.framework */; };
 		F8667F5D1A6C0AC00004B45B /* LevelUp.m in Sources */ = {isa = PBXBuildFile; fileRef = F8667F5C1A6C0AC00004B45B /* LevelUp.m */; };
+		F8BBDCB61AB1F6AC00FD9403 /* CCLevelUpBridgeBinderIos.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BBDCB41AB1F6AC00FD9403 /* CCLevelUpBridgeBinderIos.h */; };
+		F8BBDCB71AB1F6AC00FD9403 /* CCLevelUpBridgeBinderIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = F8BBDCB51AB1F6AC00FD9403 /* CCLevelUpBridgeBinderIos.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -147,8 +149,8 @@
 		9DEA53F319B4A5F00093D5D9 /* CCLevelUpEventDispatcher.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCLevelUpEventDispatcher.cpp; sourceTree = "<group>"; };
 		9DEA53F419B4A5F00093D5D9 /* CCLevelUpEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpEventDispatcher.h; sourceTree = "<group>"; };
 		9DEA53F519B4A5F00093D5D9 /* CCLevelUpEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpEventHandler.h; sourceTree = "<group>"; };
-		9DEA53F619B4A5F00093D5D9 /* CCLevelUpService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCLevelUpService.cpp; sourceTree = "<group>"; };
-		9DEA53F719B4A5F00093D5D9 /* CCLevelUpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpService.h; sourceTree = "<group>"; };
+		9DEA53F619B4A5F00093D5D9 /* CCLevelUpBridge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCLevelUpBridge.cpp; sourceTree = "<group>"; };
+		9DEA53F719B4A5F00093D5D9 /* CCLevelUpBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpBridge.h; sourceTree = "<group>"; };
 		9DEA53F819B4A5F00093D5D9 /* CCSimpleLevelUpEventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSimpleLevelUpEventHandler.cpp; sourceTree = "<group>"; };
 		9DEA53F919B4A5F00093D5D9 /* CCSimpleLevelUpEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSimpleLevelUpEventHandler.h; sourceTree = "<group>"; };
 		9DEA53FA19B4A5F00093D5D9 /* CCWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCWorld.cpp; sourceTree = "<group>"; };
@@ -192,8 +194,8 @@
 		9DEA542D19B4A5F00093D5D9 /* CCScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCScore.h; sourceTree = "<group>"; };
 		9DEA542E19B4A5F00093D5D9 /* CCVirtualItemScore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCVirtualItemScore.cpp; sourceTree = "<group>"; };
 		9DEA542F19B4A5F00093D5D9 /* CCVirtualItemScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVirtualItemScore.h; sourceTree = "<group>"; };
-		9DEA547019B4A6010093D5D9 /* LevelUpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelUpService.h; sourceTree = "<group>"; };
-		9DEA547119B4A6010093D5D9 /* LevelUpService.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelUpService.mm; sourceTree = "<group>"; };
+		9DEA547019B4A6010093D5D9 /* LevelUpBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelUpBridge.h; sourceTree = "<group>"; };
+		9DEA547119B4A6010093D5D9 /* LevelUpBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelUpBridge.mm; sourceTree = "<group>"; };
 		9DEA547619B4A6350093D5D9 /* GateStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GateStorage.h; sourceTree = "<group>"; };
 		9DEA547719B4A6350093D5D9 /* GateStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GateStorage.m; sourceTree = "<group>"; };
 		9DEA547819B4A6350093D5D9 /* LevelStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelStorage.h; sourceTree = "<group>"; };
@@ -213,6 +215,8 @@
 		C0B3C5EF168C6D0C00161FAA /* libCocos2dxLevelUpFromSources.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCocos2dxLevelUpFromSources.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0B3C5F2168C6D0C00161FAA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F8667F5C1A6C0AC00004B45B /* LevelUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelUp.m; sourceTree = "<group>"; };
+		F8BBDCB41AB1F6AC00FD9403 /* CCLevelUpBridgeBinderIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLevelUpBridgeBinderIos.h; sourceTree = "<group>"; };
+		F8BBDCB51AB1F6AC00FD9403 /* CCLevelUpBridgeBinderIos.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCLevelUpBridgeBinderIos.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,8 +297,8 @@
 				9DEA53F319B4A5F00093D5D9 /* CCLevelUpEventDispatcher.cpp */,
 				9DEA53F419B4A5F00093D5D9 /* CCLevelUpEventDispatcher.h */,
 				9DEA53F519B4A5F00093D5D9 /* CCLevelUpEventHandler.h */,
-				9DEA53F619B4A5F00093D5D9 /* CCLevelUpService.cpp */,
-				9DEA53F719B4A5F00093D5D9 /* CCLevelUpService.h */,
+				9DEA53F619B4A5F00093D5D9 /* CCLevelUpBridge.cpp */,
+				9DEA53F719B4A5F00093D5D9 /* CCLevelUpBridge.h */,
 				9DEA53F819B4A5F00093D5D9 /* CCSimpleLevelUpEventHandler.cpp */,
 				9DEA53F919B4A5F00093D5D9 /* CCSimpleLevelUpEventHandler.h */,
 				9DEA53FA19B4A5F00093D5D9 /* CCWorld.cpp */,
@@ -399,8 +403,10 @@
 		9DEA546F19B4A6010093D5D9 /* LevelUpBridge */ = {
 			isa = PBXGroup;
 			children = (
-				9DEA547019B4A6010093D5D9 /* LevelUpService.h */,
-				9DEA547119B4A6010093D5D9 /* LevelUpService.mm */,
+				9DEA547019B4A6010093D5D9 /* LevelUpBridge.h */,
+				9DEA547119B4A6010093D5D9 /* LevelUpBridge.mm */,
+				F8BBDCB41AB1F6AC00FD9403 /* CCLevelUpBridgeBinderIos.h */,
+				F8BBDCB51AB1F6AC00FD9403 /* CCLevelUpBridgeBinderIos.mm */,
 			);
 			path = LevelUpBridge;
 			sourceTree = "<group>";
@@ -495,7 +501,7 @@
 				9DEA548E19B4A6350093D5D9 /* ScoreStorage.h in Headers */,
 				9DEA549219B4A6350093D5D9 /* LevelUp.h in Headers */,
 				9DEA546D19B4A5F00093D5D9 /* CCVirtualItemScore.h in Headers */,
-				9DEA547219B4A6010093D5D9 /* LevelUpService.h in Headers */,
+				9DEA547219B4A6010093D5D9 /* LevelUpBridge.h in Headers */,
 				9DEA544819B4A5F00093D5D9 /* CCRecordMission.h in Headers */,
 				9DEA543319B4A5F00093D5D9 /* CCSoomlaLevelUp.h in Headers */,
 				9DEA544B19B4A5F00093D5D9 /* Cocos2dxLevelUp.h in Headers */,
@@ -508,13 +514,14 @@
 				9DEA546719B4A5F00093D5D9 /* CCWorldCompletionGate.h in Headers */,
 				9DEA543E19B4A5F00093D5D9 /* CCWorld.h in Headers */,
 				9DEA545F19B4A5F00093D5D9 /* CCGatesListOr.h in Headers */,
-				9DEA543A19B4A5F00093D5D9 /* CCLevelUpService.h in Headers */,
+				9DEA543A19B4A5F00093D5D9 /* CCLevelUpBridge.h in Headers */,
 				9DEA548A19B4A6350093D5D9 /* LUJSONConsts.h in Headers */,
 				9DEA544D19B4A5F00093D5D9 /* CCGateStorage.h in Headers */,
 				9DEA545D19B4A5F00093D5D9 /* CCGatesListAND.h in Headers */,
 				372B782EBD5CE3D5D964CF62 /* CCPurchasingMission.h in Headers */,
 				372B7BAD7CA78A9111FF627E /* CCBalanceMission.h in Headers */,
 				372B7E6E164EBD909AB45D29 /* CCSocialLikeMission.h in Headers */,
+				F8BBDCB61AB1F6AC00FD9403 /* CCLevelUpBridgeBinderIos.h in Headers */,
 				372B7282359B2973C58305F2 /* CCSocialStatusMission.h in Headers */,
 				372B7F77C4042EC2997A7EF2 /* CCSocialStoryMission.h in Headers */,
 				372B708B429A9C876C985737 /* CCSocialUploadMission.h in Headers */,
@@ -579,7 +586,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DEA543919B4A5F00093D5D9 /* CCLevelUpService.cpp in Sources */,
+				9DEA543919B4A5F00093D5D9 /* CCLevelUpBridge.cpp in Sources */,
 				9DEA549419B4A6350093D5D9 /* LevelUpEventHandling.m in Sources */,
 				9DEA545019B4A5F00093D5D9 /* CCMissionStorage.cpp in Sources */,
 				9DEA545819B4A5F00093D5D9 /* CCGate.cpp in Sources */,
@@ -610,7 +617,8 @@
 				9DEA548919B4A6350093D5D9 /* LevelStorage.m in Sources */,
 				9DEA548B19B4A6350093D5D9 /* LUJSONConsts.m in Sources */,
 				9DEA543019B4A5F00093D5D9 /* CCLevel.cpp in Sources */,
-				9DEA547319B4A6010093D5D9 /* LevelUpService.mm in Sources */,
+				9DEA547319B4A6010093D5D9 /* LevelUpBridge.mm in Sources */,
+				F8BBDCB71AB1F6AC00FD9403 /* CCLevelUpBridgeBinderIos.mm in Sources */,
 				9DEA548719B4A6350093D5D9 /* GateStorage.m in Sources */,
 				F8667F5D1A6C0AC00004B45B /* LevelUp.m in Sources */,
 				9DEA546C19B4A5F00093D5D9 /* CCVirtualItemScore.cpp in Sources */,

@@ -17,7 +17,7 @@
 
 #include "CCWorldStorage.h"
 #include "CCWorld.h"
-#include "CCLevelUpService.h"
+#include "CCLevelUpBridge.h"
 
 namespace soomla {
     static CCWorldStorage *sInstance = NULL;
@@ -32,7 +32,7 @@ namespace soomla {
     }
 
     void CCWorldStorage::setCompleted(CCWorld *world, bool completed, bool notify) {
-        CCLevelUpService::getInstance()->worldSetCompleted(world, completed, notify);
+        CCLevelUpBridge::getInstance()->worldSetCompleted(world, completed, notify);
     }
 
     void CCWorldStorage::setCompleted(CCWorld *world, bool completed) {
@@ -40,22 +40,22 @@ namespace soomla {
     }
 
     bool CCWorldStorage::isCompleted(CCWorld *world) {
-        return CCLevelUpService::getInstance()->worldIsCompleted(world);
+        return CCLevelUpBridge::getInstance()->worldIsCompleted(world);
     }
 
     void CCWorldStorage::setReward(CCWorld *world, cocos2d::CCString *rewardId) {
-        CCLevelUpService::getInstance()->worldSetReward(world, rewardId);
+        CCLevelUpBridge::getInstance()->worldSetReward(world, rewardId);
     }
 
     cocos2d::CCString *CCWorldStorage::getAssignedReward(CCWorld *world) {
-        return CCLevelUpService::getInstance()->worldGetAssignedReward(world);
+        return CCLevelUpBridge::getInstance()->worldGetAssignedReward(world);
     }
     
     void CCWorldStorage::setLastCompletedInnerWorld(CCWorld *world, cocos2d::CCString *innerWorldId) {
-        CCLevelUpService::getInstance()->worldSetLastCompletedInnerWorld(world, innerWorldId);
+        CCLevelUpBridge::getInstance()->worldSetLastCompletedInnerWorld(world, innerWorldId);
     }
     
     cocos2d::CCString *CCWorldStorage::getLastCompletedInnerWorld(CCWorld *world) {
-        return CCLevelUpService::getInstance()->worldGetLastCompletedInnerWorld(world);
+        return CCLevelUpBridge::getInstance()->worldGetLastCompletedInnerWorld(world);
     }
 }
