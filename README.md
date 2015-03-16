@@ -132,11 +132,11 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 	```cpp
   soomla::CCSoomla::initialize("customSecret");
 
-	__Dictionary *storeParams = __Dictionary::create();
-	storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
+	CCDictionary *storeParams = CCDictionary::create();
+	storeParams->setObject(CCString::create("ExamplePublicKey"), "androidPublicKey");
   soomla::CCSoomlaStore::initialize(assets, storeParams);
 
-  __Dictionary *profileParams = __Dictionary::create();
+  CCDictionary *profileParams = CCDictionary::create();
 	soomla::CCSoomlaProfile::initialize(profileParams);
 
 	// initialWorld - should be created here and contain all worlds and levels of the game
