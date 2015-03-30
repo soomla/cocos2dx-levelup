@@ -24,7 +24,6 @@
 #include "CCBalanceMission.h"
 #include "CCVirtualCurrency.h"
 #include "CCVirtualGood.h"
-#include "CCSimpleStoreEventHandler.h"
 
 namespace soomla {
 
@@ -34,14 +33,14 @@ namespace soomla {
      balance.
      */
     class CCBalanceGate: public CCGate {
-        friend class CCBalanceGateEventHandler;
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mAssociatedItemId, AssociatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID)
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__Integer *, mDesiredBalance, DesiredBalance, CCLevelUpConsts::JSON_LU_DESIRED_BALANCE);
-        CC_SYNTHESIZE(CCStoreEventHandler *, mEventHandler, EventHandler);
+        CC_SYNTHESIZE(cocos2d::EventListener *, mCurrencyBalanceChangedListener, CurrencyBalanceChangedListener);
+        CC_SYNTHESIZE(cocos2d::EventListener *, mGoodBalanceChangedListener, GoodBalanceChangedListener);
 
     public:
-        CCBalanceGate(): CCGate(), mAssociatedItemId(NULL), mDesiredBalance(NULL), mEventHandler(NULL) {
-        }
+        CCBalanceGate(): CCGate(), mAssociatedItemId(NULL), mDesiredBalance(NULL), mCurrencyBalanceChangedListener(NULL),
+            mGoodBalanceChangedListener(NULL) {}
 
         /**
          Creates an instance of `CCBalanceGate`.
@@ -94,41 +93,20 @@ namespace soomla {
          events.
          */
         virtual void unregisterEvents();
-    private:
-        void checkItemIdBalance(cocos2d::__String *itemId, int balance);;
-    };
-
-    class CCBalanceGateEventHandler: public CCSimpleStoreEventHandler {
-
-    private:
-        CCBalanceGate *mBalanceGate;
-
-    public:
-
-        /**
-         Creates an instance of `CCBalanceGateEventHandler`.
-         @param balanceGate The `BalanceGate` that is associated with this
-         event handler.
-         */
-        static CCBalanceGateEventHandler *create(CCBalanceGate *balanceGate);
-
+        
         /**
          Opens this `Gate` if the currency-balance changed event causes the `Gate`'s
-         /// criteria to be met.
-         @param virtualCurrency">Virtual currency whose balance changed.
-         @param balance New balance.
-         @param amountAdded Amount added.
+         criteria to be met.
          */
-        virtual void onCurrencyBalanceChanged(CCVirtualCurrency *virtualCurrency, int balance, int amountAdded);
-
+        virtual void onCurrencyBalanceChanged(cocos2d::EventCustom *event);
+        
         /**
          Opens this `Gate` if the good-balance changed event causes the `Gate`'s
          criteria to be met.
-         @param good Virtual good whose balance has changed.
-         @param balance New balance.
-         @param amountAdded Amount added.
          */
-        virtual void onGoodBalanceChanged(CCVirtualGood *virtualGood, int balance, int amountAdded);
+        virtual void onGoodBalanceChanged(cocos2d::EventCustom *event);
+    private:
+        void checkItemIdBalance(cocos2d::__String *itemId, int balance);;
     };
 }
 

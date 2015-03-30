@@ -32,7 +32,7 @@ namespace soomla {
 
         __Dictionary *dict = __Dictionary::create();
         dict->setObject(__String::create(CCLevelUpConsts::JSON_JSON_TYPE_RECORD_GATE),
-                CCLevelUpConsts::JSON_JSON_TYPE);
+                CCCoreConsts::JSON_JSON_TYPE);
         dict->setObject(associatedScoreId, CCLevelUpConsts::JSON_LU_ASSOCSCOREID);
         dict->setObject(desiredRecord, CCLevelUpConsts::JSON_LU_DESIRED_RECORD);
         if (ret->init(id, name, rewards, dict)) {
