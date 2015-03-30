@@ -15,7 +15,7 @@ LEVELUP_SRC_LIST += $(wildcard $(LOCAL_PATH)/Soomla/gates/*.cpp)
 LEVELUP_SRC_LIST += $(wildcard $(LOCAL_PATH)/Soomla/gates/profile/*.cpp)
 LEVELUP_SRC_LIST += $(wildcard $(LOCAL_PATH)/Soomla/gates/store/*.cpp)
 LEVELUP_SRC_LIST += $(wildcard $(LOCAL_PATH)/Soomla/scoring/*.cpp)
-LOCAL_SRC_FILES := $(LEVELUP_SRC_LIST)
+LOCAL_SRC_FILES := $(LEVELUP_SRC_LIST:$(LOCAL_PATH)/%=%)
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/Soomla
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/Soomla/challenges

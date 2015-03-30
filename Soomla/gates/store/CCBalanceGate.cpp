@@ -1,12 +1,26 @@
-//
-// Created by Shubin Fedor on 20/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
+/*
+ Copyright (C) 2012-2014 Soomla Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
 
 #include "CCBalanceGate.h"
 #include "CCStoreInventory.h"
 #include "CCSoomlaUtils.h"
 #include "CCStoreEventDispatcher.h"
+
+USING_NS_CC;
 
 namespace soomla {
 
@@ -60,7 +74,8 @@ namespace soomla {
     soomla::CCBalanceGate::~CCBalanceGate() {
         CC_SAFE_RELEASE(mAssociatedItemId);
         CC_SAFE_RELEASE(mDesiredBalance);
-        CC_SAFE_RELEASE(mEventHandler);
+        CC_SAFE_RELEASE(mCurrencyBalanceChangedListener);
+        CC_SAFE_RELEASE(mGoodBalanceChangedListener);
     }
 
     bool CCBalanceGate::canOpenInner() {
@@ -89,16 +104,24 @@ namespace soomla {
 
     void CCBalanceGate::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCBalanceGateEventHandler::create(this));
-            CCStoreEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            setCurrencyBalanceChangedListener(Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_CURRENCY_BALANCE_CHANGED,
+                                                                                                                    CC_CALLBACK_1(CCBalanceGate::onCurrencyBalanceChanged, this)));
+            setGoodBalanceChangedListener(Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_GOOD_BALANCE_CHANGED,
+                                                                                                                CC_CALLBACK_1(CCBalanceGate::onGoodBalanceChanged, this)));
         }
     }
 
     void CCBalanceGate::unregisterEvents() {
-        CCStoreEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCStoreEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
+        EventListener *listener = getCurrencyBalanceChangedListener();
+        if (listener) {
+            Director::getInstance()->getEventDispatcher()->removeEventListener(listener);
+            setCurrencyBalanceChangedListener(NULL);
+        }
+        
+        listener = getGoodBalanceChangedListener();
+        if (listener) {
+            Director::getInstance()->getEventDispatcher()->removeEventListener(listener);
+            setCurrencyBalanceChangedListener(NULL);
         }
     }
 
@@ -107,22 +130,24 @@ namespace soomla {
             forceOpen(true);
         }
     }
-
-    CCBalanceGateEventHandler *CCBalanceGateEventHandler::create(CCBalanceGate *balanceGate) {
-        CCBalanceGateEventHandler *ret = new CCBalanceGateEventHandler();
-        ret->autorelease();
-
-        ret->mBalanceGate = balanceGate;
-
-        return ret;
+    
+    void CCBalanceGate::onCurrencyBalanceChanged(cocos2d::EventCustom *event) {
+        __Dictionary *eventData = (__Dictionary *)event->getUserData();
+        CCVirtualCurrency *virtualCurrency = dynamic_cast<CCVirtualCurrency *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_CURRENCY));
+        CC_ASSERT(virtualCurrency);
+        __Integer *balance = dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_BALANCE));
+        CC_ASSERT(balance);
+        
+        checkItemIdBalance(virtualCurrency->getItemId(), balance->getValue());
     }
-
-    void CCBalanceGateEventHandler::onCurrencyBalanceChanged(CCVirtualCurrency *virtualCurrency, int balance, int amountAdded) {
-        mBalanceGate->checkItemIdBalance(virtualCurrency->getItemId(), balance);
+    
+    void CCBalanceGate::onGoodBalanceChanged(cocos2d::EventCustom *event) {
+        __Dictionary *eventData = (__Dictionary *)event->getUserData();
+        CCVirtualGood *virtualGood = dynamic_cast<CCVirtualGood *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_GOOD));
+        CC_ASSERT(virtualGood);
+        __Integer *balance = dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_BALANCE));
+        CC_ASSERT(balance);
+        
+        checkItemIdBalance(virtualGood->getItemId(), balance->getValue());
     }
-
-    void CCBalanceGateEventHandler::onGoodBalanceChanged(CCVirtualGood *virtualGood, int balance, int amountAdded) {
-        mBalanceGate->checkItemIdBalance(virtualGood->getItemId(), balance);
-    }
-
 }

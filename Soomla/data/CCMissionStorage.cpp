@@ -1,10 +1,21 @@
-//
-// Created by Shubin Fedor on 19/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
+/*
+ Copyright (C) 2012-2014 Soomla Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
 #include "CCMissionStorage.h"
-#include "CCLevelUpService.h"
+#include "CCLevelUpBridge.h"
 
 namespace soomla {
     static CCMissionStorage *sInstance = nullptr;
@@ -24,7 +35,7 @@ namespace soomla {
     }
 
     void CCMissionStorage::setCompleted(CCMission *mission, bool completed, bool notify) {
-        return CCLevelUpService::getInstance()->missionSetCompleted(mission, completed, notify);
+        return CCLevelUpBridge::getInstance()->missionSetCompleted(mission, completed, notify);
     }
 
     bool CCMissionStorage::isCompleted(CCMission *mission) {
@@ -32,6 +43,6 @@ namespace soomla {
     }
 
     int CCMissionStorage::getTimesCompleted(CCMission *mission) {
-        return CCLevelUpService::getInstance()->missionGetTimesCompleted(mission);
+        return CCLevelUpBridge::getInstance()->missionGetTimesCompleted(mission);
     }
 }

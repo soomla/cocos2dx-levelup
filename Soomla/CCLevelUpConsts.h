@@ -24,7 +24,7 @@
 #include "CCCoreConsts.h"
 
 namespace soomla {
-    class CCLevelUpConsts : public CCCoreConsts {
+    class CCLevelUpConsts {
     public:
         /** Global **/
         static char const *JSON_LU_ASSOCITEMID;
@@ -96,14 +96,27 @@ namespace soomla {
 
         static char const *JSON_JSON_TYPE_WORLD;
         static char const *JSON_JSON_TYPE_LEVEL;
+        
+        /** Events **/
+        
+        static char const *DICT_ELEMENT_SCORE;
+        static char const *DICT_ELEMENT_GATE;
+        static char const *DICT_ELEMENT_REWARD;
+        static char const *DICT_ELEMENT_WORLD;
+        static char const *DICT_ELEMENT_MISSION;
+        static char const *DICT_ELEMENT_LEVEL;
+        static char const *DICT_ELEMENT_INNER_WORLD;
 
         static char const *EVENT_LEVEL_UP_INITIALIZED;
+        static char const *EVENT_LATEST_SCORE_CHANGED;
         static char const *EVENT_SCORE_RECORD_REACHED;
         static char const *EVENT_SCORE_RECORD_CHANGED;
         static char const *EVENT_GATE_OPENED;
+        static char const *EVENT_GATE_CLOSED;
         static char const *EVENT_MISSION_COMPLETED;
         static char const *EVENT_MISSION_COMPLETION_REVOKED;
         static char const *EVENT_WORLD_COMPLETED;
+        static char const *EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED;
         static char const *EVENT_WORLD_REWARD_ASSIGNED;
         static char const *EVENT_LEVEL_STARTED;
         static char const *EVENT_LEVEL_ENDED;
