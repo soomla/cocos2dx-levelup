@@ -17,12 +17,14 @@
 #ifndef __CoreEventHandler_H
 #define __CoreEventHandler_H
 
-#include "CCCoreEventHandler.h"
-//#include "cocos2d.h"
+#include "cocos2d.h"
 
-class CoreEventHandler : public soomla::CCCoreEventHandler {
-    void onRewardGivenEvent(soomla::CCReward *reward);
-    void onRewardTakenEvent(soomla::CCReward *reward);
+class CoreEventHandler {
+public:
+    CoreEventHandler();
+    void onRewardGivenEvent(cocos2d::EventCustom *event);
+    void onRewardTakenEvent(cocos2d::EventCustom *event);
+    void onCustomEvent(cocos2d::EventCustom *event);
 };
 
 #endif

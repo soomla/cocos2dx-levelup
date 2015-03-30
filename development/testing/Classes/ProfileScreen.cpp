@@ -59,22 +59,22 @@ bool ProfileScreen::init() {
     
     loginReward = soomla::CCVirtualItemReward::create(__String::create("login_reward"),
                                                       __String::create("Login Reward"),
-                                                      __Bool::create(false), __Integer::create(100), __String::create(MUFFIN_CURRENCY_ITEM_ID));
+                                                      __Integer::create(100), __String::create(MUFFIN_CURRENCY_ITEM_ID));
     loginReward->retain();
     
     shareReward = soomla::CCVirtualItemReward::create(__String::create("share_reward"),
                                                       __String::create("Share Reward"),
-                                                      __Bool::create(false), __Integer::create(150), __String::create(MUFFIN_CURRENCY_ITEM_ID));
+                                                      __Integer::create(150), __String::create(MUFFIN_CURRENCY_ITEM_ID));
     shareReward->retain();
     
     uploadReward = soomla::CCVirtualItemReward::create(__String::create("upload_reward"),
                                                       __String::create("Upload Reward"),
-                                                      __Bool::create(false), __Integer::create(200), __String::create(MUFFIN_CURRENCY_ITEM_ID));
+                                                      __Integer::create(200), __String::create(MUFFIN_CURRENCY_ITEM_ID));
     uploadReward->retain();
     
     likePageReward = soomla::CCVirtualItemReward::create(__String::create("like_page_reward"),
                                                        __String::create("Like Page Reward"),
-                                                       __Bool::create(false), __Integer::create(300), __String::create(MUFFIN_CURRENCY_ITEM_ID));
+                                                       __Integer::create(300), __String::create(MUFFIN_CURRENCY_ITEM_ID));
     likePageReward->retain();
 
     Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -156,9 +156,9 @@ bool ProfileScreen::init() {
         this->setLoggedInState();
         
         soomla::CCError *profileError = nullptr;
-        soomla::CCProfileController::getInstance()->like(soomla::FACEBOOK, "The.SOOMLA.Project", likePageReward, &profileError);
-        soomla::CCProfileController::getInstance()->getFeed(soomla::FACEBOOK, nullptr, &profileError);
-        soomla::CCProfileController::getInstance()->getContacts(soomla::FACEBOOK, nullptr, &profileError);
+        soomla::CCSoomlaProfile::getInstance()->like(soomla::FACEBOOK, "The.SOOMLA.Project", likePageReward, &profileError);
+        soomla::CCSoomlaProfile::getInstance()->getFeed(soomla::FACEBOOK, nullptr, &profileError);
+        soomla::CCSoomlaProfile::getInstance()->getContacts(soomla::FACEBOOK, nullptr, &profileError);
     };
     
     std::function<void(EventCustom *)> handleLogoutFinished = [this](EventCustom *event) {
@@ -193,7 +193,7 @@ bool ProfileScreen::init() {
                                                                  this);
     
     soomla::CCError *profileError = nullptr;
-    bool isLoggedIn =  soomla::CCProfileController::getInstance()->isLoggedIn(soomla::FACEBOOK, &profileError);
+    bool isLoggedIn =  soomla::CCSoomlaProfile::getInstance()->isLoggedIn(soomla::FACEBOOK, &profileError);
     if (profileError) {
         MessageBox(profileError->getInfo(), "Error");
     }
@@ -220,13 +220,13 @@ void ProfileScreen::onClicked(cocos2d::Ref *ref, Widget::TouchEventType touchTyp
         auto sender = static_cast<Widget *>(ref);
         soomla::CCError *profileError = nullptr;
         if (sender->getActionTag() == LOGIN_BUTTON_TAG) {
-            soomla::CCProfileController::getInstance()->login(soomla::FACEBOOK, loginReward, &profileError);
+            soomla::CCSoomlaProfile::getInstance()->login(soomla::FACEBOOK, loginReward, &profileError);
         }
         else if (sender->getActionTag() == STATUS_BUTTON_TAG) {
-            soomla::CCProfileController::getInstance()->updateStatus(soomla::FACEBOOK, "I love SOOMLA! http://www.soom.la", shareReward, &profileError);
+            soomla::CCSoomlaProfile::getInstance()->updateStatus(soomla::FACEBOOK, "I love SOOMLA! http://www.soom.la", shareReward, &profileError);
         }
         else if (sender->getActionTag() == STORY_BUTTON_TAG) {
-            soomla::CCProfileController::getInstance()->updateStory(soomla::FACEBOOK,
+            soomla::CCSoomlaProfile::getInstance()->updateStory(soomla::FACEBOOK,
                                                                     "This is the story of a very strong and brave SOOMBOT on his jurney from SOOMBOTIA to a far away galaxy. That galaxy contains a blue planet where all human game developers love to eat food spiced with marshmallow.",
                                                                     "The story of SOOMBOT (Profile Test App)",
                                                                     "SOOMBOT Story",
@@ -242,7 +242,7 @@ void ProfileScreen::onClicked(cocos2d::Ref *ref, Widget::TouchEventType touchTyp
             this->scheduleOnce(schedule_selector(ProfileScreen::screenshotSavedCallback), 1.0f);
         }
         else if (sender->getActionTag() == LOGOUT_BUTTON_TAG) {
-            soomla::CCProfileController::getInstance()->logout(soomla::FACEBOOK, &profileError);
+            soomla::CCSoomlaProfile::getInstance()->logout(soomla::FACEBOOK, &profileError);
         }
         else {
             return;
@@ -255,7 +255,7 @@ void ProfileScreen::onClicked(cocos2d::Ref *ref, Widget::TouchEventType touchTyp
 
 void ProfileScreen::screenshotSavedCallback(float dt) {
     soomla::CCError *profileError = nullptr;
-    soomla::CCProfileController::getInstance()->uploadImage(soomla::FACEBOOK,
+    soomla::CCSoomlaProfile::getInstance()->uploadImage(soomla::FACEBOOK,
                                                             "I love SOOMLA! http://www.soom.la",
                                                             screenshotPath.c_str(),
                                                             uploadReward,

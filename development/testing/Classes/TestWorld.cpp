@@ -23,7 +23,7 @@
 #include "CCBadgeReward.h"
 #include "CCLevel.h"
 #include "CCWorldCompletionGate.h"
-#include "CCLevelUp.h"
+#include "CCSoomlaLevelUp.h"
 #include "CCLevelUpEventDispatcher.h"
 #include "CCWorldCompletionMission.h"
 #include "CCVirtualItemReward.h"

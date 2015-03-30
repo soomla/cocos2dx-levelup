@@ -16,16 +16,8 @@
 
 #include "AppDelegate.h"
 #include "TestScreen.h"
-#include "CoreEventHandler.h"
-#include "ProfileEventHandler.h"
-#include "CCServiceManager.h"
-#include "CCProfileService.h"
 #include "MuffinRushAssets.h"
-#include "CCServiceManager.h"
-#include "CCStoreService.h"
-#include "CCCoreEventDispatcher.h"
-#include "CCLevelUpService.h"
-#include "CCLevelUp.h"
+#include "Cocos2dxLevelUp.h"
 
 USING_NS_CC;
 
@@ -36,37 +28,34 @@ AppDelegate::AppDelegate() {
 
 AppDelegate::~AppDelegate() 
 {
-    soomla::CCProfileEventDispatcher::getInstance()->removeEventHandler(handler);
-    soomla::CCCoreEventDispatcher::getInstance()->removeEventHandler(coreHandler);
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
     
-    __Dictionary *commonParams = __Dictionary::create();
-    commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-    soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+    // initialize director
+    auto director = Director::getInstance();
+    
+    soomla::CCSoomla::initialize("customSecret");
     
     MuffinRushAssets *assets = MuffinRushAssets::create();
     
     __Dictionary *storeParams = __Dictionary::create();
     storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
     
-    soomla::CCCoreEventDispatcher::getInstance()->addEventHandler(coreHandler);
-    soomla::CCStoreService::initShared(assets, storeParams);
+    soomla::CCSoomlaStore::initialize(assets, storeParams);
     
     __Dictionary *profileParams = __Dictionary::create();
+    soomla::CCSoomlaProfile::initialize(profileParams);
     
-    // initialize director
-    auto director = Director::getInstance();
-    
-    soomla::CCProfileEventDispatcher::getInstance()->addEventHandler(handler);
-    soomla::CCProfileService::initShared(profileParams);
-    
-    soomla::CCLevelUpService::initShared();
+    soomla::CCLevelUpBridge::initShared();
     
     auto glview = director->getOpenGLView();
     if(!glview) {
+#if COCOS2D_VERSION > 0x00030200
+        glview = GLViewImpl::create("My Game");
+#else
         glview = GLView::create("My Game");
+#endif
         director->setOpenGLView(glview);
     }
 

@@ -17,7 +17,7 @@
 #include "ScoreFixture.h"
 #include "CCKeyValueStorage.h"
 #include "CCWorld.h"
-#include "CCLevelUp.h"
+#include "CCSoomlaLevelUp.h"
 
 ScoreFixture::ScoreFixture() {
     score = CCScore::create(__String::create("test_score"));
@@ -49,6 +49,6 @@ void ScoreFixture::registerScoreWithWorld() {
                                      __Dictionary::create(),
                                      __Array::create());
     world->addScore(score);
-    CCLevelUp::getInstance()->initialize(world, __Array::create());
+    CCSoomlaLevelUp::getInstance()->initialize(world, __Array::create());
 };
 

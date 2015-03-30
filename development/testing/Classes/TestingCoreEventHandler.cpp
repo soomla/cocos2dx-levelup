@@ -17,10 +17,29 @@
 #include "TestingCoreEventHandler.h"
 #include "CCCoreConsts.h"
 
-void TestingCoreEventHandler::onRewardGivenEvent(soomla::CCReward *reward) {
+USING_NS_CC;
+using namespace soomla;
+
+TestingCoreEventHandler::TestingCoreEventHandler() {
+    Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCCoreConsts::EVENT_REWARD_GIVEN, CC_CALLBACK_1(TestingCoreEventHandler::onRewardGivenEvent, this));
+    Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCCoreConsts::EVENT_REWARD_TAKEN, CC_CALLBACK_1(TestingCoreEventHandler::onRewardTakenEvent, this));
+}
+
+TestingCoreEventHandler::~TestingCoreEventHandler() {
+    Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(CCCoreConsts::EVENT_REWARD_GIVEN);
+    Director::getInstance()->getEventDispatcher()->removeCustomEventListeners(CCCoreConsts::EVENT_REWARD_TAKEN);
+}
+
+void TestingCoreEventHandler::onRewardGivenEvent(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    CCReward *reward = dynamic_cast<CCReward *>(eventData->objectForKey(CCCoreConsts::DICT_ELEMENT_REWARD));
+    
     addToEventStack(soomla::CCCoreConsts::EVENT_REWARD_GIVEN, reward);
 }
 
-void TestingCoreEventHandler::onRewardTakenEvent(soomla::CCReward *reward) {
+void TestingCoreEventHandler::onRewardTakenEvent(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    CCReward *reward = dynamic_cast<CCReward *>(eventData->objectForKey(CCCoreConsts::DICT_ELEMENT_REWARD));
+    
     addToEventStack(soomla::CCCoreConsts::EVENT_REWARD_TAKEN, reward);
 };

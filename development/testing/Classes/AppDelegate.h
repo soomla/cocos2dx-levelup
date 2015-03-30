@@ -18,8 +18,8 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
-#include "CCCoreEventHandler.h"
-#include "Cocos2dxProfile.h"
+#include "ProfileEventHandler.h"
+#include "CoreEventHandler.h"
 
 /**
 @brief    The cocos2d Application.
@@ -51,8 +51,8 @@ public:
     */
     virtual void applicationWillEnterForeground();
 
-    soomla::CCProfileEventHandler *handler;
-    soomla::CCCoreEventHandler *coreHandler;
+    ProfileEventHandler *handler;
+    CoreEventHandler *coreHandler;
 };
 
 #endif // _APP_DELEGATE_H_

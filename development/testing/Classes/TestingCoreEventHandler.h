@@ -18,14 +18,15 @@
 #define __TestingCoreEventHandler_H
 
 #include "cocos2d.h"
-#include "CCCoreEventHandler.h"
 #include "BaseTestingEventHandler.h"
 #include "CCReward.h"
 
-class TestingCoreEventHandler : public soomla::CCCoreEventHandler, public BaseTestingEventHandler {
+class TestingCoreEventHandler : public BaseTestingEventHandler {
 public:
-    void onRewardGivenEvent(soomla::CCReward *reward);
-    void onRewardTakenEvent(soomla::CCReward *reward);
+    TestingCoreEventHandler();
+    ~TestingCoreEventHandler();
+    void onRewardGivenEvent(cocos2d::EventCustom *event);
+    void onRewardTakenEvent(cocos2d::EventCustom *event);
 };
 
 #endif // __TestingCoreEventHandler_H

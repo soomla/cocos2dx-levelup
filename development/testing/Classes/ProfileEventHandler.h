@@ -14,42 +14,41 @@
  limitations under the License.
  */
 
-//
-// Created by Fedor Shubin on 6/14/14.
-//
-
-
-#include "CCProfileEventHandler.h"
-
 #ifndef __ProfileEventHandler_H_
 #define __ProfileEventHandler_H_
 
+#include "cocos2d.h"
+#include "Cocos2dxProfile.h"
 
-class ProfileEventHandler: public soomla::CCProfileEventHandler {
+class ProfileEventHandler {
 
 public:
-    virtual void onLoginFailed(soomla::CCProvider provider, cocos2d::__String *errorDescription);
-    virtual void onLoginFinished(soomla::CCUserProfile *userProfile);
-    virtual void onLoginStarted(soomla::CCProvider provider);
-    virtual void onLoginCancelledEvent(soomla::CCProvider provider);
+    ProfileEventHandler();
+    virtual void onProfileInitialized(cocos2d::EventCustom *event);
+    virtual void onUserRatingEvent(cocos2d::EventCustom *event);
     
-    virtual void onLogoutFailed(soomla::CCProvider provider, cocos2d::__String *errorDescription);
-    virtual void onLogoutFinished(soomla::CCProvider provider);
-    virtual void onLogoutStarted(soomla::CCProvider provider);
+    virtual void onLoginFailed(cocos2d::EventCustom *event);
+    virtual void onLoginFinished(cocos2d::EventCustom *event);
+    virtual void onLoginStarted(cocos2d::EventCustom *event);
+    virtual void onLoginCancelledEvent(cocos2d::EventCustom *event);
     
-    virtual void onGetContactsFailed(soomla::CCProvider provider, cocos2d::__String *errorDescription);
-    virtual void onGetContactsFinished(soomla::CCProvider provider, cocos2d::__Array *contactsDict);
-    virtual void onGetContactsStarted(soomla::CCProvider provider);
+    virtual void onLogoutFailed(cocos2d::EventCustom *event);
+    virtual void onLogoutFinished(cocos2d::EventCustom *event);
+    virtual void onLogoutStarted(cocos2d::EventCustom *event);
     
-    virtual void onGetFeedFailed(soomla::CCProvider provider, cocos2d::__String *errorDescription);
-    virtual void onGetFeedFinished(soomla::CCProvider provider, cocos2d::__Array *feedList);
-    virtual void onGetFeedStarted(soomla::CCProvider provider);
+    virtual void onGetContactsFailed(cocos2d::EventCustom *event);
+    virtual void onGetContactsFinished(cocos2d::EventCustom *event);
+    virtual void onGetContactsStarted(cocos2d::EventCustom *event);
     
-    virtual void onSocialActionFailedEvent(soomla::CCProvider provider, soomla::CCSocialActionType socialActionType, cocos2d::__String *errorDescription);
-    virtual void onSocialActionFinishedEvent(soomla::CCProvider provider, soomla::CCSocialActionType socialActionType);
-    virtual void onSocialActionStartedEvent(soomla::CCProvider provider, soomla::CCSocialActionType socialActionType);
+    virtual void onGetFeedFailed(cocos2d::EventCustom *event);
+    virtual void onGetFeedFinished(cocos2d::EventCustom *event);
+    virtual void onGetFeedStarted(cocos2d::EventCustom *event);
     
-    virtual void onUserProfileUpdatedEvent(soomla::CCUserProfile *userProfile);
+    virtual void onSocialActionFailedEvent(cocos2d::EventCustom *event);
+    virtual void onSocialActionFinishedEvent(cocos2d::EventCustom *event);
+    virtual void onSocialActionStartedEvent(cocos2d::EventCustom *event);
+    
+    virtual void onUserProfileUpdatedEvent(cocos2d::EventCustom *event);
 };
 
 

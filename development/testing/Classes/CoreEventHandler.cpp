@@ -15,15 +15,34 @@
  */
 
 #include "CoreEventHandler.h"
+#include "Cocos2dxCore.h"
 
 #define TAG "CoreEventHandler >>>"
 
 USING_NS_CC;
+using namespace soomla;
 
-void CoreEventHandler::onRewardGivenEvent(soomla::CCReward *reward) {
-    log("%s Reward %s was given", TAG, reward->getName()->getCString());
+CoreEventHandler::CoreEventHandler() {
+    Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCCoreConsts::EVENT_REWARD_GIVEN, CC_CALLBACK_1(CoreEventHandler::onRewardGivenEvent, this));
+    Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCCoreConsts::EVENT_REWARD_TAKEN, CC_CALLBACK_1(CoreEventHandler::onRewardTakenEvent, this));
+    Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCCoreConsts::EVENT_CUSTOM, CC_CALLBACK_1(CoreEventHandler::onCustomEvent, this));
 }
 
-void CoreEventHandler::onRewardTakenEvent(soomla::CCReward *reward) {
-    log("%s Reward %s was taken", TAG, reward->getName()->getCString());
+void CoreEventHandler::onRewardGivenEvent(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    CCReward *reward = dynamic_cast<CCReward *>(eventData->objectForKey(CCCoreConsts::DICT_ELEMENT_REWARD));
+    CCSoomlaUtils::logDebug(TAG, __String::createWithFormat("Reward %s was given", reward->getName()->getCString())->getCString());
+}
+
+void CoreEventHandler::onRewardTakenEvent(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    CCReward *reward = dynamic_cast<CCReward *>(eventData->objectForKey(CCCoreConsts::DICT_ELEMENT_REWARD));
+    CCSoomlaUtils::logDebug(TAG, __String::createWithFormat("Reward %s was taken", reward->getName()->getCString())->getCString());
+}
+
+void CoreEventHandler::onCustomEvent(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    __String *name = dynamic_cast<__String *>(eventData->objectForKey(CCCoreConsts::DICT_ELEMENT_NAME));
+//    __Dictionary *extra = dynamic_cast<__Dictionary *>(eventData->objectForKey(CCCoreConsts::DICT_ELEMENT_EXTRA));
+    CCSoomlaUtils::logDebug(TAG, __String::createWithFormat("Custom event arrived %s", name->getCString())->getCString());
 }

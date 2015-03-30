@@ -17,30 +17,30 @@
 #ifndef __TestingLevelUpEventHandler_H
 #define __TestingLevelUpEventHandler_H
 
-#include "CCLevelUpEventHandler.h"
 #include "cocos2d.h"
-#include "CCLevelUpConsts.h"
+#include "Cocos2dxLevelUp.h"
 #include "BaseTestingEventHandler.h"
 
-class TestingLevelUpEventHandler : public soomla::CCLevelUpEventHandler, public BaseTestingEventHandler {
+class TestingLevelUpEventHandler : public BaseTestingEventHandler {
     
 public:
+    TestingLevelUpEventHandler();
+    ~TestingLevelUpEventHandler();
+    void onLevelUpInitialized(cocos2d::EventCustom *event);
     
-    void onLevelUpInitialized();
+    void onScoreRecordReached(cocos2d::EventCustom *event);
+    void onScoreRecordChanged(cocos2d::EventCustom *event);
     
-    void onScoreRecordReached(soomla::CCScore *score);
-    void onScoreRecordChanged(soomla::CCScore *score);
+    void onGateOpened(cocos2d::EventCustom *event);
     
-    void onGateOpened(soomla::CCGate *gate);
+    void onMissionCompleted(cocos2d::EventCustom *event);
+    void onMissionCompletionRevoked(cocos2d::EventCustom *event);
     
-    void onMissionCompleted(soomla::CCMission *mission);
-    void onMissionCompletionRevoked(soomla::CCMission *mission);
+    void onWorldCompleted(cocos2d::EventCustom *event);
+    void onWorldRewardAssigned(cocos2d::EventCustom *event);
     
-    void onWorldCompleted(soomla::CCWorld *world);
-    void onWorldRewardAssigned(soomla::CCWorld *world);
-    
-    void onLevelStarted(soomla::CCLevel *level);
-    void onLevelEnded(soomla::CCLevel *level);
+    void onLevelStarted(cocos2d::EventCustom *event);
+    void onLevelEnded(cocos2d::EventCustom *event);
 };
 
 #endif // __TestingLevelUpEventHandler_H
