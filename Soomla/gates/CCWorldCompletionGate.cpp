@@ -77,16 +77,15 @@ namespace soomla {
 
     void CCWorldCompletionGate::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCWorldCompletionGateEventHanler::create(this));
-            CCLevelUpEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            setEventListener(Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_WORLD_COMPLETED,
+                                                                                                  CC_CALLBACK_1(CCWorldCompletionGate::onWorldCompleted, this)));
         }
     }
 
     void CCWorldCompletionGate::unregisterEvents() {
-        CCLevelUpEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
+        if (mEventListener) {
+            Director::getInstance()->getEventDispatcher()->removeEventListener(mEventListener);
+            setEventListener(NULL);
         }
     }
 
@@ -103,19 +102,14 @@ namespace soomla {
 
         return false;
     }
-
-    CCWorldCompletionGateEventHanler *CCWorldCompletionGateEventHanler::create(CCWorldCompletionGate *worldCompletionGate) {
-        CCWorldCompletionGateEventHanler *ret = new CCWorldCompletionGateEventHanler();
-        ret->autorelease();
-
-        ret->mWorldCompletionGate = worldCompletionGate;
-
-        return ret;
-    }
-
-    void CCWorldCompletionGateEventHanler::onWorldCompleted(CCWorld *world) {
-        if (world->getId()->compare(mWorldCompletionGate->mAssociatedWorldId->getCString()) == 0) {
-            mWorldCompletionGate->forceOpen(true);
+    
+    void CCWorldCompletionGate::onWorldCompleted(cocos2d::EventCustom *event) {
+        __Dictionary *eventData = (__Dictionary *)event->getUserData();
+        CCWorld *world = dynamic_cast<CCWorld *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_WORLD));
+        CC_ASSERT(world);
+        
+        if (world->getId()->compare(mAssociatedWorldId->getCString()) == 0) {
+            forceOpen(true);
         }
     }
 }

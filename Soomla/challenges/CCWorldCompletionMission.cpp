@@ -30,7 +30,7 @@ namespace soomla {
 
         __Dictionary *dict = __Dictionary::create();
         dict->setObject(__String::create(CCLevelUpConsts::JSON_JSON_TYPE_WORLD_COMPLETION_GATE),
-                CCLevelUpConsts::JSON_JSON_TYPE);
+                CCCoreConsts::JSON_JSON_TYPE);
         dict->setObject(associatedWorldId, CCLevelUpConsts::JSON_LU_ASSOCWORLDID);
         if (ret->init(id, name, rewards, dict)) {
             ret->autorelease();

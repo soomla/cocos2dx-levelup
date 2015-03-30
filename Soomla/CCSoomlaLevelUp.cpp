@@ -97,7 +97,7 @@ namespace soomla {
             CCDICT_FOREACH(mRewards, el) {
                 rewardArray->addObject(el->getObject());
             }
-            dict->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(rewardArray), CCLevelUpConsts::JSON_REWARDS);
+            dict->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(rewardArray), CCCoreConsts::JSON_REWARDS);
         }
         return dict;
     }

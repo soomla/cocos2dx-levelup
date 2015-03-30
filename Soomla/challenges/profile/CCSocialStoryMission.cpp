@@ -39,7 +39,7 @@ namespace soomla {
 
         __Dictionary *dict = __Dictionary::create();
         dict->setObject(__String::create(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STORY_GATE),
-                CCLevelUpConsts::JSON_JSON_TYPE);
+                CCCoreConsts::JSON_JSON_TYPE);
         dict->setObject(CCUserProfileUtils::providerEnumToString(provider), CCLevelUpConsts::JSON_LU_SOCIAL_PROVIDER);
         dict->setObject(message, CCLevelUpConsts::JSON_LU_MESSAGE);
         dict->setObject(storyName, CCLevelUpConsts::JSON_LU_STORY_NAME);

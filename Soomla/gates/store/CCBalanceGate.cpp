@@ -20,6 +20,8 @@
 #include "CCSoomlaUtils.h"
 #include "CCStoreEventDispatcher.h"
 
+USING_NS_CC;
+
 namespace soomla {
 
 #define TAG "SOOMLA BalanceGate"
@@ -72,7 +74,8 @@ namespace soomla {
     soomla::CCBalanceGate::~CCBalanceGate() {
         CC_SAFE_RELEASE(mAssociatedItemId);
         CC_SAFE_RELEASE(mDesiredBalance);
-        CC_SAFE_RELEASE(mEventHandler);
+        CC_SAFE_RELEASE(mCurrencyBalanceChangedListener);
+        CC_SAFE_RELEASE(mGoodBalanceChangedListener);
     }
 
     bool CCBalanceGate::canOpenInner() {
@@ -101,16 +104,24 @@ namespace soomla {
 
     void CCBalanceGate::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCBalanceGateEventHandler::create(this));
-            CCStoreEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            setCurrencyBalanceChangedListener(Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_CURRENCY_BALANCE_CHANGED,
+                                                                                                                    CC_CALLBACK_1(CCBalanceGate::onCurrencyBalanceChanged, this)));
+            setGoodBalanceChangedListener(Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_GOOD_BALANCE_CHANGED,
+                                                                                                                CC_CALLBACK_1(CCBalanceGate::onGoodBalanceChanged, this)));
         }
     }
 
     void CCBalanceGate::unregisterEvents() {
-        CCStoreEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCStoreEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
+        EventListener *listener = getCurrencyBalanceChangedListener();
+        if (listener) {
+            Director::getInstance()->getEventDispatcher()->removeEventListener(listener);
+            setCurrencyBalanceChangedListener(NULL);
+        }
+        
+        listener = getGoodBalanceChangedListener();
+        if (listener) {
+            Director::getInstance()->getEventDispatcher()->removeEventListener(listener);
+            setCurrencyBalanceChangedListener(NULL);
         }
     }
 
@@ -119,22 +130,24 @@ namespace soomla {
             forceOpen(true);
         }
     }
-
-    CCBalanceGateEventHandler *CCBalanceGateEventHandler::create(CCBalanceGate *balanceGate) {
-        CCBalanceGateEventHandler *ret = new CCBalanceGateEventHandler();
-        ret->autorelease();
-
-        ret->mBalanceGate = balanceGate;
-
-        return ret;
+    
+    void CCBalanceGate::onCurrencyBalanceChanged(cocos2d::EventCustom *event) {
+        __Dictionary *eventData = (__Dictionary *)event->getUserData();
+        CCVirtualCurrency *virtualCurrency = dynamic_cast<CCVirtualCurrency *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_CURRENCY));
+        CC_ASSERT(virtualCurrency);
+        __Integer *balance = dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_BALANCE));
+        CC_ASSERT(balance);
+        
+        checkItemIdBalance(virtualCurrency->getItemId(), balance->getValue());
     }
-
-    void CCBalanceGateEventHandler::onCurrencyBalanceChanged(CCVirtualCurrency *virtualCurrency, int balance, int amountAdded) {
-        mBalanceGate->checkItemIdBalance(virtualCurrency->getItemId(), balance);
+    
+    void CCBalanceGate::onGoodBalanceChanged(cocos2d::EventCustom *event) {
+        __Dictionary *eventData = (__Dictionary *)event->getUserData();
+        CCVirtualGood *virtualGood = dynamic_cast<CCVirtualGood *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_GOOD));
+        CC_ASSERT(virtualGood);
+        __Integer *balance = dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_BALANCE));
+        CC_ASSERT(balance);
+        
+        checkItemIdBalance(virtualGood->getItemId(), balance->getValue());
     }
-
-    void CCBalanceGateEventHandler::onGoodBalanceChanged(CCVirtualGood *virtualGood, int balance, int amountAdded) {
-        mBalanceGate->checkItemIdBalance(virtualGood->getItemId(), balance);
-    }
-
 }

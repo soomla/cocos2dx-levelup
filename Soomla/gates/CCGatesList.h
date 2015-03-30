@@ -34,11 +34,10 @@ namespace soomla {
      */
     class CCGatesList: public CCGate {
 
-        friend class CCGateListEventHandler;
-        CC_SYNTHESIZE_RETAIN(CCLevelUpEventHandler *, mEventHandler, EventHandler);
+        CC_SYNTHESIZE_RETAIN(cocos2d::EventListener *, mEventListener, EventListener);
 
     public:
-        CCGatesList(): CCGate(), mGates(NULL), mEventHandler(NULL) {
+        CCGatesList(): CCGate(), mGates(NULL), mEventListener(NULL) {
         }
 
         bool init(cocos2d::__String *id, cocos2d::__Array *gates = NULL);
@@ -88,30 +87,10 @@ namespace soomla {
          */
         virtual void unregisterEvents();
         
+        virtual void onGateOpened(cocos2d::EventCustom *event);
+        
     private:
         cocos2d::__Array *mGates;
-    };
-
-    class CCGateListEventHandler: public CCSimpleLevelUpEventHandler {
-
-    private:
-
-        CCGatesList *mGatesList;
-
-    public:
-
-        /**
-         Creates an instance of `CCGateListEventHandler`.
-         @param gatesList The `GatesList` associated with this event handler.
-         */
-        static CCGateListEventHandler *create(CCGatesList *gatesList);
-
-        /**
-         Opens this gateslist if the gate-opened event causes the GatesList
-         composite criteria to be met.
-         @param gate Gate that was opened.
-         */
-        virtual void onGateOpened(CCGate *gate);
     };
 }
 

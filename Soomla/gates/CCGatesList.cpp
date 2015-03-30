@@ -134,38 +134,32 @@ namespace soomla {
 
     void CCGatesList::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCGateListEventHandler::create(this));
-            CCLevelUpEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            setEventListener(Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_GATE_OPENED,
+                                                                                                  CC_CALLBACK_1(CCGatesList::onGateOpened, this)));
         }
     }
 
     void CCGatesList::unregisterEvents() {
-        CCLevelUpEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
+        if (mEventListener) {
+            Director::getInstance()->getEventDispatcher()->removeEventListener(mEventListener);
+            setEventListener(NULL);
+        }
+    }
+    
+    void CCGatesList::onGateOpened(cocos2d::EventCustom *event) {
+        __Dictionary *eventData = (__Dictionary *)event->getUserData();
+        CCGate *gate = dynamic_cast<CCGate *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_GATE));
+        CC_ASSERT(gate);
+        
+        if (mGates->containsObject(gate)) {
+            if (canOpen()) {
+                forceOpen(true);
+            }
         }
     }
 
     CCGatesList::~CCGatesList() {
         CC_SAFE_RELEASE(mGates);
-        CC_SAFE_RELEASE(mEventHandler);
-    }
-
-    CCGateListEventHandler *CCGateListEventHandler::create(CCGatesList *gatesList) {
-        CCGateListEventHandler *ret = new CCGateListEventHandler();
-        ret->autorelease();
-
-        ret->mGatesList = gatesList;
-
-        return ret;
-    }
-
-    void CCGateListEventHandler::onGateOpened(CCGate *gate) {
-        if (mGatesList->mGates->containsObject(gate)) {
-            if (mGatesList->canOpen()) {
-                mGatesList->forceOpen(true);
-            }
-        }
+        CC_SAFE_RELEASE(mEventListener);
     }
 }

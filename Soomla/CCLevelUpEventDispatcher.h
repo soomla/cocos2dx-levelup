@@ -19,8 +19,6 @@
 #ifndef __CCLevelUpEventDispatcher_H_
 #define __CCLevelUpEventDispatcher_H_
 
-#include "CCLevelUpEventHandler.h"
-#include "CCAbstractAggregatedEventHandler.h"
 #include "CCScore.h"
 #include "CCWorld.h"
 #include "CCLevel.h"
@@ -29,13 +27,13 @@ namespace soomla {
 
     /**
      @class CCLevelUpEventDispatcher
-     @brief Calls event handler functions when events are fired
+     @brief Fires event when recieved from the native implementation.
 
-     Signs up to native LevelUp events. When the events arrive, this class calls
-     event handler functions. To do that you must call addEventHandler().
+     Signs up to native LevelUp events. 
+     When the events arrive this class fires the repective event through
+     the Cocos2dx Event Dispatcher.
      */
-    class CCLevelUpEventDispatcher
-            : public CCAbstractAggregatedEventHandler<CCLevelUpEventHandler>, public CCLevelUpEventHandler {
+    class CCLevelUpEventDispatcher : public cocos2d::Ref {
     public:
         /**
         This class is singleton, access it with this function.
