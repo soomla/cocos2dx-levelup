@@ -196,6 +196,7 @@ namespace soomla {
     void CCLevelUpEventDispatcher::onLastCompletedInnerWorldChanged(CCWorld *world, cocos2d::__String *innerWorldId) {
         __Dictionary *eventData = __Dictionary::create();
         eventData->setObject(world, CCLevelUpConsts::DICT_ELEMENT_WORLD);
+        eventData->setObject(innerWorldId, CCLevelUpConsts::DICT_ELEMENT_INNER_WORLD);
         
         Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(CCLevelUpConsts::EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED, eventData);
     }
