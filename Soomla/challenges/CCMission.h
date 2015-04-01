@@ -22,7 +22,6 @@
 #include "CCSoomlaEntity.h"
 #include "CCSchedule.h"
 #include "CCGate.h"
-#include "CCSimpleLevelUpEventHandler.h"
 
 namespace soomla {
 
@@ -37,16 +36,14 @@ namespace soomla {
      NOTE: `Mission`s can be completed multiple times.
      */
     class CCMission: public CCSoomlaEntity {
-        friend class CCMissionEventHandler;
-        friend class CCChallengeEventHandler;
         CC_SYNTHESIZE_RETAIN(cocos2d::__Array *, mRewards, Rewards)
         CC_SYNTHESIZE_RETAIN(CCSchedule *, mSchedule, Schedule)
 
-        CC_SYNTHESIZE_RETAIN(CCLevelUpEventHandler *, mEventHandler, EventHandler);
+        CC_SYNTHESIZE_RETAIN(cocos2d::EventListener *, mEventListener, EventListener);
 
     public:
 
-        CCMission(): CCSoomlaEntity(), mRewards(NULL), mSchedule(NULL), mGate(NULL), mEventHandler(NULL) {
+        CCMission(): CCSoomlaEntity(), mRewards(NULL), mSchedule(NULL), mGate(NULL), mEventListener(NULL) {
         }
 
         /**
@@ -130,6 +127,8 @@ namespace soomla {
          @param completed If set to `true` gives rewards.
          */
         void setCompletedInner(bool completed);
+        
+        virtual void onGateOpened(cocos2d::EventCustom *event);
 
     private:
 
@@ -138,31 +137,6 @@ namespace soomla {
         void giveRewards();
         
         CCGate *mGate;
-    };
-
-    class CCMissionEventHandler: public CCSimpleLevelUpEventHandler {
-
-    private:
-
-        CCMission *mMission;
-
-    public:
-
-        CCMissionEventHandler(): mMission(NULL) {
-
-        }
-
-        /**
-         Creates an instance of `CCMissionEventHandler`.
-         @param mission The `Mission` for this event handler.
-         */
-        static CCMissionEventHandler *create(CCMission *mission);
-
-        /**
-         Handles gate-opened events.
-         @param gate The `Gate` that triggered the event.
-         */
-        virtual void onGateOpened(CCGate *gate);
     };
 }
 

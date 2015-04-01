@@ -25,6 +25,7 @@
 #include "CCReward.h"
 
 namespace soomla {
+    class CCLevel;
 
     /**
      A game can have multiple `World`s or a single one, and `World`s can also

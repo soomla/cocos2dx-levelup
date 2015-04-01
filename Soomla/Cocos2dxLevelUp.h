@@ -23,10 +23,9 @@
 
 #include "CCLevel.h"
 #include "CCSoomlaLevelUp.h"
+#include "CCLevelUpConsts.h"
 #include "CCLevelUpEventDispatcher.h"
-#include "CCLevelUpEventHandler.h"
 #include "CCLevelUpBridge.h"
-#include "CCSimpleLevelUpEventHandler.h"
 #include "CCWorld.h"
 #include "CCChallenge.h"
 #include "CCMission.h"

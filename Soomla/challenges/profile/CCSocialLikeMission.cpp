@@ -29,7 +29,7 @@ namespace soomla {
 
         __Dictionary *dict = __Dictionary::create();
         dict->setObject(__String::create(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_LIKE_GATE),
-                CCLevelUpConsts::JSON_JSON_TYPE);
+                CCCoreConsts::JSON_JSON_TYPE);
         dict->setObject(CCUserProfileUtils::providerEnumToString(provider), CCLevelUpConsts::JSON_LU_SOCIAL_PROVIDER);
         dict->setObject(pageName, CCLevelUpConsts::JSON_LU_PAGE_NAME);
         if (ret->init(id, name, rewards, dict)) {
