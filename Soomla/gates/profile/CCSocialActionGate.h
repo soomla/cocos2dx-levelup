@@ -20,7 +20,6 @@
 
 #include "CCGate.h"
 #include "CCLevelUpConsts.h"
-#include "CCSimpleProfileEventHandler.h"
 #include "CCUserProfileUtils.h"
 
 namespace soomla {
@@ -34,12 +33,11 @@ namespace soomla {
      This is an abstract class that all social `Gate`s must implement.
      */
     class CCSocialActionGate: public CCGate {
-        friend class CCRecordGateEventHandler;
-        CC_SYNTHESIZE(CCProfileEventHandler *, mEventHandler, EventHandler);
+        CC_SYNTHESIZE(cocos2d::EventListener *, mEventListener, EventListener);
         CC_SYNTHESIZE(CCProvider, mProvider, Provider);
 
     public:
-        CCSocialActionGate(): CCGate(), mProvider(FACEBOOK), mEventHandler(NULL) {
+        CCSocialActionGate(): CCGate(), mProvider(FACEBOOK), mEventListener(NULL) {
         }
 
         virtual bool init(cocos2d::__String *id, CCProvider provider);
@@ -71,34 +69,12 @@ namespace soomla {
          Unregisters relevant events: social-action-finished event.
          */
         virtual void unregisterEvents();
+        
+        void onSocialActionFinishedEvent(cocos2d::EventCustom *event);
 
     private:
         void fillProviderFromDict(cocos2d::__Dictionary *dict);
         void putProviderToDict(cocos2d::__Dictionary *dict);
-    };
-
-    class CCSocialActionGateEventHandler: public CCSimpleProfileEventHandler {
-
-    private:
-        CCSocialActionGate *mSocialActionGate;
-
-    public:
-
-        /**
-         Creates an instance of `CCSocialActionGateEventHandler`.
-         @param socialActionGate The `SocialActionGate`associated with this
-         event handler.
-         */
-        static CCSocialActionGateEventHandler *create(CCSocialActionGate *socialActionGate);
-
-        /**
-         Opens this `Gate` if the social action that was finished causes the
-         `Gate`'s criteria to be met.
-         @param provider Social provider related to the action that was finished.
-         @param socialActionType The type of the social action that was finished.
-         @param payload Payload to compare with this `Gate`'s ID.
-         */
-        virtual void onSocialActionFinishedEvent(CCProvider provider, CCSocialActionType socialActionType, cocos2d::__String *payload) override;
     };
 }
 
