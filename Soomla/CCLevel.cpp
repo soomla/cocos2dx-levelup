@@ -1,7 +1,35 @@
-//
-// Created by Shubin Fedor on 22/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
+/*
+ Copyright (C) 2012-2014 Soomla Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
+/*
+ Copyright (C) 2012-2014 Soomla Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
 
 #include "CCLevel.h"
 #include "CCLevelStorage.h"
@@ -75,6 +103,7 @@ namespace soomla {
 
     bool CCLevel::start() {
         if (mState == LevelState::Running) {
+            CCSoomlaUtils::logError(TAG, "Can't start a level that is already running.");
             return false;
         }
 
@@ -97,6 +126,7 @@ namespace soomla {
 
     void CCLevel::pause() {
         if (mState != LevelState::Running) {
+            CCSoomlaUtils::logError(TAG, "Can't pause a level that is not running.");
             return;
         }
 
@@ -121,8 +151,9 @@ namespace soomla {
 
     void CCLevel::end(bool completed) {
 
-        // check end() called without matching start()
-        if(mStartTime == 0) {
+        // check end() called without matching start(),
+        // i.e, the level is not running nor paused
+        if(mState != LevelState::Running && mState != LevelState::Paused) {
             CCSoomlaUtils::logError(TAG, "end() called without prior start()! ignoring.");
             return;
         }
@@ -138,7 +169,9 @@ namespace soomla {
                 CCLevelStorage::getInstance()->setSlowestDurationMillis(this, duration);
             }
 
-            if (duration < getFastestDurationMillis()) {
+            // We assume that levels' duration is never 0
+            long fastest = getFastestDurationMillis();
+            if ((fastest == 0) || (duration < getFastestDurationMillis())) {
                 CCLevelStorage::getInstance()->setFastestDurationMillis(this, duration);
             }
 
@@ -153,12 +186,12 @@ namespace soomla {
             // Count number of times this level was played
             CCLevelStorage::getInstance()->incTimesPlayed(this);
 
-            // reset timers
-            mStartTime = 0;
-            mElapsed = 0;
-
             setCompleted(true);
         }
+        
+        // reset timers
+        mStartTime = 0;
+        mElapsed = 0;
     }
 
     void CCLevel::restart(bool completed) {
@@ -169,14 +202,20 @@ namespace soomla {
     }
 
     void CCLevel::setCompleted(bool completed) {
-        mState = LevelState::Completed;
+        if (completed) {
+            mState = LevelState::Completed;
+            CCLevelStorage::getInstance()->incTimesCompleted(this);
+        }
+        else {
+            mState = LevelState::Idle;
+        }
         CCWorld::setCompleted(completed);
     }
 
     long CCLevel::getCurrentTimeMs() {
         struct timeval now;
         gettimeofday(&now, NULL);
-
-        return (long) (1000 * now.tv_sec + now.tv_usec / 1000.0f);
+        
+        return (1000 * now.tv_sec + (long)(now.tv_usec / 1000.0f));
     }
 }

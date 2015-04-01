@@ -1,7 +1,18 @@
-//
-// Created by Shubin Fedor on 20/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
+/*
+ Copyright (C) 2012-2014 Soomla Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
 #include "CCWorldCompletionGate.h"
 #include "CCStoreEventDispatcher.h"
@@ -9,7 +20,7 @@
 #include "CCSoomlaUtils.h"
 #include "CCLevelUpEventDispatcher.h"
 #include "CCWorld.h"
-#include "CCLevelUp.h"
+#include "CCSoomlaLevelUp.h"
 
 namespace soomla {
 
@@ -66,21 +77,20 @@ namespace soomla {
 
     void CCWorldCompletionGate::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCWorldCompletionGateEventHanler::create(this));
-            CCLevelUpEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            setEventListener(Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_WORLD_COMPLETED,
+                                                                                                  CC_CALLBACK_1(CCWorldCompletionGate::onWorldCompleted, this)));
         }
     }
 
     void CCWorldCompletionGate::unregisterEvents() {
-        CCLevelUpEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
+        if (mEventListener) {
+            Director::getInstance()->getEventDispatcher()->removeEventListener(mEventListener);
+            setEventListener(NULL);
         }
     }
 
     bool CCWorldCompletionGate::canOpenInner() {
-        CCWorld *world = CCLevelUp::getInstance()->getWorld(mAssociatedWorldId->getCString());
+        CCWorld *world = CCSoomlaLevelUp::getInstance()->getWorld(mAssociatedWorldId->getCString());
         return world != NULL && world->isCompleted();
     }
 
@@ -92,20 +102,14 @@ namespace soomla {
 
         return false;
     }
-
-    CCWorldCompletionGateEventHanler *CCWorldCompletionGateEventHanler::create(CCWorldCompletionGate *worldCompletionGate) {
-        CCWorldCompletionGateEventHanler *ret = new CCWorldCompletionGateEventHanler();
-        ret->autorelease();
-
-        ret->mWorldCompletionGate = worldCompletionGate;
-
-        return ret;
-    }
-
-    void CCWorldCompletionGateEventHanler::onWorldCompleted(CCWorld *world) {
-        if (world->getId()->compare(mWorldCompletionGate->mAssociatedWorldId->getCString()) == 0) {
-            mWorldCompletionGate->forceOpen(true);
+    
+    void CCWorldCompletionGate::onWorldCompleted(cocos2d::EventCustom *event) {
+        __Dictionary *eventData = (__Dictionary *)event->getUserData();
+        CCWorld *world = dynamic_cast<CCWorld *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_WORLD));
+        CC_ASSERT(world);
+        
+        if (world->getId()->compare(mAssociatedWorldId->getCString()) == 0) {
+            forceOpen(true);
         }
     }
 }
-

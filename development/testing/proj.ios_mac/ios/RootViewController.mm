@@ -25,7 +25,12 @@
 
 #import "RootViewController.h"
 #import "cocos2d.h"
+// for Cocos2d-x v3.3+ compatibility only
+#if COCOS2D_VERSION > 0x00030200
+#import "platform/ios/CCEAGLView-ios.h"
+#else
 #import "CCEAGLView.h"
+#endif
 
 @implementation RootViewController
 

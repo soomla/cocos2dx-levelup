@@ -35,6 +35,22 @@ public class LevelUpEventHandlerBridge {
     }
 
     @Subscribe
+    public void onLatestScoreChanged(final LatestScoreChangedEvent latestScoreChangedEvent) {
+        mGLThread.queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject parameters = createJsonObjectForMethod("CCLevelUpEventHandler::onLatestScoreChanged");
+                    parameters.put("scoreId", latestScoreChangedEvent.ScoreId);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
+                } catch (JSONException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        });
+    }
+
+    @Subscribe
     public void onScoreRecordReached(final ScoreRecordReachedEvent scoreRecordReachedEvent) {
         mGLThread.queueEvent(new Runnable() {
             @Override
@@ -83,6 +99,22 @@ public class LevelUpEventHandlerBridge {
     }
 
     @Subscribe
+    public void onGateClosed(final GateClosedEvent gateClosedEvent) {
+        mGLThread.queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject parameters = createJsonObjectForMethod("CCLevelUpEventHandler::onGateClosed");
+                    parameters.put("gateId", gateClosedEvent.GateId);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
+                } catch (JSONException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        });
+    }
+
+    @Subscribe
     public void onMissionCompleted(final MissionCompletedEvent missionCompletedEvent) {
         mGLThread.queueEvent(new Runnable() {
             @Override
@@ -122,6 +154,23 @@ public class LevelUpEventHandlerBridge {
                 try {
                     JSONObject parameters = createJsonObjectForMethod("CCLevelUpEventHandler::onWorldCompleted");
                     parameters.put("worldId", worldCompletedEvent.WorldId);
+                    NdkGlue.getInstance().sendMessageWithParameters(parameters);
+                } catch (JSONException e) {
+                    throw new IllegalStateException(e);
+                }
+            }
+        });
+    }
+
+    @Subscribe
+    public void onLastCompletedInnerWorldChanged(final LastCompletedInnerWorldChanged lastCompletedInnerWorldChanged) {
+        mGLThread.queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject parameters = createJsonObjectForMethod("CCLevelUpEventHandler::onLastCompletedInnerWorldChanged");
+                    parameters.put("worldId", lastCompletedInnerWorldChanged.WorldId);
+                    parameters.put("innerWorldId", lastCompletedInnerWorldChanged.InnerWorldId);
                     NdkGlue.getInstance().sendMessageWithParameters(parameters);
                 } catch (JSONException e) {
                     throw new IllegalStateException(e);

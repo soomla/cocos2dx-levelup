@@ -1,5 +1,5 @@
 
-#import "LevelUpService.h"
+#import "LevelUpBridge.h"
 #import "NdkGlue.h"
 #import "LevelUpEventHandling.h"
 #import "GateStorage.h"
@@ -9,20 +9,20 @@
 #import "WorldStorage.h"
 
 
-@interface LevelUpService ()
+@interface LevelUpBridge ()
 @end
 
-@implementation LevelUpService {
+@implementation LevelUpBridge {
 
 }
 
-+ (id)sharedLevelUpService {
-    static LevelUpService *sharedProfileService = nil;
++ (id)sharedLevelUpBridge {
+    static LevelUpBridge *sharedLevelUpBridge = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedProfileService = [self alloc];
+        sharedLevelUpBridge = [self alloc];
     });
-    return sharedProfileService;
+    return sharedLevelUpBridge;
 }
 
 + (void)initialize {
@@ -57,157 +57,154 @@
     NdkGlue *ndkGlue = [NdkGlue sharedInstance];
 
     /* -= Call handlers =- */
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::initLevelUp" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
-        BOOL res = [[LevelUpService sharedLevelUpService] init] != nil;
-        if (res) {
-            [WorldStorage initLevelUp];
-        }
-        retParameters[@"return"] = @(res);
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::initLevelUp" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+        [WorldStorage initLevelUp];
+        retParameters[@"return"] = @(YES);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::gateIsOpen" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::gateIsOpen" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *gateId = parameters[@"gateId"];
         retParameters[@"return"] = @([GateStorage isOpen:gateId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::gateSetOpen" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::gateSetOpen" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *gateId = parameters[@"gateId"];
         bool open = [parameters[@"open"] boolValue];
         bool notify = [parameters[@"notify"] boolValue];
         [GateStorage setOpen:open forGate:gateId andEvent:notify];
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelSetSlowestDurationMillis" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelSetSlowestDurationMillis" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         long duration = [parameters[@"duration"] longValue];
         [LevelStorage setSlowestDurationMillis:duration forLevel:levelId];
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelGetSlowestDurationMillis" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelGetSlowestDurationMillis" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage getSlowestDurationMillisForLevel:levelId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelSetFastestDurationMillis" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelSetFastestDurationMillis" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         long duration = [parameters[@"duration"] longValue];
         [LevelStorage setFastestDurationMillis:duration forLevel:levelId];
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelGetFastestDurationMillis" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelGetFastestDurationMillis" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage getFastestDurationMillisForLevel:levelId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelIncTimesStarted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelIncTimesStarted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage incTimesStartedForLevel:levelId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelDecTimesStarted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelDecTimesStarted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage decTimesStartedForLevel:levelId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelGetTimesStarted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelGetTimesStarted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage getTimesStartedForLevel:levelId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelGetTimesPlayed" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelGetTimesPlayed" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage getTimesPlayedForLevel:levelId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelIncTimesPlayed" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelIncTimesPlayed" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage incTimesPlayedForLevel:levelId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelDecTimesPlayed" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelDecTimesPlayed" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage decTimesPlayedForLevel:levelId]);
     }];
     
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelGetTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelGetTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage getTimesCompletedForLevel:levelId]);
     }];
     
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelIncTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelIncTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage incTimesCompletedForLevel:levelId]);
     }];
     
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::levelDecTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::levelDecTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *levelId = parameters[@"levelId"];
         retParameters[@"return"] = @([LevelStorage decTimesCompletedForLevel:levelId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::missionSetCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::missionSetCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *missionId = parameters[@"missionId"];
         bool completed = [parameters[@"completed"] boolValue];
         bool notify = [parameters[@"notify"] boolValue];
         [MissionStorage setCompleted:completed forMission:missionId andNotify:notify];
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::missionGetTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::missionGetTimesCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *missionId = parameters[@"missionId"];
         retParameters[@"return"] = @([MissionStorage getTimesCompleted:missionId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::scoreSetLatestScore" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::scoreSetLatestScore" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         double newValue = [parameters[@"newValue"] doubleValue];
         NSString *scoreId = parameters[@"scoreId"];
         [ScoreStorage setLatest:newValue toScore:scoreId];
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::scoreGetLatestScore" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::scoreGetLatestScore" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *scoreId = parameters[@"scoreId"];
         retParameters[@"return"] = @([ScoreStorage getLatestScore:scoreId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::scoreSetRecordScore" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::scoreSetRecordScore" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *scoreId = parameters[@"scoreId"];
         double newValue = [parameters[@"newValue"] doubleValue];
         [ScoreStorage setRecord:newValue toScore:scoreId];
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::scoreGetRecordScore" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::scoreGetRecordScore" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *scoreId = parameters[@"scoreId"];
         retParameters[@"return"] = @([ScoreStorage getRecordScore:scoreId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::worldSetCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::worldSetCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *worldId = parameters[@"worldId"];
         bool completed = [parameters[@"completed"] boolValue];
         bool notify = [parameters[@"notify"] boolValue];
         [WorldStorage setCompleted:completed forWorld:worldId andNotify:notify];
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::worldIsCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::worldIsCompleted" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *worldId = parameters[@"worldId"];
         retParameters[@"return"] = @([WorldStorage isWorldCompleted:worldId]);
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::worldSetReward" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::worldSetReward" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *worldId = parameters[@"worldId"];
         NSString *rewardId = parameters[@"rewardId"];
         [WorldStorage setReward:rewardId forWorld:worldId];
     }];
 
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::worldGetAssignedReward" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::worldGetAssignedReward" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *worldId = parameters[@"worldId"];
         retParameters[@"return"] = ([WorldStorage getAssignedReward:worldId] ?: [NSNull null]);
     }];
     
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::worldSetLastCompletedInnerWorld" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::worldSetLastCompletedInnerWorld" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *worldId = parameters[@"worldId"];
         NSString *innerWorldId = parameters[@"innerWorldId"];
         [WorldStorage setLastCompletedInnerWorld:innerWorldId forWorld:worldId];
     }];
     
-    [ndkGlue registerCallHandlerForKey:@"CCLevelUpService::worldGetLastCompletedInnerWorld" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
+    [ndkGlue registerCallHandlerForKey:@"CCLevelUpBridge::worldGetLastCompletedInnerWorld" withBlock:^(NSDictionary *parameters, NSMutableDictionary *retParameters) {
         NSString *worldId = parameters[@"worldId"];
         retParameters[@"return"] = ([WorldStorage getLastCompletedInnerWorld:worldId] ?: [NSNull null]);
     }];

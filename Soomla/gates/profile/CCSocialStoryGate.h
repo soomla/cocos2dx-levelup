@@ -1,7 +1,18 @@
-//
-// Created by Shubin Fedor on 21/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
+/*
+ Copyright (C) 2012-2014 Soomla Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
 
 
 #ifndef __CCSocialStoryGate_H_
@@ -13,6 +24,15 @@
 
 namespace soomla {
 
+    /**
+     NOTE: Social `Gate`s require the user to perform a specific social action
+     in order to open the `Gate`. Currently, the social provider that's
+     available is Facebook, so the `Gates`s are FB-oriented. In the future,
+     more social providers will be added.
+
+     A specific type of `Gate` that has an associated story. The `Gate`
+     is opened once the player posts the story.
+     */
     class CCSocialStoryGate: public CCSocialActionGate {
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mMessage, Message, CCLevelUpConsts::JSON_LU_MESSAGE);
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::__String *, mStoryName, StoryName, CCLevelUpConsts::JSON_LU_STORY_NAME);
@@ -25,6 +45,17 @@ namespace soomla {
                              mCaption(NULL), mLink(NULL), mImgUrl(NULL) {
         }
 
+
+        /**
+         Creates an instance of `CCSocialStoryGate`.
+         @param id `Gate` ID.
+         @param provider Social provider.
+         @param message Message for the story.
+         @param storyName Story name.
+         @param caption Caption for the story image.
+         @param link Link for the story.
+         @param imgUrl Image URL for the story.
+         */
         static CCSocialStoryGate *create(cocos2d::__String *id, CCProvider provider,
                 cocos2d::__String *message,
                 cocos2d::__String *storyName, cocos2d::__String *caption,
@@ -40,11 +71,21 @@ namespace soomla {
 
         virtual const char *getType() const override;
 
+        /**
+         Converts this `SocialStoryGate` to a Dictionary.
+         @param The Dictionary representation of `CCSocialStoryGate`.
+         */
         virtual cocos2d::__Dictionary *toDictionary();
 
         virtual ~CCSocialStoryGate();
 
     protected:
+
+        /**
+         Opens this `Gate` by posting the associated story.
+         @return If the story was successfully posted returns `true`;
+         otherwise `false`.
+         */
         virtual bool openInner();
     };
 

@@ -16,7 +16,7 @@
 
 #include "UnitTestPP.h"
 #include "InitialWorldFixture.h"
-#include "CCLevelUp.h"
+#include "CCSoomlaLevelUp.h"
 #include "CCBadgeReward.h"
 #include "CCLevel.h"
 #include "CCWorldCompletionGate.h"
@@ -27,8 +27,8 @@ SUITE(TestLevelUp) {
     TEST_FIXTURE(InitialWorldFixture, SanityInitializeNoRewards) {
         reinitialize();
         
-        CHECK_EQUAL(initialWorld, CCLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
-        CHECK(CCLevelUp::getInstance()->getReward("reward") == NULL);
+        CHECK_EQUAL(initialWorld, CCSoomlaLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
+        CHECK(CCSoomlaLevelUp::getInstance()->getReward("reward") == NULL);
     }
     
     TEST_FIXTURE(InitialWorldFixture, SanityInitializeRewards) {
@@ -40,9 +40,9 @@ SUITE(TestLevelUp) {
         
         reinitialize(__Array::create(reward, secondReward, NULL));
         
-        CHECK_EQUAL(initialWorld, CCLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
-        CHECK_EQUAL(reward, CCLevelUp::getInstance()->getReward(reward->getId()->getCString()));
-        CHECK_EQUAL(secondReward, CCLevelUp::getInstance()->getReward(secondReward->getId()->getCString()));
+        CHECK_EQUAL(initialWorld, CCSoomlaLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
+        CHECK_EQUAL(reward, CCSoomlaLevelUp::getInstance()->getReward(reward->getId()->getCString()));
+        CHECK_EQUAL(secondReward, CCSoomlaLevelUp::getInstance()->getReward(secondReward->getId()->getCString()));
     }
     
     TEST_FIXTURE(InitialWorldFixture, TestGetWorld) {
@@ -53,9 +53,9 @@ SUITE(TestLevelUp) {
         
         reinitialize();
         
-        CHECK_EQUAL(initialWorld, CCLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
-        CHECK_EQUAL(level, CCLevelUp::getInstance()->getWorld(level->getId()->getCString()));
-        CHECK_EQUAL(innerLevel, CCLevelUp::getInstance()->getWorld(innerLevel->getId()->getCString()));
+        CHECK_EQUAL(initialWorld, CCSoomlaLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
+        CHECK_EQUAL(level, CCSoomlaLevelUp::getInstance()->getWorld(level->getId()->getCString()));
+        CHECK_EQUAL(innerLevel, CCSoomlaLevelUp::getInstance()->getWorld(innerLevel->getId()->getCString()));
     }
     
     TEST_FIXTURE(InitialWorldFixture, TestGetLevel) {
@@ -69,11 +69,11 @@ SUITE(TestLevelUp) {
         
         reinitialize();
         
-        CHECK_EQUAL(initialWorld, CCLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
-        CHECK_EQUAL(level, CCLevelUp::getInstance()->getLevel(level->getId()->getCString()));
-        CHECK_EQUAL(innerLevel, CCLevelUp::getInstance()->getLevel(innerLevel->getId()->getCString()));
+        CHECK_EQUAL(initialWorld, CCSoomlaLevelUp::getInstance()->getWorld(initialWorld->getId()->getCString()));
+        CHECK_EQUAL(level, CCSoomlaLevelUp::getInstance()->getLevel(level->getId()->getCString()));
+        CHECK_EQUAL(innerLevel, CCSoomlaLevelUp::getInstance()->getLevel(innerLevel->getId()->getCString()));
         
-        CHECK(CCLevelUp::getInstance()->getLevel(innerWorld->getId()->getCString()) == NULL);
+        CHECK(CCSoomlaLevelUp::getInstance()->getLevel(innerWorld->getId()->getCString()) == NULL);
     }
     
     TEST_FIXTURE(InitialWorldFixture, TestGetScore) {
@@ -87,8 +87,8 @@ SUITE(TestLevelUp) {
         
         reinitialize();
         
-        CHECK_EQUAL(score, CCLevelUp::getInstance()->getScore(score->getId()->getCString()));
-        CHECK_EQUAL(innerScore, CCLevelUp::getInstance()->getScore(innerScore->getId()->getCString()));
+        CHECK_EQUAL(score, CCSoomlaLevelUp::getInstance()->getScore(score->getId()->getCString()));
+        CHECK_EQUAL(innerScore, CCSoomlaLevelUp::getInstance()->getScore(innerScore->getId()->getCString()));
     }
     
     TEST_FIXTURE(InitialWorldFixture, TestGetGate) {
@@ -104,7 +104,7 @@ SUITE(TestLevelUp) {
         
         reinitialize();
         
-        CHECK_EQUAL(gate, CCLevelUp::getInstance()->getGate(gate->getId()->getCString()));
+        CHECK_EQUAL(gate, CCSoomlaLevelUp::getInstance()->getGate(gate->getId()->getCString()));
     }
     
     TEST_FIXTURE(InitialWorldFixture, TestGetMission) {
@@ -121,6 +121,6 @@ SUITE(TestLevelUp) {
         
         reinitialize();
         
-        CHECK_EQUAL(mission, CCLevelUp::getInstance()->getMission(mission->getId()->getCString()));
+        CHECK_EQUAL(mission, CCSoomlaLevelUp::getInstance()->getMission(mission->getId()->getCString()));
     }
 }

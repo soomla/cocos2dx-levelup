@@ -15,7 +15,7 @@
  */
 
 #include "InitialWorldFixture.h"
-#include "CCLevelUp.h"
+#include "CCSoomlaLevelUp.h"
 #include "CCLevelUpEventDispatcher.h"
 #include "CCCoreEventDispatcher.h"
 #include "CCKeyValueStorage.h"
@@ -28,18 +28,16 @@ InitialWorldFixture::InitialWorldFixture() {
                                    __Array::create());
     
     handler = new TestingLevelUpEventHandler();
-    CCLevelUpEventDispatcher::getInstance()->addEventHandler(handler);
     coreHandler = new TestingCoreEventHandler();
-    CCCoreEventDispatcher::getInstance()->addEventHandler(coreHandler);
     
     CCKeyValueStorage::getInstance()->purge();
 }
 
 InitialWorldFixture::~InitialWorldFixture() {
-    CCLevelUpEventDispatcher::getInstance()->purge();
-    CCCoreEventDispatcher::getInstance()->purge();
+    delete handler;
+    delete coreHandler;
 }
 
 void InitialWorldFixture::reinitialize(__Array *rewards) {
-    CCLevelUp::getInstance()->initialize(initialWorld, rewards);
+    CCSoomlaLevelUp::getInstance()->initialize(initialWorld, rewards);
 }

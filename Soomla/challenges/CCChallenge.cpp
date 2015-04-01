@@ -1,7 +1,19 @@
-//
-// Created by Shubin Fedor on 19/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
+/*
+ Copyright (C) 2012-2014 Soomla Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
 
 #include "CCChallenge.h"
 #include "CCDomainHelper.h"
@@ -11,9 +23,9 @@
 #include "CCMissionStorage.h"
 
 namespace soomla {
-    
+
     USING_NS_CC;
-    
+
     #define TAG "SOOMLA Challenge"
 
     CCChallenge *CCChallenge::create(cocos2d::__String *id, cocos2d::__String *name, cocos2d::__Array *missions, cocos2d::__Array *rewards) {
@@ -87,69 +99,76 @@ namespace soomla {
         return true;
     }
 
-    CCChallengeEventHandler *CCChallengeEventHandler::create(CCChallenge *challenge) {
-        CCChallengeEventHandler *ret = new CCChallengeEventHandler();
-        ret->autorelease();
-        ret->mChallenge = challenge;
-        return ret;
-    }
-
     void CCChallenge::registerEvents() {
         CCSoomlaUtils::logDebug (TAG, "registerEvents called");
         if (!this->isCompleted()) {
             CCSoomlaUtils::logDebug (TAG, "registering!");
             // register for events
-            setEventHandler(CCChallengeEventHandler::create(this));
-            CCLevelUpEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            setEventListener(Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_MISSION_COMPLETED,
+                                                                                                  CC_CALLBACK_1(CCChallenge::onMissionCompleted, this)));
+            setMissionCompletionRevokedListener(Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED,
+                                                                                                                      CC_CALLBACK_1(CCChallenge::onMissionCompletionRevoked, this)));
         }
     }
 
     void CCChallenge::unregisterEvents() {
-        if (getEventHandler()) {
-            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(getEventHandler());
-            setEventHandler(NULL);
+        if (getEventListener()) {
+            Director::getInstance()->getEventDispatcher()->removeEventListener(getEventListener());
+            setEventListener(NULL);
+        }
+        
+        if (getMissionCompletionRevokedListener()) {
+            Director::getInstance()->getEventDispatcher()->removeEventListener(getMissionCompletionRevokedListener());
+            setMissionCompletionRevokedListener(NULL);
         }
     }
-
-    void CCChallengeEventHandler::onMissionCompleted(CCMission *completedMission) {
+    
+    void CCChallenge::onMissionCompleted(cocos2d::EventCustom *event) {
+        __Dictionary *eventData = (__Dictionary *)event->getUserData();
+        CCMission *completedMission = dynamic_cast<CCMission *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_MISSION));
+        CC_ASSERT(completedMission);
+        
         CCSoomlaUtils::logDebug (TAG, "onMissionCompleted");
-        if (mChallenge->mMissions->containsObject(completedMission)) {
+        if (mMissions->containsObject(completedMission)) {
             CCSoomlaUtils::logDebug (TAG, __String::createWithFormat("Mission %s is part of challenge %s (%zi) total",
-                    completedMission->getId()->getCString(),
-                    mChallenge->getId()->getCString(),
-                    mChallenge->mMissions->count())->getCString());
+                                                                     completedMission->getId()->getCString(),
+                                                                     getId()->getCString(),
+                                                                     mMissions->count())->getCString());
             bool completed = true;
             Ref *ref;
             CCMission *mission;
-            CCARRAY_FOREACH(mChallenge->mMissions, ref) {
-                    mission = dynamic_cast<CCMission *>(ref);
-                    CC_ASSERT(mission);
-                    if (!mission->isCompleted()) {
-                        CCSoomlaUtils::logDebug(TAG, __String::createWithFormat(
-                                "challenge mission not completed?=%s",
-                                mission->getId()->getCString()
-                        )->getCString());
-                        completed = false;
-                        break;
-                    }
+            CCARRAY_FOREACH(mMissions, ref) {
+                mission = dynamic_cast<CCMission *>(ref);
+                CC_ASSERT(mission);
+                if (!mission->isCompleted()) {
+                    CCSoomlaUtils::logDebug(TAG, __String::createWithFormat(
+                                                                            "challenge mission not completed?=%s",
+                                                                            mission->getId()->getCString()
+                                                                            )->getCString());
+                    completed = false;
+                    break;
                 }
-
+            }
+            
             if (completed) {
                 CCSoomlaUtils::logDebug(TAG, __String::createWithFormat(
-                        "Challenge %s completed!", mChallenge->getId()->getCString())->getCString());
-                mChallenge->setCompletedInner(true);
+                                                                        "Challenge %s completed!", getId()->getCString())->getCString());
+                setCompletedInner(true);
             }
         }
     }
-
-    void CCChallengeEventHandler::onMissionCompletionRevoked(CCMission *mission) {
-        if (mChallenge->mMissions->containsObject(mission)) {
+    
+    void CCChallenge::onMissionCompletionRevoked(cocos2d::EventCustom *event) {
+        __Dictionary *eventData = (__Dictionary *)event->getUserData();
+        CCMission *mission = dynamic_cast<CCMission *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_MISSION));
+        CC_ASSERT(mission);
+        
+        if (mMissions->containsObject(mission)) {
             // if the challenge was completed before, but now one of its child missions
             // was uncompleted - the challenge is revoked as well
-            if (CCMissionStorage::getInstance()->isCompleted(mChallenge)) {
-                mChallenge->setCompletedInner(false);
+            if (CCMissionStorage::getInstance()->isCompleted(this)) {
+                setCompletedInner(false);
             }
         }
     }
-
 }

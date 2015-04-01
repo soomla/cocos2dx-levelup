@@ -1,29 +1,24 @@
 package com.soomla.cocos2dx.levelup;
 
 import android.opengl.GLSurfaceView;
-import com.soomla.cocos2dx.common.AbstractSoomlaService;
 import com.soomla.cocos2dx.common.NdkGlue;
 import com.soomla.levelup.data.*;
 import org.json.JSONObject;
-
-import java.lang.ref.WeakReference;
 
 /**
  * @author vedi
  *         date 6/10/14
  *         time 11:08 AM
  */
-public class LevelUpService extends AbstractSoomlaService {
+public class LevelUpBridge {
 
-    private static LevelUpService INSTANCE = null;
+    private static LevelUpBridge INSTANCE = null;
 
-    private boolean inited = false;
-
-    public static LevelUpService getInstance() {
+    public static LevelUpBridge getInstance() {
         if (INSTANCE == null) {
-            synchronized (LevelUpService.class) {
+            synchronized (LevelUpBridge.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new LevelUpService();
+                    INSTANCE = new LevelUpBridge();
                 }
             }
         }
@@ -33,22 +28,21 @@ public class LevelUpService extends AbstractSoomlaService {
     @SuppressWarnings("FieldCanBeLocal")
     private LevelUpEventHandlerBridge levelUpEventHandlerBridge;
 
-    public LevelUpService() {
+    public LevelUpBridge() {
         levelUpEventHandlerBridge = new LevelUpEventHandlerBridge();
 
         final NdkGlue ndkGlue = NdkGlue.getInstance();
 
-        ndkGlue.registerCallHandler("CCLevelUpService::initLevelUp", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::initLevelUp", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
-                LevelUpService.getInstance().init();
-                JSONObject metadata = params.optJSONObject("metadata");
-                WorldStorage.initLevelUp(metadata != null ? metadata.toString() : "{}");
+                LevelUpBridge.getInstance().init();
+                WorldStorage.initLevelUp();
                 retParams.put("return", true);
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::gateIsOpen", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::gateIsOpen", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String gateId = params.getString("gateId");
@@ -56,7 +50,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::gateSetOpen", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::gateSetOpen", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String gateId = params.getString("gateId");
@@ -66,7 +60,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::levelSetSlowestDurationMillis", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelSetSlowestDurationMillis", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String levelId = params.getString("levelId");
@@ -75,7 +69,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::levelGetSlowestDurationMillis", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelGetSlowestDurationMillis", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String levelId = params.getString("levelId");
@@ -83,7 +77,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::levelSetFastestDurationMillis", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelSetFastestDurationMillis", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String levelId = params.getString("levelId");
@@ -92,7 +86,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::levelGetFastestDurationMillis", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelGetFastestDurationMillis", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String levelId = params.getString("levelId");
@@ -100,7 +94,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::levelIncTimesStarted", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelIncTimesStarted", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String levelId = params.getString("levelId");
@@ -108,7 +102,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::levelDecTimesStarted", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelDecTimesStarted", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String levelId = params.getString("levelId");
@@ -116,7 +110,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::levelGetTimesStarted", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelGetTimesStarted", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String levelId = params.getString("levelId");
@@ -124,7 +118,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::levelGetTimesPlayed", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelGetTimesPlayed", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String levelId = params.getString("levelId");
@@ -132,7 +126,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::levelIncTimesPlayed", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelIncTimesPlayed", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String levelId = params.getString("levelId");
@@ -140,7 +134,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::levelDecTimesPlayed", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelDecTimesPlayed", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String levelId = params.getString("levelId");
@@ -148,7 +142,31 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::missionSetCompleted", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelGetTimesCompleted", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String levelId = params.getString("levelId");
+                retParams.put("return", LevelStorage.getTimesCompleted(levelId));
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelIncTimesCompleted", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String levelId = params.getString("levelId");
+                retParams.put("return", LevelStorage.incTimesCompleted(levelId));
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCLevelUpBridge::levelDecTimesCompleted", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String levelId = params.getString("levelId");
+                retParams.put("return", LevelStorage.decTimesCompleted(levelId));
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCLevelUpBridge::missionSetCompleted", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String missionId = params.getString("missionId");
@@ -158,7 +176,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::missionGetTimesCompleted", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::missionGetTimesCompleted", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String missionId = params.getString("missionId");
@@ -166,7 +184,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::scoreSetLatestScore", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::scoreSetLatestScore", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String scoreId = params.getString("scoreId");
@@ -175,7 +193,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::scoreGetLatestScore", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::scoreGetLatestScore", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String scoreId = params.getString("scoreId");
@@ -183,7 +201,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::scoreSetRecordScore", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::scoreSetRecordScore", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String scoreId = params.getString("scoreId");
@@ -192,7 +210,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::scoreGetRecordScore", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::scoreGetRecordScore", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String scoreId = params.getString("scoreId");
@@ -200,7 +218,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::worldSetCompleted", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::worldSetCompleted", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String worldId = params.getString("worldId");
@@ -210,7 +228,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::worldIsCompleted", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::worldIsCompleted", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String worldId = params.getString("worldId");
@@ -218,7 +236,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::worldSetReward", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::worldSetReward", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String worldId = params.getString("worldId");
@@ -227,7 +245,7 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
-        ndkGlue.registerCallHandler("CCLevelUpService::worldGetAssignedReward", new NdkGlue.CallHandler() {
+        ndkGlue.registerCallHandler("CCLevelUpBridge::worldGetAssignedReward", new NdkGlue.CallHandler() {
             @Override
             public void handle(JSONObject params, JSONObject retParams) throws Exception {
                 String worldId = params.getString("worldId");
@@ -235,22 +253,29 @@ public class LevelUpService extends AbstractSoomlaService {
             }
         });
 
+        ndkGlue.registerCallHandler("CCLevelUpBridge::worldSetLastCompletedInnerWorld", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String worldId = params.getString("worldId");
+                String innerWorldId = params.getString("innerWorldId");
+                WorldStorage.setLastCompletedInnerWorld(worldId, innerWorldId);
+            }
+        });
+
+        ndkGlue.registerCallHandler("CCLevelUpBridge::worldGetLastCompletedInnerWorld", new NdkGlue.CallHandler() {
+            @Override
+            public void handle(JSONObject params, JSONObject retParams) throws Exception {
+                String worldId = params.getString("worldId");
+                retParams.put("return", WorldStorage.getLastCompletedInnerWorld(worldId));
+            }
+        });
+
     }
 
     public void init() {
-        final GLSurfaceView glSurfaceView = glSurfaceViewRef.get();
+        final GLSurfaceView glSurfaceView = NdkGlue.getInstance().getGlSurfaceRef().get();
         if (glSurfaceView != null) {
             levelUpEventHandlerBridge.setGlSurfaceView(glSurfaceView);
-        }
-
-        inited = true;
-    }
-
-    public void setGlSurfaceView(GLSurfaceView glSurfaceView) {
-        if (inited) {
-            levelUpEventHandlerBridge.setGlSurfaceView(glSurfaceView);
-        } else {
-            glSurfaceViewRef = new WeakReference<GLSurfaceView>(glSurfaceView);
         }
     }
 }

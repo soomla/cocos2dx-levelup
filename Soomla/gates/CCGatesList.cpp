@@ -1,7 +1,19 @@
-//
-// Created by Shubin Fedor on 20/08/14.
-// Copyright (c) 2014 SOOMLA. All rights reserved.
-//
+/*
+ Copyright (C) 2012-2014 Soomla Inc.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
 
 #include "CCGatesList.h"
 #include "CCStoreInventory.h"
@@ -16,7 +28,12 @@ namespace soomla {
     bool CCGatesList::init(cocos2d::__String *id, __Array *gates) {
         bool result = CCGate::init(id, NULL);
         if (result) {
-            setGates(gates);
+            if (gates != NULL) {
+                setGates(gates);
+            }
+            else {
+                setGates(cocos2d::__Array::create());
+            }
             return true;
         }
         return result;
@@ -57,11 +74,52 @@ namespace soomla {
     }
 
     void CCGatesList::add(CCGate *gate) {
+        if (gate == NULL) {
+            return;
+        }
+        
+        gate->onAttached();
         mGates->addObject(gate);
     }
 
     void CCGatesList::remove(CCGate *gate) {
+        if (gate == NULL) {
+            return;
+        }
+        
+        gate->onDetached();
         mGates->removeObject(gate);
+    }
+    
+    cocos2d::__Array *CCGatesList::getGates() const {
+        return mGates;
+    }
+    
+    void CCGatesList::setGates(cocos2d::__Array *gates) {
+        if (mGates != gates)
+        {
+            if (mGates != NULL) {
+                Ref *ref;
+                CCGate *gate;
+                CCARRAY_FOREACH(mGates, ref) {
+                    gate = dynamic_cast<CCGate *>(ref);
+                    gate->onDetached();
+                }
+            }
+            
+            CC_SAFE_RETAIN(gates);
+            CC_SAFE_RELEASE(mGates);
+            mGates = gates;
+            
+            if (mGates != NULL) {
+                Ref *ref;
+                CCGate *gate;
+                CCARRAY_FOREACH(mGates, ref) {
+                    gate = dynamic_cast<CCGate *>(ref);
+                    gate->onAttached();
+                }
+            }
+        }
     }
 
     bool CCGatesList::openInner() {
@@ -76,38 +134,32 @@ namespace soomla {
 
     void CCGatesList::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCGateListEventHandler::create(this));
-            CCLevelUpEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            setEventListener(Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCLevelUpConsts::EVENT_GATE_OPENED,
+                                                                                                  CC_CALLBACK_1(CCGatesList::onGateOpened, this)));
         }
     }
 
     void CCGatesList::unregisterEvents() {
-        CCLevelUpEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
+        if (mEventListener) {
+            Director::getInstance()->getEventDispatcher()->removeEventListener(mEventListener);
+            setEventListener(NULL);
+        }
+    }
+    
+    void CCGatesList::onGateOpened(cocos2d::EventCustom *event) {
+        __Dictionary *eventData = (__Dictionary *)event->getUserData();
+        CCGate *gate = dynamic_cast<CCGate *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_GATE));
+        CC_ASSERT(gate);
+        
+        if (mGates->containsObject(gate)) {
+            if (canOpen()) {
+                forceOpen(true);
+            }
         }
     }
 
     CCGatesList::~CCGatesList() {
         CC_SAFE_RELEASE(mGates);
-        CC_SAFE_RELEASE(mEventHandler);
-    }
-
-    CCGateListEventHandler *CCGateListEventHandler::create(CCGatesList *gatesList) {
-        CCGateListEventHandler *ret = new CCGateListEventHandler();
-        ret->autorelease();
-
-        ret->mGatesList = gatesList;
-
-        return ret;
-    }
-
-    void CCGateListEventHandler::onGateOpened(CCGate *gate) {
-        if (mGatesList->mGates->containsObject(gate)) {
-            if (mGatesList->canOpen()) {
-                mGatesList->forceOpen(true);
-            }
-        }
+        CC_SAFE_RELEASE(mEventListener);
     }
 }
