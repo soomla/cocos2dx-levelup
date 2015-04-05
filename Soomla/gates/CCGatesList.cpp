@@ -134,38 +134,27 @@ namespace soomla {
 
     void CCGatesList::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCGateListEventHandler::create(this));
-            CCLevelUpEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(CCGatesList::onGateOpened),
+                                                                          CCLevelUpConsts::EVENT_GATE_OPENED, NULL);
         }
     }
 
     void CCGatesList::unregisterEvents() {
-        CCLevelUpEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
+        CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, CCLevelUpConsts::EVENT_GATE_OPENED);
+    }
+    
+    void CCGatesList::onGateOpened(cocos2d::CCDictionary *eventData) {
+        CCGate *gate = dynamic_cast<CCGate *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_GATE));
+        CC_ASSERT(gate);
+        
+        if (mGates->containsObject(gate)) {
+            if (canOpen()) {
+                forceOpen(true);
+            }
         }
     }
 
     CCGatesList::~CCGatesList() {
         CC_SAFE_RELEASE(mGates);
-        CC_SAFE_RELEASE(mEventHandler);
-    }
-
-    CCGateListEventHandler *CCGateListEventHandler::create(CCGatesList *gatesList) {
-        CCGateListEventHandler *ret = new CCGateListEventHandler();
-        ret->autorelease();
-
-        ret->mGatesList = gatesList;
-
-        return ret;
-    }
-
-    void CCGateListEventHandler::onGateOpened(CCGate *gate) {
-        if (mGatesList->mGates->containsObject(gate)) {
-            if (mGatesList->canOpen()) {
-                mGatesList->forceOpen(true);
-            }
-        }
     }
 }

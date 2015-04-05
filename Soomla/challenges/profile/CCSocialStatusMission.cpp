@@ -28,7 +28,7 @@ namespace soomla {
 
         CCDictionary *dict = CCDictionary::create();
         dict->setObject(CCString::create(CCLevelUpConsts::JSON_JSON_TYPE_SOCIAL_STATUS_GATE),
-                CCLevelUpConsts::JSON_JSON_TYPE);
+                CCCoreConsts::JSON_JSON_TYPE);
         dict->setObject(CCUserProfileUtils::providerEnumToString(provider), CCLevelUpConsts::JSON_LU_SOCIAL_PROVIDER);
         dict->setObject(status, CCLevelUpConsts::JSON_LU_STATUS);
         if (ret->init(id, name, rewards, dict)) {

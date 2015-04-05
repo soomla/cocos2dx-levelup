@@ -78,7 +78,7 @@ namespace soomla {
             CCObject *ref;
 
             // rewards
-            ref = dict->objectForKey(CCLevelUpConsts::JSON_REWARDS);
+            ref = dict->objectForKey(CCCoreConsts::JSON_REWARDS);
             if (ref) {
                 CCArray *rewardsDict = dynamic_cast<CCArray *>(ref);
                 setRewards(CCDomainHelper::getInstance()->getDomainsFromDictArray(rewardsDict));
@@ -94,7 +94,7 @@ namespace soomla {
             }
 
             // schedule
-            ref = dict->objectForKey(CCLevelUpConsts::JSON_SCHEDULE);
+            ref = dict->objectForKey(CCCoreConsts::JSON_SCHEDULE);
             CC_ASSERT(dynamic_cast<CCDictionary *>(ref));
             setSchedule(CCSchedule::createWithDictionary(dynamic_cast<CCDictionary *>(ref)));
 
@@ -111,7 +111,7 @@ namespace soomla {
         CCDictionary *dict = CCSoomlaEntity::toDictionary();
 
         if (mRewards) {
-            dict->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(mRewards), CCLevelUpConsts::JSON_REWARDS);
+            dict->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(mRewards), CCCoreConsts::JSON_REWARDS);
         }
 
         if (mGate) {
@@ -119,7 +119,7 @@ namespace soomla {
         }
 
         if (mSchedule) {
-            dict->setObject(mSchedule->toDictionary(), CCLevelUpConsts::JSON_SCHEDULE);
+            dict->setObject(mSchedule->toDictionary(), CCCoreConsts::JSON_SCHEDULE);
         }
 
         return dict;
@@ -155,22 +155,18 @@ namespace soomla {
         CC_SAFE_RELEASE(mRewards);
         CC_SAFE_RELEASE(mGate);
         CC_SAFE_RELEASE(mSchedule);
-        CC_SAFE_RELEASE(mEventHandler);
     }
 
 
     void CCMission::registerEvents() {
         if (!isCompleted() && this->mGate != NULL) {
-            setEventHandler(CCMissionEventHandler::create(this));
-            CCLevelUpEventDispatcher::getInstance()->addEventHandler(mEventHandler);
+            CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(CCMission::onGateOpened),
+                                                                          CCLevelUpConsts::EVENT_GATE_OPENED, NULL);
         }
     }
 
     void CCMission::unregisterEvents() {
-        if (mEventHandler) {
-            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(mEventHandler);
-            setEventHandler(NULL);
-        }
+        CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, CCLevelUpConsts::EVENT_GATE_OPENED);
     }
 
     CCString *CCMission::autoGateId() {
@@ -237,19 +233,14 @@ namespace soomla {
                 }
         }
     }
-
-    CCMissionEventHandler *soomla::CCMissionEventHandler::create(soomla::CCMission *mission) {
-        CCMissionEventHandler *ret = new CCMissionEventHandler();
-        ret->autorelease();
-        ret->mMission = mission;
-        return ret;
-    }
-
-    void CCMissionEventHandler::onGateOpened(CCGate *gate) {
-        if (mMission->mGate == gate) {
-            mMission->mGate->forceOpen(false);
-            mMission->setCompletedInner(true);
+    
+    void CCMission::onGateOpened(cocos2d::CCDictionary *eventData) {
+        CCGate *gate = dynamic_cast<CCGate *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_GATE));
+        CC_ASSERT(gate);
+        
+        if (mGate == gate) {
+            mGate->forceOpen(false);
+            setCompletedInner(true);
         }
     }
-
 }

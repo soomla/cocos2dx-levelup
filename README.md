@@ -21,7 +21,6 @@ cocos2dx-levelup is the implementation of the LevelUp module for the Cocos2d-x f
 
 ## Contents
 
-  - [Contents](#contents)
   - [Model Overview](#model-overview)
     - [World / Level](#world--level)
     - [Score](#score)
@@ -32,9 +31,10 @@ cocos2dx-levelup is the implementation of the LevelUp module for the Cocos2d-x f
   - [Getting Started (With pre-built libraries - RECOMMENDED)](#getting-started-with-pre-built-libraries---recommended)
     - [Integration with SOOMLA cocos2dx-store](#integration-with-soomla-cocos2dx-store)
     - [Integration with SOOMLA cocos2dx-profile](#integration-with-soomla-cocos2dx-profile)
+  - [Event Handling](#event-handling)
   - [Debugging](#debugging)
   - [Working with sources](#working-with-sources)
-  - [How to move from v1.0.x to v1.1.x?](#how-to-move-from-v10x-to-v11x)
+  - [How to move from v1.0.x to v1.2.x?](#how-to-move-from-v10x-to-v12x)
   - [Example Usages](#example-usages)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -83,10 +83,10 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 ## Download
 
 ####Pre baked zip:
-- [soomla-cocos2dx-core 1.1.1](http://library.soom.la/fetch/cocos2dx-v2-core/1.1.1?cf=github)
-- [cocos2dx-store 4.4.1](http://library.soom.la/fetch/cocos2dx-v2-store/4.4.1?cf=github)
-- [cocos2dx-profile 1.1.1](http://library.soom.la/fetch/cocos2dx-v2-profile/1.1.1?cf=github)
-- [cocos2dx-levelup 1.1.1](http://library.soom.la/fetch/cocos2dx-v2-levelup/1.1.1?cf=github)
+- [soomla-cocos2dx-core 1.2.0](http://library.soom.la/fetch/cocos2dx-v2-core/1.2.0?cf=github)
+- [cocos2dx-store 4.5.0](http://library.soom.la/fetch/cocos2dx-v2-store/4.5.0?cf=github)
+- [cocos2dx-profile 1.2.0](http://library.soom.la/fetch/cocos2dx-v2-profile/1.2.0?cf=github)
+- [cocos2dx-levelup 1.2.0](http://library.soom.la/fetch/cocos2dx-v2-levelup/1.2.0?cf=github)
 
 ## Getting Started (With pre-built libraries - RECOMMENDED)
 
@@ -113,8 +113,6 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
     ```
     $ git clone git@github.com:soomla/jansson.git external/jansson
     ```
-
-1. Implement your `CCLevelUpEventHandler` class in order to be notified about LevelUp-related events.
 
 1. Make sure to include the `Cocos2dxLevelUp.h` header whenever you use any of the **cocos2dx-levelup** functions:
 
@@ -146,6 +144,8 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 	```
 	- NOTE: *Custom Secret* - is an encryption secret you provide that will be used to secure your data. Choose this secret wisely, you can't change it after you launch your game!
 	> Initialize `CCSoomlaLevelUp` ONLY ONCE when your application loads.
+
+1. You'll need to subscribe to levelup events to get notified about Level-Up related events. refer to the [Event Handling](#event-handling) section for more information.
 
 **The next steps are different according to which platform you're using.**
 
@@ -244,6 +244,35 @@ Then, you can use the **store-related _LevelUp_ classes**, such as _CCVirtualIte
 Please follow the steps in [cocos2dx-profile](https://github.com/soomla/cocos2dx-profile) for the _Profile_ part of the setup.
 Then, you can use the **profile-related _LevelUp_ classes**, such as _CCSocialLikeMission_.
 
+## Event Handling
+
+SOOMLA lets you subscribe to levelup events, get notified and implement your own application specific behaviour to them.
+
+> Your behaviour is an addition to the default behaviour implemented by SOOMLA. You don't replace SOOMLA's behaviour.
+
+SOOMLA uses the Cocos2d-x [`EventDispatcher`](http://www.cocos2d-x.org/wiki/EventDispatcher_Mechanism) to dispatch its own custom events.
+The names of such events are defined in `CCLevelUpConsts`, the received event has a `__Dictionary` set in its `userData` which holds all the meta-data for the event.
+You can subscribe to any event from anywhere in your code.
+
+For example here's how to subscribe to the world completed event:
+
+```cpp
+cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(soomla::CCLevelUpConsts::EVENT_WORLD_COMPLETED, CC_CALLBACK_1(ExampleScene::onWorldCompleted, this));
+```
+
+Continuing the example, here's how you would handle and extract data from such an event:
+
+```cpp
+void ExampleScene::onWorldCompleted(cocos2d::EventCustom *event) {
+  cocos2d::__Dictionary *eventData = (cocos2d::__Dictionary *)event->getUserData();
+  soomla::CCWorld *world = dynamic_cast<soomla::CCWorld *>(eventData->objectForKey(soomla::CCLevelUpConsts::DICT_ELEMENT_WORLD));
+
+  // Use world for your needs
+}
+```
+
+Each event has its own meta-data, see inline documentation in [`CCLevelUpEventDispatcher`](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCLevelUpEventDispatcher.h) for more information.
+
 ## Debugging
 
 You can enable debug logging in cocos2dx-levelup by setting `SOOMLA_DEBUG` in `CCSoomlaUtils.h` (which is located in `soomla-cocos2dx-core` submodule) to `true`. Debug logging can also be enabled at build time by adding `-DSOOMLA_DEBUG=1` to `APP_CPPFLAGS` in your `Application.mk` on Android, or by setting `SOOMLA_DEBUG=1` in your Build Settings' `Preprocessor Macros` on iOS.
@@ -292,10 +321,10 @@ To integrate cocos2dx-levelup into your game, follow these steps:
 	1. `extensions/cocos2dx-profile/development/Cocos2dxProfileFromSources.iml`
 	1. `extensions/cocos2dx-levelup/development/Cocos2dxLevelUpFromSources.iml`
 
-## How to move from v1.0.x to v1.1.x?
+## How to move from v1.0.x to v1.2.x?
 
-  Version 1.1.x is all about making the integration process on iOS and Android easier.
-  If you are using v1.0.x and want to move to v1.1.x follow these steps:
+  Version 1.2.x is all about making the integration process on iOS and Android easier.
+  If you are using v1.0.x and want to move to v1.2.x follow these steps:
 
   1. Pull the latest version to your `extensions` folder
   1. Remove any Soomla-related code in iOS (`AppController.mm`) and Android (`Cocos2dxActivity`), especially code related to `ServiceManager` and any other `Service`s.
@@ -305,6 +334,7 @@ To integrate cocos2dx-levelup into your game, follow these steps:
     - Change `soomla::CCProfileService::initShared(profileParams);` to `soomla::CCSoomlaProfile::initialize(profileParams);`
     - Remove `soomla::CCLevelUpService::initShared();`
     - Remove any `#include`s to missing header files, you only need `Cocos2dxStore.h`, `Cocos2dxProfile.h` and `Cocos2dxLevelUp.h`
+  1. Remove any reference to `EventHandler`s and subscribing through Soomla `EventDispatcher`s, instead use the Cocos2d-x `EventDispatcher` to subscribe to events.
 
 ## Example Usages
 

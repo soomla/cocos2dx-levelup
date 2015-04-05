@@ -56,21 +56,25 @@ namespace soomla {
 
     void CCSocialActionGate::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCSocialActionGateEventHandler::create(this));
-            CCProfileEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(CCSocialActionGate::onSocialActionFinishedEvent),
+                                                                          CCProfileConsts::EVENT_SOCIAL_ACTION_FINISHED, NULL);
         }
     }
 
     void CCSocialActionGate::unregisterEvents() {
-        CCProfileEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCProfileEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
+        CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, CCProfileConsts::EVENT_SOCIAL_ACTION_FINISHED);
+    }
+    
+    void CCSocialActionGate::onSocialActionFinishedEvent(cocos2d::CCDictionary *eventData) {
+        CCString *payload = dynamic_cast<CCString *>(eventData->objectForKey(CCProfileConsts::DICT_ELEMENT_PAYLOAD));
+        CC_ASSERT(payload);
+        
+        if (payload->isEqual(getId())) {
+            forceOpen(true);
         }
     }
 
     CCSocialActionGate::~CCSocialActionGate() {
-        CC_SAFE_RELEASE(mEventHandler);
     }
 
 
@@ -83,20 +87,5 @@ namespace soomla {
     void CCSocialActionGate::putProviderToDict(cocos2d::CCDictionary *dict) {
         dict->setObject(CCUserProfileUtils::providerEnumToString(getProvider()),
                 CCLevelUpConsts::JSON_LU_SOCIAL_PROVIDER);
-    }
-
-    CCSocialActionGateEventHandler *CCSocialActionGateEventHandler::create(CCSocialActionGate *socialActionGate) {
-        CCSocialActionGateEventHandler *ret = new CCSocialActionGateEventHandler();
-        ret->autorelease();
-
-        ret->mSocialActionGate = socialActionGate;
-
-        return ret;
-    }
-
-    void CCSocialActionGateEventHandler::onSocialActionFinishedEvent(CCProvider provider, CCSocialActionType socialActionType, cocos2d::CCString *payload) {
-        if (payload->isEqual(this->mSocialActionGate->getId())) {
-            mSocialActionGate->forceOpen(true);
-        }
     }
 }

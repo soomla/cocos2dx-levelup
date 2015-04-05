@@ -49,7 +49,7 @@ namespace soomla {
     bool CCScheduleGate::initWithDictionary(cocos2d::CCDictionary *dict) {
         bool result = CCGate::initWithDictionary(dict);
         if (result) {
-            CCObject *ref = dict->objectForKey(CCLevelUpConsts::JSON_SCHEDULE);
+            CCObject *ref = dict->objectForKey(CCCoreConsts::JSON_SCHEDULE);
             if (ref) {
                 cocos2d::CCDictionary *scheduleDict = dynamic_cast<cocos2d::CCDictionary *>(ref);
                 CC_ASSERT(scheduleDict);
@@ -65,7 +65,7 @@ namespace soomla {
         cocos2d::CCDictionary *dict = CCSoomlaEntity::toDictionary();
 
         if (mSchedule) {
-            dict->setObject(mSchedule->toDictionary(), CCLevelUpConsts::JSON_SCHEDULE);
+            dict->setObject(mSchedule->toDictionary(), CCCoreConsts::JSON_SCHEDULE);
         }
 
         return dict;

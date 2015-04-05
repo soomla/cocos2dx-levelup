@@ -84,40 +84,9 @@ namespace soomla {
          `OnMissionCompletionRevoked`.
          */
         void unregisterEvents();
-    };
-
-    class CCChallengeEventHandler: public CCSimpleLevelUpEventHandler {
-
-    private:
-
-        CCChallenge *mChallenge;
-
-    public:
-
-        CCChallengeEventHandler() : mChallenge(NULL) {
-        }
-
-        /**
-         Creates an instance of `CCChallengeEventHandler`.
-         @param challenge The `Challenge` for this event handler.
-         */
-        static CCChallengeEventHandler *create(CCChallenge *challenge);
-
-        /**
-         Handles mission-completion events. Checks if all `Mission`s included
-         in this `Challenge` are completed, and if so, sets the `Challenge` as
-         completed.
-         @param completedMission The `Mission` that triggered the event.
-         */
-        void onMissionCompleted(CCMission *completedMission);
-
-        /**
-         Handles mission-revoked events. If the `Challenge` was completed
-         before, but now one of its child `Mission`s is incomplete, the
-         `Challenge` is revoked as well.
-         @param mission The `Mission` that triggered the event.
-         */
-        void onMissionCompletionRevoked(CCMission *mission);
+        
+        void onMissionCompleted(cocos2d::CCDictionary *eventData);
+        void onMissionCompletionRevoked(cocos2d::CCDictionary *eventData);
     };
 }
 

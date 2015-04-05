@@ -19,6 +19,8 @@
 #include "CCSoomlaLevelUp.h"
 #include "CCSoomlaUtils.h"
 
+USING_NS_CC;
+
 namespace soomla {
 
 #define TAG "SOOMLA RecordGate"
@@ -97,37 +99,26 @@ namespace soomla {
 
     void CCRecordGate::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCRecordGateEventHandler::create(this));
-            CCLevelUpEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(CCRecordGate::onScoreRecordChanged),
+                                                                          CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED, NULL);
         }
     }
 
     void CCRecordGate::unregisterEvents() {
-        CCLevelUpEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
-        }
+        CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED);
     }
-
-    CCRecordGateEventHandler *CCRecordGateEventHandler::create(CCRecordGate *recordGate) {
-        CCRecordGateEventHandler *ret = new CCRecordGateEventHandler();
-        ret->autorelease();
-
-        ret->mRecordGate = recordGate;
-
-        return ret;
-    }
-
-    void CCRecordGateEventHandler::onScoreRecordChanged(CCScore *score) {
-
-        if (score->getId()->compare(mRecordGate->mAssociatedScoreId->getCString()) == 0 &&
-                score->hasRecordReached(mRecordGate->mDesiredRecord->getValue())) {
-
+    
+    void CCRecordGate::onScoreRecordChanged(cocos2d::CCDictionary *eventData) {
+        CCScore *score = dynamic_cast<CCScore *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_SCORE));
+        CC_ASSERT(score);
+        
+        if (score->getId()->compare(mAssociatedScoreId->getCString()) == 0 &&
+            score->hasRecordReached(mDesiredRecord->getValue())) {
+            
             // We were thinking what will happen if the score's record will be broken over and over again.
             // It might have made this function being called over and over again.
             // It won't be called b/c ForceOpen(true) calls 'unregisterEvents' inside.
-            mRecordGate->forceOpen(true);
+            forceOpen(true);
         }
     }
 }

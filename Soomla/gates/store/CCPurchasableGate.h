@@ -21,7 +21,6 @@
 
 #include "CCGate.h"
 #include "CCLevelUpConsts.h"
-#include "CCSimpleStoreEventHandler.h"
 
 namespace soomla {
 
@@ -32,9 +31,8 @@ namespace soomla {
     class CCPurchasableGate: public CCGate {
         friend class CCPurchasableGateEventHanler;
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCString *, mAssociatedItemId, AssociatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID)
-        CC_SYNTHESIZE_RETAIN(CCStoreEventHandler *, mEventHandler, EventHandler);
     public:
-        CCPurchasableGate(): CCGate(), mAssociatedItemId(NULL), mEventHandler(NULL) {
+        CCPurchasableGate(): CCGate(), mAssociatedItemId(NULL) {
         }
 
         /**
@@ -84,32 +82,8 @@ namespace soomla {
          `false`.
          */
         virtual bool openInner();
-    };
-
-    class CCPurchasableGateEventHanler: public CCSimpleStoreEventHandler {
-
-    private:
-        CCPurchasableGate *mPurchasableGate;
-
-    public:
-
-        CCPurchasableGateEventHanler(): mPurchasableGate(NULL) {
-        }
-
-        /**
-         Creates an instance of `CCPurchasableGateEventHanler`.
-         @param purchasableGate The `PurchasableGate` associated with this
-         event handler.
-         */
-        static CCPurchasableGateEventHanler *create(CCPurchasableGate *purchasableGate);
-
-        /**
-         Opens this `Gate` if the item-purchased event causes the `Gate`'s
-         criteria to be met.
-         @param pvi The item that was purchased.
-         @param payload Payment ID of the item purchased.
-         */
-        virtual void onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::CCString *payload);
+        
+        virtual void onItemPurchased(cocos2d::CCDictionary *eventData);
     };
 }
 

@@ -37,10 +37,6 @@ namespace soomla {
 
     bool CCLevelUpEventDispatcher::init() {
 
-        if (!CCAbstractAggregatedEventHandler::init()) {
-            return false;
-        }
-
         CCSoomlaEventDispatcher *eventDispatcher = CCSoomlaEventDispatcher::getInstance();
 
         eventDispatcher->registerEventHandler(CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED,
@@ -86,129 +82,92 @@ namespace soomla {
     }
 
     void CCLevelUpEventDispatcher::onLevelUpInitialized() {
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onLevelUpInitialized();
-        }
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED);
     }
 
     void CCLevelUpEventDispatcher::onGateOpened(CCGate *gate) {
-        lockEventHandlers();
-
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onGateOpened(gate);
-        }
-
-        unlockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(gate, CCLevelUpConsts::DICT_ELEMENT_GATE);
+        
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_GATE_OPENED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onGateClosed(CCGate *gate) {
-        lockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(gate, CCLevelUpConsts::DICT_ELEMENT_GATE);
         
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onGateClosed(gate);
-        }
-
-        unlockEventHandlers();
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_GATE_CLOSED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onMissionCompleted(CCMission *mission) {
-        lockEventHandlers();
-
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onMissionCompleted(mission);
-        }
-
-        unlockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(mission, CCLevelUpConsts::DICT_ELEMENT_MISSION);
+        
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_MISSION_COMPLETED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onMissionCompletionRevoked(CCMission *mission) {
-        lockEventHandlers();
-
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onMissionCompletionRevoked(mission);
-        }
-
-        unlockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(mission, CCLevelUpConsts::DICT_ELEMENT_MISSION);
+        
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onLatestScoreChanged(CCScore *score) {
-        lockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(score, CCLevelUpConsts::DICT_ELEMENT_SCORE);
         
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onLatestScoreChanged(score);
-        }
-
-        unlockEventHandlers();
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_LATEST_SCORE_CHANGED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onScoreRecordReached(CCScore *score) {
-        lockEventHandlers();
-
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onScoreRecordReached(score);
-        }
-
-        unlockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(score, CCLevelUpConsts::DICT_ELEMENT_SCORE);
+        
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onScoreRecordChanged(CCScore *score) {
-        lockEventHandlers();
-
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onScoreRecordChanged(score);
-        }
-
-        unlockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(score, CCLevelUpConsts::DICT_ELEMENT_SCORE);
+        
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onWorldCompleted(CCWorld *world) {
-        lockEventHandlers();
-
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onWorldCompleted(world);
-        }
-
-        unlockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(world, CCLevelUpConsts::DICT_ELEMENT_WORLD);
+        
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_WORLD_COMPLETED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onLastCompletedInnerWorldChanged(CCWorld *world, cocos2d::CCString *innerWorldId) {
-        lockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(world, CCLevelUpConsts::DICT_ELEMENT_WORLD);
+        eventData->setObject(innerWorldId, CCLevelUpConsts::DICT_ELEMENT_INNER_WORLD);
         
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onLastCompletedInnerWorldChanged(world, innerWorldId);
-        }
-
-        unlockEventHandlers();
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onWorldRewardAssigned(CCWorld *world) {
-        lockEventHandlers();
-
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onWorldRewardAssigned(world);
-        }
-
-        unlockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(world, CCLevelUpConsts::DICT_ELEMENT_WORLD);
+        
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onLevelStarted(CCLevel *level) {
-        lockEventHandlers();
-
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onLevelStarted(level);
-        }
-
-        unlockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(level, CCLevelUpConsts::DICT_ELEMENT_LEVEL);
+        
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_LEVEL_STARTED, eventData);
     }
 
     void CCLevelUpEventDispatcher::onLevelEnded(CCLevel *level) {
-        lockEventHandlers();
-
-        FOR_EACH_EVENT_HANDLER(CCLevelUpEventHandler)
-            eventHandler->onLevelEnded(level);
-        }
-
-        unlockEventHandlers();
+        CCDictionary *eventData = CCDictionary::create();
+        eventData->setObject(level, CCLevelUpConsts::DICT_ELEMENT_LEVEL);
+        
+        CCNotificationCenter::sharedNotificationCenter()->postNotification(CCLevelUpConsts::EVENT_LEVEL_ENDED, eventData);
     }
 
 
