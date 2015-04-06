@@ -21,8 +21,6 @@
 
 #include "CCGate.h"
 #include "CCLevelUpConsts.h"
-#include "CCSimpleStoreEventHandler.h"
-#include "CCSimpleLevelUpEventHandler.h"
 #include "CCWorld.h"
 
 namespace soomla {
@@ -34,11 +32,10 @@ namespace soomla {
     class CCWorldCompletionGate: public CCGate {
         friend class CCWorldCompletionGateEventHanler;
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCString *, mAssociatedWorldId, AssociatedWorldId, CCLevelUpConsts::JSON_LU_ASSOCWORLDID)
-        CC_SYNTHESIZE_RETAIN(CCLevelUpEventHandler *, mEventHandler, EventHandler);
 
     public:
 
-        CCWorldCompletionGate(): CCGate(), mAssociatedWorldId(NULL), mEventHandler(NULL) {
+        CCWorldCompletionGate(): CCGate(), mAssociatedWorldId(NULL) {
         }
 
         /**
@@ -87,30 +84,8 @@ namespace soomla {
          @return Upon success of opening returns `true`; otherwise `false`.
          */
         virtual bool openInner();
-    };
-
-    class CCWorldCompletionGateEventHanler: public CCSimpleLevelUpEventHandler {
-
-    private:
-        CCWorldCompletionGate *mWorldCompletionGate;
-
-    public:
-        CCWorldCompletionGateEventHanler(): mWorldCompletionGate(NULL) {
-        }
-
-        /**
-         Creates an instance of `CCWorldCompletionGateEventHanler`.
-         @param worldCompletionGate The `WorldCompletionGate` associated with
-         this event handler.
-         */
-        static CCWorldCompletionGateEventHanler *create(CCWorldCompletionGate *worldCompletionGate);
-
-        /**
-         Opens this `Gate` if the world-completed event causes the `Gate`'s
-         criteria to be met.
-         @param world `World` to be compared to the associated `World`.
-         */
-        void onWorldCompleted(CCWorld *world);
+        
+        void onWorldCompleted(cocos2d::CCDictionary *eventData);
     };
 }
 

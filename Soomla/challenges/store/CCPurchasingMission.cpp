@@ -31,7 +31,7 @@ namespace soomla {
 
         CCDictionary *dict = CCDictionary::create();
         dict->setObject(CCString::create(CCLevelUpConsts::JSON_JSON_TYPE_PURCHASABLE_GATE),
-                CCLevelUpConsts::JSON_JSON_TYPE);
+                CCCoreConsts::JSON_JSON_TYPE);
         dict->setObject(associatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID);
         if (ret->init(id, name, rewards, dict)) {
             ret->autorelease();

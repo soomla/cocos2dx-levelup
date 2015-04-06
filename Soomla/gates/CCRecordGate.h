@@ -21,7 +21,7 @@
 
 #include "CCGate.h"
 #include "CCLevelUpConsts.h"
-#include "CCSimpleLevelUpEventHandler.h"
+#include "CCScore.h"
 
 namespace soomla {
 
@@ -32,13 +32,11 @@ namespace soomla {
      */
     class CCRecordGate: public CCGate {
 
-        friend class CCRecordGateEventHandler;
         SL_SYNTHESIZE_RETAIN_WITH_DICT(cocos2d::CCString *, mAssociatedScoreId, AssociatedScoreId, CCLevelUpConsts::JSON_LU_ASSOCSCOREID)
         SL_SYNTHESIZE_DOUBLE_RETAIN_WITH_DICT(mDesiredRecord, DesiredRecord, CCLevelUpConsts::JSON_LU_DESIRED_RECORD);
-        CC_SYNTHESIZE(CCLevelUpEventHandler *, mEventHandler, EventHandler);
 
     public:
-        CCRecordGate(): CCGate(), mAssociatedScoreId(NULL), mDesiredRecord(NULL), mEventHandler(NULL) {
+        CCRecordGate(): CCGate(), mAssociatedScoreId(NULL), mDesiredRecord(NULL) {
         }
 
         /**
@@ -89,27 +87,12 @@ namespace soomla {
          Unregisters relevant events: score-record changed event.
          */
         virtual void unregisterEvents();
-    };
-
-    class CCRecordGateEventHandler: public CCSimpleLevelUpEventHandler {
-
-    private:
-        CCRecordGate *mRecordGate;
-
-    public:
-
-        /**
-         Creates an instance of `CCRecordGateEventHandler`.
-         @param recordGate The `RecordGate` associated with this event handler.
-         */
-        static CCRecordGateEventHandler *create(CCRecordGate *recordGate);
-
+        
         /**
          Opens this `Gate` if the score-record-changed event causes the `Gate`'s
          criteria to be met.
-         @param score The `Score` whose record has changed.
          */
-        void onScoreRecordChanged(CCScore *score);
+        virtual void onScoreRecordChanged(cocos2d::CCDictionary *eventData);
     };
 }
 

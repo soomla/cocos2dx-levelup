@@ -77,17 +77,13 @@ namespace soomla {
 
     void CCWorldCompletionGate::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCWorldCompletionGateEventHanler::create(this));
-            CCLevelUpEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(CCWorldCompletionGate::onWorldCompleted),
+                                                                          CCLevelUpConsts::EVENT_WORLD_COMPLETED, NULL);
         }
     }
 
     void CCWorldCompletionGate::unregisterEvents() {
-        CCLevelUpEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCLevelUpEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
-        }
+        CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, CCLevelUpConsts::EVENT_WORLD_COMPLETED);
     }
 
     bool CCWorldCompletionGate::canOpenInner() {
@@ -103,19 +99,13 @@ namespace soomla {
 
         return false;
     }
-
-    CCWorldCompletionGateEventHanler *CCWorldCompletionGateEventHanler::create(CCWorldCompletionGate *worldCompletionGate) {
-        CCWorldCompletionGateEventHanler *ret = new CCWorldCompletionGateEventHanler();
-        ret->autorelease();
-
-        ret->mWorldCompletionGate = worldCompletionGate;
-
-        return ret;
-    }
-
-    void CCWorldCompletionGateEventHanler::onWorldCompleted(CCWorld *world) {
-        if (world->getId()->compare(mWorldCompletionGate->mAssociatedWorldId->getCString()) == 0) {
-            mWorldCompletionGate->forceOpen(true);
+    
+    void CCWorldCompletionGate::onWorldCompleted(cocos2d::CCDictionary *eventData) {
+        CCWorld *world = dynamic_cast<CCWorld *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_WORLD));
+        CC_ASSERT(world);
+        
+        if (world->getId()->compare(mAssociatedWorldId->getCString()) == 0) {
+            forceOpen(true);
         }
     }
 }

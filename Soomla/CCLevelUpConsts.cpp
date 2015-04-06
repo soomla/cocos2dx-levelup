@@ -89,6 +89,14 @@ namespace soomla {
 
     char const *CCLevelUpConsts::JSON_JSON_TYPE_WORLD       = "World";
     char const *CCLevelUpConsts::JSON_JSON_TYPE_LEVEL       = "Level";
+    
+    char const *CCLevelUpConsts::DICT_ELEMENT_SCORE = "score";
+    char const *CCLevelUpConsts::DICT_ELEMENT_GATE = "gate";
+    char const *CCLevelUpConsts::DICT_ELEMENT_REWARD = "reward";
+    char const *CCLevelUpConsts::DICT_ELEMENT_WORLD = "world";
+    char const *CCLevelUpConsts::DICT_ELEMENT_MISSION = "mission";
+    char const *CCLevelUpConsts::DICT_ELEMENT_LEVEL = "level";
+    char const *CCLevelUpConsts::DICT_ELEMENT_INNER_WORLD = "innerWorld";
 
     char const *CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED = "CCLevelUpEventHandler::onLevelUpInitialized";
     char const *CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED = "CCLevelUpEventHandler::onScoreRecordChanged";

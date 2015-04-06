@@ -75,17 +75,13 @@ namespace soomla {
 
     void CCPurchasableGate::registerEvents() {
         if (!isOpen()) {
-            setEventHandler(CCPurchasableGateEventHanler::create(this));
-            CCStoreEventDispatcher::getInstance()->addEventHandler(getEventHandler());
+            CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(CCPurchasableGate::onItemPurchased),
+                                                                          CCStoreConsts::EVENT_ITEM_PURCHASED, NULL);
         }
     }
 
     void CCPurchasableGate::unregisterEvents() {
-        CCStoreEventHandler *eventHandler = getEventHandler();
-        if (eventHandler) {
-            CCStoreEventDispatcher::getInstance()->removeEventHandler(eventHandler);
-            setEventHandler(NULL);
-        }
+        CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, CCStoreConsts::EVENT_ITEM_PURCHASED);
     }
 
     bool CCPurchasableGate::canOpenInner() {
@@ -104,20 +100,16 @@ namespace soomla {
         }
         return true;
     }
-
-    CCPurchasableGateEventHanler *CCPurchasableGateEventHanler::create(CCPurchasableGate *purchasableGate) {
-        CCPurchasableGateEventHanler *ret = new CCPurchasableGateEventHanler();
-        ret->autorelease();
-
-        ret->mPurchasableGate = purchasableGate;
-
-        return ret;
-    }
-
-    void CCPurchasableGateEventHanler::onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::CCString *payload) {
-        if ((purchasableVirtualItem->getItemId()->compare(mPurchasableGate->getAssociatedItemId()->getCString()) == 0)
-                && payload->isEqual(mPurchasableGate->getId())) {
-            mPurchasableGate->forceOpen(true);
+    
+    void CCPurchasableGate::onItemPurchased(cocos2d::CCDictionary *eventData) {
+        CCPurchasableVirtualItem *purchasableVirtualItem = dynamic_cast<CCPurchasableVirtualItem *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_PURCHASABLE));
+        CC_ASSERT(purchasableVirtualItem);
+        CCString *payload = dynamic_cast<CCString *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_DEVELOPERPAYLOAD));
+        CC_ASSERT(payload);
+        
+        if ((purchasableVirtualItem->getItemId()->compare(getAssociatedItemId()->getCString()) == 0)
+            && payload->isEqual(getId())) {
+            forceOpen(true);
         }
     }
 }

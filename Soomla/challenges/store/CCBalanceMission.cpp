@@ -30,7 +30,7 @@ namespace soomla {
 
         CCDictionary *dict = CCDictionary::create();
         dict->setObject(CCString::create(CCLevelUpConsts::JSON_JSON_TYPE_BALANCE_GATE),
-                CCLevelUpConsts::JSON_JSON_TYPE);
+                CCCoreConsts::JSON_JSON_TYPE);
         dict->setObject(associatedItemId, CCLevelUpConsts::JSON_LU_ASSOCITEMID);
         dict->setObject(desiredBalance, CCLevelUpConsts::JSON_LU_DESIRED_BALANCE);
         if (ret->init(id, name, rewards, dict)) {
