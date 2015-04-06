@@ -250,28 +250,27 @@ SOOMLA lets you subscribe to levelup events, get notified and implement your own
 
 > Your behaviour is an addition to the default behaviour implemented by SOOMLA. You don't replace SOOMLA's behaviour.
 
-SOOMLA uses the Cocos2d-x [`EventDispatcher`](http://www.cocos2d-x.org/wiki/EventDispatcher_Mechanism) to dispatch its own custom events.
-The names of such events are defined in `CCLevelUpConsts`, the received event has a `__Dictionary` set in its `userData` which holds all the meta-data for the event.
-You can subscribe to any event from anywhere in your code.
+SOOMLA uses the Cocos2d-x `CCNotificationCenter` to dispatch its own custom events.
+The names of such events are defined in `CCLevelUpConsts`, the received event data is a `CCDictionary` which holds all the meta-data for the event.
+You can subscribe to any event from any `CCObject` in your code.
 
 For example here's how to subscribe to the world completed event:
 
 ```cpp
-cocos2d::Director::getInstance()->getEventDispatcher()->addCustomEventListener(soomla::CCLevelUpConsts::EVENT_WORLD_COMPLETED, CC_CALLBACK_1(ExampleScene::onWorldCompleted, this));
+cocos2d::CCNotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(ExampleScene::onWorldCompleted), soomla::CCLevelUpConsts::EVENT_WORLD_COMPLETED, NULL);
 ```
 
 Continuing the example, here's how you would handle and extract data from such an event:
 
 ```cpp
-void ExampleScene::onWorldCompleted(cocos2d::EventCustom *event) {
-  cocos2d::__Dictionary *eventData = (cocos2d::__Dictionary *)event->getUserData();
+void ExampleScene::onWorldCompleted(cocos2d::CCDictionary *eventData) {
   soomla::CCWorld *world = dynamic_cast<soomla::CCWorld *>(eventData->objectForKey(soomla::CCLevelUpConsts::DICT_ELEMENT_WORLD));
 
   // Use world for your needs
 }
 ```
 
-Each event has its own meta-data, see inline documentation in [`CCLevelUpEventDispatcher`](https://github.com/soomla/cocos2dx-levelup/blob/master/Soomla/CCLevelUpEventDispatcher.h) for more information.
+Each event has its own meta-data, see inline documentation in [`CCLevelUpEventDispatcher`](https://github.com/soomla/cocos2dx-levelup/blob/cocos2dx-v2/Soomla/CCLevelUpEventDispatcher.h) for more information.
 
 ## Debugging
 
@@ -334,7 +333,7 @@ To integrate cocos2dx-levelup into your game, follow these steps:
     - Change `soomla::CCProfileService::initShared(profileParams);` to `soomla::CCSoomlaProfile::initialize(profileParams);`
     - Remove `soomla::CCLevelUpService::initShared();`
     - Remove any `#include`s to missing header files, you only need `Cocos2dxStore.h`, `Cocos2dxProfile.h` and `Cocos2dxLevelUp.h`
-  1. Remove any reference to `EventHandler`s and subscribing through Soomla `EventDispatcher`s, instead use the Cocos2d-x `EventDispatcher` to subscribe to events.
+  1. Remove any reference to `EventHandler`s and subscribing through Soomla `EventDispatcher`s, instead use the Cocos2d-x `CCNotificationCenter` to subscribe to events.
 
 ## Example Usages
 
