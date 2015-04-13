@@ -8,25 +8,25 @@
    * LevelUpConsts
    */
   var LevelUpConsts = Soomla.Models.LevelUpConsts = {
-    EVENT_LEVEL_UP_INITIALIZED: "CCLevelUpEventHandler::onLevelUpInitialized",
-    EVENT_SCORE_RECORD_CHANGED: "CCLevelUpEventHandler::onScoreRecordChanged",
-    EVENT_SCORE_RECORD_REACHED: "CCLevelUpEventHandler::onScoreRecordReached",
-    EVENT_LATEST_SCORE_CHANGED: "CCLevelUpEventHandler::onLatestScoreChanged",
-    EVENT_GATE_OPENED: "CCLevelUpEventHandler::onGateOpened",
-    EVENT_GATE_CLOSED: "CCLevelUpEventHandler::onGateClosed",
-    EVENT_MISSION_COMPLETED: "CCLevelUpEventHandler::onMissionCompleted",
-    EVENT_MISSION_COMPLETION_REVOKED: "CCLevelUpEventHandler::onMissionCompletionRevoked",
-    EVENT_WORLD_COMPLETED: "CCLevelUpEventHandler::onWorldCompleted",
-    EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED: "CCLevelUpEventHandler::onLastCompletedInnerWorldChanged",
-    EVENT_WORLD_REWARD_ASSIGNED: "CCLevelUpEventHandler::onWorldRewardAssigned",
-    EVENT_LEVEL_STARTED: "CCLevelUpEventHandler::onLevelStarted",
-    EVENT_LEVEL_ENDED: "CCLevelUpEventHandler::onLevelEnded"
+    EVENT_LEVEL_UP_INITIALIZED: 'CCLevelUpEventHandler::onLevelUpInitialized',
+    EVENT_SCORE_RECORD_CHANGED: 'CCLevelUpEventHandler::onScoreRecordChanged',
+    EVENT_SCORE_RECORD_REACHED: 'CCLevelUpEventHandler::onScoreRecordReached',
+    EVENT_LATEST_SCORE_CHANGED: 'CCLevelUpEventHandler::onLatestScoreChanged',
+    EVENT_GATE_OPENED: 'CCLevelUpEventHandler::onGateOpened',
+    EVENT_GATE_CLOSED: 'CCLevelUpEventHandler::onGateClosed',
+    EVENT_MISSION_COMPLETED: 'CCLevelUpEventHandler::onMissionCompleted',
+    EVENT_MISSION_COMPLETION_REVOKED: 'CCLevelUpEventHandler::onMissionCompletionRevoked',
+    EVENT_WORLD_COMPLETED: 'CCLevelUpEventHandler::onWorldCompleted',
+    EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED: 'CCLevelUpEventHandler::onLastCompletedInnerWorldChanged',
+    EVENT_WORLD_REWARD_ASSIGNED: 'CCLevelUpEventHandler::onWorldRewardAssigned',
+    EVENT_LEVEL_STARTED: 'CCLevelUpEventHandler::onLevelStarted',
+    EVENT_LEVEL_ENDED: 'CCLevelUpEventHandler::onLevelEnded'
   };
 
   // Gates
 
   var Gate = Soomla.Models.Gate = function () {
-    return Soomla.declareClass("Gate", {
+    return Soomla.declareClass('Gate', {
 
       eventsRegistered: false,
 
@@ -139,7 +139,7 @@
   }();
 
   var GatesList = Soomla.Models.Gate = function () {
-    var GatesList = Soomla.declareClass("GatesList", {
+    var GatesList = Soomla.declareClass('GatesList', {
       eventListener: null,
       _gates: [],
 
@@ -226,7 +226,7 @@
       }
 
     }, Gate);
-    Object.defineProperty(GatesList.prototype, "gates", {
+    Object.defineProperty(GatesList.prototype, 'gates', {
       get: function () {
         return this._gates;
       },
@@ -245,7 +245,7 @@
      @brief A specific type of `GatesList` that can be opened only if ALL
      `Gate`s in its list are open.
      */
-    var GatesListAnd = Soomla.declareClass("GatesListAND", {
+    var GatesListAnd = Soomla.declareClass('GatesListAND', {
       /**
        Checks if this `GatesList` meets its criteria for opening, by checking
        that ALL `Gate`s in the list are open.
@@ -266,7 +266,7 @@
      A specific type of `GatesList` that can be opened if AT LEAST ONE `Gate`
      in its list is open.
      */
-    var GatesListOr = Soomla.declareClass("GatesListOR", {
+    var GatesListOr = Soomla.declareClass('GatesListOR', {
       /**
        Checks if this `GatesList` meets its criteria for opening, by checking
        that AT LEAST ONE `Gate` in the list are open.
@@ -289,7 +289,7 @@
      record. The `Gate` opens once the player achieves the desired record for
      the given score.
      */
-    var RecordGate = Soomla.declareClass("Gate", {
+    var RecordGate = Soomla.declareClass('Gate', {
       associatedScoreId: null,
       desiredRecord: null,
       eventListener: false,
@@ -302,7 +302,7 @@
       canOpenInner: function canOpenInner() {
         var score = Soomla.soomlaLevelUp.getScore(this.associatedScoreId);
         if (!score) {
-          logError("(canOpenInner) couldn't find score with scoreId: ", this.associatedScoreId);
+          logError('(canOpenInner) couldn\'t find score with scoreId: ', this.associatedScoreId);
           return false;
         }
 
@@ -354,7 +354,7 @@
           return;
         }
 
-        if (score.id === this.associatedScoreId &&
+        if (score.itemId === this.associatedScoreId &&
           score.hasRecordReached(this.desiredRecord)) {
 
           // We were thinking what will happen if the score's record will be broken over and over again.
@@ -375,7 +375,7 @@
      can be opened. The `Gate` opens once the player tries to open it in the
      time frame of the defined schedule.
      */
-    var ScheduleGate = Soomla.declareClass("ScheduleGate", {
+    var ScheduleGate = Soomla.declareClass('ScheduleGate', {
       schedule: null,
 
       /**
@@ -424,7 +424,7 @@
      A specific type of `Gate` that has an associated world. The `Gate` opens
      once the `World` has been completed.
      */
-    var WorldCompletionGate = Soomla.declareClass("WorldCompletionGate", {
+    var WorldCompletionGate = Soomla.declareClass('WorldCompletionGate', {
       associatedWorldId: null,
       eventListener: false,
 
@@ -478,7 +478,7 @@
           return;
         }
 
-        if (world.id === this.associatedWorldId) {
+        if (world.itemId === this.associatedWorldId) {
           this.forceOpen(true);
         }
       }
@@ -488,16 +488,16 @@
 
   // Profile Gates
 
-  /**
-   NOTE: Social `Gate`s require the user to perform a specific social
-   action in order to open the `Gate`. Currently, the social provider that's
-   available is Facebook, so the `Gates`s are FB-oriented. In the future,
-   more social providers will be added.
-
-   This is an abstract class that all social `Gate`s must implement.
-   */
   var SocialActionGate = Soomla.Models.SocialActionGate = function () {
-    var SocialActionGate = Soomla.declareClass("SocialActionGate", {
+    /**
+     NOTE: Social `Gate`s require the user to perform a specific social
+     action in order to open the `Gate`. Currently, the social provider that's
+     available is Facebook, so the `Gates`s are FB-oriented. In the future,
+     more social providers will be added.
+
+     This is an abstract class that all social `Gate`s must implement.
+     */
+    var SocialActionGate = Soomla.declareClass('SocialActionGate', {
       provider: Soomla.Models.Provider.FACEBOOK, // TODO: Solve convertion <-> providerId
       eventListener: false,
 
@@ -536,7 +536,7 @@
           return;
         }
 
-        if (payload === this.id) {
+        if (payload === this.itemId) {
           this.forceOpen(true);
         }
       }
@@ -544,22 +544,22 @@
     return SocialActionGate;
   }();
 
-  /**
-   NOTE: Social `Gate`s require the user to perform a specific social action
-   in order to open the `Gate`. Currently, the social provider that's
-   available is Facebook, so the `Gates`s are FB-oriented. In the future,
-   more social providers will be added.
-
-   A specific type of `Gate` that has an associated page name.
-   The `Gate` opens once the player "Likes" the associated page.
-   */
   var SocialLikeGate = Soomla.Models.SocialLikeGate = function () {
-    var SocialLikeGate = Soomla.declareClass("SocialLikeGate", {
+    /**
+     NOTE: Social `Gate`s require the user to perform a specific social action
+     in order to open the `Gate`. Currently, the social provider that's
+     available is Facebook, so the `Gates`s are FB-oriented. In the future,
+     more social providers will be added.
+
+     A specific type of `Gate` that has an associated page name.
+     The `Gate` opens once the player 'Likes' the associated page.
+     */
+    var SocialLikeGate = Soomla.declareClass('SocialLikeGate', {
       pageName: null,
 
       /**
-       Opens this `Gate` by "liking" the associated page.
-       @return Boolean If the page was successfully "liked" returns `true`; otherwise
+       Opens this `Gate` by 'liking' the associated page.
+       @return Boolean If the page was successfully 'liked' returns `true`; otherwise
        `false`.
        */
       openInner: function openInner() {
@@ -574,17 +574,17 @@
     return SocialLikeGate;
   }();
 
-  /**
-   NOTE: Social `Gate`s require the user to perform a specific social
-   action in order to open the `Gate`. Currently, the social provider that's
-   available is Facebook, so the `Gates`s are FB-oriented. In the future,
-   more social providers will be added.
-
-   A specific type of `Gate` that has an associated status. The `Gate`
-   is opened once the player posts the status.
-   */
   var SocialStatusGate = Soomla.Models.SocialStatusGate = function () {
-    var SocialStatusGate = Soomla.declareClass("SocialStatusGate", {
+    /**
+     NOTE: Social `Gate`s require the user to perform a specific social
+     action in order to open the `Gate`. Currently, the social provider that's
+     available is Facebook, so the `Gates`s are FB-oriented. In the future,
+     more social providers will be added.
+
+     A specific type of `Gate` that has an associated status. The `Gate`
+     is opened once the player posts the status.
+     */
+    var SocialStatusGate = Soomla.declareClass('SocialStatusGate', {
       status: null,
 
       /**
@@ -594,7 +594,7 @@
        */
       openInner: function openInner() {
         if (this.canOpen()) {
-          Soomla.soomlaProfile.updateStatus(this.provide, this.id, this.status);
+          Soomla.soomlaProfile.updateStatus(this.provider, this.itemId, this.status);
           return true;
         }
         return false;
@@ -603,17 +603,17 @@
     return SocialStatusGate;
   }();
 
-  /**
-   NOTE: Social `Gate`s require the user to perform a specific social action
-   in order to open the `Gate`. Currently, the social provider that's
-   available is Facebook, so the `Gates`s are FB-oriented. In the future,
-   more social providers will be added.
-
-   A specific type of `Gate` that has an associated story. The `Gate`
-   is opened once the player posts the story.
-   */
   var SocialStoryGate = Soomla.Models.SocialStoryGate = function () {
-    var SocialStoryGate = Soomla.declareClass("SocialStoryGate", {
+    /**
+     NOTE: Social `Gate`s require the user to perform a specific social action
+     in order to open the `Gate`. Currently, the social provider that's
+     available is Facebook, so the `Gates`s are FB-oriented. In the future,
+     more social providers will be added.
+
+     A specific type of `Gate` that has an associated story. The `Gate`
+     is opened once the player posts the story.
+     */
+    var SocialStoryGate = Soomla.declareClass('SocialStoryGate', {
       message: null,
       storyName: null,
       caption: null,
@@ -626,24 +626,24 @@
        otherwise `false`.
        */
       openInner: function openInner() {
-        Soomla.soomlaProfile.updateStory(this.provider,this.message, this.storyName, this.caption, "",
-          this.link, this.id, this.imgUrl);
+        Soomla.soomlaProfile.updateStory(this.provider,this.message, this.storyName, this.caption, '',
+          this.link, this.itemId, this.imgUrl);
       }
     }, SocialActionGate);
     return SocialStoryGate;
   }();
 
-  /**
-   NOTE: Social `Gate`s require the user to perform a specific social
-   action in order to open the `Gate`. Currently, the social provider that's
-   available is Facebook, so the `Gates`s are FB-oriented. In the future,
-   more social providers will be added.
-
-   A specific type of `Gate` that has an associated image. The `Gate`
-   is opened once the player uploads the image.
-   */
   var SocialUploadGate = Soomla.Models.SocialUploadGate = function () {
-    var SocialUploadGate = Soomla.declareClass("SocialUploadGate", {
+    /**
+     NOTE: Social `Gate`s require the user to perform a specific social
+     action in order to open the `Gate`. Currently, the social provider that's
+     available is Facebook, so the `Gates`s are FB-oriented. In the future,
+     more social providers will be added.
+
+     A specific type of `Gate` that has an associated image. The `Gate`
+     is opened once the player uploads the image.
+     */
+    var SocialUploadGate = Soomla.declareClass('SocialUploadGate', {
       message: null,
       fileName: null,
 
@@ -654,7 +654,7 @@
        */
       openInner: function openInner() {
         if (this.canOpen()) {
-          Soomla.soomlaProfile.uploadImage(this.provider, this.id, this.message, this.fileName);
+          Soomla.soomlaProfile.uploadImage(this.provider, this.itemId, this.message, this.fileName);
           return true;
         }
         return false;
@@ -671,7 +671,7 @@
      balance. The `Gate` opens once the item's balance reaches the desired
      balance.
      */
-    var BalanceGate = Soomla.declareClass("BalanceGate", {
+    var BalanceGate = Soomla.declareClass('BalanceGate', {
       associatedItemId: null,
       desiredBalance: null,
       currencyBalanceChangedListener: false,
@@ -791,7 +791,7 @@
      A specific type of `Gate` that has an associated virtual item. The `Gate`
      opens once the item has been purchased.
      */
-    var PurchasableGate = Soomla.declareClass("PurchasableGate", {
+    var PurchasableGate = Soomla.declareClass('PurchasableGate', {
       associatedItemId: null,
       eventListener: false,
 
@@ -829,7 +829,7 @@
        `false`.
        */
       openInner: function () {
-        Soomla.storeInventory.buyItem(this.associatedItemId, this.id);
+        Soomla.storeInventory.buyItem(this.associatedItemId, this.itemId);
         return true;
       },
 
@@ -846,7 +846,7 @@
           return;
         }
 
-        if (purchasableVirtualItem.itemId === this.associatedItemId && payload === this.id) {
+        if (purchasableVirtualItem.itemId === this.associatedItemId && payload === this.itemId) {
           this.forceOpen(true)
         }
       }
@@ -863,7 +863,7 @@
      (higher is better) or can be descending such as time-to-complete level
      (lower is better).
      */
-    var Score = Soomla.declareClass("Score", {
+    var Score = Soomla.declareClass('Score', {
       startValue: null,
       higherBetter: null,
 
@@ -1000,7 +1000,7 @@
      `Score` can be on a scale of 10 to 100 according to the user's performance
      in the game.
      */
-    var RangeScore = Soomla.declareClass("RangeScore", {
+    var RangeScore = Soomla.declareClass('RangeScore', {
       range: null,
 
       /**
@@ -1065,9 +1065,9 @@
     /**
      A specific type of `Score` that has an associated virtual item.
      The score is related to the specific item ID. For example: a game
-     that has an "energy" virtual item can have energy points.
+     that has an 'energy' virtual item can have energy points.
      */
-    var VirtualItemScore = Soomla.declareClass("VirtualItemScore", {
+    var VirtualItemScore = Soomla.declareClass('VirtualItemScore', {
       associatedItemId: null,
 
       /**
@@ -1083,21 +1083,517 @@
     return VirtualItemScore;
   }();
 
+  // Challenges
+
+  var Mission = Soomla.Models.Mission = function () {
+    /**
+     @class `CCMission`
+     @brief A `Mission` is a task your users need to complete in your game.
+     Each `Mission`s is associated with a `Gate` that defines the criteria for
+     completing the `Mission`. You can optionally choose to give a `Reward` for
+     users that complete your `Mission`. Create `Mission`s and use them as
+     single, independent, entities OR you can create a `Challenge` to handle
+     several `Mission`s and monitor their completion.
+     NOTE: `Mission`s can be completed multiple times.
+     */
+    var Mission = Soomla.declareClass('Mission', {
+      rewards: null,
+      schedule: null,
+      eventListener: false,
+
+      _gate: null,
+
+      /**
+       Generates a gate ID for this `Mission`.
+       @return 'gate_' followed by this `Mission`'s ID.
+       */
+      autoGateId: function () {
+        return 'gate_' + this.itemId;
+      },
+
+      /**
+       Determines whether this `Mission` is available by checking the criteria
+       that makes the specific `Mission` available.
+       @return If this instance is available returns `true`; otherwise `false`.
+       */
+      isAvailable: function () {
+        return this._gate.canOpen() && this.schedule.approve(Soomla.missionStorage.getTimesCompleted(this));
+      },
+
+      /**
+       Checks if this `Mission` has ever been completed.
+       @return If this instance is completed returns `true`; otherwise `false`.
+       */
+      isCompleted: function () {
+        // check if completed in Mission Storage
+        // this checks if the mission was ever completed... no matter how many times.
+        return Soomla.missionStorage.isCompleted(this);
+      },
+
+      /**
+       Completes this `Mission`'s by opening its `Gate`.
+       @return If `Schedule` doesn't approve, the mission cannot be completed
+       and thus returns `false`; otherwise opens this `Mission`'s `Gate` and
+       returns Boolean `true` if successful.
+       */
+      complete: function () {
+        if (!this.schedule.approve(Soomla.missionStorage.getTimesCompleted(this))) {
+          logDebug('missions cannot be completed b/c Schedule doesn\'t approve.');
+          return false;
+        }
+        logDebug('trying opening gate to complete mission: ' + this.itemId);
+        return this._gate.open();
+      },
+
+      /**
+       Forces completion of this `Mission`. This function should not be used
+       in standard scenarios.
+       */
+      forceComplete: function () {
+        this._gate.forceOpen(true);
+      },
+
+
+      //protected:
+
+      /**
+       Registers relevant events: `OnGateOpened`.
+       */
+      registerEvents: function () {
+        if (!this.isCompleted() && this._gate) {
+          Soomla.addEventHandler(LevelUpConsts.EVENT_GATE_OPENED, this.onGateOpened, this);
+          this.eventListener = true;
+        }
+      },
+
+      /**
+       Unregisters relevant events: `OnGateOpened`.
+       */
+      unregisterEvents: function () {
+        if (this.eventListener) {
+          Soomla.removeEventHandler(LevelUpConsts.EVENT_GATE_OPENED, this.onGateOpened);
+          this.eventListener = false;
+        }
+      },
+
+      /**
+       Sets this `Mission` as completed and gives or takes `Reward`s according
+       to the given `completed` value.
+       @param completed If set to `true` gives rewards.
+       */
+      setCompletedInner: function (completed) {
+        // set completed in Mission Storage
+        Soomla.missionStorage.setCompleted(this, completed);
+
+        if (completed) {
+          this.giveRewards();
+        } else {
+          this.takeRewards();
+        }
+      },
+
+      onGateOpened: function (event) {
+        var gate = event.gate; // TODO: check this field
+        if (!gate) {
+          logError('No gate data in event');
+          return;
+        }
+
+        if (this._gate === gate) {
+          this._gate.forceOpen(false);
+          this.setCompletedInner(true);
+        }
+      },
+
+      //private:
+
+      takeRewards: function () {
+        if (this.rewards) {
+          _.invoke(this.rewards, 'take');
+        }
+      },
+
+      giveRewards: function () {
+        if (this.rewards) {
+          _.invoke(this.rewards, 'give');
+        }
+      },
+
+      onCreate: function () {
+        this.schedule = Soomla.Models.Schedule.createAnyTimeOnce();
+        this.registerEvents();
+      }
+
+    }, SoomlaEntity);
+
+    Object.defineProperty(Mission.prototype, 'gate', {
+      get: function () {
+        return this._gate;
+      },
+      set: function (gate) {
+        if (this._gate !== gate) {
+          if (this._gate) {
+            this._gate.onDetached();
+          }
+
+          this._gate = gate;
+
+          if (this._gate) {
+            this._gate.onAttached();
+          }
+        }
+      }
+    });
+
+    return Mission;
+  }();
+
+  var RecordMission = Soomla.Models.RecordMission = function () {
+    /**
+     @class `CCRecordMission`
+     @brief A specific type of `Mission` that has an associated score and a desired
+     record. The `Mission` is complete once the player achieves the desired
+     record for the given score.
+     */
+    var RecordMission = Soomla.declareClass('RecordMission', {
+      associatedScoreId: null,
+      desiredRecord: null,
+
+      onCreate: function () {
+        this.__super__.onCreate();
+        if (!this.gate) {
+          this.gate = RecordGate.create({
+            itemId: this.autoGateId(),
+            associatedScoreId: this.associatedScoreId,
+            desiredRecord: this.desiredRecord
+          });
+        }
+      }
+
+    }, Mission);
+    return RecordMission;
+  }();
+
+  var WorldCompletionMission = Soomla.Models.WorldCompletionMission = function () {
+    /**
+     @class `CCWorldCompletionMission`
+     @brief A specific type of `Mission` that has an associated `World`.
+     The `Mission` is complete once the `World` has been completed.
+     */
+    var WorldCompletionMission = Soomla.declareClass('WorldCompletionMission', {
+      associatedWorldId: null,
+
+      onCreate: function () {
+        this.__super__.onCreate();
+        if (!this.gate) {
+          this.gate = WorldCompletionGate.create({
+            itemId: this.autoGateId(),
+            associatedWorldId: this.associatedWorldId
+          });
+        }
+      }
+
+    }, Mission);
+    return WorldCompletionMission;
+  }();
+
+  var Challenge = Soomla.Models.Challenge = function () {
+    /**
+     @class CCChallenge
+     @brief A challenge is a specific type of `Mission` which holds a collection
+     of `Mission`s. The user is required to complete all these `Mission`s in
+     order to earn the `Reward` associated with the `Challenge`.
+     */
+    var Challenge = Soomla.declareClass('Challenge', {
+      missions: null,
+      missionCompletionRevokedListener: false,
+
+      /**
+       Checks if this `CCChallenge` is completed.
+       @return Boolean If this instance is completed returns `true`; otherwise `false`.
+       */
+      isCompleted: function () {
+        // could happen in construction
+        // need to return false in order to register for child events
+        if (!this.missions || this.missions.length === 0) {
+          return false;
+        }
+
+        _.all(this.missions, function (mission) {
+          return mission.isCompleted();
+        });
+
+        return true;
+      },
+
+      //protected:
+
+      /**
+       Registers relevant events: `OnMissionCompleted` and
+       `OnMissionCompletionRevoked`.
+       */
+      registerEvents: function () {
+        logDebug ('registerEvents called');
+        if (!this.isCompleted()) {
+          logDebug ('registering!');
+          // register for events
+          Soomla.addEventHandler(LevelUpConsts.EVENT_MISSION_COMPLETED, this.onMissionCompleted, this);
+          this.eventListener = true;
+
+          Soomla.addEventHandler(LevelUpConsts.EVENT_MISSION_COMPLETION_REVOKED, this.onMissionCompletionRevoked, this);
+          this.missionCompletionRevokedListener = true;
+        }
+      },
+
+      /**
+       Unregisters relevant events: `OnMissionCompleted` and
+       `OnMissionCompletionRevoked`.
+       */
+      unregisterEvents: function () {
+        if (this.eventListener) {
+          Soomla.removeEventHandler(LevelUpConsts.EVENT_MISSION_COMPLETED, this.onMissionCompleted);
+          this.eventListener = false;
+        }
+        if (this.missionCompletionRevokedListener) {
+          Soomla.removeEventHandler(LevelUpConsts.EVENT_MISSION_COMPLETION_REVOKED, this.onMissionCompletionRevoked);
+          this.missionCompletionRevokedListener = false;
+        }
+      },
+
+      onMissionCompleted: function (event) {
+        var completedMission = event.mission; // TODO: check this field
+        if (!completedMission) {
+          logError('No mission data in event');
+          return;
+        }
+
+        logDebug ('onMissionCompleted');
+
+        if (_.indexOf(this.missions, completedMission) >= 0) {
+          logDebug('Mission ' + completedMission.itemId + ' is part of challenge ' + this.itemId + ' (' + this.missions.length + ') total');
+          var completed = true;
+          var incompletedMission = _.find(this.missions, function (mission) {
+            return !mission.isCompleted();
+          });
+          if (incompletedMission) {
+            logDebug('challenge mission not completed?=' + incompletedMission.itemId);
+            completed = false;
+          }
+
+          if (completed) {
+            logDebug('Challenge ' + this.itemId + ' completed!');
+            this.setCompletedInner(true);
+          }
+        }
+      },
+
+      onMissionCompletionRevoked: function (event) {
+        var mission = event.mission; // TODO: check this field
+        if (!mission) {
+          logError('No mission data in event');
+          return;
+        }
+        if (_.indexOf(this.missions, mission) >= 0) {
+          if (Soomla.missionStorage.isCompleted(this)) {
+            this.setCompletedInner(false);
+          }
+        }
+      }
+
+    }, Mission);
+    return Challenge;
+  }();
+
+  var SocialLikeMission = Soomla.Models.SocialLikeMission = function () {
+    /**
+     @class `CCSocialLikeMission`
+     @brief NOTE: Social `Mission`s require the user to perform a specific
+     social action in order to receive a `Reward`. Currently, the social
+     provider that's available is Facebook, so the `Mission`s are FB-oriented.
+     In the future, more social providers will be added.
+     A specific type of `Mission` that has an associated page name.
+     The `Mission` is complete once the player 'Likes' the page.
+     */
+    var SocialLikeMission = Soomla.declareClass('SocialLikeMission', {
+      provider: null,
+      pageName: null,
+
+      onCreate: function () {
+        this.__super__.onCreate();
+        if (!this.gate) {
+          this.gate = SocialLikeGate.create({
+            itemId: this.autoGateId(),
+            provider: this.provider,
+            pageName: this.pageName
+          });
+        }
+      }
+    }, Mission);
+    return SocialLikeMission;
+  }();
+
+  var SocialStatusMission = Soomla.Models.SocialStatusMission = function () {
+    /**
+     @class `CCSocialStatusMission`
+     @brief NOTE: Social `Mission`s require the user to perform a specific
+     social action in order to receive a `Reward`. Currently, the social
+     provider that's available is Facebook, so the `Mission`s are FB-oriented.
+     In the future, more social providers will be added.
+
+     A specific type of `Mission` that has an associated status. The `Mission`
+     s complete once the player posts the status.
+     */
+    var SocialStatusMission = Soomla.declareClass('SocialStatusMission', {
+      provider: null,
+      status: null,
+
+      onCreate: function () {
+        this.__super__.onCreate();
+        if (!this.gate) {
+          this.gate = SocialStatusGate.create({
+            itemId: this.autoGateId(),
+            provider: this.provider,
+            status: this.status
+          });
+        }
+      }
+    }, Mission);
+    return SocialStatusMission;
+  }();
+
+  var SocialStoryMission = Soomla.Models.SocialStoryMission = function () {
+    /**
+     @class `CCSocialStoryMission`
+     @brief NOTE: Social `Mission`s require the user to perform a specific
+     social action in order to receive a `Reward`. Currently, the social
+     provider that's available is Facebook, so the `Mission`s are FB-oriented.
+     In the future, more social providers will be added.
+     A specific type of `Mission` that has an associated story that includes a
+     message, storyname, caption, link, and image. The `Mission` is complete
+     once the player posts the story.
+     */
+    var SocialStoryMission = Soomla.declareClass('SocialStoryMission', {
+      provider: null,
+      message: null,
+      storyName: null,
+      caption: null,
+      link: null,
+      imgUrl: null,
+
+      onCreate: function () {
+        this.__super__.onCreate();
+        if (!this.gate) {
+          this.gate = SocialStoryGate.create({
+            itemId: this.autoGateId(),
+            provider: this.provider,
+            message: this.message,
+            storyName: this.storyName,
+            caption: this.caption,
+            link: this.link,
+            imgUrl: this.imgUrl
+          });
+        }
+      }
+    }, Mission);
+    return SocialStoryMission;
+  }();
+
+  var SocialUploadMission = Soomla.Models.SocialUploadMission = function () {
+    /**
+     @class `CCSocialUploadMission`
+     @brief NOTE: Social `Mission`s require the user to perform a specific
+     social action in order to receive a `Reward`. Currently, the social
+     provider that's available is Facebook, so the `Mission`s are FB-oriented.
+     In the future, more social providers will be added.
+
+     A specific type of `Mission` that has an associated filename and message.
+     The `Mission` is complete once the player uploads the image.
+     */
+    var SocialUploadMission = Soomla.declareClass('SocialUploadMission', {
+      provider: null,
+      message: null,
+      fileName: null,
+
+      onCreate: function () {
+        this.__super__.onCreate();
+        if (!this.gate) {
+          this.gate = SocialUploadGate.create({
+            itemId: this.autoGateId(),
+            provider: this.provider,
+            message: this.message,
+            fileName: this.fileName
+          });
+        }
+      }
+    }, Mission);
+    return SocialUploadMission;
+  }();
+
+  var BalanceMission = Soomla.Models.BalanceMission = function () {
+    /**
+     @class `CCBalanceMission`
+     @brief A specific type of `Mission` that has an associated virtual
+     item and a desired balance. The `Mission` is complete once the item's
+     balance reaches the desired balance.
+     */
+    var BalanceMission = Soomla.declareClass('BalanceMission', {
+      associatedItemId: null,
+      desiredBalance: null,
+
+      onCreate: function () {
+        this.__super__.onCreate();
+        if (!this.gate) {
+          this.gate = BalanceGate.create({
+            itemId: this.autoGateId(),
+            associatedItemId: this.associatedItemId,
+            desiredBalance: this.desiredBalance
+          });
+        }
+      }
+    }, Mission);
+    return BalanceMission;
+  }();
+
+  var PurchasingMission = Soomla.Models.PurchasingMission = function () {
+    /**
+     @class `CCPurchasingMission`
+     @brief A specific type of `Mission` that has an associated virtual
+     item. The `Mission` is complete once the item has been purchased.
+     */
+    var PurchasingMission = Soomla.declareClass('PurchasingMission', {
+      associatedItemId: null,
+
+      onCreate: function () {
+        this.__super__.onCreate();
+        if (!this.gate) {
+          this.gate = PurchasableGate.create({
+            itemId: this.autoGateId(),
+            associatedItemId: this.associatedItemId
+          });
+        }
+      }
+    }, Mission);
+    return PurchasingMission;
+  }();
+
   ///////////
 
   //var Gate = Soomla.Models.Gate = function () {
-  //  var Gate = Soomla.declareClass("Gate", {});
+  //  var Gate = Soomla.declareClass('Gate', {});
   //  return Gate;
   //}();
-  //
 
-  var GateStorage = Soomla.GateStorage = Soomla.declareClass("GateStorage", {});
+
+  var GateStorage = Soomla.GateStorage = Soomla.declareClass('GateStorage', {});
   Soomla.gateStorage = GateStorage.create();
 
-  var ScoreStorage = Soomla.ScoreStorage = Soomla.declareClass("ScoreStorage", {});
+  var ScoreStorage = Soomla.ScoreStorage = Soomla.declareClass('ScoreStorage', {});
   Soomla.scoreStorage = ScoreStorage.create();
 
-  var SoomlaLevelUp = Soomla.SoomlaLevelUp = Soomla.declareClass("SoomlaLevelUp", {});
+  var MissionStorage = Soomla.MissionStorage = Soomla.declareClass('MissionStorage', {});
+  Soomla.missionStorage = MissionStorage.create();
+
+  var SoomlaLevelUp = Soomla.SoomlaLevelUp = Soomla.declareClass('SoomlaLevelUp', {});
   Soomla.soomlaLevelUp = SoomlaLevelUp.create();
 
 
