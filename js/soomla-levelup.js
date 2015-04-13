@@ -854,6 +854,235 @@
     return PurchasableGate;
   }();
 
+  var Score = Soomla.Models.Score = function () {
+    /**
+     Represents a score in the game. A simple game usually has one generic
+     numeric score which grows as the user progresses in the game. A game can
+     also have multiple scores for different aspects such as time, speed,
+     points etc. A `Score` can be ascending in nature such as regular points
+     (higher is better) or can be descending such as time-to-complete level
+     (lower is better).
+     */
+    var Score = Soomla.declareClass("Score", {
+      startValue: null,
+      higherBetter: null,
+
+      //protected:
+      tempScore: 0,
+
+      //private:
+      scoreRecordReachedSent: false,
+
+      /**
+       Increases this `Score` by the given amount.
+       @param amount Amount to increase by.
+       */
+      inc: function (amount) {
+        this.setTempScore(this.tempScore + amount)
+      },
+
+      /**
+       Decreases this `Score` by the given amount.
+       @param amount Amount to decrease by.
+       */
+      dec: function (amount) {
+        this.setTempScore(this.tempScore - amount)
+      },
+
+      /**
+       Saves the current `Score` (and record if reached) and resets the score
+       to its initial value. Use this method for example when a user restarts
+       a level with a fresh score of 0.
+       @param save If set to `true` save.
+       */
+      reset: function (save) {
+        if (save) {
+          Soomla.scoreStorage.setLatestScore(this, this.tempScore);
+
+          var record = Soomla.scoreStorage.getRecordScore(this);
+          if ((record == -1) || this.hasTempReached(record)) {
+            Soomla.scoreStorage.setRecordScore(this, this.tempScore);
+            this.scoreRecordReachedSent = false;
+          }
+
+          this.performSaveActions();
+        }
+
+        this.setTempScore(this.startValue);
+      },
+
+      /**
+       Checks if the `Score` in the current game session has reached the given
+       value.
+       @return If this `Score` has reached the given scoreVal returns `true`;
+       otherwise `false`.
+       @param scoreVal numeric score value.
+       */
+      hasTempReached: function (scoreVal) {
+        return this.hasScoreReached(this.tempScore, scoreVal);
+      },
+
+      /**
+       Determines if this `Score` has reached a record value of the given
+       `scoreVal`.
+       @return If this score has reached the given record returns `true`;
+       otherwise `false`.
+       @param scoreVal numeric score value.
+       */
+      hasRecordReached: function (scoreVal) {
+        var record = Soomla.scoreStorage.getRecordScore(this);
+        return this.hasScoreReached(record, scoreVal);
+      },
+
+      /**
+       Sets the temp score to be the given `score`, and checks if the given
+       `score` breaks a record - if so, triggers the score-record-reached
+       event.
+       @param score Score to compare to temp score.
+       */
+      setTempScore: function (score, onlyIfBetter) {
+        onlyIfBetter = onlyIfBetter || !_.isUndefined(onlyIfBetter)
+
+
+        if (onlyIfBetter && !this.hasScoreReached(score, this.tempScore)) {
+          return;
+        }
+        if (!this.scoreRecordReachedSent && this.hasScoreReached(score, this.tempScore)) {
+          Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_SCORE_RECORD_REACHED, [this]);
+          this.scoreRecordReachedSent = true;
+        }
+        this.tempScore = score;
+      },
+
+      /**
+       Retrieves the record of this `Score`.
+       @return The record.
+       */
+      getRecord: function () {
+        Soomla.scoreStorage.getRecordScore(this);
+      },
+
+      /**
+       Retrieves the most recently saved value of this `Score`.
+       @return The latest score.
+       */
+      getLatest: function () {
+        Soomla.scoreStorage.getLatestScore(this);
+      },
+
+      //protected:
+
+      /**
+       `Score` can sometimes have additional actions associated with
+       reaching/saving it. Override this method to add specific `Score`
+       behavior.
+       */
+      performSaveActions: function () {
+        // empty
+      },
+
+      //private:
+      hasScoreReached: function (score1, score2) {
+        return this.higherBetter ?
+          (score1 >= score2) :
+          (score1 <= score2);
+      }
+
+    }, SoomlaEntity);
+
+    return Score;
+  }();
+
+  var RangeScore = Soomla.Models.RangeScore = function () {
+    /**
+     A specific type of `Score` that has an associated range. The `Score`'s
+     value can be only inside the range of values. For example, a shooting
+     `Score` can be on a scale of 10 to 100 according to the user's performance
+     in the game.
+     */
+    var RangeScore = Soomla.declareClass("RangeScore", {
+      range: null,
+
+      /**
+       Increases this `Score` by the given amount after checking that it will
+       stay within the range.
+       @param amount Amount to increase by.
+       */
+      inc: function (amount) {
+        // Don't increment if we've hit the range's highest value
+        if (this.tempScore >= this.range.high) {
+          return;
+        }
+
+        if ((this.tempScore + amount) > this.range.high) {
+          amount = this.range.high - this.tempScore;
+        }
+
+        this.__super__.inc(amount);
+      },
+
+      /**
+       Decreases this `Score` by the given amount after checking that the
+       `Score` will stay within the range.
+       @param amount Amount to decrease by.
+       */
+      dec: function (amount) {
+        // Don't decrement if we've hit the range's lowest value
+        if (this.tempScore <= this.range.low) {
+          return;
+        }
+
+        if ((this.tempScore-amount) < this.range.low) {
+          amount = this.tempScore - this.range.low;
+        }
+
+        this.__super__.dec(amount);
+      },
+
+      /**
+       Sets the temp score to be the given `score`, after making sure that the
+       it will stay within the range.
+       @param score Score.
+       @param onlyIfBetter If `Score` is better than the given `score` then
+       this value should be `true`.
+       */
+      setTempScore: function (score, onlyIfBetter) {
+        if (score > this.range.high) {
+          score = this.range.high;
+        }
+        if (score < this.range.low) {
+          score = this.range.low;
+        }
+
+        this.__super__.setTempScore(score, onlyIfBetter);
+      }
+
+    }, Score);
+    return RangeScore;
+  }();
+
+  var VirtualItemScore = Soomla.Models.VirtualItemScore = function () {
+    /**
+     A specific type of `Score` that has an associated virtual item.
+     The score is related to the specific item ID. For example: a game
+     that has an "energy" virtual item can have energy points.
+     */
+    var VirtualItemScore = Soomla.declareClass("VirtualItemScore", {
+      associatedItemId: null,
+
+      /**
+       Gives your user the temp-score amount of the associated item.
+       */
+      performSaveActions: function () {
+        this.__super__.performSaveActions();
+
+        var amount = this.tempScore;
+        Soomla.storeInventory.giveItem(this.associatedItemId, amount);
+      }
+    }, Score);
+    return VirtualItemScore;
+  }();
+
   ///////////
 
   //var Gate = Soomla.Models.Gate = function () {
@@ -864,6 +1093,9 @@
 
   var GateStorage = Soomla.GateStorage = Soomla.declareClass("GateStorage", {});
   Soomla.gateStorage = GateStorage.create();
+
+  var ScoreStorage = Soomla.ScoreStorage = Soomla.declareClass("ScoreStorage", {});
+  Soomla.scoreStorage = ScoreStorage.create();
 
   var SoomlaLevelUp = Soomla.SoomlaLevelUp = Soomla.declareClass("SoomlaLevelUp", {});
   Soomla.soomlaLevelUp = SoomlaLevelUp.create();
