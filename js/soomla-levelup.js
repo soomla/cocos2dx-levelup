@@ -2906,31 +2906,326 @@
 
   ///////////
 
-  //var Gate = Soomla.Models.Gate = function () {
-  //  var Gate = Soomla.declareClass('Gate', {});
-  //  return Gate;
-  //}();
+  var GateStorage = Soomla.GateStorage = function () {
+    /**
+     @class
+     @brief A utility class for persisting and querying the state of `Gate`s.
+     Use this class to check if a certain `Gate` is open, or to open it.
+     */
+    return Soomla.declareClass('GateStorage', {
+      /**
+       Determines if the given `Gate` is open.
+       @param gate `Gate` to check if is open.
+       @return If the given `Gate` is open returns `true`; otherwise, `false`.
+       */
+      isOpen: function (gate) {
+        return Soomla.levelUpBridge.gateIsOpen(gate);
+      },
 
-
-  var GateStorage = Soomla.GateStorage = Soomla.declareClass('GateStorage', {
-
-  });
+      /**
+       Sets the given `Gate` as open if the given parameter `open` is `true`;
+       otherwise sets as closed.
+       @param gate The `Gate` to open/close.
+       @param open If set to `true` set the `Gate` to open;
+       @param notify If set to `true` trigger event.
+       */
+      setOpen: function (gate, open, notify) {
+        notify = notify || _.isUndefined(notify);
+        Soomla.levelUpBridge.gateSetOpen(gate, open, notify);
+      }
+    });
+  }();
   Soomla.gateStorage = GateStorage.create();
 
-  var ScoreStorage = Soomla.ScoreStorage = Soomla.declareClass('ScoreStorage', {});
+  var ScoreStorage = Soomla.ScoreStorage = function () {
+    /**
+     @class `CCScoreStorage`
+     @brief A utility class for persisting and querying `Score`s and records.
+     Use this class to get or set the values of `Score`s and records.
+     */
+    return Soomla.declareClass('ScoreStorage', {
+      /**
+       Sets the given `Score` to the given value.
+       @param score `Score` to set.
+       @param newValue The value to set for the `Score`.
+       */
+      setLatestScore: function (score, newValue) {
+        Soomla.levelUpBridge.scoreSetLatestScore(score, newValue);
+      },
+
+      /**
+       Retrieves the most recently saved value of the given `Score`.
+       @param score Score whose most recent value it to be retrieved.
+       @return The latest `Score`.
+       */
+      getLatestScore: function (score) {
+        return Soomla.levelUpBridge.scoreGetLatestScore(score);
+      },
+  
+      /**
+       Sets the given record for the given `Score`.
+       @param score `Score` whose record is to change.
+       @param newValue The new record.
+       */
+      setRecordScore: function (score, newValue) {
+        Soomla.levelUpBridge.scoreSetRecordScore(score, newValue);
+      },
+  
+      /**
+       Retrieves the record of the given `Score`.
+       @param score `Score` whose record is to be retrieved.
+       @return The record value of the given `Score`.
+       */
+      getRecordScore: function (score) {
+        return Soomla.levelUpBridge.scoreGetRecordScore(score);
+      }
+    });
+  }();
   Soomla.scoreStorage = ScoreStorage.create();
 
-  var MissionStorage = Soomla.MissionStorage = Soomla.declareClass('MissionStorage', {});
+  var MissionStorage = Soomla.MissionStorage = function () {
+    /**
+     @class
+     @brief A utility class for persisting and querying the state of `Mission`s.
+     Use this class to check if a certain `Mission` is complete, or to set its
+     completion status.
+     */
+    return Soomla.declareClass('MissionStorage', {
+      /**
+       Increases the number of times the given `Mission` has been completed
+       if the given paramter `up` is `true`; otherwise decreases the number
+       of times completed.
+       @param mission `Mission` to set as completed.
+       @param completed If set to `true` add 1 to the number of times completed,
+       otherwise subtract 1.
+       @param notify If set to `true` trigger the relevant event according
+       to the value of `up`.
+       */
+      setCompleted: function setCompleted(mission, completed, notify) {
+        notify = notify || _.isUndefined(notify);
+        return Soomla.levelUpBridge.missionSetCompleted(mission, completed, notify);
+      },
+  
+      /**
+       Determines if the given `Mission` is complete.
+       @param mission `Mission` to determine if complete.
+       @return Boolean If the given `Mission` is completed returns `true`;
+       otherwise `false`.
+       */
+      isCompleted: function (mission) {
+        return this.getTimesCompleted(mission) > 0;
+      },
+  
+      /**
+       Retrieves the number of times the given `Mission` has been completed.
+       @param mission Mission.
+       @return The number of times the given mission has been completed.
+       */
+      getTimesCompleted: function (mission) {
+        return Soomla.levelUpBridge.missionGetTimesCompleted(mission);
+      }
+    });
+  }();
   Soomla.missionStorage = MissionStorage.create();
 
-  var WorldStorage = Soomla.WorldStorage = Soomla.declareClass('WorldStorage', {});
+  var WorldStorage = Soomla.WorldStorage = function () {
+    /**
+     @class `CCWorldStorage`
+     @brief A utility class for persisting and querying `World`s.
+     Use this class to get or set the completion of `World`s and assign rewards.
+     */
+    return Soomla.declareClass('WorldStorage', {
+      /**
+       Sets the given `World` as completed if `completed` is `true`.
+       @param world `World` to set as completed.
+       @param completed If set to `true` the `World` will be set
+       as completed.
+       @param notify If set to `true` trigger events.
+       */
+      setCompleted: function (world, completed, notify) {
+        notify = notify || _.isUndefined(notify);
+
+        Soomla.levelUpBridge.worldSetCompleted(world, completed, notify);
+      },
+  
+      /**
+       Determines if the given `World` is completed.
+       @param world `World` to determine if completed.
+       @return If the given `World` is completed returns `true`;
+       otherwise `false`.
+       */
+      isCompleted: function (world) {
+        return Soomla.levelUpBridge.worldIsCompleted(world);
+      },
+  
+      /**
+       Assigns the reward with the given reward ID to the given `World`.
+       @param world `World` to assign a reward to.
+       @param rewardId ID of reward to assign.
+       */
+      setReward: function (world, rewardId) {
+        Soomla.levelUpBridge.worldSetReward(world, rewardId);
+      },
+  
+      /**
+       Retrieves the given `World`'s assigned reward.
+       @param world `World` whose reward is to be retrieved.
+       @return The assigned reward to retrieve.
+       */
+      getAssignedReward: function (world) {
+        return Soomla.levelUpBridge.worldGetAssignedReward(world);
+      },
+  
+      /**
+       Sets the given inner world ID as the last completed inner world
+       for the given `World`.
+       @param world `World` to set inner completed world ID.
+       @param innerWorldId the inner world ID that was last completed.
+       */
+      setLastCompletedInnerWorld: function (world, innerWorldId) {
+        Soomla.levelUpBridge.worldSetLastCompletedInnerWorld(world, innerWorldId);
+      },
+  
+      /**
+       Retrieves the given `World`'s last completed inner world.
+       @param world `World` whose last completed inner world is to be retrieved.
+       @return The last completed inner world ID.
+       */
+      getLastCompletedInnerWorld: function (world) {
+        return Soomla.levelUpBridge.worldGetLastCompletedInnerWorld(world);
+      }
+      
+    });
+  }();
   Soomla.worldStorage = WorldStorage.create();
 
-  var LevelStorage = Soomla.LevelStorage = Soomla.declareClass('LevelStorage', {});
-  Soomla.levelStorage = LevelStorage.create();
+  var LevelStorage = Soomla.LevelStorage = function () {
+    /**
+     @class `CCLevelStorage`
+     @brief A utility class for persisting and querying the state of `Level`s.
+     Use this class to get or set information about a `Level`, such as the play
+     duration, start or end time, etc.
+     */
+    return Soomla.declareClass('LevelStorage', {
+      /**
+       Sets the slowest (given) duration for the given level.
+       @param level `Level` to set slowest duration.</param>
+       @param duration Duration to set.
+       */
+      setSlowestDurationMillis: function (level, duration) {
+        Soomla.levelUpBridge.levelSetSlowestDurationMillis(level, duration);
+      },
 
-  var SoomlaLevelUp = Soomla.SoomlaLevelUp = Soomla.declareClass('SoomlaLevelUp', {});
-  Soomla.soomlaLevelUp = SoomlaLevelUp.create();
+      /**
+       Retrieves the slowest duration for the given level.
+       @return The slowest duration of the given `Level`.
+       @param level `Level` to get slowest duration.
+       */
+      getSlowestDurationMillis: function (level) {
+        return Soomla.levelUpBridge.levelGetSlowestDurationMillis(level);
+      },
+  
+      /**
+       Sets the fastest (given) duration for the given `Level`.
+       @param level `Level` to set fastest duration.
+       @param duration Duration to set.
+       */
+      setFastestDurationMillis: function (level, duration) {
+        Soomla.levelUpBridge.levelSetFastestDurationMillis(level, duration);
+      },
+  
+      /**
+       Retrieves the fastest duration for the given `Level`.
+       @param level `Level` to get fastest duration.
+       @return The fastest duration of the given `Level`.
+       */
+      getFastestDurationMillis: function (level) {
+        return Soomla.levelUpBridge.levelGetFastestDurationMillis(level);
+      },
+  
+      /**
+       Increases by 1 the number of times the given `Level` has been started.
+       @param level `Level` to increase its times started.
+       @return The number of times started after increasing.
+       */
+      incTimesStarted: function (level) {
+        return Soomla.levelUpBridge.levelIncTimesStarted(level);
+      },
+  
+      /**
+       Decreases by 1 the number of times the given `Level` has been started.
+       @param level `Level` to decrease its times started.
+       @return The number of times started after decreasing.
+       */
+      decTimesStarted: function (level) {
+        return Soomla.levelUpBridge.levelDecTimesStarted(level);
+      },
+  
+      /**
+       Retrieves the number of times this `Level` has been started.
+       @param level `Level` whose times started is to be retrieved.
+       @return The number of times started.
+       */
+      getTimesStarted: function (level) {
+        return Soomla.levelUpBridge.levelGetTimesStarted(level);
+      },
+  
+      /**
+       Retrieves the number of times this `Level` has been played.
+       @param level `Level` whose times played is to be retrieved.
+       @return The number of times played.
+       */
+      getTimesPlayed: function (level) {
+        return Soomla.levelUpBridge.levelGetTimesPlayed(level);
+      },
+  
+      /**
+       Increases by 1 the number of times the given `Level` has been played.
+       @param level `Level` to increase its times played.
+       @return The number of times played after increasing.
+       */
+      incTimesPlayed: function (level) {
+        return Soomla.levelUpBridge.levelIncTimesPlayed(level);
+      },
+  
+      /**
+       Decreases by 1 the number of times the given `Level` has been played.
+       @param level `Level` to decrease its times played.
+       @return The number of times played after decreasing.
+       */
+      decTimesPlayed: function (level) {
+        return Soomla.levelUpBridge.levelDecTimesPlayed(level);
+      },
+  
+      /**
+       Retrieves the number of times this `Level` has been completed.
+       @param level `Level` whose times completed is to be retrieved.
+       @return The number of times completed.
+       */
+      getTimesCompleted: function (level) {
+        return Soomla.levelUpBridge.levelGetTimesCompleted(level);
+      },
+  
+      /**
+       Increases by 1 the number of times the given `Level` has been completed.
+       @param level `Level` to increase its times completed.
+       @return The number of times completed after increasing.
+       */
+      incTimesCompleted: function (level) {
+        return Soomla.levelUpBridge.levelIncTimesCompleted(level);
+      },
+  
+      /**
+       Decreases by 1 the number of times the given `Level` has been completed.
+       @param level `Level` to decrease its times completed.
+       @return The number of times completed after decreasing.
+       */
+      decTimesCompleted: function (level) {
+        return Soomla.levelUpBridge.levelDecTimesCompleted(level);
+      }
+    });
+  }();
+  Soomla.levelStorage = LevelStorage.create();
 
 
   return true;
