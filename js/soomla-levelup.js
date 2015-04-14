@@ -2904,6 +2904,8 @@
     return SoomlaLevelUp;
   }();
 
+  Soomla.soomlaLevelUp = SoomlaLevelUp.create();
+
   ///////////
 
   var GateStorage = Soomla.GateStorage = function () {
@@ -3227,6 +3229,254 @@
   }();
   Soomla.levelStorage = LevelStorage.create();
 
+  var LevelUpEventDispatcher = Soomla.LevelUpEventDispatcher = function () {
+
+    /**
+     @class CCLevelUpEventDispatcher
+     @brief Fires event when received from the native implementation.
+
+     Signs up to native LevelUp events.
+     When the events arrive this class fires the respective event through
+     the Cocos2dx Event Dispatcher.
+     */
+    return Soomla.declareClass('LevelUpEventDispatcher', {
+      init: function () {
+        var eventDispatcher = Soomla.soomlaEventDispatcher;
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_LEVEL_UP_INITIALIZED, _.bind(function (parameters) {
+          Soomla.fireSoomlaEvent(parameters.method, []);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_LATEST_SCORE_CHANGED, _.bind(function (parameters) {
+          var score = Soomla.soomlaLevelUp.getScore(parameters.scoreId);
+          Soomla.fireSoomlaEvent(parameters.method, [score]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_SCORE_RECORD_REACHED, _.bind(function (parameters) {
+          var score = Soomla.soomlaLevelUp.getScore(parameters.scoreId);
+          Soomla.fireSoomlaEvent(parameters.method, [score]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_SCORE_RECORD_CHANGED, _.bind(function (parameters) {
+          var score = Soomla.soomlaLevelUp.getScore(parameters.scoreId);
+          Soomla.fireSoomlaEvent(parameters.method, [score]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_GATE_OPENED, _.bind(function (parameters) {
+          var gate = Soomla.soomlaLevelUp.getGate(parameters.gateId);
+          Soomla.fireSoomlaEvent(parameters.method, [gate]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_GATE_CLOSED, _.bind(function (parameters) {
+          var gate = Soomla.soomlaLevelUp.getGate(parameters.gateId);
+          Soomla.fireSoomlaEvent(parameters.method, [gate]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_MISSION_COMPLETED, _.bind(function (parameters) {
+          var mission = Soomla.soomlaLevelUp.getMission(parameters.missionId);
+          Soomla.fireSoomlaEvent(parameters.method, [mission]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_MISSION_COMPLETION_REVOKED, _.bind(function (parameters) {
+          var mission = Soomla.soomlaLevelUp.getMission(parameters.missionId);
+          Soomla.fireSoomlaEvent(parameters.method, [mission]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_WORLD_COMPLETED, _.bind(function (parameters) {
+          var world = Soomla.soomlaLevelUp.getWorld(parameters.worldId);
+          Soomla.fireSoomlaEvent(parameters.method, [world]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED, _.bind(function (parameters) {
+          var world = Soomla.soomlaLevelUp.getWorld(parameters.worldId);
+          var innerWorldId = parameters.innerWorldId;
+          Soomla.fireSoomlaEvent(parameters.method, [world, innerWorldId]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_WORLD_REWARD_ASSIGNED, _.bind(function (parameters) {
+          var world = Soomla.soomlaLevelUp.getWorld(parameters.worldId);
+          Soomla.fireSoomlaEvent(parameters.method, [world]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_LEVEL_STARTED, _.bind(function (parameters) {
+          var level = Soomla.soomlaLevelUp.getWorld(parameters.levelId);
+          Soomla.fireSoomlaEvent(parameters.method, [level]);
+        }, this));
+
+        eventDispatcher.registerEventHandler(LevelUpConsts.EVENT_LEVEL_ENDED, _.bind(function (parameters) {
+          var level = Soomla.soomlaLevelUp.getWorld(parameters.levelId);
+          Soomla.fireSoomlaEvent(parameters.method, [level]);
+        }, this));
+
+        return true;
+      }
+    });
+  }();
+
+  /**
+   * LevelUpEventHandler
+   * Here for documentation reasons only, shows signatures for level up event handlers
+   */
+  var LevelUpEventHandler = Soomla.LevelUpEventHandler = function () {
+    return Soomla.declareClass("LevelUpEventHandler", {
+      /**
+       Fired when initialization has been completed.
+
+       Event Name - CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED
+       */
+      onLevelUpInitialized: function () {
+
+      },
+
+      /**
+       Fired when a CCGate has been opened.
+
+       Event Name - CCLevelUpConsts::EVENT_GATE_OPENED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::DICT_ELEMENT_GATE - CCGate - The gate which was opened
+       */
+      onGateOpened: function (gate) {
+
+      },
+      /**
+       Fired when a CCGate has been closed.
+
+       Event Name - CCLevelUpConsts::EVENT_GATE_CLOSED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::DICT_ELEMENT_GATE - CCGate - The gate which was closed
+       balance has changed.
+       */
+      onGateClosed: function (gate) {
+
+      },
+
+      /**
+       Fired when a CCMission has been completed.
+
+       Event Name - CCLevelUpConsts::EVENT_MISSION_COMPLETED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::DICT_ELEMENT_MISSION - CCMission - the mission that
+       was completed.
+       */
+      onMissionCompleted: function (mission) {
+
+      },
+
+      /**
+       Fired when CCMission completion has been revoked.
+       For example, you can decide to revoke a mission if the condition for
+       completing it is no longer valid
+
+       Event Name - CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::DICT_ELEMENT_MISSION - CCMission - the mission to be
+       revoked.
+       */
+      onMissionCompletionRevoked: function (mission) {
+
+      },
+
+      /**
+       Fired when a latest score is changed.
+
+       Event Name - CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::DICT_ELEMENT_SCORE - CCScore - the score which has
+       been changed.
+       */
+      onLatestScoreChanged: function (score) {
+
+      },
+
+      /**
+       Fired when a new record has been reached for a score.
+
+       Event Name - CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::DICT_ELEMENT_SCORE - CCScore - the score which has
+       reached a new record.
+       */
+      onScoreRecordReached: function (score) {
+
+      },
+
+      /**
+       Fired when a score's record is changed.
+
+       Event Name - CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::DICT_ELEMENT_SCORE - CCScore - the score which
+       has been changed.
+       */
+      onScoreRecordChanged: function (score) {
+
+      },
+
+      /**
+       Fired when a CCWorld has been completed.
+
+       Event Name - CCLevelUpConsts::EVENT_WORLD_COMPLETED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::DICT_ELEMENT_WORLD - CCWorld - the world which was
+       completed.
+       */
+      onWorldCompleted: function (world) {
+
+      },
+
+      /**
+       Fired when the last completed world inside a world has changed.
+
+       Event Name - CCLevelUpConsts::EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::DICT_ELEMENT_WORLD - CCWorld - the world which had
+       last completed world changed.
+       CCLevelUpConsts::DICT_ELEMENT_INNER_WORLD - __String - The inner world
+       ID which was last completed.
+       */
+      onLastCompletedInnerWorldChanged: function (world, innerWorldId) {
+
+      },
+
+      /**
+       Fired when a CCWorld is being assigned a reward.
+
+       Event Name - CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::DICT_ELEMENT_WORLD - CCWorld - the World whose
+       reward has changed.
+       */
+      onWorldRewardAssigned: function (world) {
+
+      },
+
+      /**
+       Fired when a level has started, i.e. when start is called on an
+       instance of CCLevel
+
+       Event Name - CCLevelUpConsts::EVENT_GOOD_BALANCE_CHANGED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::EVENT_LEVEL_STARTED - CCLevel - the level which just
+       started.
+       */
+      onLevelStarted: function (level) {
+
+      },
+
+      /**
+       Fired when a level has ended, i.e. when end is called on an
+       instance of CCLevel
+
+       Event Name - CCLevelUpConsts::EVENT_LEVEL_ENDED
+       Event Data (__Dictionary):
+       CCLevelUpConsts::EVENT_LEVEL_STARTED - CCLevel - the level which just
+       ended.
+       */
+      onLevelEnded: function (level) {
+
+      }
+    });
+  }();
 
   return true;
 })();
