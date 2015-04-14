@@ -2014,6 +2014,205 @@
     return World;
   }();
 
+  var Level = Soomla.Models.Level = function () {
+    /**
+     @class CCLevel
+     @brief A `Level` is a type of `World`, while a `World` contains
+     a set of `Level`s. Each `Level` always has a state that is one
+     of: idle, running, paused, ended, or completed.
+
+     Real Game Examples: "Candy Crush" and "Angry Birds" use `Level`s.
+     */
+    var Level = Soomla.declareClass('Level', {
+      // Start time of this `Level`.
+      startTime: 0,
+      // The elapsed time this `Level` is being played.
+      elapsed: 0,
+
+      /**
+       The state of this `Level`. The initial state is idle, later in the
+       game can be any of: running, paused, ended, or completed.
+       */
+      state: Soomla.Models.Level.LevelState.Idle,
+
+      /**
+       Gets the number of times this `Level` was started.
+       @return The number of times started.
+       */
+      getTimesStarted: function getTimesStarted() {
+        return Soomla.levelStorage.getTimesStarted(this);
+      },
+
+      /**
+       Gets the number of times this `Level` was played.
+       @return The number of times played.
+       */
+      getTimesPlayed: function getTimesPlayed() {
+        return Soomla.levelStorage.getTimesPlayed(this);
+      },
+
+      /**
+       Gets the slowest duration in millis that this `Level` was played.
+       @return The slowest duration in millis.
+       */
+      getSlowestDurationMillis: function getSlowestDurationMillis() {
+        return Soomla.levelStorage.getSlowestDurationMillis(this);
+      },
+
+      /**
+       Gets the fastest duration in millis that this `Level` was played.
+       @return The fastest duration in millis.
+       */
+      getFastestDurationMillis: function getFastestDurationMillis() {
+        return Soomla.levelStorage.getFastestDurationMillis(this);
+      },
+
+      /**
+       Gets the play duration of this `Level` in millis.
+       @return The play duration in millis.
+       */
+      getPlayDurationMillis: function getPlayDurationMillis() {
+
+        var now = this.getCurrentTimeMs();
+        var duration = this.elapsed;
+        if (this.startTime !== 0) {
+          duration += now - this.startTime;
+        }
+
+        return duration;
+      },
+
+      /**
+       Starts this `Level`.
+       */
+      start: function () {
+        if (this.state === Soomla.Models.Level.LevelState.Running) {
+          logError('Can\'t start a level that is already running.');
+          return false;
+        }
+
+        logDebug('Starting level with world id: ' + this.itemId);
+
+        if (!this.canStart()) {
+          return false;
+        }
+
+        if (this.state != Soomla.Models.Level.LevelState.Paused) {
+          this.elapsed = 0;
+          return Soomla.levelStorage.incTimesStarted(this);
+        }
+
+        this.startTime = this.getCurrentTimeMs();
+        this.state = Soomla.Models.Level.LevelState.Running;
+        return true;
+      },
+
+      /**
+       Pauses this `Level`.
+       */
+      pause: function () {
+        if (this.state !== Soomla.Models.Level.LevelState.Running) {
+          logError('Can\'t pause a level that is not running.');
+          return;
+        }
+
+        var now = this.getCurrentTimeMs();
+        this.elapsed += now - this.startTime;
+        this.startTime = 0;
+
+        this.state = Soomla.Models.Level.LevelState.Paused;
+      },
+
+      /**
+       Ends this `Level`.
+       @param completed If set to `true` completed.
+       */
+      end: function (completed) {
+        // check end() called without matching start(),
+        // i.e, the level is not running nor paused
+        if(this.state !== Soomla.Models.Level.LevelState.Running && this.state != Soomla.Models.Level.LevelState.Paused) {
+          logError('end() called without prior start()! ignoring.');
+          return;
+        }
+
+        this.state = Soomla.Models.Level.LevelState.Ended;
+
+        if (completed) {
+          var duration = this.getPlayDurationMillis();
+
+          // Calculate the slowest \ fastest durations of level play
+
+          if (duration > this.getSlowestDurationMillis()) {
+            Soomla.levelStorage.setSlowestDurationMillis(this, duration);
+          }
+
+          // We assume that levels' duration is never 0
+          var fastest = this.getFastestDurationMillis();
+          if ((fastest === 0) || (duration < this.getFastestDurationMillis())) {
+            Soomla.levelStorage.setFastestDurationMillis(this, duration);
+          }
+
+          _.forEach(this._scores, function (score) {
+            score.reset(true);
+          });
+
+          // Count number of times this level was played
+          Soomla.levelStorage.incTimesPlayed(this);
+
+          this.setCompleted(true);
+        }
+
+        // reset timers
+        this.startTime = 0;
+        this.elapsed = 0;
+      },
+
+      /**
+       Restarts this `Level`.
+       @param completed If set to `true` completed.
+       */
+      restart: function (completed) {
+        if (this.state === Soomla.Models.Level.LevelState.Running || this.state == Soomla.Models.Level.LevelState.Paused) {
+          this.end(completed);
+        }
+        this.start();
+      },
+
+      /**
+       Sets this `Level` as completed.
+       @param completed If set to `true` completed.
+       */
+      setCompleted: function (completed) {
+        if (completed) {
+          this.state = Soomla.Models.Level.LevelState.Completed;
+          Soomla.levelStorage.incTimesCompleted(this);
+        }
+        else {
+          this.state = Soomla.Models.Level.LevelState.Idle;
+        }
+        this.__super__.setCompleted(completed);
+      },
+
+      //protected:
+      getCurrentTimeMs: function () {
+        return Date.now();
+      }
+    }, World);
+
+    /**
+     The state of this `Level`. Every level must have one of the below
+     states.
+     */
+    Level.LevelState = {
+      Idle: 0,
+      Running: 1,
+      Paused: 2,
+      Ended: 3,
+      Completed: 4
+    };
+
+    return Level;
+  }();
 
   ///////////
 
@@ -2034,6 +2233,9 @@
 
   var WorldStorage = Soomla.WorldStorage = Soomla.declareClass('WorldStorage', {});
   Soomla.worldStorage = WorldStorage.create();
+
+  var LevelStorage = Soomla.LevelStorage = Soomla.declareClass('LevelStorage', {});
+  Soomla.levelStorage = LevelStorage.create();
 
   var SoomlaLevelUp = Soomla.SoomlaLevelUp = Soomla.declareClass('SoomlaLevelUp', {});
   Soomla.soomlaLevelUp = SoomlaLevelUp.create();
