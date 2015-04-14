@@ -2221,6 +2221,10 @@
      */
     var LevelUpBridge = Soomla.declareClass('LevelUpBridge', {
 
+      ctor: function () {
+        this.bindNative();
+      },
+
       init: function init() {
         return true;
       },
@@ -2524,7 +2528,380 @@
         }
       }
     });
+
+    LevelUpBridge.initShared = function () {
+      var ret = LevelUpBridge.create();
+      if (ret.init()) {
+        Soomla.levelUpBridge = ret;
+      } else {
+        Soomla.levelUpBridge = null;
+      }
+    };
+
+
     return LevelUpBridge;
+  }();
+
+  var SoomlaLevelUp = Soomla.Models.SoomlaLevelUp = function () {
+
+
+    function ifLevel(innerWorld) {
+      return innerWorld.className === 'Level';
+    }
+
+    function ifCompletedLevel(innerWorld) {
+      return innerWorld.className === 'Level' && innerWorld.isCompleted();
+    }
+
+    function ifWorld(innerWorld) {
+      return innerWorld.className === 'World';
+    }
+
+    function ifCompletedWorld(innerWorld) {
+      return innerWorld.className === 'World' && innerWorld.isCompleted();
+    }
+
+    function ifWorldOrLevel(innerWorld) {
+      return ifWorld(innerWorld) || ifLevel(innerWorld);
+    }
+
+
+    /**
+     @class CCSoomlaLevelUp
+     @brief This is the top level container for the cocos2dx-levelup model and
+     definitions. It stores the configurations of the game's world-hierarchy and
+     provides lookup functions for levelup model elements.
+     */
+    var SoomlaLevelUp = Soomla.declareClass('SoomlaLevelUp', {
+      DB_KEY_PREFIX: 'soomla.levelup.',
+
+      mainWorld: null,
+      rewards: null,
+
+      /**
+       Initializes the specified `InitialWorld` and rewards.
+       @param initialWorld Initial `World` to begin the game.
+       @param rewards Rewards for the initial `World`.
+       */
+      initialize: function initialize(initialWorld, rewards) {
+        this.initialWorld = initialWorld;
+
+        if (rewards) {
+          this.rewards = _.inject(rewards, function (result, reward) {
+            result[reward.itemId] =  reward;
+            return result;
+          });
+        }
+
+        this.save();
+
+        Soomla.LevelUpBridge.initShared();
+        Soomla.levelUpBridge.initLevelUp();
+      },
+
+      /**
+       Retrieves the reward with the given ID.
+       @param rewardId ID of the `Reward` to be fetched.
+       @return The reward that was fetched.
+       */
+      getReward: function getReward(rewardId) {
+        return this.rewards ? this.rewards[rewardId] : null;
+      },
+
+      /**
+       Retrieves the `Score` with the given score ID.
+       @param scoreId ID of the `Score` to be fetched.
+       @return The score.
+       */
+      getScore: function (scoreId) {
+        var scores = this.initialWorld.scores;
+        var score = scores[scoreId];
+        if (!score) {
+          score = this.fetchScoreFromWorlds(scoreId, this.initialWorld.innerWorldsMap);
+        }
+
+        return score;
+      },
+
+      /**
+       Retrieves the `World` with the given world ID.
+       @param worldId ID of the `World` to be fetched.
+       @return The world.
+       */
+      getWorld: function (worldId) {
+        if (this.initialWorld.itemId === worldId) {
+          return this.initialWorld;
+        }
+
+        return this.fetchWorld(worldId, this.initialWorld.innerWorldsMap);
+      },
+
+      /**
+       Retrieves the `Level` with the given level ID.
+       @param levelId ID of the `Level` to be fetched.
+       @return The world.
+       */
+      getLevel: function (levelId) {
+        return this.getWorld(levelId);
+      },
+
+      /**
+       Retrieves the `Gate` with the given ID.
+       @param gateId ID of the `Gate` to be fetched.</param>
+       @return The gate.
+       */
+      getGate: function (gateId) {
+        var gate = this.fetchGateFromGate(gateId, this.initialWorld.gate);
+        if (!gate) {
+          return gate;
+        }
+
+        gate = this.fetchGateFromMissions(gateId, this.initialWorld.missions);
+        if (gate) {
+          return gate;
+        }
+
+        return this.fetchGate(gateId, this.initialWorld.innerWorldsMap);
+      },
+
+      /**
+       Retrieves the `Mission` with the given ID.
+       @param missionId ID of the `Mission` to be fetched.
+       @return The mission.
+       */
+      getMission: function (missionId) {
+        var retMission = this.fetchMissionInMissions(missionId, this.initialWorld.missions);
+
+        if (!retMission ) {
+          return this.fetchMissionInWorlds(missionId, this.initialWorld.innerWorldsMap);
+        }
+
+        return retMission;
+      },
+
+      /**
+       Counts all the `Level`s in all `World`s and inner `World`s
+       starting from the `InitialWorld`.
+       @return The number of levels in all worlds and their inner worlds.
+       */
+      getLevelCount: function () {
+        return this.getLevelCountInWorld(this.initialWorld);
+      },
+
+      /**
+       Counts all the `Level`s in all `World`s and inner `World`s
+       starting from the given `World`.
+       @param world The world to examine.
+       @return The number of levels in the given world and its inner worlds.
+       */
+      getLevelCountInWorld: function (world) {
+        var innerWorldsMap = world.innerWorldsMap;
+        return _.reduce(innerWorldsMap, function (result, innerWorld) {
+          return result + this.getRecursiveCount(innerWorld, ifLevel);
+        }, this);
+      },
+
+      /**
+       Counts all `World`s and their inner `World`s with or without their
+       `Level`s according to the given `withLevels`.
+       @param withLevels Indicates whether to count `Level`s also.
+       @return The number of `World`s, and optionally their inner `Level`s.
+       */
+      getWorldCount: function (withLevels) {
+        return this.getRecursiveCount(this.initialWorld, withLevels ? ifWorldOrLevel : ifWorld);
+      },
+
+      /**
+       Counts all completed `Level`s.
+       @return The number of completed `Level`s and their inner completed
+       `Level`s.
+       */
+      getCompletedLevelCount: function () {
+        return this.getRecursiveCount(this.initialWorld, ifCompletedLevel);
+      },
+
+      /**
+       Counts the number of completed `World`s.
+       @return The number of completed `World`s and their inner completed
+       `World`s.
+       */
+      getCompletedWorldCount: function () {
+        return this.getRecursiveCount(this.initialWorld, ifCompletedWorld);
+      },
+
+      //private:
+      fetchWorld: function (worldId, worlds) {
+        var retWorld = worlds[worldId];
+        if (!retWorld) {
+          _.any(retWorld.innerWorldsMap, function (world) {
+            retWorld = this.fetchWorld(worldId, world);
+            return !!retWorld;
+          }, this);
+        }
+
+        return retWorld;
+      },
+
+      fetchScoreFromWorlds: function (scoreId, worlds) {
+        var retScore = null;
+
+        _.any(worlds, function (world) {
+          retScore = world.scores[scoreId];
+          if (!retScore) {
+            retScore = this.fetchScoreFromWorlds(scoreId, world.innerWorldsMap);
+          }
+          return !!retScore;
+        }, this);
+
+        return retScore;
+      },
+
+      fetchGate: function (gateId, worlds) {
+        if (!worlds) {
+          return null;
+        }
+
+        var retGate;
+        _.any(worlds, function (world) {
+          retGate = this.fetchGateFromGate(gateId, world.gate);
+          return !!retGate;
+        }, this);
+
+
+        if (!retGate) {
+          retGate = _.any(worlds, function (world) {
+            retGate = this.fetchGateFromMissions(gateId, world.missions);
+            if (!retGate) {
+              retGate = this.fetchGate(gateId, world.innerWorldsMap);
+            }
+            return !!retGate;
+          }, this);
+
+        }
+
+        return retGate;
+      },
+
+      fetchGateFromMissions: function (gateId, missions) {
+        var retGate = null;
+
+        _.any(missions, function (mission) {
+          retGate = this.fetchGateFromGate(gateId, mission.gate);
+          return !!retGate;
+        }, this);
+
+        if (!retGate) {
+          _.any(missions, function (challenge) {
+            if (challenge.className === 'Challenge') {
+              retGate = this.fetchGateFromMissions(gateId, challenge.missions);
+            }
+            return !!retGate;
+          }, this);
+        }
+
+        return retGate;
+      },
+
+      fetchGateFromGate: function (gateId, targetGate) {
+        if (!targetGate) {
+          return null;
+        }
+
+        if (targetGate.itemId === gateId) {
+          return targetGate;
+        }
+
+        var result = null;
+        // Duck typing to check GateList
+        if (targetGate.gates !== undefined) {
+          _.any(targetGate.gates, function (innerGate) {
+            result = this.fetchGateFromGate(gateId, innerGate);
+
+            return !!result;
+          }, this);
+        }
+
+        return result;
+      },
+
+      getRecursiveCount: function (world, isAccepted) {
+        var count = 0;
+
+        // If the predicate is true, increment
+        if (isAccepted(world)) {
+          count++;
+        }
+
+        _.forEach(world.innerWorldsMap, function (innerWorld) {
+          count += this.getRecursiveCount(innerWorld, isAccepted);
+        }, this);
+
+        return count;
+      },
+
+      fetchMissionInWorlds: function fetchMissionInWorlds(missionId, worlds) {
+        var mission = null;
+        _.any(worlds, function (world) {
+          mission = this.fetchMissionInMissions(missionId, world.missions);
+
+          if (!mission) {
+            mission = this.fetchMissionInWorlds(missionId, world.innerWorldsMap);
+          }
+
+          return !!mission;
+        }, this);
+
+        return mission;
+      },
+
+      fetchMissionInMissions: function fetchMissionInMissions(missionId, missions) {
+        if (!missions) {
+          return null;
+        }
+
+        var retMission = null;
+
+        _.any(missions, function (mission) {
+          retMission = this.fetchMission(missionId, mission);
+          return !!retMission;
+        }, this);
+
+        return retMission;
+      },
+
+      fetchMission: function (missionId, targetMission) {
+        if (!targetMission) {
+          return null;
+        }
+
+        if (targetMission.itemId === missionId) {
+          return targetMission;
+        }
+
+        if (targetMission.className === 'Challenge') {
+          return this.fetchMissionInMissions(missionId, targetMission.missions);
+        } else {
+          return null;
+        }
+      },
+
+      save: function () {
+        var key = this.DB_KEY_PREFIX + 'model';
+        Soomla.keyValueStorage.setValue(key, JSON.stringify(this));
+      }
+
+    });
+
+    Object.defineProperty(SoomlaLevelUp.prototype, 'initialWorld', {
+      get: function () {
+        return this.mainWorld;
+      },
+      set: function (initialWorld) {
+        this.mainWorld = initialWorld;
+      }
+    });
+
+    return SoomlaLevelUp;
   }();
 
   ///////////
