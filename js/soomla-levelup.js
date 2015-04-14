@@ -2214,6 +2214,319 @@
     return Level;
   }();
 
+  var LevelUpBridge = Soomla.LevelUpBridge = function () {
+    /**
+     This class calls the bridge functions that call the relative native
+     functions.
+     */
+    var LevelUpBridge = Soomla.declareClass('LevelUpBridge', {
+
+      init: function init() {
+        return true;
+      },
+
+      initLevelUp: function initLevelUp() {
+        logDebug('call init');
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::initLevelUp',
+          metadata: {}
+        });
+
+        return result['return'];
+      },
+
+      gateIsOpen: function (gate) {
+        logDebug('call gateIsOpen with gate: ' + gate.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::gateIsOpen',
+          gateId: gate.itemId
+        });
+
+        return result['return'];
+      },
+
+      gateSetOpen: function (gate, open, notify) {
+        logDebug('call gateSetOpen with gate: ' + gate.itemId);
+
+        Soomla.callNative({
+          method: 'CCLevelUpBridge::gateSetOpen',
+          gateId: gate.itemId,
+          open: open,
+          notify: notify
+        });
+      },
+
+      levelSetSlowestDurationMillis: function (level, duration) {
+        logDebug('call levelSetSlowestDurationMillis with level: ' + level.itemId);
+
+        Soomla.callNative({
+          method: 'CCLevelUpBridge::levelSetSlowestDurationMillis',
+          levelId: level.itemId,
+          duration: duration
+        });
+      },
+      levelGetSlowestDurationMillis: function (level) {
+        logDebug('call levelGetSlowestDurationMillis with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelGetSlowestDurationMillis',
+          levelId: level.itemId,
+        });
+
+        return result['return'];
+      },
+
+      levelSetFastestDurationMillis: function (level, duration) {
+        logDebug('call levelSetFastestDurationMillis with level: ' + level.itemId);
+
+        Soomla.callNative({
+          method: 'CCLevelUpBridge::levelSetFastestDurationMillis',
+          levelId: level.itemId,
+          duration: duration
+        });
+      },
+      levelGetFastestDurationMillis: function (level) {
+        logDebug('call levelGetFastestDurationMillis with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelGetFastestDurationMillis',
+          levelId: level.itemId,
+        });
+
+        return result['return'];
+      },
+
+      levelIncTimesStarted: function (level) {
+        logDebug('call levelIncTimesStarted with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelIncTimesStarted',
+          levelId: level.itemId
+        });
+
+        return result['return'];
+      },
+      levelDecTimesStarted: function (level) {
+        logDebug('call levelDecTimesStarted with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelDecTimesStarted',
+          levelId: level.itemId
+        });
+
+        return result['return'];
+      },
+      levelGetTimesStarted: function (level) {
+        logDebug('call levelGetTimesStarted with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelGetTimesStarted',
+          levelId: level.itemId
+        });
+
+        return result['return'];
+      },
+
+      levelGetTimesPlayed: function (level) {
+        logDebug('call levelGetTimesPlayed with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelGetTimesPlayed',
+          levelId: level.itemId
+        });
+
+        return result['return'];
+      },
+      levelIncTimesPlayed: function (level) {
+        logDebug('call levelIncTimesPlayed with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelIncTimesPlayed',
+          levelId: level.itemId
+        });
+
+        return result['return'];
+      },
+      levelDecTimesPlayed: function (level) {
+        logDebug('call levelDecTimesPlayed with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelDecTimesPlayed',
+          levelId: level.itemId
+        });
+
+        return result['return'];
+      },
+
+      levelGetTimesCompleted: function (level) {
+        logDebug('call levelGetTimesCompleted with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelGetTimesCompleted',
+          levelId: level.itemId
+        });
+
+        return result['return'];
+      },
+      levelIncTimesCompleted: function (level) {
+        logDebug('call levelIncTimesCompleted with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelIncTimesCompleted',
+          levelId: level.itemId
+        });
+
+        return result['return'];
+      },
+      levelDecTimesCompleted: function (level) {
+        logDebug('call levelDecTimesCompleted with level: ' + level.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::levelDecTimesCompleted',
+          levelId: level.itemId
+        });
+
+        return result['return'];
+      },
+
+      missionSetCompleted: function (mission, completed, notify) {
+        logDebug('call missionSetCompleted with mission: ' + mission.itemId);
+
+        Soomla.callNative({
+          method: 'CCLevelUpBridge::missionSetCompleted',
+          missionId: mission.itemId,
+          completed: completed,
+          notify: notify
+        });
+      },
+      missionGetTimesCompleted: function (mission) {
+        logDebug('call missionGetTimesCompleted with mission: ' + mission.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::missionGetTimesCompleted',
+          missionId: mission.itemId
+        });
+
+        return result['return'];
+      },
+
+      scoreSetLatestScore: function (score, newValue) {
+        logDebug('call scoreSetLatestScore with score: ' + score.itemId);
+
+        Soomla.callNative({
+          method: 'CCLevelUpBridge::scoreSetLatestScore',
+          scoreId: score.itemId,
+          newValue: newValue
+        });
+      },
+      scoreGetLatestScore: function (score) {
+        logDebug('call scoreGetLatestScore with score: ' + score.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::scoreGetLatestScore',
+          scoreId: score.itemId
+        });
+
+        return result['return'];
+      },
+      scoreSetRecordScore: function (score, newValue) {
+        logDebug('call scoreSetRecordScore with score: ' + score.itemId);
+
+        Soomla.callNative({
+          method: 'CCLevelUpBridge::scoreSetRecordScore',
+          scoreId: score.itemId,
+          newValue: newValue
+        });
+      },
+      scoreGetRecordScore: function (score) {
+        logDebug('call scoreGetRecordScore with score: ' + score.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::scoreGetRecordScore',
+          scoreId: score.itemId
+        });
+
+        return result['return'];
+      },
+
+
+      worldSetCompleted: function (world, completed, notify) {
+        logDebug('call worldSetCompleted with world: ' + world.itemId);
+
+        Soomla.callNative({
+          method: 'CCLevelUpBridge::worldSetCompleted',
+          worldId: world.itemId,
+          completed: completed,
+          notify: notify
+        });
+      },
+      worldIsCompleted: function (world) {
+        logDebug('call worldIsCompleted with world: ' + world.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::worldIsCompleted',
+          worldId: world.itemId
+        });
+
+        return result['return'];
+      },
+
+      worldSetReward: function (world, rewardId) {
+        logDebug('call worldSetReward with world: ' + world.itemId);
+
+        Soomla.callNative({
+          method: 'CCLevelUpBridge::worldSetReward',
+          worldId: world.itemId,
+          rewardId: rewardId
+        });
+      },
+      worldGetAssignedReward: function (world) {
+        logDebug('call worldGetAssignedReward with world: ' + world.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::worldGetAssignedReward',
+          worldId: world.itemId
+        });
+
+        return result['return'];
+      },
+
+      worldSetLastCompletedInnerWorld: function (world, innerWorldId) {
+        logDebug('call worldSetLastCompletedInnerWorld with world: ' + world.itemId);
+
+        Soomla.callNative({
+          method: 'CCLevelUpBridge::worldSetLastCompletedInnerWorld',
+          worldId: world.itemId,
+          innerWorldId: innerWorldId
+        });
+      },
+      worldGetLastCompletedInnerWorld: function (world) {
+        logDebug('call worldGetLastCompletedInnerWorld with world: ' + world.itemId);
+
+        var result = Soomla.callNative({
+          method: 'CCLevelUpBridge::worldGetLastCompletedInnerWorld',
+          worldId: world.itemId
+        });
+
+        return result['return'];
+      },
+      //private:
+      bindNative: function bindNative() {
+        logDebug('Binding to native platform bridge...');
+        if (platform.isAndroid()) {
+          jsb.reflection.callStaticMethod('com/soomla/cocos2dx/levelup/LevelUpBridgeBinder', 'bind', '()V');
+        } else if (platform.isIos()) {
+          jsb.reflection.callStaticMethod('LevelUpBridge', 'initShared');
+        } else {
+          logError('Unsupported platform: ' + platform.name);
+        }
+      }
+    });
+    return LevelUpBridge;
+  }();
+
   ///////////
 
   //var Gate = Soomla.Models.Gate = function () {
@@ -2222,7 +2535,9 @@
   //}();
 
 
-  var GateStorage = Soomla.GateStorage = Soomla.declareClass('GateStorage', {});
+  var GateStorage = Soomla.GateStorage = Soomla.declareClass('GateStorage', {
+
+  });
   Soomla.gateStorage = GateStorage.create();
 
   var ScoreStorage = Soomla.ScoreStorage = Soomla.declareClass('ScoreStorage', {});
