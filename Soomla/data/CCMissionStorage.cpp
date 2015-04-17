@@ -15,27 +15,48 @@
  */
 
 #include "CCMissionStorage.h"
-#include "CCLevelUpBridge.h"
+#include "CCLevelUpEventDispatcher.h"
+#include "CCKeyValueStorage.h"
 
 namespace soomla {
+
+#define DB_MISSION_KEY_PREFIX "soomla.levelup.missions."
+
+    USING_NS_CC;
+
     static CCMissionStorage *sInstance = nullptr;
 
     CCMissionStorage *soomla::CCMissionStorage::getInstance() {
         if (!sInstance)
         {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) || (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
             sInstance = new CCMissionStorage();
-            sInstance->retain();
+#else
+            sInstance = new CCNativeMissionStorage();
+#endif
         }
         return sInstance;
     }
-
 
     void CCMissionStorage::setCompleted(CCMission *mission, bool completed) {
         return this->setCompleted(mission, completed, true);
     }
 
     void CCMissionStorage::setCompleted(CCMission *mission, bool completed, bool notify) {
-        return CCLevelUpBridge::getInstance()->missionSetCompleted(mission, completed, notify);
+        int total = this->getTimesCompleted(mission) + (completed ? 1 : -1);
+        if (total < 0) {
+            total = 0;
+        }
+
+        this->setTimesCompleted(mission, total);
+
+        if (notify) {
+            if (completed) {
+                CCLevelUpEventDispatcher::getInstance()->onMissionCompleted(mission);
+            } else {
+                CCLevelUpEventDispatcher::getInstance()->onMissionCompletionRevoked(mission);
+            }
+        }
     }
 
     bool CCMissionStorage::isCompleted(CCMission *mission) {
@@ -43,6 +64,22 @@ namespace soomla {
     }
 
     int CCMissionStorage::getTimesCompleted(CCMission *mission) {
-        return CCLevelUpBridge::getInstance()->missionGetTimesCompleted(mission);
+        const char *key = this->keyMissionTimesCompletedWithMissionId(mission->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0) ? __String::create(val)->intValue() : 0;
+    }
+
+    void CCMissionStorage::setTimesCompleted(CCMission *mission, int timesCompleted) {
+        const char *key = this->keyMissionTimesCompletedWithMissionId(mission->getId()->getCString());
+        const char *val = __String::createWithFormat("%d", timesCompleted)->getCString();
+        CCKeyValueStorage::getInstance()->setValue(key, val);
+    }
+
+    char const *CCMissionStorage::keyMissionTimesCompletedWithMissionId(char const *missionId) {
+        return this->keyMissionsWithMissionId(missionId, "timesCompleted");
+    }
+
+    char const *CCMissionStorage::keyMissionsWithMissionId(char const *missionId, char const *postfix) {
+        return __String::createWithFormat("%s%s.%s", DB_MISSION_KEY_PREFIX, missionId, postfix)->getCString();
     }
 }
