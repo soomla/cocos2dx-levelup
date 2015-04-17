@@ -15,6 +15,7 @@
 		372B7367CE943BCDCB7624D2 /* CCPurchasingMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B76B105E532FCD11DAC53 /* CCPurchasingMission.cpp */; };
 		372B739A0AA233A031884574 /* CCNativeMissionStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7611EB31D01B41CF0A68 /* CCNativeMissionStorage.h */; };
 		372B73D4339FC4558C1AC0DA /* CCNativeLevelStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B773B2590EC6892C17A29 /* CCNativeLevelStorage.cpp */; };
+		372B7490D0B241E1BB51F69D /* soomla-levelup.js in Sources */ = {isa = PBXBuildFile; fileRef = 372B7DED3D7F48AA79BB9E9E /* soomla-levelup.js */; };
 		372B754965BCFD96AFD35F84 /* CCSocialStoryMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7ADC3890E5E65AAD3270 /* CCSocialStoryMission.cpp */; };
 		372B758D02AC07D2B8099E25 /* CCBalanceGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B715770A556EC7DFEFC31 /* CCBalanceGate.cpp */; };
 		372B75EEB950F5BFEF2C9A7F /* CCPurchasableGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7D4B20FB6BD4B373D48E /* CCPurchasableGate.h */; };
@@ -151,6 +152,7 @@
 		372B7D4B20FB6BD4B373D48E /* CCPurchasableGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPurchasableGate.h; sourceTree = "<group>"; };
 		372B7D8AE02BB5D9882D1F9C /* CCSocialLikeGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSocialLikeGate.cpp; sourceTree = "<group>"; };
 		372B7DAB0B0BB3000F871947 /* CCSocialUploadMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSocialUploadMission.h; sourceTree = "<group>"; };
+		372B7DED3D7F48AA79BB9E9E /* soomla-levelup.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "soomla-levelup.js"; sourceTree = "<group>"; };
 		372B7EAB5EE3DFF8F2E6E030 /* CCBalanceMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBalanceMission.cpp; sourceTree = "<group>"; };
 		372B7EB19C08B6A9B8FA34E7 /* CCSocialStoryMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSocialStoryMission.h; sourceTree = "<group>"; };
 		372B7F87FEBB8A75F41E7353 /* CCBalanceGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBalanceGate.h; sourceTree = "<group>"; };
@@ -271,6 +273,15 @@
 				372B758EAE308999DC25E48D /* CCNativeWorldStorage.cpp */,
 			);
 			path = NativeImpl;
+			sourceTree = "<group>";
+		};
+		372B72E0365C322DAF352C71 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				372B7DED3D7F48AA79BB9E9E /* soomla-levelup.js */,
+			);
+			name = js;
+			path = ../js;
 			sourceTree = "<group>";
 		};
 		372B7A18701A932A22BDF0D6 /* profile */ = {
@@ -473,6 +484,7 @@
 				9DEA547419B4A6350093D5D9 /* SoomlaiOSLevelUp */,
 				C0B3C5F1168C6D0C00161FAA /* Frameworks */,
 				C0B3C5F0168C6D0C00161FAA /* Products */,
+				372B72E0365C322DAF352C71 /* js */,
 			);
 			sourceTree = "<group>";
 		};
@@ -663,6 +675,7 @@
 				372B720204C9DF9F96FB2B3F /* CCNativeMissionStorage.cpp in Sources */,
 				372B7F388F3AE51549B17EFB /* CCNativeScoreStorage.cpp in Sources */,
 				372B7E77D9EBAC0229421B80 /* CCNativeWorldStorage.cpp in Sources */,
+				372B7490D0B241E1BB51F69D /* soomla-levelup.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
