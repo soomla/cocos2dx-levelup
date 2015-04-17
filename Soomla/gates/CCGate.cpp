@@ -72,7 +72,7 @@ namespace soomla {
         if (open) {
             unregisterEvents();
         } else {
-            // we can do this here ONLY becasue we check 'isOpen == open' a few lines above.
+            // we can do this here ONLY because we check 'isOpen == open' a few lines above.
             registerEvents();
         }
     }
