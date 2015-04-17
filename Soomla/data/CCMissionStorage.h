@@ -40,7 +40,7 @@ namespace soomla {
          if the given paramter `up` is `true`; otherwise decreases the number
          of times completed.
          @param mission `Mission` to set as completed.
-         @param up If set to `true` add 1 to the number of times completed,
+         @param completed If set to `true` add 1 to the number of times completed,
          otherwise subtract 1.
          @param notify If set to `true` trigger the relevant event according
          to the value of `up`.
