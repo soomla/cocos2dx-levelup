@@ -106,7 +106,7 @@
        this method.
        */
       registerEvents: function registerEvents() {
-        logError('IMPLEMENT ME!');
+        Soomla.logError('IMPLEMENT ME!');
       },
 
       /**
@@ -114,7 +114,7 @@
        implement this method.
        */
       unregisterEvents: function unregisterEvents() {
-        logError('IMPLEMENT ME!');
+        Soomla.logError('IMPLEMENT ME!');
       },
 
       /**
@@ -125,7 +125,7 @@
        otherwise `false`.
        */
       canOpenInner: function canOpenInner() {
-        logError('IMPLEMENT ME!');
+        Soomla.logError('IMPLEMENT ME!');
       },
 
       /**
@@ -133,9 +133,9 @@
        @return If this `Gate` was opened returns `true`; otherwise `false`.
        */
       openInner: function openInner() {
-        logError('IMPLEMENT ME!');
+        Soomla.logError('IMPLEMENT ME!');
       }
-    }, SoomlaEntity);
+    }, Soomla.SoomlaEntity);
   }();
 
   var GatesList = Soomla.Models.Gate = function () {
@@ -214,7 +214,7 @@
       onGateOpened: function onGateOpened(event) {
         var gate = event.gate; // TODO: check this field
         if (!gate) {
-          logError('No gate data in event');
+          Soomla.logError('No gate data in event');
           return;
         }
 
@@ -297,12 +297,12 @@
       /**
        Checks if this `Gate` meets its criteria for opening, by checking if
        this `Gate`'s associated `Score` has reached the desired record.
-       @return boolean If the `Gate` can be opened returns `true`; otherwise `false`.
+       @return Boolean If the `Gate` can be opened returns `true`; otherwise `false`.
        */
       canOpenInner: function canOpenInner() {
         var score = Soomla.soomlaLevelUp.getScore(this.associatedScoreId);
         if (!score) {
-          logError('(canOpenInner) couldn\'t find score with scoreId: ', this.associatedScoreId);
+          Soomla.logError('(canOpenInner) couldn\'t find score with scoreId: ', this.associatedScoreId);
           return false;
         }
 
@@ -350,7 +350,7 @@
       onScoreRecordChanged: function onScoreRecordChanged(event) {
         var score = event.score; // TODO: check this field
         if (!score) {
-          logError('No score data in event');
+          Soomla.logError('No score data in event');
           return;
         }
 
@@ -474,7 +474,7 @@
       onWorldCompleted: function (event) {
         var world = event.world; // TODO: check this field
         if (!world) {
-          logError('No world data in event');
+          Soomla.logError('No world data in event');
           return;
         }
 
@@ -514,7 +514,7 @@
        */
       registerEvents: function () {
         if (!this.isOpen()) {
-          Soomla.addEventHandler(ProfileConsts.EVENT_SOCIAL_ACTION_FINISHED, this.onSocialActionFinishedEvent, this);
+          Soomla.addEventHandler(Soomla.ProfileConsts.EVENT_SOCIAL_ACTION_FINISHED, this.onSocialActionFinishedEvent, this);
           this.eventListener = true;
         }
       },
@@ -524,7 +524,7 @@
        */
       unregisterEvents: function () {
         if (!this.isOpen()) {
-          Soomla.removeEventHandler(ProfileConsts.EVENT_SOCIAL_ACTION_FINISHED, this.onSocialActionFinishedEvent);
+          Soomla.removeEventHandler(Soomla.ProfileConsts.EVENT_SOCIAL_ACTION_FINISHED, this.onSocialActionFinishedEvent);
           this.eventListener = true;
         }
       },
@@ -532,7 +532,7 @@
       onSocialActionFinishedEvent: function (event) {
         var payload = event.payload; // TODO: check this field
         if (!payload) {
-          logError('No payload data in event');
+          Soomla.logError('No payload data in event');
           return;
         }
 
@@ -686,8 +686,8 @@
       canOpenInner: function () {
         var balance = Soomla.storeInventory.getItemBalance(this.associatedItemId);
         if (error) {
-          logError('(canOpenInner) Couldn\'t find itemId. itemId: ' + this.associatedItemId);
-          logError(error.info);
+          Soomla.logError('(canOpenInner) Couldn\'t find itemId. itemId: ' + this.associatedItemId);
+          Soomla.logError(error.info);
           return false;
         }
         return (balance >= this.desiredBalance);
@@ -744,13 +744,13 @@
       onCurrencyBalanceChanged: function (event) {
         var virtualCurrency = event['VirtualCurrency']; // TODO: check this field
         if (!virtualCurrency) {
-          logError('No virtualCurrency data in event');
+          Soomla.logError('No virtualCurrency data in event');
           return;
         }
 
         var balance = event.balance;
         if (!balance) {
-          logError('No balance data in event');
+          Soomla.logError('No balance data in event');
           return;
         }
         this.checkItemIdBalance(virtualCurrency.itemId, balance);
@@ -763,13 +763,13 @@
       onGoodBalanceChanged: function (event) {
         var virtualGood = event['VirtualGood']; // TODO: check this field
         if (!virtualGood) {
-          logError('No virtualGood data in event');
+          Soomla.logError('No virtualGood data in event');
           return;
         }
 
         var balance = event.balance;
         if (!balance) {
-          logError('No balance data in event');
+          Soomla.logError('No balance data in event');
           return;
         }
         this.checkItemIdBalance(virtualGood.itemId, balance);
@@ -817,7 +817,7 @@
 
       /**
        Checks if this `Gate` meets its criteria for opening.
-       @return Always `true`.
+       @return Boolean Always `true`.
        */
       canOpenInner: function () {
         return true;
@@ -836,13 +836,13 @@
       onItemPurchased: function (event) {
         var purchasableVirtualItem = event['PurchasableVirtualItem']; // TODO: check this field
         if (!purchasableVirtualItem) {
-          logError('No purchasableVirtualItem data in event');
+          Soomla.logError('No purchasableVirtualItem data in event');
           return;
         }
 
         var payload = event['DeveloperPayload'];
         if (!payload) {
-          logError('No payload data in event');
+          Soomla.logError('No payload data in event');
           return;
         }
 
@@ -925,9 +925,9 @@
       /**
        Determines if this `Score` has reached a record value of the given
        `scoreVal`.
-       @return If this score has reached the given record returns `true`;
-       otherwise `false`.
        @param scoreVal numeric score value.
+       @return Boolean If this score has reached the given record returns `true`;
+       otherwise `false`.
        */
       hasRecordReached: function (scoreVal) {
         var record = Soomla.scoreStorage.getRecordScore(this);
@@ -1132,16 +1132,16 @@
 
       /**
        Completes this `Mission`'s by opening its `Gate`.
-       @return If `Schedule` doesn't approve, the mission cannot be completed
+       @return Boolean If `Schedule` doesn't approve, the mission cannot be completed
        and thus returns `false`; otherwise opens this `Mission`'s `Gate` and
-       returns Boolean `true` if successful.
+       returns `true` if successful.
        */
       complete: function () {
         if (!this.schedule.approve(Soomla.missionStorage.getTimesCompleted(this))) {
-          logDebug('missions cannot be completed b/c Schedule doesn\'t approve.');
+          Soomla.logDebug('missions cannot be completed b/c Schedule doesn\'t approve.');
           return false;
         }
-        logDebug('trying opening gate to complete mission: ' + this.itemId);
+        Soomla.logDebug('trying opening gate to complete mission: ' + this.itemId);
         return this._gate.open();
       },
 
@@ -1195,7 +1195,7 @@
       onGateOpened: function (event) {
         var gate = event.gate; // TODO: check this field
         if (!gate) {
-          logError('No gate data in event');
+          Soomla.logError('No gate data in event');
           return;
         }
 
@@ -1333,9 +1333,9 @@
        `OnMissionCompletionRevoked`.
        */
       registerEvents: function () {
-        logDebug ('registerEvents called');
+        Soomla.logDebug ('registerEvents called');
         if (!this.isCompleted()) {
-          logDebug ('registering!');
+          Soomla.logDebug ('registering!');
           // register for events
           Soomla.addEventHandler(LevelUpConsts.EVENT_MISSION_COMPLETED, this.onMissionCompleted, this);
           this.eventListener = true;
@@ -1363,25 +1363,25 @@
       onMissionCompleted: function (event) {
         var completedMission = event.mission; // TODO: check this field
         if (!completedMission) {
-          logError('No mission data in event');
+          Soomla.logError('No mission data in event');
           return;
         }
 
-        logDebug ('onMissionCompleted');
+        Soomla.logDebug ('onMissionCompleted');
 
         if (_.indexOf(this.missions, completedMission) >= 0) {
-          logDebug('Mission ' + completedMission.itemId + ' is part of challenge ' + this.itemId + ' (' + this.missions.length + ') total');
+          Soomla.logDebug('Mission ' + completedMission.itemId + ' is part of challenge ' + this.itemId + ' (' + this.missions.length + ') total');
           var completed = true;
           var incompletedMission = _.find(this.missions, function (mission) {
             return !mission.isCompleted();
           });
           if (incompletedMission) {
-            logDebug('challenge mission not completed?=' + incompletedMission.itemId);
+            Soomla.logDebug('challenge mission not completed?=' + incompletedMission.itemId);
             completed = false;
           }
 
           if (completed) {
-            logDebug('Challenge ' + this.itemId + ' completed!');
+            Soomla.logDebug('Challenge ' + this.itemId + ' completed!');
             this.setCompletedInner(true);
           }
         }
@@ -1390,7 +1390,7 @@
       onMissionCompletionRevoked: function (event) {
         var mission = event.mission; // TODO: check this field
         if (!mission) {
-          logError('No mission data in event');
+          Soomla.logError('No mission data in event');
           return;
         }
         if (_.indexOf(this.missions, mission) >= 0) {
@@ -1639,8 +1639,8 @@
        one by one, you can create them all at once.
        @param numLevels The number of `Level`s to be added to this `World`.
        @param gateTemplate The `Gate` for the levels.
-       @param scoreTemplate `Score` template for the `Level`s.
-       @param missionTemplate `Mission` template for the `Level`s.
+       @param scoreTemplates `Score` template for the `Level`s.
+       @param missionTemplates `Mission` template for the `Level`s.
        */
       batchAddLevelsWithTemplates: function (numLevels, gateTemplate, scoreTemplates, missionTemplates) {
         if (!_.isArray(scoreTemplates)) {
@@ -1748,7 +1748,7 @@
       resetScores: function (save) {
 
         if (!this._scores || _.isEmpty(this._scores)) {
-          logError('(ResetScores) You don\'t have any scores defined in this world. World id: ' + this.itemId);
+          Soomla.logError('(ResetScores) You don\'t have any scores defined in this world. World id: ' + this.itemId);
           return;
         }
 
@@ -1797,13 +1797,14 @@
        Sets the `Score` with the given ID to have the given value.
        @param id ID of the `Score` whose value is to be set.
        @param scoreVal Value to set.
+       @param onlyIfBetter
        */
       setScoreValue: function (id, scoreVal, onlyIfBetter) {
         onlyIfBetter = !!onlyIfBetter;
 
         var score = this._scores[id];
         if (!score) {
-          logError('(setScore) Can\'t find score id: ' + id + ' world id: ' + this.itemId);
+          Soomla.logError('(setScore) Can\'t find score id: ' + id + ' world id: ' + this.itemId);
           return;
         }
         score.setTempScore(scoreVal, onlyIfBetter);
@@ -2087,11 +2088,11 @@
        */
       start: function () {
         if (this.state === Soomla.Models.Level.LevelState.Running) {
-          logError('Can\'t start a level that is already running.');
+          Soomla.logError('Can\'t start a level that is already running.');
           return false;
         }
 
-        logDebug('Starting level with world id: ' + this.itemId);
+        Soomla.logDebug('Starting level with world id: ' + this.itemId);
 
         if (!this.canStart()) {
           return false;
@@ -2112,7 +2113,7 @@
        */
       pause: function () {
         if (this.state !== Soomla.Models.Level.LevelState.Running) {
-          logError('Can\'t pause a level that is not running.');
+          Soomla.logError('Can\'t pause a level that is not running.');
           return;
         }
 
@@ -2131,7 +2132,7 @@
         // check end() called without matching start(),
         // i.e, the level is not running nor paused
         if(this.state !== Soomla.Models.Level.LevelState.Running && this.state != Soomla.Models.Level.LevelState.Paused) {
-          logError('end() called without prior start()! ignoring.');
+          Soomla.logError('end() called without prior start()! ignoring.');
           return;
         }
 
@@ -2230,7 +2231,7 @@
       },
 
       initLevelUp: function initLevelUp() {
-        logDebug('call init');
+        Soomla.logDebug('call init');
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::initLevelUp',
@@ -2241,7 +2242,7 @@
       },
 
       gateIsOpen: function (gate) {
-        logDebug('call gateIsOpen with gate: ' + gate.itemId);
+        Soomla.logDebug('call gateIsOpen with gate: ' + gate.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::gateIsOpen',
@@ -2252,7 +2253,7 @@
       },
 
       gateSetOpen: function (gate, open, notify) {
-        logDebug('call gateSetOpen with gate: ' + gate.itemId);
+        Soomla.logDebug('call gateSetOpen with gate: ' + gate.itemId);
 
         Soomla.callNative({
           method: 'CCLevelUpBridge::gateSetOpen',
@@ -2263,7 +2264,7 @@
       },
 
       levelSetSlowestDurationMillis: function (level, duration) {
-        logDebug('call levelSetSlowestDurationMillis with level: ' + level.itemId);
+        Soomla.logDebug('call levelSetSlowestDurationMillis with level: ' + level.itemId);
 
         Soomla.callNative({
           method: 'CCLevelUpBridge::levelSetSlowestDurationMillis',
@@ -2272,18 +2273,18 @@
         });
       },
       levelGetSlowestDurationMillis: function (level) {
-        logDebug('call levelGetSlowestDurationMillis with level: ' + level.itemId);
+        Soomla.logDebug('call levelGetSlowestDurationMillis with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelGetSlowestDurationMillis',
-          levelId: level.itemId,
+          levelId: level.itemId
         });
 
         return result['return'];
       },
 
       levelSetFastestDurationMillis: function (level, duration) {
-        logDebug('call levelSetFastestDurationMillis with level: ' + level.itemId);
+        Soomla.logDebug('call levelSetFastestDurationMillis with level: ' + level.itemId);
 
         Soomla.callNative({
           method: 'CCLevelUpBridge::levelSetFastestDurationMillis',
@@ -2292,18 +2293,18 @@
         });
       },
       levelGetFastestDurationMillis: function (level) {
-        logDebug('call levelGetFastestDurationMillis with level: ' + level.itemId);
+        Soomla.logDebug('call levelGetFastestDurationMillis with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelGetFastestDurationMillis',
-          levelId: level.itemId,
+          levelId: level.itemId
         });
 
         return result['return'];
       },
 
       levelIncTimesStarted: function (level) {
-        logDebug('call levelIncTimesStarted with level: ' + level.itemId);
+        Soomla.logDebug('call levelIncTimesStarted with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelIncTimesStarted',
@@ -2313,7 +2314,7 @@
         return result['return'];
       },
       levelDecTimesStarted: function (level) {
-        logDebug('call levelDecTimesStarted with level: ' + level.itemId);
+        Soomla.logDebug('call levelDecTimesStarted with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelDecTimesStarted',
@@ -2323,7 +2324,7 @@
         return result['return'];
       },
       levelGetTimesStarted: function (level) {
-        logDebug('call levelGetTimesStarted with level: ' + level.itemId);
+        Soomla.logDebug('call levelGetTimesStarted with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelGetTimesStarted',
@@ -2334,7 +2335,7 @@
       },
 
       levelGetTimesPlayed: function (level) {
-        logDebug('call levelGetTimesPlayed with level: ' + level.itemId);
+        Soomla.logDebug('call levelGetTimesPlayed with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelGetTimesPlayed',
@@ -2344,7 +2345,7 @@
         return result['return'];
       },
       levelIncTimesPlayed: function (level) {
-        logDebug('call levelIncTimesPlayed with level: ' + level.itemId);
+        Soomla.logDebug('call levelIncTimesPlayed with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelIncTimesPlayed',
@@ -2354,7 +2355,7 @@
         return result['return'];
       },
       levelDecTimesPlayed: function (level) {
-        logDebug('call levelDecTimesPlayed with level: ' + level.itemId);
+        Soomla.logDebug('call levelDecTimesPlayed with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelDecTimesPlayed',
@@ -2365,7 +2366,7 @@
       },
 
       levelGetTimesCompleted: function (level) {
-        logDebug('call levelGetTimesCompleted with level: ' + level.itemId);
+        Soomla.logDebug('call levelGetTimesCompleted with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelGetTimesCompleted',
@@ -2375,7 +2376,7 @@
         return result['return'];
       },
       levelIncTimesCompleted: function (level) {
-        logDebug('call levelIncTimesCompleted with level: ' + level.itemId);
+        Soomla.logDebug('call levelIncTimesCompleted with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelIncTimesCompleted',
@@ -2385,7 +2386,7 @@
         return result['return'];
       },
       levelDecTimesCompleted: function (level) {
-        logDebug('call levelDecTimesCompleted with level: ' + level.itemId);
+        Soomla.logDebug('call levelDecTimesCompleted with level: ' + level.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::levelDecTimesCompleted',
@@ -2396,7 +2397,7 @@
       },
 
       missionSetCompleted: function (mission, completed, notify) {
-        logDebug('call missionSetCompleted with mission: ' + mission.itemId);
+        Soomla.logDebug('call missionSetCompleted with mission: ' + mission.itemId);
 
         Soomla.callNative({
           method: 'CCLevelUpBridge::missionSetCompleted',
@@ -2406,7 +2407,7 @@
         });
       },
       missionGetTimesCompleted: function (mission) {
-        logDebug('call missionGetTimesCompleted with mission: ' + mission.itemId);
+        Soomla.logDebug('call missionGetTimesCompleted with mission: ' + mission.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::missionGetTimesCompleted',
@@ -2417,7 +2418,7 @@
       },
 
       scoreSetLatestScore: function (score, newValue) {
-        logDebug('call scoreSetLatestScore with score: ' + score.itemId);
+        Soomla.logDebug('call scoreSetLatestScore with score: ' + score.itemId);
 
         Soomla.callNative({
           method: 'CCLevelUpBridge::scoreSetLatestScore',
@@ -2426,7 +2427,7 @@
         });
       },
       scoreGetLatestScore: function (score) {
-        logDebug('call scoreGetLatestScore with score: ' + score.itemId);
+        Soomla.logDebug('call scoreGetLatestScore with score: ' + score.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::scoreGetLatestScore',
@@ -2436,7 +2437,7 @@
         return result['return'];
       },
       scoreSetRecordScore: function (score, newValue) {
-        logDebug('call scoreSetRecordScore with score: ' + score.itemId);
+        Soomla.logDebug('call scoreSetRecordScore with score: ' + score.itemId);
 
         Soomla.callNative({
           method: 'CCLevelUpBridge::scoreSetRecordScore',
@@ -2445,7 +2446,7 @@
         });
       },
       scoreGetRecordScore: function (score) {
-        logDebug('call scoreGetRecordScore with score: ' + score.itemId);
+        Soomla.logDebug('call scoreGetRecordScore with score: ' + score.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::scoreGetRecordScore',
@@ -2457,7 +2458,7 @@
 
 
       worldSetCompleted: function (world, completed, notify) {
-        logDebug('call worldSetCompleted with world: ' + world.itemId);
+        Soomla.logDebug('call worldSetCompleted with world: ' + world.itemId);
 
         Soomla.callNative({
           method: 'CCLevelUpBridge::worldSetCompleted',
@@ -2467,7 +2468,7 @@
         });
       },
       worldIsCompleted: function (world) {
-        logDebug('call worldIsCompleted with world: ' + world.itemId);
+        Soomla.logDebug('call worldIsCompleted with world: ' + world.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::worldIsCompleted',
@@ -2478,7 +2479,7 @@
       },
 
       worldSetReward: function (world, rewardId) {
-        logDebug('call worldSetReward with world: ' + world.itemId);
+        Soomla.logDebug('call worldSetReward with world: ' + world.itemId);
 
         Soomla.callNative({
           method: 'CCLevelUpBridge::worldSetReward',
@@ -2487,7 +2488,7 @@
         });
       },
       worldGetAssignedReward: function (world) {
-        logDebug('call worldGetAssignedReward with world: ' + world.itemId);
+        Soomla.logDebug('call worldGetAssignedReward with world: ' + world.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::worldGetAssignedReward',
@@ -2498,7 +2499,7 @@
       },
 
       worldSetLastCompletedInnerWorld: function (world, innerWorldId) {
-        logDebug('call worldSetLastCompletedInnerWorld with world: ' + world.itemId);
+        Soomla.logDebug('call worldSetLastCompletedInnerWorld with world: ' + world.itemId);
 
         Soomla.callNative({
           method: 'CCLevelUpBridge::worldSetLastCompletedInnerWorld',
@@ -2507,7 +2508,7 @@
         });
       },
       worldGetLastCompletedInnerWorld: function (world) {
-        logDebug('call worldGetLastCompletedInnerWorld with world: ' + world.itemId);
+        Soomla.logDebug('call worldGetLastCompletedInnerWorld with world: ' + world.itemId);
 
         var result = Soomla.callNative({
           method: 'CCLevelUpBridge::worldGetLastCompletedInnerWorld',
@@ -2518,13 +2519,13 @@
       },
       //private:
       bindNative: function bindNative() {
-        logDebug('Binding to native platform bridge...');
+        Soomla.logDebug('Binding to native platform bridge...');
         if (platform.isAndroid()) {
           jsb.reflection.callStaticMethod('com/soomla/cocos2dx/levelup/LevelUpBridgeBinder', 'bind', '()V');
         } else if (platform.isIos()) {
           jsb.reflection.callStaticMethod('LevelUpBridge', 'initShared');
         } else {
-          logError('Unsupported platform: ' + platform.name);
+          Soomla.logError('Unsupported platform: ' + platform.name);
         }
       }
     });
@@ -2567,7 +2568,7 @@
 
 
     /**
-     @class CCSoomlaLevelUp
+     @class SoomlaLevelUp
      @brief This is the top level container for the cocos2dx-levelup model and
      definitions. It stores the configurations of the game's world-hierarchy and
      provides lookup functions for levelup model elements.
@@ -2595,8 +2596,9 @@
 
         this.save();
 
-        Soomla.LevelUpBridge.initShared();
-        Soomla.levelUpBridge.initLevelUp();
+        Soomla.LevelUpEventDispatcher.initShared();
+
+        Soomla.worldStorage.initLevelUp();
       },
 
       /**
@@ -2915,6 +2917,64 @@
      Use this class to check if a certain `Gate` is open, or to open it.
      */
     return Soomla.declareClass('GateStorage', {
+      DB_GATE_KEY_PREFIX: 'soomla.levelup.gates.',
+
+      /**
+       Determines if the given `Gate` is open.
+       @param gate `Gate` to check if is open.
+       @return If the given `Gate` is open returns `true`; otherwise, `false`.
+       */
+      isOpen: function (gate) {
+        var key = this.keyGateOpen(gate.itemId);
+        var val = Soomla.keyValueStorage.getValue(key);
+        return (val && val.length > 0);
+      },
+
+      /**
+       Sets the given `Gate` as open if the given parameter `open` is `true`;
+       otherwise sets as closed.
+       @param gate The `Gate` to open/close.
+       @param open If set to `true` set the `Gate` to open;
+       @param notify If set to `true` trigger event.
+       */
+      setOpen: function (gate, open, notify) {
+        notify = notify || _.isUndefined(notify);
+
+        var key = this.keyGateOpen(gate.itemId);
+
+        if (open) {
+          Soomla.keyValueStorage.setValue(key, 'yes');
+
+          if (notify) {
+            Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_GATE_OPENED, [gate]);
+          }
+        } else {
+          Soomla.keyValueStorage.deleteKeyValue(key);
+
+          if (notify) {
+            Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_GATE_CLOSED, [gate]);
+          }
+        }
+      },
+
+      // private
+      keyGatesWithGateId: function (gateId, postfix) {
+        return this.DB_GATE_KEY_PREFIX + gateId + '.' + postfix;
+      },
+
+      keyGateOpen: function (gateId) {
+        return this.keyGatesWithGateId(gateId, 'open');
+      }
+    });
+  }();
+
+  var NativeGateStorage = Soomla.NativeGateStorage = function () {
+    /**
+     @class
+     @brief A utility class for persisting and querying the state of `Gate`s.
+     Use this class to check if a certain `Gate` is open, or to open it.
+     */
+    return Soomla.declareClass('NativeGateStorage', {
       /**
        Determines if the given `Gate` is open.
        @param gate `Gate` to check if is open.
@@ -2935,9 +2995,9 @@
         notify = notify || _.isUndefined(notify);
         Soomla.levelUpBridge.gateSetOpen(gate, open, notify);
       }
-    });
+    }, GateStorage);
   }();
-  Soomla.gateStorage = GateStorage.create();
+  Soomla.gateStorage = Soomla.platform.isNativeSupported() ? NativeGateStorage.create() : GateStorage.create();
 
   var ScoreStorage = Soomla.ScoreStorage = function () {
     /**
@@ -2946,6 +3006,76 @@
      Use this class to get or set the values of `Score`s and records.
      */
     return Soomla.declareClass('ScoreStorage', {
+      DB_SCORE_KEY_PREFIX: 'soomla.levelup.scores.',
+      
+      /**
+       Sets the given `Score` to the given value.
+       @param score `Score` to set.
+       @param newValue The value to set for the `Score`.
+       */
+      setLatestScore: function (score, newValue) {
+        var key = this.keyLatestScoreWithScoreId(score.itemId);
+        Soomla.keyValueStorage.setValue(key, newValue);
+
+        Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_LATEST_SCORE_CHANGED, [score]);
+      },
+
+      /**
+       Retrieves the most recently saved value of the given `Score`.
+       @param score Score whose most recent value it to be retrieved.
+       @return Number The latest `Score`.
+       */
+      getLatestScore: function (score) {
+        var key = this.keyLatestScoreWithScoreId(score.itemId);
+        var val = Soomla.keyValueStorage.getValue(key);
+        return (val && val.length > 0) ? parseFloat(val) : -1;
+      },
+  
+      /**
+       Sets the given record for the given `Score`.
+       @param score `Score` whose record is to change.
+       @param newValue The new record.
+       */
+      setRecordScore: function (score, newValue) {
+        var key = this.keyRecordScoreWithScoreId(score.itemId);
+        Soomla.keyValueStorage.setValue(key, newValue);
+
+        Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_SCORE_RECORD_CHANGED, [score]);
+      },
+  
+      /**
+       Retrieves the record of the given `Score`.
+       @param score `Score` whose record is to be retrieved.
+       @return Number The record value of the given `Score`.
+       */
+      getRecordScore: function (score) {
+        var key = this.keyRecordScoreWithScoreId(score.itemId);
+        var val = Soomla.keyValueStorage.getValue(key);
+        return (val && val.length > 0) ? parseFloat(val) : -1;
+      },
+
+      keyLatestScoreWithScoreId: function (scoreId) {
+        return this.keyScoresWithScoreId(scoreId, "latest");
+      },
+      
+      keyRecordScoreWithScoreId: function (scoreId) {
+        return this.keyScoresWithScoreId(scoreId, "record");
+      },
+
+      keyScoresWithScoreId: function (scoreId, postfix) {
+        return this.DB_SCORE_KEY_PREFIX + scoreId + '.' + postfix;
+      }
+      
+    });
+  }();
+
+  var NativeScoreStorage = Soomla.NativeScoreStorage = function () {
+    /**
+     @class `CCScoreStorage`
+     @brief A utility class for persisting and querying `Score`s and records.
+     Use this class to get or set the values of `Score`s and records.
+     */
+    return Soomla.declareClass('NativeScoreStorage', {
       /**
        Sets the given `Score` to the given value.
        @param score `Score` to set.
@@ -2963,7 +3093,7 @@
       getLatestScore: function (score) {
         return Soomla.levelUpBridge.scoreGetLatestScore(score);
       },
-  
+
       /**
        Sets the given record for the given `Score`.
        @param score `Score` whose record is to change.
@@ -2972,7 +3102,7 @@
       setRecordScore: function (score, newValue) {
         Soomla.levelUpBridge.scoreSetRecordScore(score, newValue);
       },
-  
+
       /**
        Retrieves the record of the given `Score`.
        @param score `Score` whose record is to be retrieved.
@@ -2981,9 +3111,10 @@
       getRecordScore: function (score) {
         return Soomla.levelUpBridge.scoreGetRecordScore(score);
       }
-    });
+    }, ScoreStorage);
   }();
-  Soomla.scoreStorage = ScoreStorage.create();
+
+  Soomla.scoreStorage = Soomla.platform.isNativeSupported() ? NativeScoreStorage.create() : ScoreStorage.create();
 
   var MissionStorage = Soomla.MissionStorage = function () {
     /**
@@ -2993,6 +3124,9 @@
      completion status.
      */
     return Soomla.declareClass('MissionStorage', {
+
+      DB_MISSION_KEY_PREFIX: 'soomla.levelup.missions.',
+      
       /**
        Increases the number of times the given `Mission` has been completed
        if the given paramter `up` is `true`; otherwise decreases the number
@@ -3005,7 +3139,21 @@
        */
       setCompleted: function setCompleted(mission, completed, notify) {
         notify = notify || _.isUndefined(notify);
-        return Soomla.levelUpBridge.missionSetCompleted(mission, completed, notify);
+
+        var total = this.getTimesCompleted(mission) + (completed ? 1 : -1);
+        if (total < 0) {
+          total = 0;
+        }
+
+        this.setTimesCompleted(mission, total);
+
+        if (notify) {
+          if (completed) {
+            Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_MISSION_COMPLETED, [mission]);
+          } else {
+            Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_MISSION_COMPLETION_REVOKED, [mission]);
+          }
+        }
       },
   
       /**
@@ -3024,11 +3172,61 @@
        @return The number of times the given mission has been completed.
        */
       getTimesCompleted: function (mission) {
-        return Soomla.levelUpBridge.missionGetTimesCompleted(mission);
+        var key = this.keyMissionTimesCompletedWithMissionId(mission.itemId);
+        var val = Soomla.keyValueStorage.getValue(key);
+        return (val && val.length > 0) ? parseInt(val) : 0;
+      },
+
+      setTimesCompleted: function (mission, timesCompleted) {
+        var key = this.keyMissionTimesCompletedWithMissionId(mission.itemId);
+        Soomla.keyValueStorage.setValue(key, timesCompleted);
+      },
+
+      keyMissionTimesCompletedWithMissionId: function (missionId) {
+        return this.keyMissionsWithMissionId(missionId, 'timesCompleted');
+      },
+
+      keyMissionsWithMissionId: function (missionId, postfix) {
+        return this.DB_MISSION_KEY_PREFIX + missionId + '.' + postfix;
       }
     });
   }();
-  Soomla.missionStorage = MissionStorage.create();
+
+  var NativeMissionStorage = Soomla.NativeMissionStorage = function () {
+    /**
+     @class
+     @brief A utility class for persisting and querying the state of `Mission`s.
+     Use this class to check if a certain `Mission` is complete, or to set its
+     completion status.
+     */
+    return Soomla.declareClass('NativeMissionStorage', {
+      /**
+       Increases the number of times the given `Mission` has been completed
+       if the given paramter `up` is `true`; otherwise decreases the number
+       of times completed.
+       @param mission `Mission` to set as completed.
+       @param completed If set to `true` add 1 to the number of times completed,
+       otherwise subtract 1.
+       @param notify If set to `true` trigger the relevant event according
+       to the value of `up`.
+       */
+      setCompleted: function setCompleted(mission, completed, notify) {
+        notify = notify || _.isUndefined(notify);
+        Soomla.levelUpBridge.missionSetCompleted(mission, completed, notify);
+      },
+
+      /**
+       Retrieves the number of times the given `Mission` has been completed.
+       @param mission Mission.
+       @return The number of times the given mission has been completed.
+       */
+      getTimesCompleted: function (mission) {
+        return Soomla.levelUpBridge.missionGetTimesCompleted(mission);
+      }
+    }, MissionStorage);
+  }();
+
+  Soomla.missionStorage = Soomla.platform.isNativeSupported() ? NativeMissionStorage.create() : MissionStorage.create();
 
   var WorldStorage = Soomla.WorldStorage = function () {
     /**
@@ -3037,6 +3235,129 @@
      Use this class to get or set the completion of `World`s and assign rewards.
      */
     return Soomla.declareClass('WorldStorage', {
+      DB_WORLD_KEY_PREFIX: 'soomla.levelup.worlds.',
+
+      initLevelUp: function () {
+        Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_LEVEL_UP_INITIALIZED);
+      },
+
+      /**
+       Sets the given `World` as completed if `completed` is `true`.
+       @param world `World` to set as completed.
+       @param completed If set to `true` the `World` will be set
+       as completed.
+       @param notify If set to `true` trigger events.
+       */
+      setCompleted: function (world, completed, notify) {
+        notify = notify || _.isUndefined(notify);
+
+        var key = this.keyWorldCompletedWithWorldId(world.itemId);
+
+        if (completed) {
+          Soomla.keyValueStorage.setValue(key, 'yes');
+
+          if (notify) {
+            Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_WORLD_COMPLETED, [world]);
+          }
+        } else {
+          Soomla.keyValueStorage.deleteKeyValue(key);
+        }
+      },
+  
+      /**
+       Determines if the given `World` is completed.
+       @param world `World` to determine if completed.
+       @return If the given `World` is completed returns `true`;
+       otherwise `false`.
+       */
+      isCompleted: function (world) {
+        var key = this.keyWorldCompletedWithWorldId(world.itemId);
+        var val = Soomla.keyValueStorage.getValue(key);
+        return (val && val.length > 0);
+      },
+  
+      /**
+       Assigns the reward with the given reward ID to the given `World`.
+       @param world `World` to assign a reward to.
+       @param rewardId ID of reward to assign.
+       */
+      setReward: function (world, rewardId) {
+        var key = this.keyRewardWithWorldId(world.itemId);
+
+        if (rewardId && rewardId.length > 0) {
+          Soomla.keyValueStorage.setValue(key, rewardId);
+        } else {
+          Soomla.keyValueStorage.deleteKeyValue(key);
+        }
+      },
+  
+      /**
+       Retrieves the given `World`'s assigned reward.
+       @param world `World` whose reward is to be retrieved.
+       @return The assigned reward to retrieve.
+       */
+      getAssignedReward: function (world) {
+        var key = this.keyRewardWithWorldId(world.itemId);
+        return Soomla.keyValueStorage.getValue(key);
+      },
+  
+      /**
+       Sets the given inner world ID as the last completed inner world
+       for the given `World`.
+       @param world `World` to set inner completed world ID.
+       @param innerWorldId the inner world ID that was last completed.
+       */
+      setLastCompletedInnerWorld: function (world, innerWorldId) {
+        var key = this.keyLastCompletedInnerWorldWithWorldId(world.itemId);
+
+        if (innerWorldId && innerWorldId.length > 0) {
+          Soomla.keyValueStorage.setValue(key, innerWorldId);
+        } else {
+          Soomla.keyValueStorage.deleteKeyValue(key);
+        }
+      },
+  
+      /**
+       Retrieves the given `World`'s last completed inner world.
+       @param world `World` whose last completed inner world is to be retrieved.
+       @return The last completed inner world ID.
+       */
+      getLastCompletedInnerWorld: function (world) {
+        var key = this.keyLastCompletedInnerWorldWithWorldId(world.itemId);
+        return Soomla.keyValueStorage.getValue(key);
+      },
+
+      keyWorldCompletedWithWorldId: function (worldId) {
+        return this.keyWorldsWithWorldId(worldId, 'completed');
+      },
+
+      keyWorldsWithWorldId: function (worldId, postfix) {
+        return this.DB_WORLD_KEY_PREFIX + worldId + '.' + postfix;
+      },
+
+      keyRewardWithWorldId: function (worldId) {
+        return this.keyWorldsWithWorldId(worldId, 'assignedReward');
+      },
+
+      keyLastCompletedInnerWorldWithWorldId: function (worldId) {
+        return this.keyWorldsWithWorldId(worldId, 'lastCompletedInnerWorld');
+      }
+    });
+  }();
+
+  var NativeWorldStorage = Soomla.NativeWorldStorage = function () {
+    /**
+     @class `CCWorldStorage`
+     @brief A utility class for persisting and querying `World`s.
+     Use this class to get or set the completion of `World`s and assign rewards.
+     */
+    return Soomla.declareClass('NativeWorldStorage', {
+
+      initLevelUp: function () {
+        Soomla.LevelUpBridge.initShared();
+        Soomla.levelUpBridge.initLevelUp();
+      },
+
       /**
        Sets the given `World` as completed if `completed` is `true`.
        @param world `World` to set as completed.
@@ -3049,7 +3370,7 @@
 
         Soomla.levelUpBridge.worldSetCompleted(world, completed, notify);
       },
-  
+
       /**
        Determines if the given `World` is completed.
        @param world `World` to determine if completed.
@@ -3059,7 +3380,7 @@
       isCompleted: function (world) {
         return Soomla.levelUpBridge.worldIsCompleted(world);
       },
-  
+
       /**
        Assigns the reward with the given reward ID to the given `World`.
        @param world `World` to assign a reward to.
@@ -3068,7 +3389,7 @@
       setReward: function (world, rewardId) {
         Soomla.levelUpBridge.worldSetReward(world, rewardId);
       },
-  
+
       /**
        Retrieves the given `World`'s assigned reward.
        @param world `World` whose reward is to be retrieved.
@@ -3077,7 +3398,7 @@
       getAssignedReward: function (world) {
         return Soomla.levelUpBridge.worldGetAssignedReward(world);
       },
-  
+
       /**
        Sets the given inner world ID as the last completed inner world
        for the given `World`.
@@ -3087,7 +3408,7 @@
       setLastCompletedInnerWorld: function (world, innerWorldId) {
         Soomla.levelUpBridge.worldSetLastCompletedInnerWorld(world, innerWorldId);
       },
-  
+
       /**
        Retrieves the given `World`'s last completed inner world.
        @param world `World` whose last completed inner world is to be retrieved.
@@ -3096,10 +3417,11 @@
       getLastCompletedInnerWorld: function (world) {
         return Soomla.levelUpBridge.worldGetLastCompletedInnerWorld(world);
       }
-      
-    });
+
+    }, WorldStorage);
   }();
-  Soomla.worldStorage = WorldStorage.create();
+
+  Soomla.worldStorage = Soomla.platform.isNativeSupported() ? NativeWorldStorage.create() : WorldStorage.create();
 
   var LevelStorage = Soomla.LevelStorage = function () {
     /**
@@ -3109,6 +3431,241 @@
      duration, start or end time, etc.
      */
     return Soomla.declareClass('LevelStorage', {
+      DB_LEVEL_KEY_PREFIX: 'soomla.levelup.levels.',
+
+      /**
+       Sets the slowest (given) duration for the given level.
+       @param level `Level` to set slowest duration.</param>
+       @param duration Duration to set.
+       */
+      setSlowestDurationMillis: function (level, duration) {
+        var key = this.keySlowestDurationWithLevelId(level.itemId);
+        Soomla.keyValueStorage.setValue(key, duration);
+      },
+
+      /**
+       Retrieves the slowest duration for the given level.
+       @param level `Level` to get slowest duration.
+       @return Number The slowest duration of the given `Level`.
+       */
+      getSlowestDurationMillis: function (level) {
+        var key = this.keySlowestDurationWithLevelId(level.itemId);
+        var val = Soomla.keyValueStorage.getValue(key);
+        return (val && val.length > 0) ? parseInt(val) : 0;
+      },
+  
+      /**
+       Sets the fastest (given) duration for the given `Level`.
+       @param level `Level` to set fastest duration.
+       @param duration Duration to set.
+       */
+      setFastestDurationMillis: function (level, duration) {
+        var key = this.keyFastestDurationWithLevelId(level.itemId);
+        Soomla.keyValueStorage.setValue(key, duration);
+      },
+  
+      /**
+       Retrieves the fastest duration for the given `Level`.
+       @param level `Level` to get fastest duration.
+       @return The fastest duration of the given `Level`.
+       */
+      getFastestDurationMillis: function (level) {
+        var key = this.keyFastestDurationWithLevelId(level.itemId);
+        var val = Soomla.keyValueStorage.getValue(key);
+        return (val && val.length > 0) ? parseInt(val) : 0;
+      },
+  
+      /**
+       Increases by 1 the number of times the given `Level` has been started.
+       @param level `Level` to increase its times started.
+       @return Number The number of times started after increasing.
+       */
+      incTimesStarted: function (level) {
+        var started = this.getTimesStarted(level);
+        if (started < 0) { /* can't be negative */
+          started = 0;
+        }
+        started++;
+
+        this.setTimesStarted(level, started);
+
+        // Notify level has started
+        Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_LEVEL_STARTED, [level]);
+
+        return started;
+      },
+  
+      /**
+       Decreases by 1 the number of times the given `Level` has been started.
+       @param level `Level` to decrease its times started.
+       @return Number The number of times started after decreasing.
+       */
+      decTimesStarted: function (level) {
+        var started = this.getTimesStarted(level);
+        if (started <= 0) { /* can't be negative or zero */
+          started = 0;
+        }
+        started--;
+
+        this.setTimesStarted(level, started);
+
+        return started;
+      },
+  
+      /**
+       Retrieves the number of times this `Level` has been started.
+       @param level `Level` whose times started is to be retrieved.
+       @return Number The number of times started.
+       */
+      getTimesStarted: function (level) {
+        var key = this.keyTimesStartedWithLevelId(level.itemId);
+        var val = Soomla.keyValueStorage.getValue(key);
+        return (val && val.length > 0) ? parseInt(val) : 0;
+      },
+  
+      /**
+       Retrieves the number of times this `Level` has been played.
+       @param level `Level` whose times played is to be retrieved.
+       @return Number The number of times played.
+       */
+      getTimesPlayed: function (level) {
+        var key = this.keyTimesPlayedWithLevelId(level.itemId);
+        var val = Soomla.keyValueStorage.getValue(key);
+        return (val && val.length > 0) ? parseInt(val) : 0;
+      },
+  
+      /**
+       Increases by 1 the number of times the given `Level` has been played.
+       @param level `Level` to increase its times played.
+       @return Number The number of times played after increasing.
+       */
+      incTimesPlayed: function (level) {
+        var played = this.getTimesPlayed(level);
+        if (played < 0) { /* can't be negative */
+          played = 0;
+        }
+        played++;
+
+        this.setTimesPlayed(level, played);
+
+        // Notify level has ended
+        Soomla.fireSoomlaEvent(LevelUpConsts.EVENT_LEVEL_ENDED, [level]);
+
+        return played;
+      },
+  
+      /**
+       Decreases by 1 the number of times the given `Level` has been played.
+       @param level `Level` to decrease its times played.
+       @return Number The number of times played after decreasing.
+       */
+      decTimesPlayed: function (level) {
+        var played = this.getTimesPlayed(level);
+        if (played <= 0) { /* can't be negative or zero */
+          return 0;
+        }
+        played--;
+
+        this.setTimesPlayed(level, played);
+        return played;
+      },
+  
+      /**
+       Retrieves the number of times this `Level` has been completed.
+       @param level `Level` whose times completed is to be retrieved.
+       @return Number The number of times completed.
+       */
+      getTimesCompleted: function (level) {
+        var key = this.keyTimesCompletedWithLevelId(level.itemId);
+        var val = Soomla.keyValueStorage.getValue(key);
+        return (val && val.length > 0) ? parseInt(val) : 0;
+      },
+  
+      /**
+       Increases by 1 the number of times the given `Level` has been completed.
+       @param level `Level` to increase its times completed.
+       @return Number The number of times completed after increasing.
+       */
+      incTimesCompleted: function (level) {
+        var played = this.getTimesCompleted(level);
+        if (played < 0) { /* can't be negative */
+          played = 0;
+        }
+        played++;
+
+        this.setTimesCompleted(level, played);
+
+        return played;
+      },
+  
+      /**
+       Decreases by 1 the number of times the given `Level` has been completed.
+       @param level `Level` to decrease its times completed.
+       @return Number The number of times completed after decreasing.
+       */
+      decTimesCompleted: function (level) {
+        var played = this.getTimesCompleted(level);
+        if (played <= 0) { /* can't be negative or zero */
+          played = 0;
+        }
+        played--;
+
+        this.setTimesCompleted(level, played);
+
+        return played;
+      },
+
+      // private
+      setTimesStarted: function (level, started) {
+        var key = this.keyTimesCompletedWithLevelId(level.itemId);
+        Soomla.keyValueStorage.setValue(key, started);
+      },
+
+      setTimesPlayed: function (level, played) {
+        var key = this.keyTimesPlayedWithLevelId(level.itemId);
+        Soomla.keyValueStorage.setValue(key, played);
+      },
+
+      setTimesCompleted: function (level, timesCompleted) {
+        var key = this.keyTimesCompletedWithLevelId(level.itemId);
+        Soomla.keyValueStorage.setValue(key, timesCompleted);
+      },
+
+      keySlowestDurationWithLevelId: function (levelId) {
+        return this.keyLevelsWithLevelId(levelId, "slowest");
+      },
+
+      keyFastestDurationWithLevelId: function (levelId) {
+        return this.keyLevelsWithLevelId(levelId, "fastest");
+      },
+
+      keyTimesCompletedWithLevelId: function (levelId) {
+        return this.keyLevelsWithLevelId(levelId, "timesCompleted");
+      },
+
+      keyTimesStartedWithLevelId: function (levelId) {
+        return this.keyLevelsWithLevelId(levelId, "started");
+      },
+
+      keyTimesPlayedWithLevelId: function (levelId) {
+        return this.keyLevelsWithLevelId(levelId, "played");
+      },
+
+      keyLevelsWithLevelId: function (levelId, postfix) {
+        return this.DB_LEVEL_KEY_PREFIX + levelId + '.' + postfix;
+      }
+
+    });
+  }();
+
+  var NativeLevelStorage = Soomla.NativeLevelStorage = function () {
+    /**
+     @class `CCLevelStorage`
+     @brief A utility class for persisting and querying the state of `Level`s.
+     Use this class to get or set information about a `Level`, such as the play
+     duration, start or end time, etc.
+     */
+    return Soomla.declareClass('NativeLevelStorage', {
       /**
        Sets the slowest (given) duration for the given level.
        @param level `Level` to set slowest duration.</param>
@@ -3126,7 +3683,7 @@
       getSlowestDurationMillis: function (level) {
         return Soomla.levelUpBridge.levelGetSlowestDurationMillis(level);
       },
-  
+
       /**
        Sets the fastest (given) duration for the given `Level`.
        @param level `Level` to set fastest duration.
@@ -3135,7 +3692,7 @@
       setFastestDurationMillis: function (level, duration) {
         Soomla.levelUpBridge.levelSetFastestDurationMillis(level, duration);
       },
-  
+
       /**
        Retrieves the fastest duration for the given `Level`.
        @param level `Level` to get fastest duration.
@@ -3144,7 +3701,7 @@
       getFastestDurationMillis: function (level) {
         return Soomla.levelUpBridge.levelGetFastestDurationMillis(level);
       },
-  
+
       /**
        Increases by 1 the number of times the given `Level` has been started.
        @param level `Level` to increase its times started.
@@ -3153,7 +3710,7 @@
       incTimesStarted: function (level) {
         return Soomla.levelUpBridge.levelIncTimesStarted(level);
       },
-  
+
       /**
        Decreases by 1 the number of times the given `Level` has been started.
        @param level `Level` to decrease its times started.
@@ -3162,7 +3719,7 @@
       decTimesStarted: function (level) {
         return Soomla.levelUpBridge.levelDecTimesStarted(level);
       },
-  
+
       /**
        Retrieves the number of times this `Level` has been started.
        @param level `Level` whose times started is to be retrieved.
@@ -3171,7 +3728,7 @@
       getTimesStarted: function (level) {
         return Soomla.levelUpBridge.levelGetTimesStarted(level);
       },
-  
+
       /**
        Retrieves the number of times this `Level` has been played.
        @param level `Level` whose times played is to be retrieved.
@@ -3180,7 +3737,7 @@
       getTimesPlayed: function (level) {
         return Soomla.levelUpBridge.levelGetTimesPlayed(level);
       },
-  
+
       /**
        Increases by 1 the number of times the given `Level` has been played.
        @param level `Level` to increase its times played.
@@ -3189,7 +3746,7 @@
       incTimesPlayed: function (level) {
         return Soomla.levelUpBridge.levelIncTimesPlayed(level);
       },
-  
+
       /**
        Decreases by 1 the number of times the given `Level` has been played.
        @param level `Level` to decrease its times played.
@@ -3198,7 +3755,7 @@
       decTimesPlayed: function (level) {
         return Soomla.levelUpBridge.levelDecTimesPlayed(level);
       },
-  
+
       /**
        Retrieves the number of times this `Level` has been completed.
        @param level `Level` whose times completed is to be retrieved.
@@ -3207,7 +3764,7 @@
       getTimesCompleted: function (level) {
         return Soomla.levelUpBridge.levelGetTimesCompleted(level);
       },
-  
+
       /**
        Increases by 1 the number of times the given `Level` has been completed.
        @param level `Level` to increase its times completed.
@@ -3216,7 +3773,7 @@
       incTimesCompleted: function (level) {
         return Soomla.levelUpBridge.levelIncTimesCompleted(level);
       },
-  
+
       /**
        Decreases by 1 the number of times the given `Level` has been completed.
        @param level `Level` to decrease its times completed.
@@ -3225,21 +3782,15 @@
       decTimesCompleted: function (level) {
         return Soomla.levelUpBridge.levelDecTimesCompleted(level);
       }
-    });
+    }, NativeLevelStorage);
   }();
-  Soomla.levelStorage = LevelStorage.create();
+
+  Soomla.levelStorage = Soomla.platform.isNativeSupported() ? NativeLevelStorage.create() : LevelStorage.create();
+
 
   var LevelUpEventDispatcher = Soomla.LevelUpEventDispatcher = function () {
 
-    /**
-     @class CCLevelUpEventDispatcher
-     @brief Fires event when received from the native implementation.
-
-     Signs up to native LevelUp events.
-     When the events arrive this class fires the respective event through
-     the Cocos2dx Event Dispatcher.
-     */
-    return Soomla.declareClass('LevelUpEventDispatcher', {
+    var LevelUpEventDispatcher = Soomla.declareClass('LevelUpEventDispatcher', {
       init: function () {
         var eventDispatcher = Soomla.soomlaEventDispatcher;
 
@@ -3311,6 +3862,17 @@
         return true;
       }
     });
+
+    LevelUpEventDispatcher.initShared = function () {
+      var ret = LevelUpEventDispatcher.create();
+      if (ret.init()) {
+        Soomla.levelUpEventDispatcher = ret;
+      } else {
+        Soomla.levelUpEventDispatcher = null;
+      }
+    };
+
+    return LevelUpEventDispatcher;
   }();
 
   /**
