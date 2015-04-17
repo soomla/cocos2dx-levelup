@@ -37,7 +37,7 @@ namespace soomla {
 
         static CCWorldStorage *getInstance();
 
-        void initLevelUp();
+        virtual void initLevelUp();
 
         /**
          Sets the given `World` as completed if `completed` is `true`.
@@ -47,7 +47,7 @@ namespace soomla {
          @param notify If set to `true` trigger events.
          */
         virtual void setCompleted(CCWorld *world, bool completed, bool notify);
-        void setCompleted(CCWorld *world, bool completed);
+        virtual void setCompleted(CCWorld *world, bool completed);
 
         /**
          Determines if the given `World` is completed.

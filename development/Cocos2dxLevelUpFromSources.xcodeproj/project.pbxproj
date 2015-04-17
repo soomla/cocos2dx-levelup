@@ -8,9 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		372B708B429A9C876C985737 /* CCSocialUploadMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7DAB0B0BB3000F871947 /* CCSocialUploadMission.h */; };
+		372B720204C9DF9F96FB2B3F /* CCNativeMissionStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7B8AE08566CBFE925E09 /* CCNativeMissionStorage.cpp */; };
 		372B7224D275BB1333F39035 /* CCSocialStatusMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7D2BA240C40973AE804C /* CCSocialStatusMission.cpp */; };
+		372B723C3E66BB0EE898E7F5 /* CCNativeLevelStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7878F9A68CD766A225A0 /* CCNativeLevelStorage.h */; };
 		372B7282359B2973C58305F2 /* CCSocialStatusMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B73E5BFD797259A982C20 /* CCSocialStatusMission.h */; };
 		372B7367CE943BCDCB7624D2 /* CCPurchasingMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B76B105E532FCD11DAC53 /* CCPurchasingMission.cpp */; };
+		372B739A0AA233A031884574 /* CCNativeMissionStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7611EB31D01B41CF0A68 /* CCNativeMissionStorage.h */; };
+		372B73D4339FC4558C1AC0DA /* CCNativeLevelStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B773B2590EC6892C17A29 /* CCNativeLevelStorage.cpp */; };
 		372B754965BCFD96AFD35F84 /* CCSocialStoryMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7ADC3890E5E65AAD3270 /* CCSocialStoryMission.cpp */; };
 		372B758D02AC07D2B8099E25 /* CCBalanceGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B715770A556EC7DFEFC31 /* CCBalanceGate.cpp */; };
 		372B75EEB950F5BFEF2C9A7F /* CCPurchasableGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7D4B20FB6BD4B373D48E /* CCPurchasableGate.h */; };
@@ -18,6 +22,7 @@
 		372B76811CEE5655EC58B9D2 /* CCSocialLikeGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7D8AE02BB5D9882D1F9C /* CCSocialLikeGate.cpp */; };
 		372B7710524099C25AF37854 /* CCSocialLikeMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B743F24555580F824689A /* CCSocialLikeMission.cpp */; };
 		372B773321C4BA21CB6BE9B7 /* CCSocialActionGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B77581EE07D32E4F89699 /* CCSocialActionGate.cpp */; };
+		372B7760CB9949D9A505D7AF /* CCNativeScoreStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B739330F7A428D2B2E753 /* CCNativeScoreStorage.h */; };
 		372B7794EC1929BA9D119B67 /* CCSocialActionGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B77DE3F0116EB6EFA5302 /* CCSocialActionGate.h */; };
 		372B7798C254C9553F3DFE2F /* CCPurchasableGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B705BBBE5B6A051E0F89C /* CCPurchasableGate.cpp */; };
 		372B77C3ADB395756E8E4353 /* CCSocialUploadGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B71AD7AB18C2A61092D8D /* CCSocialUploadGate.h */; };
@@ -25,13 +30,18 @@
 		372B7834621FA2C1BE848F99 /* CCSocialStoryGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B765597CFDE758D5D88C3 /* CCSocialStoryGate.h */; };
 		372B7847572612AF904DE437 /* CCSocialUploadMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B72C31C6DCA9CB63ED4A5 /* CCSocialUploadMission.cpp */; };
 		372B7890B055B97012CDA491 /* CCSocialStoryGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7C7B0B584670E1E8CEBA /* CCSocialStoryGate.cpp */; };
+		372B790A6CCFB57AE6A0295F /* CCNativeGateStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B70ADAC07CF2B54B03A40 /* CCNativeGateStorage.h */; };
 		372B79BE643F4A24F177E325 /* CCSocialStatusGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7254FE9DC2EC64E9BF5C /* CCSocialStatusGate.h */; };
+		372B7ABBA1EE917DFB907B3D /* CCNativeWorldStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7604DC06C7DA3A0946D0 /* CCNativeWorldStorage.h */; };
 		372B7BAD7CA78A9111FF627E /* CCBalanceMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7B8066E37591EAE5D589 /* CCBalanceMission.h */; };
 		372B7BC9FD9BF81C5276D44B /* CCSocialStatusGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B743D533226019FFE1D4B /* CCSocialStatusGate.cpp */; };
 		372B7CF8AF8D38EDA9E3D388 /* CCBalanceGate.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7F87FEBB8A75F41E7353 /* CCBalanceGate.h */; };
 		372B7D3695651BB929947B7B /* CCSocialUploadGate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B78C040DEC89087F8BD40 /* CCSocialUploadGate.cpp */; };
 		372B7E6E164EBD909AB45D29 /* CCSocialLikeMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B76E3A8B8B30A20CBC79D /* CCSocialLikeMission.h */; };
+		372B7E77D9EBAC0229421B80 /* CCNativeWorldStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B758EAE308999DC25E48D /* CCNativeWorldStorage.cpp */; };
 		372B7EA72AD78519E217FE1D /* CCBalanceMission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7EAB5EE3DFF8F2E6E030 /* CCBalanceMission.cpp */; };
+		372B7F388F3AE51549B17EFB /* CCNativeScoreStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7466A27D614A5037677C /* CCNativeScoreStorage.cpp */; };
+		372B7F451C240B8C3EE89AED /* CCNativeGateStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B70E16714211CD9618BFE /* CCNativeGateStorage.cpp */; };
 		372B7F77C4042EC2997A7EF2 /* CCSocialStoryMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B7EB19C08B6A9B8FA34E7 /* CCSocialStoryMission.h */; };
 		9DEA543019B4A5F00093D5D9 /* CCLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA53ED19B4A5F00093D5D9 /* CCLevel.cpp */; };
 		9DEA543119B4A5F00093D5D9 /* CCLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA53EE19B4A5F00093D5D9 /* CCLevel.h */; };
@@ -110,22 +120,32 @@
 
 /* Begin PBXFileReference section */
 		372B705BBBE5B6A051E0F89C /* CCPurchasableGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCPurchasableGate.cpp; sourceTree = "<group>"; };
+		372B70ADAC07CF2B54B03A40 /* CCNativeGateStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNativeGateStorage.h; sourceTree = "<group>"; };
+		372B70E16714211CD9618BFE /* CCNativeGateStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCNativeGateStorage.cpp; sourceTree = "<group>"; };
 		372B715770A556EC7DFEFC31 /* CCBalanceGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBalanceGate.cpp; sourceTree = "<group>"; };
 		372B71AD7AB18C2A61092D8D /* CCSocialUploadGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSocialUploadGate.h; sourceTree = "<group>"; };
 		372B7254FE9DC2EC64E9BF5C /* CCSocialStatusGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSocialStatusGate.h; sourceTree = "<group>"; };
 		372B72C31C6DCA9CB63ED4A5 /* CCSocialUploadMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSocialUploadMission.cpp; sourceTree = "<group>"; };
+		372B739330F7A428D2B2E753 /* CCNativeScoreStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNativeScoreStorage.h; sourceTree = "<group>"; };
 		372B73E5BFD797259A982C20 /* CCSocialStatusMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSocialStatusMission.h; sourceTree = "<group>"; };
 		372B743D533226019FFE1D4B /* CCSocialStatusGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSocialStatusGate.cpp; sourceTree = "<group>"; };
 		372B743F24555580F824689A /* CCSocialLikeMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSocialLikeMission.cpp; sourceTree = "<group>"; };
+		372B7466A27D614A5037677C /* CCNativeScoreStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCNativeScoreStorage.cpp; sourceTree = "<group>"; };
+		372B758EAE308999DC25E48D /* CCNativeWorldStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCNativeWorldStorage.cpp; sourceTree = "<group>"; };
+		372B7604DC06C7DA3A0946D0 /* CCNativeWorldStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNativeWorldStorage.h; sourceTree = "<group>"; };
+		372B7611EB31D01B41CF0A68 /* CCNativeMissionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNativeMissionStorage.h; sourceTree = "<group>"; };
 		372B765597CFDE758D5D88C3 /* CCSocialStoryGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSocialStoryGate.h; sourceTree = "<group>"; };
 		372B76B105E532FCD11DAC53 /* CCPurchasingMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCPurchasingMission.cpp; sourceTree = "<group>"; };
 		372B76E3A8B8B30A20CBC79D /* CCSocialLikeMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSocialLikeMission.h; sourceTree = "<group>"; };
+		372B773B2590EC6892C17A29 /* CCNativeLevelStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCNativeLevelStorage.cpp; sourceTree = "<group>"; };
 		372B77581EE07D32E4F89699 /* CCSocialActionGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSocialActionGate.cpp; sourceTree = "<group>"; };
 		372B77DE3F0116EB6EFA5302 /* CCSocialActionGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSocialActionGate.h; sourceTree = "<group>"; };
 		372B783C7524AE4ED2F0AEF6 /* CCSocialLikeGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSocialLikeGate.h; sourceTree = "<group>"; };
+		372B7878F9A68CD766A225A0 /* CCNativeLevelStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNativeLevelStorage.h; sourceTree = "<group>"; };
 		372B78C040DEC89087F8BD40 /* CCSocialUploadGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSocialUploadGate.cpp; sourceTree = "<group>"; };
 		372B7ADC3890E5E65AAD3270 /* CCSocialStoryMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSocialStoryMission.cpp; sourceTree = "<group>"; };
 		372B7B8066E37591EAE5D589 /* CCBalanceMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBalanceMission.h; sourceTree = "<group>"; };
+		372B7B8AE08566CBFE925E09 /* CCNativeMissionStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCNativeMissionStorage.cpp; sourceTree = "<group>"; };
 		372B7C7B0B584670E1E8CEBA /* CCSocialStoryGate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSocialStoryGate.cpp; sourceTree = "<group>"; };
 		372B7D2BA240C40973AE804C /* CCSocialStatusMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSocialStatusMission.cpp; sourceTree = "<group>"; };
 		372B7D4B20FB6BD4B373D48E /* CCPurchasableGate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPurchasableGate.h; sourceTree = "<group>"; };
@@ -236,6 +256,23 @@
 			path = store;
 			sourceTree = "<group>";
 		};
+		372B73DA8502F0348FB87309 /* NativeImpl */ = {
+			isa = PBXGroup;
+			children = (
+				372B70E16714211CD9618BFE /* CCNativeGateStorage.cpp */,
+				372B70ADAC07CF2B54B03A40 /* CCNativeGateStorage.h */,
+				372B773B2590EC6892C17A29 /* CCNativeLevelStorage.cpp */,
+				372B7878F9A68CD766A225A0 /* CCNativeLevelStorage.h */,
+				372B7611EB31D01B41CF0A68 /* CCNativeMissionStorage.h */,
+				372B7B8AE08566CBFE925E09 /* CCNativeMissionStorage.cpp */,
+				372B7466A27D614A5037677C /* CCNativeScoreStorage.cpp */,
+				372B739330F7A428D2B2E753 /* CCNativeScoreStorage.h */,
+				372B7604DC06C7DA3A0946D0 /* CCNativeWorldStorage.h */,
+				372B758EAE308999DC25E48D /* CCNativeWorldStorage.cpp */,
+			);
+			path = NativeImpl;
+			sourceTree = "<group>";
+		};
 		372B7A18701A932A22BDF0D6 /* profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,8 +335,8 @@
 				9DEA540919B4A5F00093D5D9 /* Cocos2dxLevelUp.h */,
 				9DEA540A19B4A5F00093D5D9 /* data */,
 				9DEA541519B4A5F00093D5D9 /* gates */,
-				9DEA542819B4A5F00093D5D9 /* jsb */,
 				9DEA542919B4A5F00093D5D9 /* scoring */,
+				372B73DA8502F0348FB87309 /* NativeImpl */,
 			);
 			name = Soomla;
 			path = ../Soomla;
@@ -360,13 +397,6 @@
 				372B7A18701A932A22BDF0D6 /* profile */,
 			);
 			path = gates;
-			sourceTree = "<group>";
-		};
-		9DEA542819B4A5F00093D5D9 /* jsb */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = jsb;
 			sourceTree = "<group>";
 		};
 		9DEA542919B4A5F00093D5D9 /* scoring */ = {
@@ -521,6 +551,11 @@
 				372B79BE643F4A24F177E325 /* CCSocialStatusGate.h in Headers */,
 				372B7834621FA2C1BE848F99 /* CCSocialStoryGate.h in Headers */,
 				372B77C3ADB395756E8E4353 /* CCSocialUploadGate.h in Headers */,
+				372B790A6CCFB57AE6A0295F /* CCNativeGateStorage.h in Headers */,
+				372B723C3E66BB0EE898E7F5 /* CCNativeLevelStorage.h in Headers */,
+				372B739A0AA233A031884574 /* CCNativeMissionStorage.h in Headers */,
+				372B7760CB9949D9A505D7AF /* CCNativeScoreStorage.h in Headers */,
+				372B7ABBA1EE917DFB907B3D /* CCNativeWorldStorage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +658,11 @@
 				372B7BC9FD9BF81C5276D44B /* CCSocialStatusGate.cpp in Sources */,
 				372B7890B055B97012CDA491 /* CCSocialStoryGate.cpp in Sources */,
 				372B7D3695651BB929947B7B /* CCSocialUploadGate.cpp in Sources */,
+				372B7F451C240B8C3EE89AED /* CCNativeGateStorage.cpp in Sources */,
+				372B73D4339FC4558C1AC0DA /* CCNativeLevelStorage.cpp in Sources */,
+				372B720204C9DF9F96FB2B3F /* CCNativeMissionStorage.cpp in Sources */,
+				372B7F388F3AE51549B17EFB /* CCNativeScoreStorage.cpp in Sources */,
+				372B7E77D9EBAC0229421B80 /* CCNativeWorldStorage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

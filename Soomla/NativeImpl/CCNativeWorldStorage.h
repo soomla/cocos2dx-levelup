@@ -47,7 +47,6 @@ namespace soomla {
          @param notify If set to `true` trigger events.
          */
         void setCompleted(CCWorld *world, bool completed, bool notify);
-        void setCompleted(CCWorld *world, bool completed);
 
         /**
          Determines if the given `World` is completed.

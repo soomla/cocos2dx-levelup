@@ -21,7 +21,9 @@
 namespace soomla {
 
     void CCNativeWorldStorage::initLevelUp() {
-        // just mute it
+        // This is like this since we need to register DomainFactory
+        // Before the developer can create an initial world
+        CCLevelUpBridge::initShared();
     }
 
     void CCNativeWorldStorage::setCompleted(CCWorld *world, bool completed, bool notify) {
