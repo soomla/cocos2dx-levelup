@@ -82,7 +82,7 @@ namespace soomla {
     double CCScoreStorage::getRecordScore(CCScore *score) {
         const char *key = this->keyRecordScoreWithScoreId(score->getId()->getCString());
         const char *val = CCKeyValueStorage::getInstance()->getValue(key);
-        return (val != NULL && strlen(val) > 0) ? __String::create(val)->intValue() : -1;
+        return (val != NULL && strlen(val) > 0) ? __String::create(val)->doubleValue() : -1;
     }
 
     char const *CCScoreStorage::keyLatestScoreWithScoreId(char const *scoreId) {

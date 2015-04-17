@@ -92,8 +92,4 @@ namespace soomla {
         return this->keyGatesWithGateId(gateId, "open");
     }
 
-    const char *CCGateStorage::keyGatePrefix() {
-        return DB_GATE_KEY_PREFIX;
-    }
-
 }

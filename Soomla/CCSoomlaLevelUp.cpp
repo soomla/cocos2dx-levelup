@@ -41,6 +41,7 @@
 #include "CCDomainHelper.h"
 #include "CCKeyValueStorage.h"
 #include "CCJsonHelper.h"
+#include "CCWorldStorage.h"
 
 namespace soomla {
 
@@ -56,10 +57,8 @@ namespace soomla {
         {
             sInstance = new CCSoomlaLevelUp();
             sInstance->retain();
-            
-            // This is like this since we need to register DomainFactory
-            // Before the developer can create an initial world
-            CCLevelUpBridge::initShared();
+
+            CCWorldStorage::getInstance()->initLevelUp();
         }
         return sInstance;
     }
