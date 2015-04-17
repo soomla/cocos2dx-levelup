@@ -18,6 +18,7 @@
 #include "CCWorldStorage.h"
 #include "CCKeyValueStorage.h"
 #include "CCLevelUpEventDispatcher.h"
+#include "CCNativeWorldStorage.h"
 
 namespace soomla {
     static CCWorldStorage *sInstance = NULL;
@@ -29,8 +30,11 @@ namespace soomla {
     CCWorldStorage *soomla::CCWorldStorage::getInstance() {
         if (!sInstance)
         {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) || (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+            sInstance = new CCNativeWorldStorage();
+#else
             sInstance = new CCWorldStorage();
-            sInstance->retain();
+#endif
         }
         return sInstance;
     }
