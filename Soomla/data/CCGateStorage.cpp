@@ -32,22 +32,34 @@
 
 
 #include "CCGateStorage.h"
-#include "CCLevelUpBridge.h"
+#include "CCNativeGateStorage.h"
+#include "CCKeyValueStorage.h"
+#include "CCLevelUpEventDispatcher.h"
 
 namespace soomla {
+
+    USING_NS_CC;
+
+#define DB_GATE_KEY_PREFIX "soomla.levelup.gates."
+
     static CCGateStorage *sInstance = nullptr;
 
     CCGateStorage *soomla::CCGateStorage::getInstance() {
         if (!sInstance)
         {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) || (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+            sInstance = new CCNativeGateStorage();
+#else
             sInstance = new CCGateStorage();
-            sInstance->retain();
+#endif
         }
         return sInstance;
     }
 
     bool CCGateStorage::isOpen(CCGate *gate) {
-        return CCLevelUpBridge::getInstance()->gateIsOpen(gate);
+        const char *key = this->keyGateOpen(gate->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0);
     }
 
     void CCGateStorage::setOpen(CCGate *gate, bool open) {
@@ -55,6 +67,29 @@ namespace soomla {
     }
 
     void CCGateStorage::setOpen(CCGate *gate, bool open, bool notify) {
-        CCLevelUpBridge::getInstance()->gateSetOpen(gate, open, notify);
+        const char *key = this->keyGateOpen(gate->getId()->getCString());
+
+        if (open) {
+            CCKeyValueStorage::getInstance()->setValue(key, "yes");
+
+            if (notify) {
+                CCLevelUpEventDispatcher::getInstance()->onGateOpened(gate);
+            }
+        } else {
+            CCKeyValueStorage::getInstance()->deleteKeyValue(key);
+
+            if (notify) {
+                CCLevelUpEventDispatcher::getInstance()->onGateClosed(gate);
+            }
+        }
     }
+
+    const char *CCGateStorage::keyGatesWithGateId(const char *gateId, const char *postfix) {
+        return __String::createWithFormat("%s%s.%s", DB_GATE_KEY_PREFIX, gateId, postfix)->getCString();
+    }
+
+    const char *CCGateStorage::keyGateOpen(const char *gateId) {
+        return this->keyGatesWithGateId(gateId, "open");
+    }
+
 }

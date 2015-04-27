@@ -15,11 +15,12 @@
  */
 
 
-#ifndef __CCMissionStorage_H_
-#define __CCMissionStorage_H_
+#ifndef __CCNativeMissionStorage_H_
+#define __CCNativeMissionStorage_H_
 
 #include "cocos2d.h"
 #include "CCMission.h"
+#include "CCMissionStorage.h"
 
 namespace soomla {
 
@@ -29,47 +30,29 @@ namespace soomla {
      Use this class to check if a certain `Mission` is complete, or to set its
      completion status.
      */
-    class CCMissionStorage: cocos2d::Ref {
+    class CCNativeMissionStorage: public CCMissionStorage {
 
     public:
 
-        static CCMissionStorage *getInstance();
-
         /**
          Increases the number of times the given `Mission` has been completed
-         if the given paramter `up` is `true`; otherwise decreases the number
+         if the given parameter `up` is `true`; otherwise decreases the number
          of times completed.
          @param mission `Mission` to set as completed.
-         @param completed If set to `true` add 1 to the number of times completed,
+         @param up If set to `true` add 1 to the number of times completed,
          otherwise subtract 1.
          @param notify If set to `true` trigger the relevant event according
          to the value of `up`.
          */
-        void setCompleted(CCMission *mission, bool completed);
-        virtual void setCompleted(CCMission *mission, bool completed, bool notify);
-
-        /**
-         Determines if the given `Mission` is complete.
-         @param mission `Mission` to determine if complete.
-         @return If the given `Mission` is completed returns `true`;
-         otherwise `false`.
-         */
-        bool isCompleted(CCMission *mission);
+        void setCompleted(CCMission *mission, bool completed, bool notify);
 
         /**
          Retrieves the number of times the given `Mission` has been completed.
          @param mission Mission.
          @return The number of times the given mission has been completed.
          */
-        virtual int getTimesCompleted(CCMission *mission);
-
-    private:
-        void setTimesCompleted(CCMission *mission, int timesCompleted);
-
-        char const *keyMissionTimesCompletedWithMissionId(char const *missionId);
-
-        char const *keyMissionsWithMissionId(char const *missionId, char const *postfix);
+        int getTimesCompleted(CCMission *mission);
     };
 }
 
-#endif //__CCMissionStorage_H_
+#endif //__CCNativeMissionStorage_H_

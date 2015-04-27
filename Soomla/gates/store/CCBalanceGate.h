@@ -106,7 +106,7 @@ namespace soomla {
          */
         virtual void onGoodBalanceChanged(cocos2d::EventCustom *event);
     private:
-        void checkItemIdBalance(cocos2d::__String *itemId, int balance);;
+        void checkItemIdBalance(cocos2d::__String *itemId, int balance);
     };
 }
 

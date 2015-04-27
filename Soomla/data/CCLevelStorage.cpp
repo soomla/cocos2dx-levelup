@@ -16,69 +16,190 @@
 
 #include "CCLevelStorage.h"
 #include "CCLevel.h"
-#include "CCLevelUpBridge.h"
+#include "CCNativeLevelStorage.h"
+#include "CCKeyValueStorage.h"
+#include "CCLevelUpEventDispatcher.h"
 
 namespace soomla {
+
+    USING_NS_CC;
+
+#define DB_LEVEL_KEY_PREFIX "soomla.levelup.levels."
+
     static CCLevelStorage *sInstance = nullptr;
 
     CCLevelStorage *soomla::CCLevelStorage::getInstance() {
         if (!sInstance)
         {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) || (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+            sInstance = new CCNativeLevelStorage();
+#else
             sInstance = new CCLevelStorage();
-            sInstance->retain();
+#endif
         }
         return sInstance;
     }
 
     void CCLevelStorage::setSlowestDurationMillis(CCLevel *level, long duration) {
-        CCLevelUpBridge::getInstance()->levelSetSlowestDurationMillis(level, duration);
+        const char *key = this->keySlowestDurationWithLevelId(level->getId()->getCString());
+        const char *val = __String::createWithFormat("%ld", duration)->getCString();
+        CCKeyValueStorage::getInstance()->setValue(key, val);
     }
 
     long CCLevelStorage::getSlowestDurationMillis(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelGetSlowestDurationMillis(level);
+        const char *key = this->keySlowestDurationWithLevelId(level->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0) ? __String::create(val)->intValue() : 0;
     }
 
     void CCLevelStorage::setFastestDurationMillis(CCLevel *level, long duration) {
-        CCLevelUpBridge::getInstance()->levelSetFastestDurationMillis(level, duration);
+        const char *key = this->keyFastestDurationWithLevelId(level->getId()->getCString());
+        const char *val = __String::createWithFormat("%ld", duration)->getCString();
+        CCKeyValueStorage::getInstance()->setValue(key, val);
     }
 
     long CCLevelStorage::getFastestDurationMillis(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelGetFastestDurationMillis(level);
+        const char *key = this->keyFastestDurationWithLevelId(level->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0) ? __String::create(val)->intValue() : 0;
     }
 
     int CCLevelStorage::incTimesStarted(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelIncTimesStarted(level);
+        int started = this->getTimesStarted(level);
+        if (started < 0) { /* can't be negative */
+            started = 0;
+        }
+        started++;
+
+        this->setTimesStarted(level, started);
+
+        // Notify level has started
+        CCLevelUpEventDispatcher::getInstance()->onLevelStarted(level);
+
+        return started;
     }
 
     int CCLevelStorage::decTimesStarted(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelDecTimesStarted(level);
+        int started = this->getTimesStarted(level);
+        if (started <= 0) { /* can't be negative or zero */
+            started = 0;
+        }
+        started--;
+
+        this->setTimesStarted(level, started);
+
+        return started;
     }
 
     int CCLevelStorage::getTimesStarted(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelGetTimesStarted(level);
+        const char *key = this->keyTimesStartedWithLevelId(level->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0) ? __String::create(val)->intValue() : 0;
     }
 
     int CCLevelStorage::getTimesPlayed(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelGetTimesPlayed(level);
+        const char *key = this->keyTimesPlayedWithLevelId(level->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0) ? __String::create(val)->intValue() : 0;
     }
 
     int CCLevelStorage::incTimesPlayed(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelIncTimesPlayed(level);
+        int played = this->getTimesPlayed(level);
+        if (played < 0) { /* can't be negative */
+            played = 0;
+        }
+        played++;
+
+        this->setTimesPlayed(level, played);
+
+        // Notify level has ended
+        CCLevelUpEventDispatcher::getInstance()->onLevelEnded(level);
+
+        return played;
     }
 
     int CCLevelStorage::decTimesPlayed(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelDecTimesPlayed(level);
+        int played = this->getTimesPlayed(level);
+        if (played <= 0) { /* can't be negative or zero */
+            return 0;
+        }
+        played--;
+
+        this->setTimesPlayed(level, played);
+        return played;
     }
     
     int CCLevelStorage::getTimesCompleted(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelGetTimesCompleted(level);
+        const char *key = this->keyTimesCompletedWithLevelId(level->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0) ? __String::create(val)->intValue() : 0;
     }
     
     int CCLevelStorage::incTimesCompleted(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelIncTimesCompleted(level);
+        int played = this->getTimesCompleted(level);
+        if (played < 0) { /* can't be negative */
+            played = 0;
+        }
+        played++;
+
+        this->setTimesCompleted(level, played);
+
+        return played;
     }
     
     int CCLevelStorage::decTimesCompleted(CCLevel *level) {
-        return CCLevelUpBridge::getInstance()->levelDecTimesCompleted(level);
+        int played = this->getTimesCompleted(level);
+        if (played <= 0) { /* can't be negative or zero */
+            played = 0;
+        }
+        played--;
+
+        this->setTimesCompleted(level, played);
+
+        return played;
     }
+
+    void CCLevelStorage::setTimesStarted(CCLevel *level, int started) {
+        const char *key = this->keyTimesCompletedWithLevelId(level->getId()->getCString());
+        const char *val = __String::createWithFormat("%d", started)->getCString();
+        CCKeyValueStorage::getInstance()->setValue(key, val);
+    }
+
+    void CCLevelStorage::setTimesPlayed(CCLevel *level, int played) {
+        const char *key = this->keyTimesPlayedWithLevelId(level->getId()->getCString());
+        const char *val = __String::createWithFormat("%d", played)->getCString();
+        CCKeyValueStorage::getInstance()->setValue(key, val);
+    }
+
+    void CCLevelStorage::setTimesCompleted(CCLevel *level, int timesCompleted) {
+        const char *key = this->keyTimesCompletedWithLevelId(level->getId()->getCString());
+        const char *val = __String::createWithFormat("%d", timesCompleted)->getCString();
+        CCKeyValueStorage::getInstance()->setValue(key, val);
+    }
+
+    char const *CCLevelStorage::keyTimesStartedWithLevelId(char const *levelId) {
+        return this->keyLevelsWithLevelId(levelId, "started");
+    }
+
+    char const *CCLevelStorage::keyTimesCompletedWithLevelId(char const *levelId) {
+        return this->keyLevelsWithLevelId(levelId, "timesCompleted");
+    }
+
+    char const *CCLevelStorage::keyTimesPlayedWithLevelId(char const *levelId) {
+        return this->keyLevelsWithLevelId(levelId, "played");
+    }
+
+    char const *CCLevelStorage::keySlowestDurationWithLevelId(char const *levelId) {
+        return this->keyLevelsWithLevelId(levelId, "slowest");
+    }
+
+    char const *CCLevelStorage::keyFastestDurationWithLevelId(char const *levelId) {
+        return this->keyLevelsWithLevelId(levelId, "fastest");
+    }
+
+    char const *CCLevelStorage::keyLevelsWithLevelId(char const *levelId, char const *postfix) {
+        return __String::createWithFormat("%s%s.%s", DB_LEVEL_KEY_PREFIX, levelId, postfix)->getCString();
+
+    }
+
 }

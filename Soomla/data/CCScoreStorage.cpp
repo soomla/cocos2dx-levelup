@@ -34,32 +34,66 @@
 #include "CCScoreStorage.h"
 #include "CCScore.h"
 #include "CCLevelUpBridge.h"
+#include "CCNativeScoreStorage.h"
+#include "CCKeyValueStorage.h"
+#include "CCLevelUpEventDispatcher.h"
 
 namespace soomla {
     static CCScoreStorage *sInstance = nullptr;
 
+#define DB_SCORE_KEY_PREFIX "soomla.levelup.scores."
+
+    USING_NS_CC;
+
     CCScoreStorage *soomla::CCScoreStorage::getInstance() {
         if (!sInstance)
         {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) || (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+            sInstance = new CCNativeScoreStorage();
+#else
             sInstance = new CCScoreStorage();
-            sInstance->retain();
+#endif
         }
         return sInstance;
     }
 
     void CCScoreStorage::setLatestScore(CCScore *score, double newValue) {
-        CCLevelUpBridge::getInstance()->scoreSetLatestScore(score, newValue);
+        const char *key = this->keyLatestScoreWithScoreId(score->getId()->getCString());
+        const char *val = __String::createWithFormat("%f", newValue)->getCString();
+        CCKeyValueStorage::getInstance()->setValue(key, val);
+
+        CCLevelUpEventDispatcher::getInstance()->onLatestScoreChanged(score);
     }
 
     double CCScoreStorage::getLatestScore(CCScore *score) {
-        return CCLevelUpBridge::getInstance()->scoreGetLatestScore(score);
+        const char *key = this->keyLatestScoreWithScoreId(score->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0) ? __String::create(val)->doubleValue() : -1;
     }
 
     void CCScoreStorage::setRecordScore(CCScore *score, double newValue) {
-        CCLevelUpBridge::getInstance()->scoreSetRecordScore(score, newValue);
+        const char *key = this->keyRecordScoreWithScoreId(score->getId()->getCString());
+        const char *val = __String::createWithFormat("%f", newValue)->getCString();
+        CCKeyValueStorage::getInstance()->setValue(key, val);
+
+        CCLevelUpEventDispatcher::getInstance()->onScoreRecordChanged(score);
     }
 
     double CCScoreStorage::getRecordScore(CCScore *score) {
-        return CCLevelUpBridge::getInstance()->scoreGetRecordScore(score);
+        const char *key = this->keyRecordScoreWithScoreId(score->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0) ? __String::create(val)->doubleValue() : -1;
+    }
+
+    char const *CCScoreStorage::keyLatestScoreWithScoreId(char const *scoreId) {
+        return this->keyScoresWithScoreId(scoreId, "latest");
+    }
+
+    char const *CCScoreStorage::keyRecordScoreWithScoreId(char const *scoreId) {
+        return this->keyScoresWithScoreId(scoreId, "record");
+    }
+
+    char const *CCScoreStorage::keyScoresWithScoreId(char const *scoreId, char const *postfix) {
+        return __String::createWithFormat("%s%s.%s", DB_SCORE_KEY_PREFIX, scoreId, postfix)->getCString();
     }
 }

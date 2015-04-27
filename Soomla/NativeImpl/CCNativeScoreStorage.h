@@ -31,60 +31,53 @@
  */
 
 
-#ifndef __CCScoreStorage_H_
-#define __CCScoreStorage_H_
+#ifndef __CCNativeScoreStorage_H_
+#define __CCNativeScoreStorage_H_
 
 #include "cocos2d.h"
 #include "CCMission.h"
+#include "CCScoreStorage.h"
 
 namespace soomla {
 
     class CCScore;
 
     /**
-     @class `CCScoreStorage`
+     @class `CCNativeScoreStorage`
      @brief A utility class for persisting and querying `Score`s and records.
      Use this class to get or set the values of `Score`s and records.
      */
-    class CCScoreStorage: cocos2d::Ref {
+    class CCNativeScoreStorage: public CCScoreStorage {
 
     public:
-
-        static CCScoreStorage *getInstance();
 
         /**
          Sets the given `Score` to the given value.
          @param score `Score` to set.
          @param latest The value to set for the `Score`.
          */
-        virtual void setLatestScore(CCScore *score, double newValue);
+        void setLatestScore(CCScore *score, double newValue);
 
         /**
          Retrieves the most recently saved value of the given `Score`.
          @param score Score whose most recent value it to be retrieved.
          @return The latest `Score`.
          */
-        virtual double getLatestScore(CCScore *score);
+        double getLatestScore(CCScore *score);
 
         /**
          Sets the given record for the given `Score`.
          @param score `Score` whose record is to change.
          @param record The new record.
          */
-        virtual void setRecordScore(CCScore *score, double newValue);
+        void setRecordScore(CCScore *score, double newValue);
 
         /**
          Retrieves the record of the given `Score`.
          @param score `Score` whose record is to be retrieved.
          @return The record value of the given `Score`.
          */
-        virtual double getRecordScore(CCScore *score);
-
-        char const *keyLatestScoreWithScoreId(char const *scoreId);
-
-        char const *keyRecordScoreWithScoreId(char const *scoreId);
-
-        char const *keyScoresWithScoreId(char const *scoreId, char const *postfix);
+        double getRecordScore(CCScore *score);
     };
 }
 

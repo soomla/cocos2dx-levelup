@@ -16,6 +16,11 @@
 
 }
 
++ (id)initShared {
+    return [[LevelUpBridge sharedLevelUpBridge] init];
+}
+
+
 + (id)sharedLevelUpBridge {
     static LevelUpBridge *sharedLevelUpBridge = nil;
     static dispatch_once_t onceToken;

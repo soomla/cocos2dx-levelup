@@ -41,6 +41,7 @@
 #include "CCDomainHelper.h"
 #include "CCKeyValueStorage.h"
 #include "CCJsonHelper.h"
+#include "CCWorldStorage.h"
 
 namespace soomla {
 
@@ -56,10 +57,8 @@ namespace soomla {
         {
             sInstance = new CCSoomlaLevelUp();
             sInstance->retain();
-            
-            // This is like this since we need to register DomainFactory
-            // Before the developer can create an initial world
-            CCLevelUpBridge::initShared();
+
+            CCWorldStorage::getInstance()->initLevelUp();
         }
         return sInstance;
     }
@@ -95,8 +94,8 @@ namespace soomla {
             __Array *rewardArray = __Array::create();
             DictElement* el = NULL;
             CCDICT_FOREACH(mRewards, el) {
-                rewardArray->addObject(el->getObject());
-            }
+                    rewardArray->addObject(el->getObject());
+                }
             dict->setObject(CCDomainHelper::getInstance()->getDictArrayFromDomains(rewardArray), CCCoreConsts::JSON_REWARDS);
         }
         return dict;
@@ -106,7 +105,7 @@ namespace soomla {
         CC_SAFE_RELEASE(mInitialWorld);
         CC_SAFE_RELEASE(mRewards);
     }
-    
+
     void CCSoomlaLevelUp::initialize(CCWorld *initialWorld, cocos2d::__Array *rewards) {
         if (mInitialWorld) {
             mInitialWorld->release();
@@ -115,16 +114,16 @@ namespace soomla {
         if (mInitialWorld) {
             mInitialWorld->retain();
         }
-        
+
         if (rewards != NULL) {
             __Dictionary *rewardMap = __Dictionary::create();
             Ref *ref;
             CCReward *reward;
             CCARRAY_FOREACH(rewards, ref) {
-                reward = (CCReward *) ref;
-                rewardMap->setObject(reward, reward->getId()->getCString());
-            }
-            
+                    reward = (CCReward *) ref;
+                    rewardMap->setObject(reward, reward->getId()->getCString());
+                }
+
             if (mRewards) {
                 mRewards->release();
             }
@@ -133,9 +132,9 @@ namespace soomla {
                 mRewards->retain();
             }
         }
-        
+
         save();
-        
+
         CCLevelUpBridge::getInstance()->initLevelUp();
     }
 
@@ -214,7 +213,7 @@ namespace soomla {
         __Dictionary *innerWorldsMap = world->getInnerWorldsMap();
         DictElement *el;
         CCDICT_FOREACH(innerWorldsMap, el) {
-                count += getRecursiveCount(mInitialWorld, &ifLevel);
+                count += getRecursiveCount((CCWorld *) el->getObject(), &ifLevel);
             }
         return count;
     }
@@ -300,9 +299,9 @@ namespace soomla {
         __Dictionary *innerWorldsMap = world->getInnerWorldsMap();
         DictElement *el;
         CCDICT_FOREACH(innerWorldsMap, el) {
-            // Recursively count for inner world
-            count += getRecursiveCount((CCWorld *) el->getObject(), isAccepted);
-        }
+                // Recursively count for inner world
+                count += getRecursiveCount((CCWorld *) el->getObject(), isAccepted);
+            }
         return count;
     }
 
@@ -379,7 +378,7 @@ namespace soomla {
             return NULL;
         }
 
-        if ((targetGate != NULL) && (targetGate->getId()->compare(gateId) == 0)) {
+        if (targetGate->getId()->compare(gateId) == 0) {
             return targetGate;
         }
 
@@ -389,12 +388,12 @@ namespace soomla {
             __Array *gatesArray = gatesList->getGates();
             Ref* gate = NULL;
             CCARRAY_FOREACH(gatesArray, gate) {
-                CCGate *innerGate = dynamic_cast<CCGate *>(gate);
-                result = fetchGateFromGate(gateId, innerGate);
-                if (result != NULL) {
-                    break;
+                    CCGate *innerGate = dynamic_cast<CCGate *>(gate);
+                    result = fetchGateFromGate(gateId, innerGate);
+                    if (result != NULL) {
+                        break;
+                    }
                 }
-            }
         }
 
         return result;
@@ -406,9 +405,9 @@ namespace soomla {
         CCMission *mission;
         CCDICT_FOREACH(worlds, el) {
                 world = (CCWorld *) el->getObject();
-            
+
                 mission = fetchMission(missionId, world->getMissions());
-            
+
                 if (mission) {
                     return mission;
                 }
@@ -422,42 +421,42 @@ namespace soomla {
 
         return NULL;
     }
-    
+
     CCMission *CCSoomlaLevelUp::fetchMission(char const *missionId, cocos2d::__Array *missions) {
         CCMission *retMission = NULL;
-        
+
         if (!missions) {
             return NULL;
         }
-        
+
         Ref *ref;
         CCARRAY_FOREACH(missions, ref) {
-            CCMission *mission = dynamic_cast<CCMission *>(ref);
-            CC_ASSERT(mission);
-            retMission = fetchMission(missionId, mission);
-            if (retMission) {
-                return retMission;
+                CCMission *mission = dynamic_cast<CCMission *>(ref);
+                CC_ASSERT(mission);
+                retMission = fetchMission(missionId, mission);
+                if (retMission) {
+                    return retMission;
+                }
             }
-        }
-        
+
         return retMission;
     }
-    
+
     CCMission *CCSoomlaLevelUp::fetchMission(char const *missionId, CCMission *targetMission) {
         if (!targetMission) {
             return NULL;
         }
-        
-        if (targetMission && (targetMission->getId()->compare(missionId) == 0)) {
+
+        if (targetMission->getId()->compare(missionId) == 0) {
             return targetMission;
         }
-        
+
         CCMission *result = NULL;
         CCChallenge *challenge = dynamic_cast<CCChallenge *>(targetMission);
         if (challenge) {
             return fetchMission(missionId, challenge->getMissions());
         }
-        
+
         return result;
     }
 }
