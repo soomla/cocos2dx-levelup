@@ -16,23 +16,45 @@
 
 
 #include "CCWorldStorage.h"
-#include "CCWorld.h"
-#include "CCLevelUpBridge.h"
+#include "CCKeyValueStorage.h"
+#include "CCLevelUpEventDispatcher.h"
+#include "CCNativeWorldStorage.h"
 
 namespace soomla {
     static CCWorldStorage *sInstance = NULL;
 
+    USING_NS_CC;
+
+#define DB_WORLD_KEY_PREFIX "soomla.levelup.worlds."
+
     CCWorldStorage *soomla::CCWorldStorage::getInstance() {
         if (!sInstance)
         {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) || (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+            sInstance = new CCNativeWorldStorage();
+#else
             sInstance = new CCWorldStorage();
-            sInstance->retain();
+#endif
         }
         return sInstance;
     }
 
+    void CCWorldStorage::initLevelUp() {
+        CCLevelUpEventDispatcher::getInstance()->onLevelUpInitialized();
+    }
+
     void CCWorldStorage::setCompleted(CCWorld *world, bool completed, bool notify) {
-        CCLevelUpBridge::getInstance()->worldSetCompleted(world, completed, notify);
+        const char *key = this->keyWorldCompletedWithWorldId(world->getId()->getCString());
+
+        if (completed) {
+            CCKeyValueStorage::getInstance()->setValue(key, "yes");
+
+            if (notify) {
+                CCLevelUpEventDispatcher::getInstance()->onWorldCompleted(world);
+            }
+        } else {
+            CCKeyValueStorage::getInstance()->deleteKeyValue(key);
+        }
     }
 
     void CCWorldStorage::setCompleted(CCWorld *world, bool completed) {
@@ -40,22 +62,57 @@ namespace soomla {
     }
 
     bool CCWorldStorage::isCompleted(CCWorld *world) {
-        return CCLevelUpBridge::getInstance()->worldIsCompleted(world);
+        const char *key = this->keyWorldCompletedWithWorldId(world->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0);
     }
 
     void CCWorldStorage::setReward(CCWorld *world, cocos2d::__String *rewardId) {
-        CCLevelUpBridge::getInstance()->worldSetReward(world, rewardId);
+        const char *key = this->keyRewardWithWorldId(world->getId()->getCString());
+
+        if (rewardId != NULL && rewardId->length() > 0) {
+            CCKeyValueStorage::getInstance()->setValue(key, rewardId->getCString());
+        } else {
+            CCKeyValueStorage::getInstance()->deleteKeyValue(key);
+        }
     }
 
     cocos2d::__String *CCWorldStorage::getAssignedReward(CCWorld *world) {
-        return CCLevelUpBridge::getInstance()->worldGetAssignedReward(world);
+        const char *key = this->keyRewardWithWorldId(world->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return val != NULL ? __String::create(val) : NULL;
     }
     
     void CCWorldStorage::setLastCompletedInnerWorld(CCWorld *world, cocos2d::__String *innerWorldId) {
-        CCLevelUpBridge::getInstance()->worldSetLastCompletedInnerWorld(world, innerWorldId);
+        const char *key = this->keyLastCompletedInnerWorldWithWorldId(world->getId()->getCString());
+
+        if (innerWorldId != NULL && innerWorldId->length() > 0) {
+            CCKeyValueStorage::getInstance()->setValue(key, innerWorldId->getCString());
+        } else {
+            CCKeyValueStorage::getInstance()->deleteKeyValue(key);
+        }
     }
     
     cocos2d::__String *CCWorldStorage::getLastCompletedInnerWorld(CCWorld *world) {
-        return CCLevelUpBridge::getInstance()->worldGetLastCompletedInnerWorld(world);
+        const char *key = this->keyLastCompletedInnerWorldWithWorldId(world->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return val != NULL ? __String::create(val) : NULL;
     }
+
+    char const *CCWorldStorage::keyWorldCompletedWithWorldId(char const *worldId) {
+        return this->keyWorldsWithWorldId(worldId, "completed");
+    }
+
+    char const *CCWorldStorage::keyRewardWithWorldId(char const *worldId) {
+        return this->keyWorldsWithWorldId(worldId, "assignedReward");
+    }
+
+    char const *CCWorldStorage::keyLastCompletedInnerWorldWithWorldId(char const *worldId) {
+        return this->keyWorldsWithWorldId(worldId, "lastCompletedInnerWorld");
+    }
+
+    char const *CCWorldStorage::keyWorldsWithWorldId(char const *worldId, char const *postfix) {
+        return __String::createWithFormat("%s%s.%s", DB_WORLD_KEY_PREFIX, worldId, postfix)->getCString();
+    }
+
 }

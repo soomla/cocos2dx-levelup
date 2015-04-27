@@ -33,11 +33,12 @@
 
 
 
-#ifndef __CCGateStorage_H_
-#define __CCGateStorage_H_
+#ifndef __CCNativeGateStorage_H_
+#define __CCNativeGateStorage_H_
 
 #include "cocos2d.h"
 #include "CCMission.h"
+#include "CCGateStorage.h"
 
 namespace soomla {
 
@@ -46,17 +47,15 @@ namespace soomla {
      @brief A utility class for persisting and querying the state of `Gate`s.
      Use this class to check if a certain `Gate` is open, or to open it.
      */
-    class CCGateStorage: cocos2d::Ref {
+    class CCNativeGateStorage: public CCGateStorage {
 
     public:
-        static CCGateStorage *getInstance();
-
         /**
          Determines if the given `Gate` is open.
          @param gate `Gate` to check if is open.
          @return If the given `Gate` is open returns `true`; otherwise, `false`.
          */
-        virtual bool isOpen(CCGate *gate);
+        bool isOpen(CCGate *gate);
 
         /**
          Sets the given `Gate` as open if the given parameter `open` is `true`;
@@ -65,12 +64,8 @@ namespace soomla {
          @param open If set to `true` set the `Gate` to open;
          @param notify If set to `true` trigger event.
          */
-        virtual void setOpen(CCGate *gate, bool open);
-        virtual void setOpen(CCGate *gate, bool open, bool notify);
-    private:
-        char const *keyGatesWithGateId(char const *gateId, char const *postfix);
-        char const *keyGateOpen(char const *gateId);
+        void setOpen(CCGate *gate, bool open, bool notify);
     };
 }
 
-#endif //__CCGateStorage_H_
+#endif //__CCNativeGateStorage_H_

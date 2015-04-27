@@ -15,29 +15,29 @@
  */
 
 
-#ifndef __CCWorldStorage_H_
-#define __CCWorldStorage_H_
+#ifndef __CCNativeWorldStorage_H_
+#define __CCNativeWorldStorage_H_
 
 #include "cocos2d.h"
 #include "CCMission.h"
 #include "CCWorld.h"
+#include "CCNativeWorldStorage.h"
+#include "CCWorldStorage.h"
 
 namespace soomla {
 
     class CCWorld;
 
     /**
-     @class `CCWorldStorage`
+     @class `CCNativeWorldStorage`
      @brief A utility class for persisting and querying `World`s.
      Use this class to get or set the completion of `World`s and assign rewards.
      */
-    class CCWorldStorage: cocos2d::Ref {
+    class CCNativeWorldStorage: public CCWorldStorage {
 
     public:
 
-        static CCWorldStorage *getInstance();
-
-        virtual void initLevelUp();
+        void initLevelUp();
 
         /**
          Sets the given `World` as completed if `completed` is `true`.
@@ -46,8 +46,7 @@ namespace soomla {
          as completed.
          @param notify If set to `true` trigger events.
          */
-        virtual void setCompleted(CCWorld *world, bool completed, bool notify);
-        virtual void setCompleted(CCWorld *world, bool completed);
+        void setCompleted(CCWorld *world, bool completed, bool notify);
 
         /**
          Determines if the given `World` is completed.
@@ -55,21 +54,21 @@ namespace soomla {
          @return If the given `World` is completed returns `true`;
          otherwise `false`.
          */
-        virtual bool isCompleted(CCWorld *world);
+        bool isCompleted(CCWorld *world);
 
         /**
          Assigns the reward with the given reward ID to the given `World`.
          @param world `World` to assign a reward to.
          @param rewardId ID of reward to assign.
          */
-        virtual void setReward(CCWorld *world, cocos2d::__String *rewardId);
+        void setReward(CCWorld *world, cocos2d::__String *rewardId);
 
         /**
          Retrieves the given `World`'s assigned reward.
          @param world `World` whose reward is to be retrieved.
          @return The assigned reward to retrieve.
          */
-        virtual cocos2d::__String *getAssignedReward(CCWorld *world);
+        cocos2d::__String *getAssignedReward(CCWorld *world);
         
         /**
          Sets the given inner world ID as the last completed inner world
@@ -77,23 +76,15 @@ namespace soomla {
          @param world `World` to set inner completed world ID.
          @param innerWorldId the inner world ID that was last completed.
          */
-        virtual void setLastCompletedInnerWorld(CCWorld *world, cocos2d::__String *innerWorldId);
+        void setLastCompletedInnerWorld(CCWorld *world, cocos2d::__String *innerWorldId);
         
         /**
          Retrieves the given `World`'s last completed inner world.
          @param world `World` whose last completed inner world is to be retrieved.
          @return The last completed inner world ID.
          */
-        virtual cocos2d::__String *getLastCompletedInnerWorld(CCWorld *world);
-
-        char const *keyWorldCompletedWithWorldId(char const *worldId);
-
-        char const *keyWorldsWithWorldId(char const *worldId, char const *postfix);
-
-        char const *keyRewardWithWorldId(char const *worldId);
-
-        char const *keyLastCompletedInnerWorldWithWorldId(char const *worldId);
+        cocos2d::__String *getLastCompletedInnerWorld(CCWorld *world);
     };
 }
 
-#endif //__CCWorldStorage_H_
+#endif //__CCNativeWorldStorage_H_

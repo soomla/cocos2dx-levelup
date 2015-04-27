@@ -83,7 +83,7 @@ namespace soomla {
     }
 
     void CCRangeScore::dec(double amount) {
-        // Don't dencrement if we've hit the range's lowest value
+        // Don't decrement if we've hit the range's lowest value
         if (mTempScore <= mRange->mLow) {
             return;
         }

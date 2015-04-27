@@ -1,0 +1,14 @@
+{
+  "name": "soomla-levelup",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha tests/spec"
+  },
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "localStorage": "^1.0.3",
+    "lodash": "^3.7.0",
+    "mocha": "^2.2.4",
+    "npm": "^2.8.3"
+  }
+}
