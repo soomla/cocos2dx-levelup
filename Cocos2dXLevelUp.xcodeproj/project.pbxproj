@@ -33,6 +33,16 @@
 		372B7E7FF1EA7B51DF41CC35 /* CCSocialStatusMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B79BF7773B407F1F63FB2 /* CCSocialStatusMission.h */; };
 		372B7F216683817D30326994 /* CCSocialLikeMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B716224DEB6EB10FF0F48 /* CCSocialLikeMission.h */; };
 		372B7F348D696FC00042CADB /* CCBalanceMission.h in Headers */ = {isa = PBXBuildFile; fileRef = 372B74821177B212D38AA3D0 /* CCBalanceMission.h */; };
+		9D08F81C1AF378FC00F5CAEA /* CCNativeGateStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D08F8121AF378FC00F5CAEA /* CCNativeGateStorage.cpp */; };
+		9D08F81D1AF378FC00F5CAEA /* CCNativeGateStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D08F8131AF378FC00F5CAEA /* CCNativeGateStorage.h */; };
+		9D08F81E1AF378FC00F5CAEA /* CCNativeLevelStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D08F8141AF378FC00F5CAEA /* CCNativeLevelStorage.cpp */; };
+		9D08F81F1AF378FC00F5CAEA /* CCNativeLevelStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D08F8151AF378FC00F5CAEA /* CCNativeLevelStorage.h */; };
+		9D08F8201AF378FC00F5CAEA /* CCNativeMissionStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D08F8161AF378FC00F5CAEA /* CCNativeMissionStorage.cpp */; };
+		9D08F8211AF378FC00F5CAEA /* CCNativeMissionStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D08F8171AF378FC00F5CAEA /* CCNativeMissionStorage.h */; };
+		9D08F8221AF378FC00F5CAEA /* CCNativeScoreStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D08F8181AF378FC00F5CAEA /* CCNativeScoreStorage.cpp */; };
+		9D08F8231AF378FC00F5CAEA /* CCNativeScoreStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D08F8191AF378FC00F5CAEA /* CCNativeScoreStorage.h */; };
+		9D08F8241AF378FC00F5CAEA /* CCNativeWorldStorage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9D08F81A1AF378FC00F5CAEA /* CCNativeWorldStorage.cpp */; };
+		9D08F8251AF378FC00F5CAEA /* CCNativeWorldStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D08F81B1AF378FC00F5CAEA /* CCNativeWorldStorage.h */; };
 		9DEA53AA19B4A4000093D5D9 /* CCLevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA536719B4A4000093D5D9 /* CCLevel.cpp */; };
 		9DEA53AB19B4A4000093D5D9 /* CCLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DEA536819B4A4000093D5D9 /* CCLevel.h */; };
 		9DEA53AE19B4A4000093D5D9 /* CCLevelUpConsts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA536B19B4A4000093D5D9 /* CCLevelUpConsts.cpp */; };
@@ -116,6 +126,16 @@
 		372B7E35918D021E574D706E /* CCPurchasingMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCPurchasingMission.h; sourceTree = "<group>"; };
 		372B7E5FB6CC7C9CB97BE7D8 /* CCSocialLikeMission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSocialLikeMission.cpp; sourceTree = "<group>"; };
 		372B7E9C1FB91D77AC6EF93E /* CCSocialUploadMission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSocialUploadMission.h; sourceTree = "<group>"; };
+		9D08F8121AF378FC00F5CAEA /* CCNativeGateStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCNativeGateStorage.cpp; sourceTree = "<group>"; };
+		9D08F8131AF378FC00F5CAEA /* CCNativeGateStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNativeGateStorage.h; sourceTree = "<group>"; };
+		9D08F8141AF378FC00F5CAEA /* CCNativeLevelStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCNativeLevelStorage.cpp; sourceTree = "<group>"; };
+		9D08F8151AF378FC00F5CAEA /* CCNativeLevelStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNativeLevelStorage.h; sourceTree = "<group>"; };
+		9D08F8161AF378FC00F5CAEA /* CCNativeMissionStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCNativeMissionStorage.cpp; sourceTree = "<group>"; };
+		9D08F8171AF378FC00F5CAEA /* CCNativeMissionStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNativeMissionStorage.h; sourceTree = "<group>"; };
+		9D08F8181AF378FC00F5CAEA /* CCNativeScoreStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCNativeScoreStorage.cpp; sourceTree = "<group>"; };
+		9D08F8191AF378FC00F5CAEA /* CCNativeScoreStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNativeScoreStorage.h; sourceTree = "<group>"; };
+		9D08F81A1AF378FC00F5CAEA /* CCNativeWorldStorage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCNativeWorldStorage.cpp; sourceTree = "<group>"; };
+		9D08F81B1AF378FC00F5CAEA /* CCNativeWorldStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNativeWorldStorage.h; sourceTree = "<group>"; };
 		9D41016D1978D35200907FA8 /* libCocos2dXiOSCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocos2dXiOSCore.a; path = "soomla-native/compilations/ios/libCocos2dXiOSCore.a"; sourceTree = "<group>"; };
 		9D41016E1978D35200907FA8 /* libSoomlaiOSCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoomlaiOSCore.a; path = "soomla-native/compilations/ios/libSoomlaiOSCore.a"; sourceTree = "<group>"; };
 		9D63D09D19B1B20D0054EA87 /* libCocos2dXiOSCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocos2dXiOSCore.a; path = build/ios/libCocos2dXiOSCore.a; sourceTree = "<group>"; };
@@ -247,9 +267,27 @@
 			path = store;
 			sourceTree = "<group>";
 		};
+		9D08F8111AF378FC00F5CAEA /* NativeImpl */ = {
+			isa = PBXGroup;
+			children = (
+				9D08F8121AF378FC00F5CAEA /* CCNativeGateStorage.cpp */,
+				9D08F8131AF378FC00F5CAEA /* CCNativeGateStorage.h */,
+				9D08F8141AF378FC00F5CAEA /* CCNativeLevelStorage.cpp */,
+				9D08F8151AF378FC00F5CAEA /* CCNativeLevelStorage.h */,
+				9D08F8161AF378FC00F5CAEA /* CCNativeMissionStorage.cpp */,
+				9D08F8171AF378FC00F5CAEA /* CCNativeMissionStorage.h */,
+				9D08F8181AF378FC00F5CAEA /* CCNativeScoreStorage.cpp */,
+				9D08F8191AF378FC00F5CAEA /* CCNativeScoreStorage.h */,
+				9D08F81A1AF378FC00F5CAEA /* CCNativeWorldStorage.cpp */,
+				9D08F81B1AF378FC00F5CAEA /* CCNativeWorldStorage.h */,
+			);
+			path = NativeImpl;
+			sourceTree = "<group>";
+		};
 		9DEA536619B4A4000093D5D9 /* Soomla */ = {
 			isa = PBXGroup;
 			children = (
+				9D08F8111AF378FC00F5CAEA /* NativeImpl */,
 				F8BBDCC01AB2031500FD9403 /* CCLevelUpBridge.cpp */,
 				F8BBDCC11AB2031500FD9403 /* CCLevelUpBridge.h */,
 				F8EE24B319EE691C00BE0286 /* CCSoomlaLevelUp.cpp */,
@@ -395,6 +433,7 @@
 				9DEA53E319B4A4000093D5D9 /* CCRangeScore.h in Headers */,
 				9DEA53CB19B4A4000093D5D9 /* CCMissionStorage.h in Headers */,
 				9DEA53C719B4A4000093D5D9 /* CCGateStorage.h in Headers */,
+				9D08F81D1AF378FC00F5CAEA /* CCNativeGateStorage.h in Headers */,
 				9DEA53B119B4A4000093D5D9 /* CCLevelUpEventDispatcher.h in Headers */,
 				9DEA53AF19B4A4000093D5D9 /* CCLevelUpConsts.h in Headers */,
 				9DEA53B819B4A4000093D5D9 /* CCWorld.h in Headers */,
@@ -405,8 +444,11 @@
 				9DEA53BC19B4A4000093D5D9 /* CCChallenge.h in Headers */,
 				9DEA53CF19B4A4000093D5D9 /* CCWorldStorage.h in Headers */,
 				F8EE24B619EE691C00BE0286 /* CCSoomlaLevelUp.h in Headers */,
+				9D08F8231AF378FC00F5CAEA /* CCNativeScoreStorage.h in Headers */,
+				9D08F8251AF378FC00F5CAEA /* CCNativeWorldStorage.h in Headers */,
 				9DEA53C919B4A4000093D5D9 /* CCLevelStorage.h in Headers */,
 				9DEA53CD19B4A4000093D5D9 /* CCScoreStorage.h in Headers */,
+				9D08F81F1AF378FC00F5CAEA /* CCNativeLevelStorage.h in Headers */,
 				9DEA53BE19B4A4000093D5D9 /* CCMission.h in Headers */,
 				9DEA53C419B4A4000093D5D9 /* CCWorldCompletionMission.h in Headers */,
 				9DEA53AB19B4A4000093D5D9 /* CCLevel.h in Headers */,
@@ -427,6 +469,7 @@
 				372B73BB45E64D2117B87161 /* CCSocialStatusGate.h in Headers */,
 				372B7CDA8325979AC6584AF2 /* CCSocialUploadGate.h in Headers */,
 				372B74BF6730584276D1F199 /* CCBalanceGate.h in Headers */,
+				9D08F8211AF378FC00F5CAEA /* CCNativeMissionStorage.h in Headers */,
 				372B798115EC07991E418260 /* CCPurchasableGate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,7 +529,9 @@
 				9DEA53AE19B4A4000093D5D9 /* CCLevelUpConsts.cpp in Sources */,
 				F8EE24B519EE691C00BE0286 /* CCSoomlaLevelUp.cpp in Sources */,
 				9DEA53B019B4A4000093D5D9 /* CCLevelUpEventDispatcher.cpp in Sources */,
+				9D08F81C1AF378FC00F5CAEA /* CCNativeGateStorage.cpp in Sources */,
 				9DEA53CA19B4A4000093D5D9 /* CCMissionStorage.cpp in Sources */,
+				9D08F8241AF378FC00F5CAEA /* CCNativeWorldStorage.cpp in Sources */,
 				9DEA53DE19B4A4000093D5D9 /* CCScheduleGate.cpp in Sources */,
 				9DEA53C619B4A4000093D5D9 /* CCGateStorage.cpp in Sources */,
 				9DEA53B719B4A4000093D5D9 /* CCWorld.cpp in Sources */,
@@ -494,6 +539,7 @@
 				9DEA53DC19B4A4000093D5D9 /* CCRecordGate.cpp in Sources */,
 				9DEA53D819B4A4000093D5D9 /* CCGatesListOr.cpp in Sources */,
 				9DEA53CE19B4A4000093D5D9 /* CCWorldStorage.cpp in Sources */,
+				9D08F8221AF378FC00F5CAEA /* CCNativeScoreStorage.cpp in Sources */,
 				9DEA53C319B4A4000093D5D9 /* CCWorldCompletionMission.cpp in Sources */,
 				9DEA53BD19B4A4000093D5D9 /* CCMission.cpp in Sources */,
 				9DEA53D219B4A4000093D5D9 /* CCGate.cpp in Sources */,
@@ -507,6 +553,7 @@
 				9DEA53CC19B4A4000093D5D9 /* CCScoreStorage.cpp in Sources */,
 				9DEA53BB19B4A4000093D5D9 /* CCChallenge.cpp in Sources */,
 				9DEA53E619B4A4000093D5D9 /* CCVirtualItemScore.cpp in Sources */,
+				9D08F8201AF378FC00F5CAEA /* CCNativeMissionStorage.cpp in Sources */,
 				372B7A676977FAB0FEB04C67 /* CCSocialLikeMission.cpp in Sources */,
 				372B7DF8DF8CA41349499064 /* CCSocialStoryMission.cpp in Sources */,
 				372B79CA0A73CBFC386A1900 /* CCSocialStatusMission.cpp in Sources */,
@@ -516,6 +563,7 @@
 				372B784873BC058BC0BEEEE5 /* CCSocialLikeGate.cpp in Sources */,
 				372B7AC96F79EE3C972140E2 /* CCSocialStoryGate.cpp in Sources */,
 				372B717C48451A25468FCC27 /* CCSocialActionGate.cpp in Sources */,
+				9D08F81E1AF378FC00F5CAEA /* CCNativeLevelStorage.cpp in Sources */,
 				372B73F9C4BADABA2025B747 /* CCSocialStatusGate.cpp in Sources */,
 				372B712466992E0FBE6FD5C9 /* CCSocialUploadGate.cpp in Sources */,
 				372B7D1F8201EA20ADB68ABE /* CCBalanceGate.cpp in Sources */,
