@@ -17,6 +17,7 @@
 #include "CCMissionStorage.h"
 #include "CCLevelUpEventDispatcher.h"
 #include "CCKeyValueStorage.h"
+#include "CCNativeMissionStorage.h"
 
 namespace soomla {
 
@@ -30,9 +31,9 @@ namespace soomla {
         if (!sInstance)
         {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS) || (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-            sInstance = new CCMissionStorage();
-#else
             sInstance = new CCNativeMissionStorage();
+#else
+            sInstance = new CCMissionStorage();
 #endif
         }
         return sInstance;
