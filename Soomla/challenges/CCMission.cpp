@@ -243,7 +243,7 @@ namespace soomla {
         CCGate *gate = dynamic_cast<CCGate *>(eventData->objectForKey(CCLevelUpConsts::DICT_ELEMENT_GATE));
         CC_ASSERT(gate);
         
-        if (mGate == gate) {
+        if (mGate == gate && !this->isCompleted()) {
             mGate->forceOpen(false);
             setCompletedInner(true);
         }
