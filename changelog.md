@@ -1,3 +1,8 @@
+### v1.2.1 [view commit logs](https://github.com/soomla/cocos2dx-levelup/compare/v1.2.0...v1.2.1)
+
+* Fixes
+  * Creating CCMissionStorage correctly.
+
 ### v1.2.0 [view commit logs](https://github.com/soomla/cocos2dx-levelup/compare/v1.1.1...v1.2.0)
 
 **BREAKING API VERSION**
