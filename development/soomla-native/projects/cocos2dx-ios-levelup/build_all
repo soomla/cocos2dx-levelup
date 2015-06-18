@@ -1,5 +1,5 @@
 rm -rf build
 mkdir build
 
-xcodebuild -configuration Release -sdk iphoneos7.1 -project Cocos2dXiOSLevelUp.xcodeproj -target Cocos2dXiOSLevelUp clean build CREATING_UNIVERSAL_DIR=$PWD/build
+xcodebuild -configuration Release -sdk iphoneos -project Cocos2dXiOSLevelUp.xcodeproj -target Cocos2dXiOSLevelUp clean build CREATING_UNIVERSAL_DIR=$PWD/build
 
