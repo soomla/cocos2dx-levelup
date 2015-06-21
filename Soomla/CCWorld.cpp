@@ -379,7 +379,13 @@ namespace soomla {
         DictElement* el = NULL;
         CCDICT_FOREACH(mInnerWorldsMap, el) {
                 world = (CCWorld *) el->getObject();
-                ret += world->getSingleScore()->getRecord();
+                CCScore *score = world->getSingleScore();
+                if (score != nullptr) {
+                    double record = score->getRecord();
+                    if (record >= 0) {
+                        ret += record;
+                    }
+                }
             }
 
         return ret;

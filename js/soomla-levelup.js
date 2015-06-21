@@ -1859,7 +1859,15 @@
 
       sumInnerWorldsRecords: function () {
         return _.reduce(this._innerWorldsMap, function (sum, world) {
-          return sum + world.getSingleScore().getRecord();
+          var score = world.getSingleScore();
+          if (!_.isUndefined(score)) {
+            var record = score.getRecord();
+            if (record >= 0) {
+              return sum + record;
+            }
+          }
+
+          return sum;
         });
       },
 
