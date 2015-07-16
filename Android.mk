@@ -8,6 +8,7 @@ LOCAL_MODULE_FILENAME := libcocos2dxlevelup
 
 LEVELUP_SRC_LIST := $(wildcard $(LOCAL_PATH)/Soomla/*.cpp)
 LEVELUP_SRC_LIST += $(wildcard $(LOCAL_PATH)/Soomla/challenges/*.cpp)
+LEVELUP_SRC_LIST += $(wildcard $(LOCAL_PATH)/Soomla/NativeImpl/*.cpp)
 LEVELUP_SRC_LIST += $(wildcard $(LOCAL_PATH)/Soomla/challenges/profile/*.cpp)
 LEVELUP_SRC_LIST += $(wildcard $(LOCAL_PATH)/Soomla/challenges/store/*.cpp)
 LEVELUP_SRC_LIST += $(wildcard $(LOCAL_PATH)/Soomla/data/*.cpp)
@@ -26,6 +27,7 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/Soomla/gates
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/Soomla/gates/profile
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/Soomla/gates/store
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/Soomla/scoring
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/Soomla/NativeImpl
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../lib
 
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_static
