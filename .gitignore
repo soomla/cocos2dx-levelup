@@ -5,6 +5,8 @@ TAGS
 out
 xcuserdata
 
+build/
+
 # Compiled Object files
 *.slo
 *.lo
