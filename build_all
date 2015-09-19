@@ -1,6 +1,4 @@
 #!/bin/sh
 set -e
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-$DIR/submodules/build_all
-$DIR/build_android
-$DIR/build_ios
+$DIR/development/build_all

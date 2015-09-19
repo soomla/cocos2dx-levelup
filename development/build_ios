@@ -1,4 +1,8 @@
-paths=( "soomla-native/projects/cocos2dx-ios-levelup" )
+#!/bin/sh
+set -e
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+cd $DIR
+
 build=../build/ios
 build_headers=$build/headers
 
@@ -6,16 +10,11 @@ rm -rf $build
 mkdir -p $build
 mkdir -p $build_headers
 
-cd submodules/ios-levelup
-./build_all
-cd -
+soomla-native/projects/cocos2dx-ios-levelup/build_all
+
+cp -R soomla-native/projects/cocos2dx-ios-levelup/build/* $build/
+
 cp -L submodules/ios-levelup/build/libSoomlaiOSLevelUp.a $build/
 cp -RL submodules/ios-levelup/build/headers/SoomlaiOSLevelUp $build_headers/
 
-for path in "${paths[@]}"
-do
-  cd $path
-  ./build_all
-  cd -
-  cp -R $path/build/* $build/
-done
+cd - > /dev/null
