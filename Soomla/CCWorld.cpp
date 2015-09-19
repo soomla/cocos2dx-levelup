@@ -373,22 +373,7 @@ namespace soomla {
     }
 
     double CCWorld::sumInnerWorldsRecords() {
-        double ret = 0;
-
-        CCWorld *world;
-        DictElement* el = NULL;
-        CCDICT_FOREACH(mInnerWorldsMap, el) {
-                world = (CCWorld *) el->getObject();
-                CCScore *score = world->getSingleScore();
-                if (score != nullptr) {
-                    double record = score->getRecord();
-                    if (record >= 0) {
-                        ret += record;
-                    }
-                }
-            }
-
-        return ret;
+        return this->sumInnerWorldSingleRecords();
     }
 
     double CCWorld::sumWorldScoreRecords() {
