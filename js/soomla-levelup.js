@@ -138,7 +138,7 @@
     }, Soomla.Models.SoomlaEntity);
   }();
 
-  var GatesList = Soomla.Models.Gate = function () {
+  var GatesList = Soomla.Models.GatesList = function () {
     var GatesList = Soomla.declareClass('GatesList', {
       eventListener: null,
       _gates: [],
@@ -1857,15 +1857,40 @@
         }
       },
 
-      sumInnerWorldsRecords: function () {
+      sumInnerWorldsRecords: function sumInnerWorldsRecords() {
+        return this.sumInnerWorldSingleRecords();
+      },
+
+      sumWorldScoreRecords: function sumWorldScoreRecords() {
+        return _.reduce(this._scores, function (sum, score) {
+          var record = score.getRecord();
+          if (record > 0) {
+            return sum + record;
+          }
+
+          return sum;
+        });
+
+      },
+
+      sumInnerWorldSingleRecords: function sumInnerWorldSingleRecords() {
         return _.reduce(this._innerWorldsMap, function (sum, world) {
-          var score = world.getSingleScore();
-          if (!_.isUndefined(score)) {
-            var record = score.getRecord();
-            if (record >= 0) {
+          var singleScore = world.getSingleScore();
+          if (!_.isUndefined(singleScore)) {
+            var record = singleScore.getRecord();
+            if (record > -1) {
               return sum + record;
             }
           }
+
+          return sum;
+        });
+      },
+
+      sumAllInnerWorldsRecords: function sumAllInnerWorldsRecords() {
+        return _.reduce(this._innerWorldsMap, function (sum, world) {
+          sum += world.sumWorldScoreRecords();
+          sum += world.sumAllInnerWorldsRecords();
 
           return sum;
         });
