@@ -2839,6 +2839,23 @@
         }
       },
 
+      clearCurrentState: function () {
+        var allKeys = Soomla.keyValueStorage.getEncryptedKeys();
+        if (allKeys) {
+          _.each(function (key) {
+            if (key.indexOf(Soomla.gateStorage.getKeyGatePrefix()) === 0  ||
+              key.indexOf(Soomla.levelStorage.getKeyLevelPrefix()) === 0 ||
+              key.indexOf(Soomla.missionStorage.getKeyMissionPrefix()) === 0 ||
+              key.indexOf(Soomla.scoreStorage.getKeyScorePrefix()) === 0 ||
+              key.indexOf(Soomla.worldStorage.getKeyWorldPrefix()) === 0) {
+
+              Soomla.keyValueStorage.deleteKeyValue(key);
+            }
+          });
+        }
+
+      },
+
       save: function () {
         var key = this.DB_KEY_PREFIX + 'model';
         Soomla.keyValueStorage.setValue(key, JSON.stringify(this));
@@ -2916,6 +2933,10 @@
 
       keyGateOpen: function (gateId) {
         return this.keyGatesWithGateId(gateId, 'open');
+      },
+
+      getKeyGatePrefix: function () {
+        return this.DB_GATE_KEY_PREFIX;
       }
     });
   }();
@@ -3016,6 +3037,10 @@
 
       keyScoresWithScoreId: function (scoreId, postfix) {
         return this.DB_SCORE_KEY_PREFIX + scoreId + '.' + postfix;
+      },
+
+      getKeyScorePrefix: function () {
+        return this.DB_SCORE_KEY_PREFIX;
       }
 
     });
@@ -3140,6 +3165,10 @@
 
       keyMissionsWithMissionId: function (missionId, postfix) {
         return this.DB_MISSION_KEY_PREFIX + missionId + '.' + postfix;
+      },
+
+      getKeyMissionPrefix: function () {
+        return this.DB_MISSION_KEY_PREFIX;
       }
     });
   }();
@@ -3293,6 +3322,10 @@
 
       keyLastCompletedInnerWorldWithWorldId: function (worldId) {
         return this.keyWorldsWithWorldId(worldId, 'lastCompletedInnerWorld');
+      },
+
+      getKeyWorldPrefix: function () {
+        return this.DB_WORLD_KEY_PREFIX;
       }
     });
   }();
@@ -3605,6 +3638,10 @@
 
       keyLevelsWithLevelId: function (levelId, postfix) {
         return this.DB_LEVEL_KEY_PREFIX + levelId + '.' + postfix;
+      },
+
+      getKeyLevelPrefix: function () {
+        return this.DB_GATE_KEY_PREFIX;
       }
 
     });
