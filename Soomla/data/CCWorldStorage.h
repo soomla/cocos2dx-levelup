@@ -93,6 +93,8 @@ namespace soomla {
         char const *keyRewardWithWorldId(char const *worldId);
 
         char const *keyLastCompletedInnerWorldWithWorldId(char const *worldId);
+
+        static char const *getKeyWorldPrefix();
     };
 }
 

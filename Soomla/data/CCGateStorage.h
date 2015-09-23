@@ -67,6 +67,9 @@ namespace soomla {
          */
         virtual void setOpen(CCGate *gate, bool open);
         virtual void setOpen(CCGate *gate, bool open, bool notify);
+
+        static char const *getKeyGatePrefix();
+
     private:
         char const *keyGatesWithGateId(char const *gateId, char const *postfix);
         char const *keyGateOpen(char const *gateId);

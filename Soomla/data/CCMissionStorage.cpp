@@ -83,4 +83,8 @@ namespace soomla {
     char const *CCMissionStorage::keyMissionsWithMissionId(char const *missionId, char const *postfix) {
         return __String::createWithFormat("%s%s.%s", DB_MISSION_KEY_PREFIX, missionId, postfix)->getCString();
     }
+
+    char const *CCMissionStorage::getKeyMissionPrefix() {
+        return DB_MISSION_KEY_PREFIX;
+    }
 }
