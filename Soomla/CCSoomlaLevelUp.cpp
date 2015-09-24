@@ -41,6 +41,10 @@
 #include "CCDomainHelper.h"
 #include "CCKeyValueStorage.h"
 #include "CCJsonHelper.h"
+#include "CCGateStorage.h"
+#include "CCLevelStorage.h"
+#include "CCMissionStorage.h"
+#include "CCScoreStorage.h"
 #include "CCWorldStorage.h"
 
 namespace soomla {
@@ -458,5 +462,27 @@ namespace soomla {
         }
 
         return result;
+    }
+
+    void CCSoomlaLevelUp::clearCurrentState() {
+        __Array *allKeys = CCKeyValueStorage::getInstance()->getEncryptedKeys();
+        if (allKeys != nullptr) {
+            Ref *ref;
+            __String *key;
+            CCARRAY_FOREACH(allKeys, ref) {
+                    key = (__String *) ref;
+
+                    if (key->_string.find(CCGateStorage::getKeyGatePrefix()) != std::string::npos ||
+                            key->_string.find(CCLevelStorage::getKeyLevelPrefix()) != std::string::npos ||
+                            key->_string.find(CCMissionStorage::getKeyMissionPrefix()) != std::string::npos ||
+                            key->_string.find(CCScoreStorage::getKeyScorePrefix()) != std::string::npos ||
+                            key->_string.find(CCWorldStorage::getKeyWorldPrefix()) != std::string::npos) {
+
+                        CCKeyValueStorage::getInstance()->deleteKeyValue(key->getCString());
+                    }
+
+                }
+
+        }
     }
 }

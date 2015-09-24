@@ -115,4 +115,7 @@ namespace soomla {
         return __String::createWithFormat("%s%s.%s", DB_WORLD_KEY_PREFIX, worldId, postfix)->getCString();
     }
 
+    char const *CCWorldStorage::getKeyWorldPrefix() {
+        return DB_WORLD_KEY_PREFIX;
+    }
 }

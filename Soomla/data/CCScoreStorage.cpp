@@ -96,4 +96,8 @@ namespace soomla {
     char const *CCScoreStorage::keyScoresWithScoreId(char const *scoreId, char const *postfix) {
         return __String::createWithFormat("%s%s.%s", DB_SCORE_KEY_PREFIX, scoreId, postfix)->getCString();
     }
+
+    char const *CCScoreStorage::getKeyScorePrefix() {
+        return DB_SCORE_KEY_PREFIX;
+    }
 }
