@@ -230,6 +230,23 @@ namespace soomla {
          */
         bool canStart();
 
+        /**
+        * Sums up this world's total <c>Score</c> value.
+        * @returns The total world score.
+        */
+        double sumWorldScoreRecords();
+
+        /**
+        * Sums the inner <c>World</c> single score records, non-recursive.
+        * @returns The sum of inner <c>World</c> records.
+        */
+        double sumInnerWorldSingleRecords();
+
+        /**
+        * Sums up all the inner <c>World</c> records, recursively.
+        * @returns The sum of inner <c>World</c> records.
+        */
+        double sumAllInnerWorldsRecords();
     private:
         CCWorld *mParentWorld;
         CCGate *mGate;

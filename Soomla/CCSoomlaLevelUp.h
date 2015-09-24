@@ -162,6 +162,11 @@ namespace soomla {
          */
         int getCompletedWorldCount();
 
+        /**
+        * Clears all current progress of LevelUp.
+        */
+        virtual void clearCurrentState();
+
     private:
         CCWorld *fetchWorld(char const *worldId, cocos2d::__Dictionary *worlds);
 

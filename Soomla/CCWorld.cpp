@@ -373,13 +373,53 @@ namespace soomla {
     }
 
     double CCWorld::sumInnerWorldsRecords() {
+        return this->sumInnerWorldSingleRecords();
+    }
+
+    double CCWorld::sumWorldScoreRecords() {
+        double ret = 0;
+
+        CCScore *score;
+        DictElement* el = NULL;
+        CCDICT_FOREACH(mScores, el) {
+                score = (CCScore *) el->getObject();
+                double record = score->getRecord();
+                if (record >= 0) {
+                    ret += record;
+                }
+            }
+
+        return ret;
+    }
+
+    double CCWorld::sumInnerWorldSingleRecords() {
         double ret = 0;
 
         CCWorld *world;
-        DictElement* el = NULL;
+        DictElement *el = NULL;
         CCDICT_FOREACH(mInnerWorldsMap, el) {
                 world = (CCWorld *) el->getObject();
-                ret += world->getSingleScore()->getRecord();
+                CCScore *singleScore = world->getSingleScore();
+                if (singleScore != nullptr) {
+                    double record = singleScore->getRecord();
+                    if (record > -1) {
+                        ret += record;
+                    }
+                }
+            }
+
+        return ret;
+    }
+
+    double CCWorld::sumAllInnerWorldsRecords() {
+        double ret = 0;
+
+        CCWorld *world;
+        DictElement *el = NULL;
+        CCDICT_FOREACH(mInnerWorldsMap, el) {
+                world = (CCWorld *) el->getObject();
+                ret += world->sumWorldScoreRecords();
+                ret += world->sumAllInnerWorldsRecords();
             }
 
         return ret;

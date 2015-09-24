@@ -138,7 +138,7 @@
     }, Soomla.Models.SoomlaEntity);
   }();
 
-  var GatesList = Soomla.Models.Gate = function () {
+  var GatesList = Soomla.Models.GatesList = function () {
     var GatesList = Soomla.declareClass('GatesList', {
       eventListener: null,
       _gates: [],
@@ -244,7 +244,7 @@
      @brief A specific type of `GatesList` that can be opened only if ALL
      `Gate`s in its list are open.
      */
-    var GatesListAnd = Soomla.declareClass('GatesListAND', {
+    var GatesListAnd = Soomla.declareClass('GatesListAnd', {
       /**
        Checks if this `GatesList` meets its criteria for opening, by checking
        that ALL `Gate`s in the list are open.
@@ -265,7 +265,7 @@
      A specific type of `GatesList` that can be opened if AT LEAST ONE `Gate`
      in its list is open.
      */
-    var GatesListOr = Soomla.declareClass('GatesListOR', {
+    var GatesListOr = Soomla.declareClass('GatesListOr', {
       /**
        Checks if this `GatesList` meets its criteria for opening, by checking
        that AT LEAST ONE `Gate` in the list are open.
@@ -892,6 +892,7 @@
        `score` breaks a record - if so, triggers the score-record-reached
        event.
        @param score Score to compare to temp score.
+       @param onlyIfBetter set score only if the given value is better then the existing one
        */
       setTempScore: function (score, onlyIfBetter) {
         onlyIfBetter = onlyIfBetter || !_.isUndefined(onlyIfBetter)
@@ -1856,9 +1857,42 @@
         }
       },
 
-      sumInnerWorldsRecords: function () {
+      sumInnerWorldsRecords: function sumInnerWorldsRecords() {
+        return this.sumInnerWorldSingleRecords();
+      },
+
+      sumWorldScoreRecords: function sumWorldScoreRecords() {
+        return _.reduce(this._scores, function (sum, score) {
+          var record = score.getRecord();
+          if (record > 0) {
+            return sum + record;
+          }
+
+          return sum;
+        });
+
+      },
+
+      sumInnerWorldSingleRecords: function sumInnerWorldSingleRecords() {
         return _.reduce(this._innerWorldsMap, function (sum, world) {
-          return sum + world.getSingleScore().getRecord();
+          var singleScore = world.getSingleScore();
+          if (!_.isUndefined(singleScore)) {
+            var record = singleScore.getRecord();
+            if (record > -1) {
+              return sum + record;
+            }
+          }
+
+          return sum;
+        });
+      },
+
+      sumAllInnerWorldsRecords: function sumAllInnerWorldsRecords() {
+        return _.reduce(this._innerWorldsMap, function (sum, world) {
+          sum += world.sumWorldScoreRecords();
+          sum += world.sumAllInnerWorldsRecords();
+
+          return sum;
         });
       },
 
@@ -2830,6 +2864,23 @@
         }
       },
 
+      clearCurrentState: function () {
+        var allKeys = Soomla.keyValueStorage.getEncryptedKeys();
+        if (allKeys) {
+          _.each(function (key) {
+            if (key.indexOf(Soomla.gateStorage.getKeyGatePrefix()) === 0  ||
+              key.indexOf(Soomla.levelStorage.getKeyLevelPrefix()) === 0 ||
+              key.indexOf(Soomla.missionStorage.getKeyMissionPrefix()) === 0 ||
+              key.indexOf(Soomla.scoreStorage.getKeyScorePrefix()) === 0 ||
+              key.indexOf(Soomla.worldStorage.getKeyWorldPrefix()) === 0) {
+
+              Soomla.keyValueStorage.deleteKeyValue(key);
+            }
+          });
+        }
+
+      },
+
       save: function () {
         var key = this.DB_KEY_PREFIX + 'model';
         Soomla.keyValueStorage.setValue(key, JSON.stringify(this));
@@ -2907,6 +2958,10 @@
 
       keyGateOpen: function (gateId) {
         return this.keyGatesWithGateId(gateId, 'open');
+      },
+
+      getKeyGatePrefix: function () {
+        return this.DB_GATE_KEY_PREFIX;
       }
     });
   }();
@@ -3007,6 +3062,10 @@
 
       keyScoresWithScoreId: function (scoreId, postfix) {
         return this.DB_SCORE_KEY_PREFIX + scoreId + '.' + postfix;
+      },
+
+      getKeyScorePrefix: function () {
+        return this.DB_SCORE_KEY_PREFIX;
       }
 
     });
@@ -3131,6 +3190,10 @@
 
       keyMissionsWithMissionId: function (missionId, postfix) {
         return this.DB_MISSION_KEY_PREFIX + missionId + '.' + postfix;
+      },
+
+      getKeyMissionPrefix: function () {
+        return this.DB_MISSION_KEY_PREFIX;
       }
     });
   }();
@@ -3284,6 +3347,10 @@
 
       keyLastCompletedInnerWorldWithWorldId: function (worldId) {
         return this.keyWorldsWithWorldId(worldId, 'lastCompletedInnerWorld');
+      },
+
+      getKeyWorldPrefix: function () {
+        return this.DB_WORLD_KEY_PREFIX;
       }
     });
   }();
@@ -3596,6 +3663,10 @@
 
       keyLevelsWithLevelId: function (levelId, postfix) {
         return this.DB_LEVEL_KEY_PREFIX + levelId + '.' + postfix;
+      },
+
+      getKeyLevelPrefix: function () {
+        return this.DB_GATE_KEY_PREFIX;
       }
 
     });
@@ -3825,160 +3896,107 @@
   var LevelUpEventHandler = Soomla.LevelUpEventHandler = function () {
     return Soomla.declareClass("LevelUpEventHandler", {
       /**
-       Fired when initialization has been completed.
-
-       Event Name - CCLevelUpConsts::EVENT_LEVEL_UP_INITIALIZED
+       * Fired when initialization has been completed.
+       * Event Name - Soomla.LevelUpConsts.EVENT_LEVEL_UP_INITIALIZED
        */
       onLevelUpInitialized: function () {
-
       },
 
       /**
-       Fired when a CCGate has been opened.
-
-       Event Name - CCLevelUpConsts::EVENT_GATE_OPENED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::DICT_ELEMENT_GATE - CCGate - The gate which was opened
+       * Fired when a Gate has been opened.
+       * Event Name - Soomla.LevelUpConsts.EVENT_GATE_OPENED
+       * @param gate The gate which was opened
        */
       onGateOpened: function (gate) {
-
       },
       /**
-       Fired when a CCGate has been closed.
-
-       Event Name - CCLevelUpConsts::EVENT_GATE_CLOSED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::DICT_ELEMENT_GATE - CCGate - The gate which was closed
-       balance has changed.
+       * Fired when a CCGate has been closed.
+       * Event Name - Soomla.LevelUpConsts.EVENT_GATE_CLOSED
+       * @param gate The gate which was closed
        */
       onGateClosed: function (gate) {
-
       },
 
       /**
-       Fired when a CCMission has been completed.
-
-       Event Name - CCLevelUpConsts::EVENT_MISSION_COMPLETED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::DICT_ELEMENT_MISSION - CCMission - the mission that
-       was completed.
+       * Fired when a CCMission has been completed.
+       * Event Name - Soomla.LevelUpConsts.EVENT_MISSION_COMPLETED
+       * @param mission the mission that was completed.
        */
       onMissionCompleted: function (mission) {
-
       },
 
       /**
-       Fired when CCMission completion has been revoked.
-       For example, you can decide to revoke a mission if the condition for
-       completing it is no longer valid
-
-       Event Name - CCLevelUpConsts::EVENT_MISSION_COMPLETION_REVOKED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::DICT_ELEMENT_MISSION - CCMission - the mission to be
-       revoked.
+       * Fired when CCMission completion has been revoked.
+       * For example, you can decide to revoke a mission if the condition for completing it is no longer valid
+       * Event Name - Soomla.LevelUpConsts.EVENT_MISSION_COMPLETION_REVOKED
+       * @param mission the mission to be revoked.
        */
       onMissionCompletionRevoked: function (mission) {
-
       },
 
       /**
-       Fired when a latest score is changed.
-
-       Event Name - CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::DICT_ELEMENT_SCORE - CCScore - the score which has
-       been changed.
+       * Fired when a latest score is changed.
+       * Event Name - Soomla.LevelUpConsts.EVENT_SCORE_RECORD_CHANGED
+       * @param score the score which has been changed.
        */
       onLatestScoreChanged: function (score) {
-
       },
 
       /**
-       Fired when a new record has been reached for a score.
-
-       Event Name - CCLevelUpConsts::EVENT_SCORE_RECORD_REACHED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::DICT_ELEMENT_SCORE - CCScore - the score which has
-       reached a new record.
+       * Fired when a new record has been reached for a score.
+       * Event Name - Soomla.LevelUpConsts.EVENT_SCORE_RECORD_REACHED
+       * @param score the score which has reached a new record.
        */
       onScoreRecordReached: function (score) {
-
       },
 
       /**
-       Fired when a score's record is changed.
-
-       Event Name - CCLevelUpConsts::EVENT_SCORE_RECORD_CHANGED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::DICT_ELEMENT_SCORE - CCScore - the score which
-       has been changed.
+       * Fired when a score's record is changed.
+       * Event Name - Soomla.LevelUpConsts.EVENT_SCORE_RECORD_CHANGED
+       * @param score the score which has been changed.
        */
       onScoreRecordChanged: function (score) {
-
       },
 
       /**
-       Fired when a CCWorld has been completed.
-
-       Event Name - CCLevelUpConsts::EVENT_WORLD_COMPLETED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::DICT_ELEMENT_WORLD - CCWorld - the world which was
-       completed.
+       * Fired when a CCWorld has been completed.
+       * Event Name - Soomla.LevelUpConsts.EVENT_WORLD_COMPLETED
+       * @param world the world which was completed.
        */
       onWorldCompleted: function (world) {
-
       },
 
       /**
-       Fired when the last completed world inside a world has changed.
-
-       Event Name - CCLevelUpConsts::EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::DICT_ELEMENT_WORLD - CCWorld - the world which had
-       last completed world changed.
-       CCLevelUpConsts::DICT_ELEMENT_INNER_WORLD - __String - The inner world
-       ID which was last completed.
+       * Fired when the last completed world inside a world has changed.
+       * Event Name - Soomla.LevelUpConsts.EVENT_WORLD_LAST_COMPLETED_INNER_WORLD_CHANGED
+       * @param world the world which had last completed world changed.
+       * @param innerWorldId  The inner world ID which was last completed.
        */
       onLastCompletedInnerWorldChanged: function (world, innerWorldId) {
-
       },
 
       /**
-       Fired when a CCWorld is being assigned a reward.
-
-       Event Name - CCLevelUpConsts::EVENT_WORLD_REWARD_ASSIGNED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::DICT_ELEMENT_WORLD - CCWorld - the World whose
-       reward has changed.
+       * Fired when a CCWorld is being assigned a reward.
+       * Event Name - Soomla.LevelUpConsts.EVENT_WORLD_REWARD_ASSIGNED
+       * @param world the World whose reward has changed.
        */
       onWorldRewardAssigned: function (world) {
-
       },
 
       /**
-       Fired when a level has started, i.e. when start is called on an
-       instance of CCLevel
-
-       Event Name - CCLevelUpConsts::EVENT_GOOD_BALANCE_CHANGED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::EVENT_LEVEL_STARTED - CCLevel - the level which just
-       started.
+       * Fired when a level has started, i.e. when start is called on an instance of Level
+       * Event Name - Soomla.LevelUpConsts.EVENT_GOOD_BALANCE_CHANGED
+       * @param level the level which just started.
        */
       onLevelStarted: function (level) {
-
       },
 
       /**
-       Fired when a level has ended, i.e. when end is called on an
-       instance of CCLevel
-
-       Event Name - CCLevelUpConsts::EVENT_LEVEL_ENDED
-       Event Data (__Dictionary):
-       CCLevelUpConsts::EVENT_LEVEL_STARTED - CCLevel - the level which just
-       ended.
+       * Fired when a level has ended, i.e. when end is called on an instance of Level
+       * Event Name - Soomla.LevelUpConsts.EVENT_LEVEL_ENDED
+       * @param level the level which just ended.
        */
       onLevelEnded: function (level) {
-
       }
     });
   }();
