@@ -202,4 +202,7 @@ namespace soomla {
 
     }
 
+    char const *CCLevelStorage::getKeyLevelPrefix() {
+        return DB_LEVEL_KEY_PREFIX;
+    }
 }

@@ -63,6 +63,8 @@ namespace soomla {
          */
         virtual int getTimesCompleted(CCMission *mission);
 
+        static char const *getKeyMissionPrefix();
+
     private:
         void setTimesCompleted(CCMission *mission, int timesCompleted);
 
