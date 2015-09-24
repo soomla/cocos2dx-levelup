@@ -128,6 +128,8 @@ namespace soomla {
          */
         virtual int decTimesCompleted(CCLevel *level);
 
+        static char const *getKeyLevelPrefix();
+
     private:
 
         void setTimesStarted(CCLevel *level, int started);

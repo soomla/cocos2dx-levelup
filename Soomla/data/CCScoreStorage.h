@@ -85,6 +85,8 @@ namespace soomla {
         char const *keyRecordScoreWithScoreId(char const *scoreId);
 
         char const *keyScoresWithScoreId(char const *scoreId, char const *postfix);
+
+        static char const *getKeyScorePrefix();
     };
 }
 
