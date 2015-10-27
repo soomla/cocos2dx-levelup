@@ -89,8 +89,8 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 - [cocos2dx-levelup 1.2.4](http://library.soom.la/fetch/cocos2dx-levelup/1.2.4?cf=github)
 
 #### From sources:
- - Clone this repository recursively: `git clone --recursive https://github.com/soomla/cocos2dx-levelup.git`;
- - Run `./build_all` from project directory;
+ - Clone this repository recursively: `git clone --recursive https://github.com/soomla/cocos2dx-levelup.git`
+ - Run `./build_all` from project directory
  - Take created binaries from `build` directory and use it!
 
 ## Getting Started (With pre-built libraries - RECOMMENDED)
