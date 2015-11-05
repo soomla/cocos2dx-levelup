@@ -119,6 +119,12 @@ namespace soomla {
         virtual int getTimesPlayed();
 
         /**
+         Gets the last duration in millis that this `Level` was played.
+         @return The last duration in millis.
+         */
+        virtual long getLastDurationMillis();
+        
+        /**
          Gets the slowest duration in millis that this `Level` was played.
          @return The slowest duration in millis.
          */

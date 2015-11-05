@@ -93,6 +93,10 @@ namespace soomla {
         return CCLevelStorage::getInstance()->getTimesPlayed(this);
     }
 
+    long CCLevel::getLastDurationMillis() {
+        return CCLevelStorage::getInstance()->getLastDurationMillis(this);
+    }
+    
     long CCLevel::getSlowestDurationMillis() {
         return CCLevelStorage::getInstance()->getSlowestDurationMillis(this);
     }
@@ -162,6 +166,8 @@ namespace soomla {
 
         if (completed) {
             long duration = getPlayDurationMillis();
+            
+            CCLevelStorage::getInstance()->setLastDurationMillis(this, duration);
 
             // Calculate the slowest \ fastest durations of level play
 
