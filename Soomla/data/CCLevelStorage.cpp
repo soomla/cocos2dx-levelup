@@ -39,6 +39,18 @@ namespace soomla {
         }
         return sInstance;
     }
+    
+    void CCLevelStorage::setLastDurationMillis(CCLevel *level, long duration) {
+        const char *key = this->keyLastDurationWithLevelId(level->getId()->getCString());
+        const char *val = __String::createWithFormat("%ld", duration)->getCString();
+        CCKeyValueStorage::getInstance()->setValue(key, val);
+    }
+    
+    long CCLevelStorage::getLastDurationMillis(CCLevel *level) {
+        const char *key = this->keyLastDurationWithLevelId(level->getId()->getCString());
+        const char *val = CCKeyValueStorage::getInstance()->getValue(key);
+        return (val != NULL && strlen(val) > 0) ? __String::create(val)->intValue() : 0;
+    }
 
     void CCLevelStorage::setSlowestDurationMillis(CCLevel *level, long duration) {
         const char *key = this->keySlowestDurationWithLevelId(level->getId()->getCString());
@@ -187,6 +199,10 @@ namespace soomla {
 
     char const *CCLevelStorage::keyTimesPlayedWithLevelId(char const *levelId) {
         return this->keyLevelsWithLevelId(levelId, "played");
+    }
+    
+    char const *CCLevelStorage::keyLastDurationWithLevelId(char const *levelId) {
+        return this->keyLevelsWithLevelId(levelId, "last");
     }
 
     char const *CCLevelStorage::keySlowestDurationWithLevelId(char const *levelId) {

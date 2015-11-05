@@ -38,6 +38,20 @@ namespace soomla {
         static CCLevelStorage *getInstance();
 
         /**
+         Sets the last (given) duration for the given `Level`.
+         @param level `Level` to set last duration.
+         @param duration Duration to set.
+         */
+        virtual void setLastDurationMillis(CCLevel *level, long duration);
+        
+        /**
+         Retrieves the last duration for the given `Level`.
+         @param level `Level` to get last duration.
+         @return The last duration of the given `Level`.
+         */
+        virtual long getLastDurationMillis(CCLevel *level);
+        
+        /**
          Sets the slowest (given) duration for the given level.
          @param level `Level` to set slowest duration.</param>
          @param duration Duration to set.
@@ -138,6 +152,8 @@ namespace soomla {
 
         void setTimesCompleted(CCLevel *level, int timesCompleted);
 
+        char const *keyLastDurationWithLevelId(char const *levelId);
+        
         char const *keySlowestDurationWithLevelId(char const *levelId);
 
         char const *keyFastestDurationWithLevelId(char const *levelId);
