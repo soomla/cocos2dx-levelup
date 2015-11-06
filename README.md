@@ -83,10 +83,7 @@ This can be either a badge, a virtual item from the game's economy (sword, coins
 ## Download
 
 #### Pre baked zip:
-- [soomla-cocos2dx-core 1.2.4](http://library.soom.la/fetch/cocos2dx-core/1.2.4?cf=github)
-- [cocos2dx-store 4.5.4](http://library.soom.la/fetch/cocos2dx-store/4.5.4?cf=github)
-- [cocos2dx-profile 1.3.3](http://library.soom.la/fetch/cocos2dx-profile/1.3.3?cf=github)
-- [cocos2dx-levelup 1.2.4](http://library.soom.la/fetch/cocos2dx-levelup/1.2.4?cf=github)
+- [cocos2dx-levelup 1.2.5](http://library.soom.la/fetch/cocos2dx-levelup/1.2.5?cf=github)
 
 #### From sources:
  - Clone this repository recursively: `git clone --recursive https://github.com/soomla/cocos2dx-levelup.git`

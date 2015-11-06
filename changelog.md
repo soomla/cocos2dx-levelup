@@ -1,3 +1,8 @@
+### v1.2.5 [view commit logs](https://github.com/soomla/cocos2dx-levelup/compare/v1.2.4...v1.2.5)
+
+* Fixes
+  * Minor fixes to `Level`
+
 ### v1.2.4 [view commit logs](https://github.com/soomla/cocos2dx-levelup/compare/v1.2.3...v1.2.4)
 
 * Features
