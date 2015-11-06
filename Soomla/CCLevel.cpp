@@ -163,11 +163,11 @@ namespace soomla {
         }
 
         mState = LevelState::Ended;
-
+        
+        long duration = getPlayDurationMillis();
+        CCLevelStorage::getInstance()->setLastDurationMillis(this, duration);
+        
         if (completed) {
-            long duration = getPlayDurationMillis();
-            
-            CCLevelStorage::getInstance()->setLastDurationMillis(this, duration);
 
             // Calculate the slowest \ fastest durations of level play
 
@@ -177,10 +177,12 @@ namespace soomla {
 
             // We assume that levels' duration is never 0
             long fastest = getFastestDurationMillis();
-            if ((fastest == 0) || (duration < getFastestDurationMillis())) {
+            if ((fastest == 0) || (duration < fastest)) {
                 CCLevelStorage::getInstance()->setFastestDurationMillis(this, duration);
             }
+        }
 
+        if (completed) {
             DictElement* el = NULL;
             CCScore *score;
             __Dictionary *scoresDict = getScores();
@@ -189,11 +191,11 @@ namespace soomla {
                     score->reset(true); // resetting scores
                 }
 
-            // Count number of times this level was played
-            CCLevelStorage::getInstance()->incTimesPlayed(this);
-
             setCompleted(true);
         }
+        
+        // Count number of times this level was played
+        CCLevelStorage::getInstance()->incTimesPlayed(this);
         
         // reset timers
         mStartTime = 0;
